@@ -15,47 +15,44 @@
                 <interceptor-ref name="json"/>
             </interceptor-stack>
         </interceptors>
-        <action name="getgoods" class="action.AllBooksAction">
+
+        <action name="loginstatus" class="action.LoginAction" method="loginstatus">
             <result type="json"/>
             <interceptor-ref name="demostack"/>
         </action>
-        <!--<action name="getusers" class="action.AllUsersAction">-->
-            <!--<result type="json"/>-->
-            <!--<interceptor-ref name="demostack"/>-->
-        <!--</action>-->
-        <!--<action name="getitem" class="action.UpdateBookAction" method="query">-->
-            <!--<result type="json"/>-->
-            <!--<interceptor-ref name="demostack"/>-->
-        <!--</action>-->
-        <!--<action name="loginhandle" class="action.LoginAction" method="login">-->
-            <!--<result name="success" type="json"/>-->
-            <!--<result name="error" type="httpheader">-->
-                <!--<param name="status">400</param>-->
-            <!--</result>-->
-            <!--<interceptor-ref name="demostack"/>-->
-        <!--</action>-->
-        <!--<action name="registerhandle" class="action.RegisterAction">-->
-            <!--<result type="json"/>-->
-            <!--<interceptor-ref name="demostack"/>-->
-        <!--</action>-->
-        <!--<action name="getuser" class="action.UpdateUserAction" method="query">-->
-            <!--<result name="success" type="json"/>-->
-            <!--<result name="error" type="httpheader">-->
-                <!--<param name="status">400</param>-->
-            <!--</result>-->
-            <!--<interceptor-ref name="demostack"/>-->
-        <!--</action>-->
-        <!--<action name="updateuserinfo" class="action.UpdateUserAction" method="update">-->
-            <!--<result name="success" type="json"/>-->
-            <!--<result name="error" type="httpheader">-->
-                <!--<param name="status">400</param>-->
-            <!--</result>-->
-            <!--<interceptor-ref name="demostack"/>-->
-        <!--</action>-->
-        <!--<action name="loginstatus" class="action.LoginAction" method="loginstatus">-->
-            <!--<result type="json"/>-->
-            <!--<interceptor-ref name="demostack"/>-->
-        <!--</action>-->
+        <action name="loginhandle" class="action.LoginAction" method="login">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="registerhandle" class="action.RegisterAction">
+            <result type="json"/>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="logout" class="action.LogoutAction">
+            <result name="success" type="json"/>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="getusers" class="action.AllUsersAction">
+            <result type="json"/>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="getuser" class="action.UpdateUserAction" method="query">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="updateemail" class="action.UpdateUserAction" method="updateEmail">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
         <!--<action name="addcart" class="action.UpdateCartItemAction" method="update">-->
             <!--<result name="success" type="json"/>-->
             <!--<result name="error" type="httpheader">-->
@@ -68,10 +65,6 @@
             <!--<result name="error" type="httpheader">-->
                 <!--<param name="status">400</param>-->
             <!--</result>-->
-            <!--<interceptor-ref name="demostack"/>-->
-        <!--</action>-->
-        <!--<action name="logout" class="action.LogoutAction">-->
-            <!--<result name="success" type="json"/>-->
             <!--<interceptor-ref name="demostack"/>-->
         <!--</action>-->
         <!--<action name="addorder" class="action.UpdateOrderAction" method="add">-->

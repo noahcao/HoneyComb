@@ -11,7 +11,7 @@
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close" p:driverClass="com.mysql.cj.jdbc.Driver"
-          p:jdbcUrl="jdbc:mysql://localhost:3306/bookstore?serverTimezone=UTC&amp;useSSL=true" p:user="root"
+          p:jdbcUrl="jdbc:mysql://localhost:3306/honeycomb?serverTimezone=UTC&amp;useSSL=true" p:user="root"
           p:password="root" p:maxPoolSize="40" p:minPoolSize="1"
           p:initialPoolSize="5" p:maxIdleTime="20"/>
 
@@ -20,8 +20,6 @@
           p:dataSource-ref="dataSource">
         <property name="mappingResources">
             <list>
-                <value>model/BookEntity.hbm.xml</value>
-                <value>model/OrderEntity.hbm.xml</value>
                 <value>model/UserEntity.hbm.xml</value>
             </list>
         </property>
@@ -37,21 +35,13 @@
     </bean>
 
     <!-- DAO Bean -->
-    <bean id="bookDao" class="dao.impl.BookDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-    <bean id="orderDao" class="dao.impl.OrderDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-    <bean id="iconDao" class="dao.impl.UserDaoImpl">
+    <bean id="userDao" class="dao.impl.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <!-- Service -->
     <bean id="appService" class="service.impl.AppServiceImpl">
-        <property name="bookDao" ref="bookDao"/>
-        <property name="orderDao" ref="orderDao"/>
-        <property name="userDao" ref="iconDao"/>
+        <property name="userDao" ref="userDao"/>
     </bean>
 
     <bean id="transactionManager"
