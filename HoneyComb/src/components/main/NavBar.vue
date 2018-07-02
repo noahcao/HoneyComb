@@ -141,9 +141,24 @@ export default {
 
 @media (min-width: 768px) {
     .tag {
-        margin-left: 25px;
+        margin-left: 20px;
     }
     .navbar-inverse .navbar-brand {
+        font-family: "Century Gothic", sans-serif;
+        font-weight: 400;
+        letter-spacing: 1px;
+        font-size: 22px;
+        color: #ffffff !important;
+        background-color: transparent;
+        margin-left: 15px;
+    }
+}
+
+@media (min-width: 900px) {
+  .tag {
+        margin-left: 25px;
+    }
+  .navbar-inverse .navbar-brand {
         font-family: "Century Gothic", sans-serif;
         font-weight: 400;
         letter-spacing: 1px;
@@ -154,9 +169,21 @@ export default {
     }
 }
 .navbar-right {
-    margin-right: 80px;
+    margin-right: 50px;
 }
-
+.navbar-inverse .navbar-nav>li>a {
+    display: inline-block;
+    color: #9d9d9d;
+    text-transform: uppercase;
+    font-family: 'Century Gothic', sans-serif;
+    text-decoration: none;
+    font-weight: normal;
+    letter-spacing:0.8px
+}
+.navbar-inverse .navbar-nav>li>a:hover {
+    color: #ffffff;
+    font-weight: normal;
+}
 /* .navbar-brand {
     float: left;
     height: 50px;
