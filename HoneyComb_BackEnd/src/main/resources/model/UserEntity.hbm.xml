@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.User" table="user" schema="bookstore">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name">
+            <column name="name" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="phone">
+            <column name="phone" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="email">
+            <column name="email" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="ban">
+            <column name="ban" sql-type="tinyint(4)" length="4"/>
+        </property>
+        <property name="pwd">
+            <column name="pwd" sql-type="varchar(45)" length="45"/>
+        </property>
+        <set name="orders" table="user_order" cascade="save-update, persist" lazy="false">
+            <key column="user_id"/>
+            <many-to-many column="order_id" class="model.Order"/>
+        </set>
+    </class>
+</hibernate-mapping>

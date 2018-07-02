@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Book" table="book" schema="bookstore">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+            <generator class="native"/>
+        </id>
+        <property name="name">
+            <column name="name" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="author">
+            <column name="author" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="summary">
+            <column name="summary" sql-type="mediumtext"/>
+        </property>
+        <property name="price">
+            <column name="price" sql-type="float" precision="-1"/>
+        </property>
+        <property name="stock">
+            <column name="stock" sql-type="int(11)"/>
+        </property>
+        <property name="year">
+            <column name="year" sql-type="int(11)"/>
+        </property>
+    </class>
+</hibernate-mapping>

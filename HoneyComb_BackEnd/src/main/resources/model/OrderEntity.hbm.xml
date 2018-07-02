@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Order" table="orders" schema="bookstore">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="time"/>
+        <property name="status"/>
+        <set name="items" table="order_item" cascade="save-update, persist" lazy="false">
+            <key column="order_id"/>
+            <one-to-many class="model.OrderItem"/>
+        </set>
+        <set name="user" table="user_order" cascade="save-update, persist" lazy="false">
+            <key column="order_id"/>
+            <many-to-many column="user_id" class="model.User"/>
+        </set>
+    </class>
+
+    <class name="model.OrderItem" table="order_item" schema="bookstore">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="bookid" column="book_id"/>
+        <many-to-one name="order" class="model.Order" column="order_id" cascade="save-update, persist" lazy="false"/>
+        <property name="amount" column="amount"/>
+    </class>
+</hibernate-mapping>
