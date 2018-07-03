@@ -12,7 +12,7 @@ export default {
 
 <style>
 #app {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Century Gothic", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

@@ -172,6 +172,7 @@ export default {
     margin-right: 50px;
 }
 .navbar-inverse .navbar-nav>li>a {
+    transition: all 0.6s ease;
     display: inline-block;
     color: #9d9d9d;
     text-transform: uppercase;
