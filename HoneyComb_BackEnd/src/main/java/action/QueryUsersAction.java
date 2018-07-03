@@ -6,9 +6,18 @@ import service.AppService;
 
 import java.util.List;
 
-public class AllUsersAction extends ActionSupport {
+public class QueryUsersAction extends ActionSupport {
+    private String name;
     private List<User> users;
     private AppService appService;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public void setAppService(AppService appService) {
         this.appService = appService;
@@ -22,11 +31,15 @@ public class AllUsersAction extends ActionSupport {
         this.users = users;
     }
 
-    @Override
-    public String execute() throws Exception {
+    public String allUsers() throws Exception {
         List<User> users = appService.getAllUsers();
         setUsers(users);
         return SUCCESS;
     }
 
+    public String search() throws Exception {
+        if (this.name == null) return ERROR;
+        setUsers(appService.queryUser(name));
+        return SUCCESS;
+    }
 }

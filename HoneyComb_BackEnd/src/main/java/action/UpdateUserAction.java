@@ -1,8 +1,11 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import model.Paper;
 import model.User;
 import service.AppService;
+
+import java.util.Set;
 
 
 public class UpdateUserAction extends ActionSupport {
@@ -12,7 +15,6 @@ public class UpdateUserAction extends ActionSupport {
     private String icon;
     private String email;
     private String name;
-
 
     public void setName(String name) {
         this.name = name;
@@ -68,6 +70,7 @@ public class UpdateUserAction extends ActionSupport {
     }
 
     public String query() throws Exception {
+        if (this.id == null) return ERROR;
         User result = appService.getUserById(id);
         if (result != null) {
             setUserInfo(result);
@@ -78,6 +81,7 @@ public class UpdateUserAction extends ActionSupport {
     }
 
     public String updateEmail() throws Exception {
+        if (this.email == null) return ERROR;
         User result = appService.getUserById(id);
         if (result != null) {
             result.setEmail(email);
@@ -86,6 +90,18 @@ public class UpdateUserAction extends ActionSupport {
         }
         return ERROR;
     }
+
+    public String updatePassword() throws Exception {
+        if (this.pwd == null) return ERROR;
+        User result = appService.getUserById(id);
+        if (result != null) {
+            result.setPwd(this.pwd);
+            appService.updateUser(result);
+            return SUCCESS;
+        }
+        return ERROR;
+    }
+
 //
 //    public String updateIcon() throws Exception {
 //        User result = appService.getUserById(id);
@@ -106,5 +122,7 @@ public class UpdateUserAction extends ActionSupport {
 //        setIcon(null);
 //        return "error";
 //    }
+
+
 
 }

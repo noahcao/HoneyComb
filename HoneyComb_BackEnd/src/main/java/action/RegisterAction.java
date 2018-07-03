@@ -50,6 +50,7 @@ public class RegisterAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
+        if (this.email == null || this.name == null || this.pwd == null) return ERROR;
         User resultEmail = appService.getUserByEmail(email);
         User resultName = appService.getUserByEmail(name);
         if (resultEmail == null && resultName == null) {

@@ -6,9 +6,7 @@ import model.User;
 import org.apache.struts2.StrutsStatics;
 import service.AppService;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashSet;
 import java.util.Map;
 
 public class LoginAction extends ActionSupport {
@@ -48,10 +46,11 @@ public class LoginAction extends ActionSupport {
     }
 
     public String login() throws Exception {
-        User result = appService.queryUser(name, pwd);
+        if (this.name == null || this.pwd == null) return ERROR;
+        User result = appService.UserAuthorize(name, pwd);
         Map<String, Object> usersession = ActionContext.getContext().getSession();
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(StrutsStatics.HTTP_REQUEST);
-        System.out.println(request.getServletPath());
+        // HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(StrutsStatics.HTTP_REQUEST);
+        // System.out.println(request.getServletPath());
         if (result != null) {
             setId(result.getId());
             usersession.put("username", name);
@@ -59,7 +58,7 @@ public class LoginAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String loginstatus() throws Exception {
+    public String loginStatus() throws Exception {
         Map<String, Object> usersession = ActionContext.getContext().getSession();
         setName((String) usersession.get("username"));
         if (name != null) {

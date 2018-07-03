@@ -16,7 +16,7 @@
             </interceptor-stack>
         </interceptors>
 
-        <action name="loginstatus" class="action.LoginAction" method="loginstatus">
+        <action name="loginstatus" class="action.LoginAction" method="loginStatus">
             <result type="json"/>
             <interceptor-ref name="demostack"/>
         </action>
@@ -29,13 +29,16 @@
         </action>
         <action name="registerhandle" class="action.RegisterAction">
             <result type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
             <interceptor-ref name="demostack"/>
         </action>
         <action name="logout" class="action.LogoutAction">
             <result name="success" type="json"/>
             <interceptor-ref name="demostack"/>
         </action>
-        <action name="getusers" class="action.AllUsersAction">
+        <action name="allusers" class="action.QueryUsersAction" method="allUsers">
             <result type="json"/>
             <interceptor-ref name="demostack"/>
         </action>
@@ -46,7 +49,35 @@
             </result>
             <interceptor-ref name="demostack"/>
         </action>
+        <action name="searchuser" class="action.QueryUsersAction" method="search">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
         <action name="updateemail" class="action.UpdateUserAction" method="updateEmail">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="updatepwd" class="action.UpdateUserAction" method="updatePassword">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="getpaper" class="action.UpdatePaperAction" method="query">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="searchpaper" class="action.QueryPapersAction" method="search">
             <result name="success" type="json"/>
             <result name="error" type="httpheader">
                 <param name="status">400</param>

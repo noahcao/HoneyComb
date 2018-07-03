@@ -21,6 +21,8 @@
         <property name="mappingResources">
             <list>
                 <value>model/UserEntity.hbm.xml</value>
+                <value>model/PaperEntity.hbm.xml</value>
+                <value>model/AuthorEntity.hbm.xml</value>
             </list>
         </property>
         <!-- Hibernate SessionFactory -->
@@ -38,10 +40,14 @@
     <bean id="userDao" class="dao.impl.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <bean id="paperDao" class="dao.impl.PaperDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
     <!-- Service -->
     <bean id="appService" class="service.impl.AppServiceImpl">
         <property name="userDao" ref="userDao"/>
+        <property name="paperDao" ref="paperDao"/>
     </bean>
 
     <bean id="transactionManager"

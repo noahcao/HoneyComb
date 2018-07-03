@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Set;
+
 public class User {
     private Integer id;
 
@@ -7,6 +9,15 @@ public class User {
     private String email;
     private String name;
     private String icon;
+    private Set<Paper> stars;
+
+    public Set<Paper> getStars() {
+        return stars;
+    }
+
+    public void setStars(Set<Paper> stars) {
+        this.stars = stars;
+    }
 
     public String getIcon() {
         return icon;

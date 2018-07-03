@@ -1,5 +1,6 @@
 package service;
 
+import model.Paper;
 import model.User;
 
 import java.util.List;
@@ -13,20 +14,29 @@ public interface AppService {
     /**
      * user
      */
-    public Integer addUser(User user);
+    Integer addUser(User user);
 
-    public void deleteUser(User user);
+    void deleteUser(User user);
 
-    public void updateUser(User user);
+    void updateUser(User user);
 
-    public User getUserById(int id);
+    User getUserById(Integer id);
 
-    public User getUserByEmail(String email);
+    User getUserByEmail(String email);
 
-    public User getUserByName(String name);
+    User getUserByName(String name);
 
-    public List<User> getAllUsers();
+    List<User> getAllUsers();
 
-    public User queryUser(String name, String pwd);
+    User UserAuthorize(String name, String pwd);
+
+    List<User> queryUser(String name);
+
+    /**
+     * paper
+     */
+    Paper getPaperById(Integer id);
+
+    List<Paper> queryPaper(String name);
 
 }

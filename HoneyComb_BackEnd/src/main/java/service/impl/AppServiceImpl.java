@@ -1,7 +1,8 @@
 package service.impl;
 
+import dao.PaperDao;
 import dao.UserDao;
-import dao.impl.UserDaoImpl;
+import model.Paper;
 import model.User;
 import service.AppService;
 
@@ -10,6 +11,11 @@ import java.util.List;
 public class AppServiceImpl implements AppService {
 
     private UserDao userDao;
+    private PaperDao paperDao;
+
+    public void setPaperDao(PaperDao paperDao) {
+        this.paperDao = paperDao;
+    }
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
@@ -30,7 +36,7 @@ public class AppServiceImpl implements AppService {
         userDao.update(user);
     }
 
-    public User getUserById(int id) {
+    public User getUserById(Integer id) {
         return userDao.getUserById(id);
     }
 
@@ -46,8 +52,25 @@ public class AppServiceImpl implements AppService {
         return userDao.getAllUsers();
     }
 
-    public User queryUser(String name, String pwd) {
-        return userDao.queryUser(name, pwd);
+    public User UserAuthorize(String name, String pwd) {
+        return userDao.UserAuthorize(name, pwd);
     }
 
+    @Override
+    public List<User> queryUser(String name) {
+        return userDao.queryUser(name);
+    }
+
+    /**
+     * paper
+     */
+    @Override
+    public Paper getPaperById(Integer id) {
+        return paperDao.getPaperById(id);
+    }
+
+    @Override
+    public List<Paper> queryPaper(String name) {
+        return paperDao.queryPapers(name);
+    }
 }

@@ -28,7 +28,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		return user;
 	}
 
-	public User queryUser(String name, String pwd) {
+	public User UserAuthorize(String name, String pwd) {
 		@SuppressWarnings("unchecked")
 		List<User> users = (List<User>) getHibernateTemplate().find(
 				"from User as u where u.name=? and u.pwd=?", name, pwd);
@@ -59,4 +59,12 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		return user;
 	}
 
+	@Override
+	public List<User> queryUser(String name) {
+		@SuppressWarnings("unchecked")
+		List<User> users = (List<User>) getHibernateTemplate().find(
+				"from User as u where u.name like ?",
+				"%" + name + "%");
+		return users;
+	}
 }
