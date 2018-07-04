@@ -60,10 +60,10 @@
         </form> -->
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="#">Sign in</a>
+            <router-link :to="{name:'Login'}">Sign in</router-link>
           </li>
           <li>
-            <a href="#">Sign up</a>
+            <router-link :to="{name:'Register'}">Sign up</router-link>
           </li>
           <!-- <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
