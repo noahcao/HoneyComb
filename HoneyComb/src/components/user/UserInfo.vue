@@ -1,3 +1,4 @@
+
 <template>
   <div class="row">
     <div class="col-sm-0 col-md-1"></div>
@@ -6,11 +7,15 @@
         <img class="img-rounded avatar" src="../../assets/pic/dft-header.png" alt="70x70">
         <div class="caption">
           <h3>Lena Oxton</h3>
-          <p>The former Overwatch agent known as Tracer is a time-jumping adventurer and an irrepressible force for good.</p>
+          <p v-if="editBio">{{bio}}</p>
           <p>
-            <button class="btn btn-default" type="button">
-                Edit Bio  
+            <button class="btn btn-default" type="button" @click="edit_bio" v-if="editBio">
+              Edit Bio
             </button>
+            <textarea rows="5" v-else v-model="bio"></textarea>
+            <button class="btn btn-default" v-if="!editBio" type="button">save</button>
+            <button class="btn btn-default" v-if="!editBio" type="button" @click="edit_bio">cancel</button>
+            <br/>
             <button class="btn btn-default" type="button">
               Edit Profile
             </button>
@@ -25,59 +30,76 @@
 </template>
 
 <script>
+// import $ from 'jquery'
 export default {
-  name: 'userInfo'
+  name: 'userInfo',
+  data () {
+    return {
+      editBio: true,
+      bio: 'The former Overwatch agent known as Tracer is a time-jumping adventurer and an irrepressible force for good.'
+    }
+  },
+  methods: {
+    edit_bio () {
+      this.editBio = !this.editBio
+    }
+  }
 }
 </script>
 
 <style scoped>
+textarea, p{
+  width: 235px;
+  resize: vertical;
+}
 .row {
-    margin-left: 0px;
-    margin-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 .thumbnail {
-    display: block;
-    padding: 4px;
-    margin-bottom: 20px;
-    line-height: 1.42857143;
-    background-color: rgba(255, 255, 255, 0);
-    border: none;
-    border-right: 1px solid rgba(36, 41, 46, 0.6);
-    border-radius: 0px;
-    border-right-style: groove;
-    -webkit-transition: border 0.2s ease-in-out;
-    -o-transition: border 0.2s ease-in-out;
-    transition: border 0.2s ease-in-out;
-    box-shadow: none;
+  display: block;
+  padding: 4px;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  border-right: 1px solid rgba(36, 41, 46, 0.6);
+  border-radius: 0px;
+  border-right-style: groove;
+  -webkit-transition: border 0.2s ease-in-out;
+  -o-transition: border 0.2s ease-in-out;
+  transition: border 0.2s ease-in-out;
+  box-shadow: none;
 }
 .thumbnail > img {
-    display: block;
-    /* max-width: 100%; */
-    height: 240px;
-    margin-top: 60px;
-    margin-left: 0px;
+  display: block;
+  /* max-width: 100%; */
+  height: 240px;
+  margin-top: 60px;
+  margin-left: 0px;
 }
 .avatar {
 }
 .btn-default {
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.5);
-    border-color: rgba(36, 41, 46, 0);
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(36, 41, 46, 0);
+  margin-top: 5px;
 }
 .btn-default:active:focus {
-    color: #333;
-    background-color: #d4d4d4;
-    border-color: rgba(36, 41, 46, 0);
+  color: #333;
+  background-color: #d4d4d4;
+  border-color: rgba(36, 41, 46, 0);
 }
 .btn-default:hover {
-    color: #333;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(36, 41, 46, 0);
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(36, 41, 46, 0);
 }
 .btn:active,
 .btn:focus {
-    z-index: 2;
-    box-shadow: none;
-    outline: none;
+  z-index: 2;
+  box-shadow: none;
+  outline: none;
 }
 </style>
