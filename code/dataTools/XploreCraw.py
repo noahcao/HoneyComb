@@ -106,6 +106,7 @@ def analyse_soups(soups):
                     writer = csv.writer(f, encoding='utf8', delimiter=',')
                     row = [title, author, year, cited, publisher, abstract]
                     writer.writerow(row) 
+    base += topic['page_count']
 
 
 if __name__ == '__main__':
