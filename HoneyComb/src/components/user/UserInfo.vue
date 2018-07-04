@@ -1,27 +1,24 @@
 <template>
-    <div class="row">
-        <div class="col-sm-0 col-md-1"></div>
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            <div class="thumbnail">
-                <img class="img-rounded avatar" src="../../assets/pic/dft-header.png" alt="70x70">
-                <div class="caption">
-                    <h3>Lena Oxton</h3>
-                    <p>The former Overwatch agent known as Tracer is a time-jumping adventurer and an irrepressible force for good.</p>
-                    <p>
-                        <button class="btn btn-default" type="button">
-                            Edit Bio
-                        </button>
-                        <button class="btn btn-default" type="button">
-                            Edit Profile
-                        </button>
-                    </p>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-sm-0 col-md-1"></div>
+    <div class="col-xs-12 col-sm-4 col-md-3">
+      <div class="thumbnail">
+        <img class="img-rounded avatar" src="../../assets/pic/dft-header.png" alt="70x70">
+        <div class="caption">
+          <h3>Lena Oxton</h3>
+          <p>The former Overwatch agent known as Tracer is a time-jumping adventurer and an irrepressible force for good.</p>
+          <p>
+            <button class="btn btn-default" type="button">
+                Edit Bio  
+            </button>
+            <button class="btn btn-default" type="button">
+              Edit Profile
+            </button>
+          </p>
         </div>
       </div>
     </div>
     <div class="col-sm-8 col-md-7">
-
     </div>
     <div class="col-sm-0 col-md-1"></div>
   </div>
@@ -34,8 +31,8 @@ export default {
 </script>
 
 <style scoped>
-.row{
-    margin-left:0px;
+.row {
+    margin-left: 0px;
     margin-right: 0px;
 }
 .thumbnail {
@@ -54,11 +51,11 @@ export default {
     box-shadow: none;
 }
 .thumbnail > img {
-  display: block;
-  /* max-width: 100%; */
-  height: 240px;
-  margin-top: 60px;
-  margin-left: 0px;
+    display: block;
+    /* max-width: 100%; */
+    height: 240px;
+    margin-top: 60px;
+    margin-left: 0px;
 }
 .avatar {
 }
