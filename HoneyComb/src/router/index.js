@@ -4,7 +4,6 @@ import Main from '@/components/Main'
 import Login from '../components/user/Login'
 import Register from '../components/user/Register'
 
-
 Vue.use(Router)
 
 export default new Router({

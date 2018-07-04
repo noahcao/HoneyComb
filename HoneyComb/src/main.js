@@ -3,9 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import axios from 'axios'
 
 Vue.config.productionTip = false
+
+let axiosIns = axios.create({
+  baseURL: '/',
+  /* eslint-disable */
+  baseURL: '/api/'
+})
+Vue.prototype.$http = axiosIns
 
 /* eslint-disable no-new */
 new Vue({
