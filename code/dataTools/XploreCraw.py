@@ -62,6 +62,7 @@ def analyse_soups(soups):
     citeds = []
 
     base = 0
+    url_header = 'https://ieeexplore.ieee.org'
     for topic in topics:
         with open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='') as f:
             header = ['title', 'first-author', 'year', 'citation']
@@ -70,16 +71,10 @@ def analyse_soups(soups):
         for soup in soups[base:base + topic['page_count']]:
             result = soup.select('div.List-results-items')
             for r in result:
-                #print("------------------------------")
                 title = r.select('h2 a.ng-binding')
-                #print(title)
                 year = r.select('span[ng-if="::record.publicationYear"]')
-                #print(year)
                 author = r.select('span[ng-bind-html="::author.preferredName"]')
-                #print(author)
                 cited = r.select('span[ng-if="::record.citationCount"]')
-                #print(cited)
-                #print("----------------------------------")
 
                 title, n = re.subn("\\<.*?\\>", '', innerHTML(title[0]))
                 year, n = re.subn("\\<.*?\\>", '', innerHTML(year[0]))
@@ -90,9 +85,17 @@ def analyse_soups(soups):
                     author = u'No author'  # 可能出现没有作者的情况
                 else:
                     author, n = re.subn("\\<.*?\\>", '', innerHTML(author[0]))  # 去掉内容里HTML标签的部分
+
+
                 if not cited:
                     cited = u'0'
+                    cited_url = ""
                 else:
+                    content = str(cited[0])
+                    begin = int(content.find('/document'))
+                    end = int(content.find('=papers')) + 7
+                    cited_url = content[begin: end]
+                    cited_url = url_header + cited_url
                     cited, n = re.subn("<.*?>", '', innerHTML(cited[0]))
                     cited = cited.replace('Papers (', '')   # 去掉Papers(字段
                     cited = cited.replace(')', '')          # 去掉）
@@ -102,7 +105,7 @@ def analyse_soups(soups):
                 # 把它们存在csv里
                 with open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='') as f:
                     writer = csv.writer(f, delimiter=',')
-                    row = [title, author, year, cited]
+                    row = [title, author, year, cited, cited_url]
                     writer.writerow(row)
     base += topic['page_count']
 
