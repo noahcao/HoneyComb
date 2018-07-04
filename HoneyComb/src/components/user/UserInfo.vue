@@ -6,10 +6,14 @@
                 <img class="img-rounded avatar" src="../../assets/pic/dft-header.png" alt="70x70">
                 <div class="caption">
                     <h3>Lena Oxton</h3>
-                    <p>...</p>
+                    <p>The former Overwatch agent known as Tracer is a time-jumping adventurer and an irrepressible force for good.</p>
                     <p>
-                        <a href="#" class="btn btn-primary" role="button">Button</a>
-                        <a href="#" class="btn btn-default" role="button">Button</a>
+                        <button class="btn btn-default" type="button">
+                            Edit Bio
+                        </button>
+                        <button class="btn btn-default" type="button">
+                            Edit Profile
+                        </button>
                     </p>
                 </div>
             </div>
@@ -29,16 +33,20 @@ export default {
 
 
 <style scoped>
+.row{
+    margin-left:0px;
+    margin-right: 0px;
+}
 .thumbnail {
     display: block;
     padding: 4px;
     margin-bottom: 20px;
     line-height: 1.42857143;
     background-color: rgba(255, 255, 255, 0);
-    border:none;
+    border: none;
     border-right: 1px solid rgba(36, 41, 46, 0.6);
     border-radius: 0px;
-    border-right-style:groove;
+    border-right-style: groove;
     -webkit-transition: border 0.2s ease-in-out;
     -o-transition: border 0.2s ease-in-out;
     transition: border 0.2s ease-in-out;
@@ -52,5 +60,26 @@ export default {
     margin-left: 0px;
 }
 .avatar {
+}
+.btn-default {
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(36, 41, 46, 0);
+}
+.btn-default:active:focus {
+    color: #333;
+    background-color: #d4d4d4;
+    border-color: rgba(36, 41, 46, 0);
+}
+.btn-default:hover {
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(36, 41, 46, 0);
+}
+.btn:active,
+.btn:focus {
+    z-index: 2;
+    box-shadow: none;
+    outline: none;
 }
 </style>
