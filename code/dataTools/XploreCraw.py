@@ -1,8 +1,9 @@
 from selenium import webdriver
 import progressbar
-import unicodecsv as csv
+import  csv
 import time
 from bs4 import BeautifulSoup as bs
+import re
 
 # 初始化需要查询的topic的列表
 def init_topics(topic_list):
@@ -10,7 +11,7 @@ def init_topics(topic_list):
     for topic in topic_list:
         topic_item = {}
         topic_item['keyword'] = topic
-        topic_item['page_count'] = 3
+        topic_item['page_count'] = 2
         topic_item['total'] = topic_item['page_count'] * 100
         topics.append(topic_item)
     return topics
@@ -62,23 +63,23 @@ def analyse_soups(soups):
 
     base = 0
     for topic in topics:
+        with open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='') as f:
+            header = ['title', 'first-author', 'year', 'citation']
+            writer = csv.writer(f, delimiter=',')
+            writer.writerow(header)
         for soup in soups[base:base + topic['page_count']]:
             result = soup.select('div.List-results-items')
             for r in result:
-                print("------------------------------")
-                title = r.select('h2 a.ng-if')
-                print(title)
+                #print("------------------------------")
+                title = r.select('h2 a.ng-binding')
+                #print(title)
                 year = r.select('span[ng-if="::record.publicationYear"]')
-                print(year)
+                #print(year)
                 author = r.select('span[ng-bind-html="::author.preferredName"]')
-                print(author)
-                publisher = publisher = r.select('a[ng-bind-html="::record.publicationTitle"]')
-                print(publisher)
-                abstract = r.select('span[ng-bind-html="::record.abstract"]')
-                print(abstract)
+                #print(author)
                 cited = r.select('span[ng-if="::record.citationCount"]')
-                print(cited)
-                print("----------------------------------")
+                #print(cited)
+                #print("----------------------------------")
 
                 title, n = re.subn("\\<.*?\\>", '', innerHTML(title[0]))
                 year, n = re.subn("\\<.*?\\>", '', innerHTML(year[0]))
@@ -89,23 +90,20 @@ def analyse_soups(soups):
                     author = u'No author'  # 可能出现没有作者的情况
                 else:
                     author, n = re.subn("\\<.*?\\>", '', innerHTML(author[0]))  # 去掉内容里HTML标签的部分
-                    publisher, n = re.subn("\\<.*?\\>", '', innerHTML(publisher[0]))
-                if not abstract:
-                    abstract = u'No Abstract'
-                else:                
-                    abstract, n = re.subn("\\<.*?\\>", '', innerHTML(abstract[0]))
                 if not cited:
                     cited = u'0'
                 else:
                     cited, n = re.subn("<.*?>", '', innerHTML(cited[0]))
-                    cited = cited.replace('Papers(', '') # 去掉Papers(字段
-                    cited = cited.replace(')', '') # 去掉）
+                    cited = cited.replace('Papers (', '')   # 去掉Papers(字段
+                    cited = cited.replace(')', '')          # 去掉）
+                    cited = cited.replace('\t', '')         # 去掉\t
+                    cited = cited.replace('\n', '')         # 去掉\n
 
                 # 把它们存在csv里
-                with open(topic+'.csv', 'a') as f:
-                    writer = csv.writer(f, encoding='utf8', delimiter=',')
-                    row = [title, author, year, cited, publisher, abstract]
-                    writer.writerow(row) 
+                with open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='') as f:
+                    writer = csv.writer(f, delimiter=',')
+                    row = [title, author, year, cited]
+                    writer.writerow(row)
     base += topic['page_count']
 
 
