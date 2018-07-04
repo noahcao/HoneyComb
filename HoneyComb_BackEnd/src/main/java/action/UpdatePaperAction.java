@@ -55,12 +55,11 @@ public class UpdatePaperAction extends ActionSupport {
         if (this.id == null) return ERROR;
         Paper result = appService.getPaperById(id);
         if (result != null) {
-            setId(result.getId());
             setAuthors(result.getAuthors());
             setName(result.getName());
             setUrl(result.getUrl());
             return SUCCESS;
         }
-        return ERROR;
+        return NONE;
     }
 }

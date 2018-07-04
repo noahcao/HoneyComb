@@ -47,6 +47,9 @@
             <result name="error" type="httpheader">
                 <param name="status">400</param>
             </result>
+            <result name="none" type="httpheader">
+                <param name="status">404</param>
+            </result>
             <interceptor-ref name="demostack"/>
         </action>
         <action name="searchuser" class="action.QueryUsersAction" method="search">
@@ -74,6 +77,9 @@
             <result name="success" type="json"/>
             <result name="error" type="httpheader">
                 <param name="status">400</param>
+            </result>
+            <result name="none" type="httpheader">
+                <param name="status">404</param>
             </result>
             <interceptor-ref name="demostack"/>
         </action>

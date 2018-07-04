@@ -35,14 +35,13 @@ public class QueryPapersAction extends ActionSupport{
     }
 
     public String search() throws Exception {
+        this.papers = new HashSet<>();
         if (this.key == null) return ERROR;
         String[] keys = this.key.split(" ");
         for (String key: keys) {
             if (key == null) continue;
-            System.out.println(key);
             List<Paper> result = appService.queryPaper(key);
             if (result == null) continue;
-            if (this.papers == null) this.papers = new HashSet<>();
             this.papers.addAll(result);
         }
         return SUCCESS;

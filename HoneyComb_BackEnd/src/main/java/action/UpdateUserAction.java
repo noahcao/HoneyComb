@@ -77,7 +77,7 @@ public class UpdateUserAction extends ActionSupport {
             // Hibernate.initialize(result.getOrders());
             return SUCCESS;
         }
-        return ERROR;
+        return NONE;
     }
 
     public String updateEmail() throws Exception {
@@ -88,7 +88,7 @@ public class UpdateUserAction extends ActionSupport {
             appService.updateUser(result);
             return SUCCESS;
         }
-        return ERROR;
+        return NONE;
     }
 
     public String updatePassword() throws Exception {
@@ -99,7 +99,7 @@ public class UpdateUserAction extends ActionSupport {
             appService.updateUser(result);
             return SUCCESS;
         }
-        return ERROR;
+        return NONE;
     }
 
 //
