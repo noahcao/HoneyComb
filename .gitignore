@@ -1,1 +1,4 @@
 ./HoneyComb/node_modules
+.idea/
+out/
+target/
