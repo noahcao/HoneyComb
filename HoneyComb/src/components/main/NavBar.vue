@@ -22,7 +22,7 @@
             <a href="#" class="tag">Explore</a>
           </li>
           <li>
-            <a href="#">About us</a>
+            <router-link :to="{name:'userInfo'}">About us</router-link>
           </li>
           <li>
             <a href="#">Community</a>

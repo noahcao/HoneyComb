@@ -57,11 +57,11 @@
   u.style.cssText = "position:fixed;top:0;left:0;z-index:" + s.z + ";opacity:" + s.o;
   j("body")[0].appendChild(u);
   k(), window.onresize = k;
-  window.onmousemove = function (i) {
-    i = i || window.event, f.x = i.clientX, f.y = i.clientY
-  }, window.onmouseout = function () {
-    f.x = null, f.y = null
-  };
+  // window.onmousemove = function (i) {
+  //   i = i || window.event, f.x = i.clientX, f.y = i.clientY
+  // }, window.onmouseout = function () {
+  //   f.x = null, f.y = null
+  // };
   for (var t = [], p = 0; s.n > p; p++) {
     var h = a() * r,
       g = a() * n,

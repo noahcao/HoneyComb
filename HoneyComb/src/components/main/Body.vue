@@ -33,6 +33,7 @@
     </section>
 </template>
 <script>
+import a from "../../assets/js/canvas-nest";
 export default {
     name: "main-body"
 };
