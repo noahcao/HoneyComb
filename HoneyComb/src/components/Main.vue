@@ -6,18 +6,18 @@
 </template>
 
 <script>
-import navBar from "../components/main/NavBar";
-import mainBody from "../components/main/Body";
+import mainBody from '../components/main/Body'
+import navBar from '../components/main/NavBar'
 export default {
-    name: "Main",
-    components: {
-        navBar,
-        mainBody
-    },
-    data() {
-        return {
-            msg: "Welcome to Your Vue.js App"
-        };
+  name: 'Main',
+  components: {
+    navBar,
+    mainBody
+  },
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
     }
-};
+  }
+}
 </script>

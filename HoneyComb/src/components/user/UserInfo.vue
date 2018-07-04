@@ -18,19 +18,20 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8 col-md-7">
-
-        </div>
-        <div class="col-sm-0 col-md-1"></div>
+      </div>
     </div>
+    <div class="col-sm-8 col-md-7">
+
+    </div>
+    <div class="col-sm-0 col-md-1"></div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "userInfo"
-};
+  name: 'userInfo'
+}
 </script>
-
 
 <style scoped>
 .row{
@@ -53,11 +54,11 @@ export default {
     box-shadow: none;
 }
 .thumbnail > img {
-    display: block;
-    /* max-width: 100%; */
-    height: 240px;
-    margin-top: 60px;
-    margin-left: 0px;
+  display: block;
+  /* max-width: 100%; */
+  height: 240px;
+  margin-top: 60px;
+  margin-left: 0px;
 }
 .avatar {
 }

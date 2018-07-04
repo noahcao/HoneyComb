@@ -38,7 +38,9 @@
       </div>
       <div class="form-group">
         <div class="col-xs-offset-4 col-xs-6 col-md-4">
-          <button type="button" @click="register" class="btn btn-default"><strong>Submit</strong></button>
+          <button type="button" @click="register" class="btn btn-default">
+            <strong>Submit</strong>
+          </button>
         </div>
       </div>
     </form>
@@ -128,69 +130,66 @@ export default {
 </script>
 
 <style scoped>
-.form-horizontal{
-  margin-top:5%
+.form-horizontal {
+  margin-top: 5%;
 }
-.form-group{
+.form-group {
   text-align: center;
 }
 .form-control {
-    border: none;
-    border-radius: 4px;
-    color: rgba(255, 255, 255, 0.8);
-    height: 46px;
-    margin-left: auto;
-    margin-right: auto;
-    
+  border: none;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.8);
+  height: 46px;
+  margin-left: auto;
+  margin-right: auto;
 }
 input::-webkit-input-placeholder {
-    /* WebKit browsers */
-    color: rgba(255, 255, 255, 0.9);
+  /* WebKit browsers */
+  color: rgba(255, 255, 255, 0.9);
 }
 input {
-
-    transition: all 1s ease;
-    background-color: rgba(36, 41, 46, 0.3);
-    outline: none;
-    box-shadow: none;
+  transition: all 1s ease;
+  background-color: rgba(36, 41, 46, 0.3);
+  outline: none;
+  box-shadow: none;
 }
 input:hover,
 input:focus {
-    background-color: rgba(36, 41, 46, 0.5);
-    border: 1px solid grey;
-    box-shadow: none;
+  background-color: rgba(36, 41, 46, 0.5);
+  border: 1px solid grey;
+  box-shadow: none;
 }
 .container {
-    margin-top: 80px;
-    text-align: center;
+  margin-top: 80px;
+  text-align: center;
 }
 .btn-default {
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.5);
-    border-color: rgba(36, 41, 46, 0);
-    display: inline-block;
-    height:35px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(36, 41, 46, 0);
+  display: inline-block;
+  height: 35px;
 }
 .input-group-btn > .btn:active,
 .input-group-btn > .btn:focus {
-    z-index: 2;
-    box-shadow: none;
-    outline: none;
-    
+  z-index: 2;
+  box-shadow: none;
+  outline: none;
 }
 .btn-default:active:focus {
-    color: #333;
-    background-color: #d4d4d4;
-    border-color: rgba(36, 41, 46, 0);
-    outline:none;
+  color: #333;
+  background-color: #d4d4d4;
+  border-color: rgba(36, 41, 46, 0);
+  outline: none;
 }
 .btn-default:hover {
-    color: #333;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(36, 41, 46, 0);
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(36, 41, 46, 0);
 }
-.btn-default:focus{
+.btn-default:focus {
   box-shadow: none;
-    outline: none;
+  outline: none;
 }
 </style>

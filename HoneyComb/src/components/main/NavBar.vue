@@ -95,41 +95,55 @@
 
 <script>
 export default {
-    name: "nav-bar"
-};
+  name: 'nav-bar'
+}
 </script>
 <style scoped>
 .navbar-inverse {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    background: linear-gradient(#24292e, #24292e);
-    height: 70px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  background: linear-gradient(#24292e, #24292e);
+  height: 70px;
 }
 .container-fluid {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 .navbar-inverse .navbar-header {
-    height: 60px;
+  height: 60px;
 }
 
 .navbar-inverse .navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .open > a:focus,
 .navbar-inverse .navbar-nav > .open > a:hover {
-    color: #fff;
-    background-color: #24292e;
+  color: #fff;
+  background-color: #24292e;
 }
 
 .container-fluid > .navbar-collapse,
 .container-fluid > .navbar-header,
 .container > .navbar-collapse,
 .container > .navbar-header {
-    margin-right: -16px;
-    margin-left: -16px;
-    background-color: #24292e;
+  margin-right: -16px;
+  margin-left: -16px;
+  background-color: #24292e;
 }
 
 .navbar-inverse .navbar-brand {
+  font-family: "Century Gothic", sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 22px;
+  color: #ffffff !important;
+  background-color: transparent;
+  margin-left: 15px;
+}
+
+@media (min-width: 768px) {
+  .tag {
+    margin-left: 20px;
+  }
+  .navbar-inverse .navbar-brand {
     font-family: "Century Gothic", sans-serif;
     font-weight: 400;
     letter-spacing: 1px;
@@ -137,53 +151,39 @@ export default {
     color: #ffffff !important;
     background-color: transparent;
     margin-left: 15px;
-}
-
-@media (min-width: 768px) {
-    .tag {
-        margin-left: 20px;
-    }
-    .navbar-inverse .navbar-brand {
-        font-family: "Century Gothic", sans-serif;
-        font-weight: 400;
-        letter-spacing: 1px;
-        font-size: 22px;
-        color: #ffffff !important;
-        background-color: transparent;
-        margin-left: 15px;
-    }
+  }
 }
 
 @media (min-width: 900px) {
   .tag {
-        margin-left: 25px;
-    }
+    margin-left: 25px;
+  }
   .navbar-inverse .navbar-brand {
-        font-family: "Century Gothic", sans-serif;
-        font-weight: 400;
-        letter-spacing: 1px;
-        font-size: 22px;
-        color: #ffffff !important;
-        background-color: transparent;
-        margin-left: 80px;
-    }
+    font-family: "Century Gothic", sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 22px;
+    color: #ffffff !important;
+    background-color: transparent;
+    margin-left: 80px;
+  }
 }
 .navbar-right {
-    margin-right: 50px;
+  margin-right: 50px;
 }
-.navbar-inverse .navbar-nav>li>a {
-    transition: all 0.6s ease;
-    display: inline-block;
-    color: #9d9d9d;
-    text-transform: uppercase;
-    font-family: 'Century Gothic', sans-serif;
-    text-decoration: none;
-    font-weight: normal;
-    letter-spacing:0.8px
+.navbar-inverse .navbar-nav > li > a {
+  transition: all 0.6s ease;
+  display: inline-block;
+  color: #9d9d9d;
+  text-transform: uppercase;
+  font-family: "Century Gothic", sans-serif;
+  text-decoration: none;
+  font-weight: normal;
+  letter-spacing: 0.8px;
 }
-.navbar-inverse .navbar-nav>li>a:hover {
-    color: #ffffff;
-    font-weight: normal;
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #ffffff;
+  font-weight: normal;
 }
 /* .navbar-brand {
     float: left;

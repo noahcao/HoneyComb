@@ -6,24 +6,24 @@
 
 <script>
 export default {
-    name: "App"
-};
+  name: 'App'
+}
 </script>
 
 <style>
 #app {
-    font-family: "Century Gothic", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: "Century Gothic", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 a:link,
 a:visited,
 a:hover {
-    text-decoration: none;
-    cursor: pointer;
+  text-decoration: none;
+  cursor: pointer;
 }
 body {
-    background-color: #ededed;
+  background-color: #ededed;
 }
 /* * {
     -webkit-border-radius: 0 !important;

@@ -5,7 +5,6 @@ import Login from '../components/user/Login'
 import Register from '../components/user/Register'
 import userInfo from '../components/user/userInfo'
 
-
 Vue.use(Router)
 
 export default new Router({
@@ -26,7 +25,7 @@ export default new Router({
       component: Login
     },
     {
-      path: "/userInfo",
+      path: '/userInfo',
       name: 'userInfo',
       component: userInfo
     }
