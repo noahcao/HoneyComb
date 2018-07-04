@@ -6,8 +6,9 @@
 </template>
 
 <script>
-// eslint-disable-next-line
-import mainBody from "../components/main/Body";export default {
+import mainBody from '../components/main/Body'
+import navBar from '../components/main/NavBar'
+export default {
   name: 'Main',
   components: {
     navBar,

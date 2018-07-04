@@ -25,7 +25,7 @@ export default new Router({
       component: Login
     },
     {
-      path: "/userInfo",
+      path: '/userInfo',
       name: 'userInfo',
       component: userInfo
     }
