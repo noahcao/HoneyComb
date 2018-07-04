@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import Login from '../components/user/Login'
 import Register from '../components/user/Register'
+import userInfo from '../components/user/userInfo'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: "/userInfo",
+      name: 'userInfo',
+      component: userInfo
     }
   ]
 })
