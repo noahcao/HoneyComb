@@ -1,0 +1,85 @@
+Fast and Lightweight Object Detection Network: Detection and Recognition on Resource Constrained Devices,"Bernardo Augusto Godinho de Oliveira, Fl&aacute;via Magalh&atilde;es Freitas Ferreira, Carlos Augusto Paiva da Silva Martins, ",2018,0
+Computer-aided diagnosis system for ulcer detection in wireless capsule endoscopy videos,"Said Charfi, Mohamed El Ansari, ",2017,0
+Multi-view visual saliency-based MRI classification for alzheimer's disease diagnosis,"Olfa Ben-Ahmed, Francois Lecellier, Marc Paccalin, Christine Fernandez-Maloigne, ",2017,0
+Superpixel-based salient region detection using the wavelet transform,"Masoumeh Rezaei Abkenar, M. Omair Ahmad, ",2016,1
+Patch-based salient region detection using statistical modeling in the non-subsampled contourlet domain,"M. Rezaie Abkenar, H. Sadreazami, M. Omair Ahmad, ",2017,0
+Quaternion-based salient region detection using scale space analysis,"Masoumeh Rezaei Abkenar, M. Omair Ahmad, ",2015,1
+CrowdGIS: Updating Digital Maps via Mobile Crowdsensing,"Zhe Peng, Shang Gao, Bin Xiao, Songtao Guo, Yuanyuan Yang, ",2018,0
+Hookworm Detection in Wireless Capsule Endoscopy Images With Deep Learning,"Jun-Yan He, Xiao Wu, Yu-Gang Jiang, Qiang Peng, Ramesh Jain, ",2018,0
+Discriminative Joint-Feature Topic Model With Dual Constraints for WCE Classification,"Yixuan Yuan, Xiwen Yao, Junwei Han, Lei Guo, Max Q. -H. Meng, ",2018,0
+WCE Abnormality Detection Based on Saliency and Adaptive Locality-Constrained Linear Coding,"Yixuan Yuan, Baopu Li, Max Q. -H. Meng, ",2017,2,CrowdGIS: Updating Digital Maps via Mobile Crowdsensing,Hookworm Detection in Wireless Capsule Endoscopy Images With Deep Learning,Discriminative Joint-Feature Topic Model With Dual Constraints for WCE Classification
+Visual Attention Modeling for Stereoscopic Video: A Benchmark and Computational Model,"Yuming Fang, Chi Zhang, Jing Li, Jianjun Lei, Matthieu Perreira Da Silva, Patrick Le Callet, ",2017,0
+Intensity and Compactness Enabled Saliency Estimation for Leakage Detection in Diabetic and Malarial Retinopathy,"Yitian Zhao, Yalin Zheng, Yonghuai Liu, Jian Yang, Yifan Zhao, Duanduan Chen, Yongtian Wang, ",2017,3,Visual Attention Modeling for Stereoscopic Video: A Benchmark and Computational Model
+Automatic Polyp Detection via a Novel Unified Bottom-Up and Top-Down Saliency Approach,"Yixuan Yuan, Dengwang Li, Max Q. -H. Meng, ",2018,0
+A fully automated ulcer detection system for wireless capsule endoscopy images,"Meryem Souaidi, Abdelkaher Ait Abdelouahad, Mohamed El Ansari, ",2017,0
+Saliency Based Ulcer Detection for Wireless Capsule Endoscopy Diagnosis,"Yixuan Yuan, Jiaole Wang, Baopu Li, Max Q. -H. Meng, ",2015,14,Computer-aided diagnosis system for ulcer detection in wireless capsule endoscopy videos,Saliency based Wireless Capsule Endoscopy video abstract,Multi-view visual saliency-based MRI classification for alzheimer's disease diagnosis,Superpixel-based salient region detection using the wavelet transform,Patch-based salient region detection using statistical modeling in the non-subsampled contourlet domain,Quaternion-based salient region detection using scale space analysis,WCE Abnormality Detection Based on Saliency and Adaptive Locality-Constrained Linear Coding,Intensity and Compactness Enabled Saliency Estimation for Leakage Detection in Diabetic and Malarial Retinopathy,Discriminative Joint-Feature Topic Model With Dual Constraints for WCE Classification,Automatic Polyp Detection via a Novel Unified Bottom-Up and Top-Down Saliency Approach
+A vision system for traffic sign detection and recognition,"Jian-He Shi, Huei-Yung Lin, ",2017,0
+Vision-based traffic sign compliance evaluation using convolutional neural network,"Edison A. Roxas, Joshua N. Acilo, Ryan Rhay P. Vicerra, Elmer P. Dadios, Argel A. Bandala, ",2018,0
+An efficient automatic traffic sign detection and recognition method for smartphones,"Po-Cheng Shih, Chi-Yi Tsai, Chun-Fei Hsu, ",2017,0
+Traffic sign recognition using convolutional neural networks,"Kaoutar Sefrioui Boujemaa, Ismail Berrada, Afaf Bouhoute, Karim Boubouh, ",2017,0
+Detection and recognition of traffic signs inside the attentional visual field of drivers,"S. J. Zabihi, S. M. Zabihi, S. S. Beauchemin, M. A. Bauer, ",2017,0
+From corners to rectangles &mdash; Directional road sign detection using learned corner representations,"Thomas Wenzel, Ta-Wei Chou, Steffen Brueggert, Joachim Denzler, ",2017,0
+Complementary features for traffic sign detection and recognition,"Ayoub Ellahyani, Mohamed El Ansari, ",2016,2,Computer-aided diagnosis system for ulcer detection in wireless capsule endoscopy videos,A fully automated ulcer detection system for wireless capsule endoscopy images
+Automated speed limit identification for efficient driving system,"Ayesha Waqar Mir, Hafsah Ahmed, Asim Altaf Shah, ",2017,0
+Traffic sign detection and classification using colour feature and neural network,"Md. Abdul Alim Sheikh, Alok Kole, Tanmoy Maity, ",2016,0
+A lighting independent vision based system for driver assistance,"Sabnne Hamdi, Hassene Faiedh, Chokn Souani, Kamel Besbes, ",2016,1
+Multi-scale self-searching saliency detection combined with rectangular diffusion,"Tengfei Song, Zhengyi Liu, ",2017,0
+Salient object detection by combing eye fixation prediction and semantic segmentation,"Tan Xiuli, Chen Shuhan, Hu Xuelong, ",2017,0
+Edge Preserving and Multi-Scale Contextual Neural Network for Salient Object Detection,"Xiang Wang, Huimin Ma, Xiaozhi Chen, Shaodi You, ",2018,0
+A dense semantic mapping system based on CRF-RNN network,"Jiyu Cheng, Yuxiang Sun, Max Q. -H. Meng, ",2017,0
+ScanNet: Richly-Annotated 3D Reconstructions of Indoor Scenes,"Angela Dai, Angel X. Chang, Manolis Savva, Maciej Halber, Thomas Funkhouser, Matthias Nie&szlig;ner, ",2017,0
+SceneNet RGB-D: Can 5M Synthetic Images Beat Generic ImageNet Pre-training on Indoor Segmentation?,"John McCormac, Ankur Handa, Stefan Leutenegger, Andrew J. Davison, ",2017,0
+Earthquake Safety Training through Virtual Drills,"Changyang Li, Wei Liang, Chris Quigley, Yibiao Zhao, Lap-Fai Yu, ",2017,0
+Eyes in the Dark: Distributed Scene Understanding for Disaster Management,"Liangzhi Li, Kaoru Ota, Mianxiong Dong, Wuyunzhaola Borjigin, ",2017,1
+Colored Point Cloud Registration Revisited,"Jaesik Park, Qian-Yi Zhou, Vladlen Koltun, ",2017,0
+Multiple-Level Feature-Based Measure for Retargeted Image Quality,"Yabin Zhang, Weisi Lin, Qiaohong Li, Wentao Cheng, Xinfeng Zhang, ",2018,0
+Quality Assessment of Retargeted Images Using Hand-Crafted and Deep-Learned Features,"Zhenqi Fu, Feng Shao, Qiuping Jiang, Randi Fu, Yo-Sung Ho, ",2018,0
+Social Media: New Perspectives to Improve Remote Sensing for Emergency Response,"Jun Li, Zhi He, Javier Plaza, Shutao Li, Jinfen Chen, Henglin Wu, Yandong Wang, Yu Liu, ",2017,0
+Robust Quantization for General Similarity Search,"Yuchen Guo, Guiguang Ding, Jungong Han, ",2018,0
+Duplex Metric Learning for Image Set Classification,"Gong Cheng, Peicheng Zhou, Junwei Han, ",2018,0
+Spatially Adaptive Sparse Representation for Target Detection in Hyperspectral Images,"Yiming Zhang, Bo Du, Yuxiang Zhang, Liangpei Zhang, ",2017,0
+Spatiotemporal Fusion of MODIS and Landsat-7 Reflectance Images via Compressed Sensing,"Jingbo Wei, Lizhe Wang, Peng Liu, Xiaodao Chen, Wei Li, Albert Y. Zomaya, ",2017,0
+On Combining Social Media and Spatial Technology for POI Cognition and Image Localization,"Xueming Qian, Xiaoqiang Lu, Junwei Han, Bo Du, Xuelong Li, ",2017,0
+Minimum-volume-regularized weighted symmetric nonnegative matrix factorization for clustering,"Tianxiang Gao, Sigurdur Olofsson, Songtao Lu, ",2016,0
+Nonlinear Hyperspectral Unmixing Based on Geometric Characteristics of Bilinear Mixture Models,"Bin Yang, Bin Wang, Zongmin Wu, ",2018,0
+Abundance estimation for hyperspectral images based on bilinear mixture models,"Bin Yang, Bin Wang, Zongmin Wu, Qiyong Lu, ",2017,0
+A Convex Optimization-Based Coupled Nonnegative Matrix Factorization Algorithm for Hyperspectral and Multispectral Data Fusion,"Chia-Hsiang Lin, Fei Ma, Chong-Yung Chi, Chih-Hsiang Hsieh, ",2018,0
+Saliency-Based Endmember Detection for Hyperspectral Imagery,"Xinyu Wang, Yanfei Zhong, Yao Xu, Liangpei Zhang, Yanyan Xu, ",2018,0
+Saliency-based endmember detection for hyperspectral imagery,"Xinyu Wang, Yanfei Zhong, Yao Xu, Liangpei Zhang, Yanyan Xu, ",2017,0
+A Fast Hyperplane-Based Minimum-Volume Enclosing Simplex Algorithm for Blind Hyperspectral Unmixing,"Chia-Hsiang Lin, Chong-Yung Chi, Yu-Hsiang Wang, Tsung-Han Chan, ",2016,1,Robust Minimum Volume Simplex Analysis for Hyperspectral Unmixing,Nonlinear Hyperspectral Unmixing Based on Geometric Characteristics of Bilinear Mixture Models,A Convex Optimization-Based Coupled Nonnegative Matrix Factorization Algorithm for Hyperspectral and Multispectral Data Fusion,Saliency-Based Endmember Detection for Hyperspectral Imagery
+A fast hyperplane-based MVES algorithm for hyperspectral unmixing,"Chia-Hsiang Lin, Chong-Yung Chi, Yu-Hsiang Wang, Tsung-Han Chan, ",2015,1,A Fast Hyperplane-Based Minimum-Volume Enclosing Simplex Algorithm for Blind Hyperspectral Unmixing
+Robust volume minimization-based matrix factorization via alternating optimization,"Xiao Fu, Wing-Kin Ma, Kejun Huang, Nicholas D. Sidiropoulos, ",2016,1,Minimum-volume-regularized weighted symmetric nonnegative matrix factorization for clustering
+A stochastic maximum-likelihood framework for simplex structured matrix factorization,"Ruiyuan Wu, Wing-Kin Ma, Xiao Fu, ",2017,0
+Robust Target Localization Based on Squared Range Iterative Reweighted Least Squares,"Alireza Zaeemzadeh, Mohsen Joneidi, Behzad Shahrasbi, Nazanin Rahnavard, ",2017,0
+Non-intrusive real-time monitoring of PV generation at inverters using Internet of photovoltaics,"S. Pulipaka, A. Ramesh, R. Kumar, B. Bora, S. Kumar, S. K. Singh, ",2017,0
+Taichi distance for person re-identification,"Zheng Wang, Ruimin Hu, Yi Yu, Chao Liang, Chen Chen, ",2017,0
+Robust Depth-Based Person Re-Identification,"Ancong Wu, Wei-Shi Zheng, Jian-Huang Lai, ",2017,0
+Depth-based person re-identification,"Ancong Wu, Wei-Shi Zheng, Jian-Huang Lai, ",2015,1,Robust Depth-Based Person Re-Identification
+Multimodal Neural Network for Overhead Person Re-Identification,"Aske R. Lejbolle, Kamal Nasrollahi, Benjamin Krogh, Thomas B. Moeslund, ",2017,0
+People Semantic Description and Re-identification from Point Cloud Geometry,"Modesto Castrill&oacute;n-Santana, Javier Lorenzo-Navarro, Daniel Hern&aacute;ndez-Sosa, ",2014,3,Depth-based person re-identification,Robust Depth-Based Person Re-Identification
+Person Re-identification in the Wild,"Liang Zheng, Hengheng Zhang, Shaoyan Sun, Manmohan Chandraker, Yi Yang, Qi Tian, ",2017,0
+Context-Aware Person Re-Identification in the Wild Via Fusion of Gait and Anthropometric Features,"Athira Nambiar, Alexandre Bernardino, Jacinto C. Nascimento, Ana Fred, ",2017,0
+Learning a non-linear combination of Mahalanobis distances using statistical inference for similarity measure,"Eslam Mostafa, Asem M. Ali, Aly A. Farag, ",2015,0
+Re-identifying people in the wild,"Javier Oliver, Alberto Albiol, Antonio Albiol, Jos&eacute; Manuel Mossi, ",2013,3,Saliency preprocessing for person re-identification images,Taichi distance for person re-identification,People Semantic Description and Re-identification from Point Cloud Geometry
+Dependence-Aware Feature Coding for Person Re-Identification,"Xiaobo Wang, Zhen Lei, Shengcai Liao, Xiaojie Guo, Yang Yang, Stan Z. Li, ",2018,0
+Attributes co-occurrence pattern mining for video-based person re-identification,"Xiu Zhang, Federico Pala, Bir Bhanu, ",2017,0
+Distance penalization and fusion for person re-identification,"Behzad Mirmahboub, Mohamed Lamine Mekhalfi, Vittorio Murino, ",2017,0
+Person re-identification based on CCN feature representations learning,"Li Yuan, Ping-Jun Li, ",2017,0
+Person Re-Identification with Deep Features and Transfer Learning,"Shengke Wang, Shan Wu, Lianghua Duan, Changyin Yu, Yujuan Sun, Junyu Dong, ",2017,0
+Person re-identification based on deep spatio-temporal features and transfer learning,"Shengke Wang, Cui Zhang, Lianghua Duan, Lina Wang, Shan Wu, Long Chen, ",2016,0
+Deep learning prototype domains for person re-identification,"Arne Schumann, Shaogang Gong, Tobias Schuchert, ",2017,0
+A coarse-to-fine deep learning for person re-identification,"Alexandre Franco, Luciano Oliveira, ",2016,2,Distance penalization and fusion for person re-identification,Person re-identification based on CCN feature representations learning
+Consistent-Aware Deep Learning for Person Re-identification in a Camera Network,"Ji Lin, Liangliang Ren, Jiwen Lu, Jianjiang Feng, Jie Zhou, ",2017,0
+A Perceptually Weighted Rank Correlation Indicator for Objective Image Quality Assessment,"Qingbo Wu, Hongliang Li, Fanman Meng, King N. Ngan, ",2018,0
+Recurrent Scale Approximation for Object Detection in CNN,"Yu Liu, Hongyang Li, Junjie Yan, Fangyin Wei, Xiaogang Wang, Xiaoou Tang, ",2017,0
+Triplet CNN and pedestrian attribute recognition for improved person re-identification,"Yiqiang Chen, Stefan Duffner, Andrei Stoian, Jean-Yves Dufour, Atilla Baskurt, ",2017,0
+Deep person re-identification with improved embedding and efficient training,"Haibo Jin, Xiaobo Wang, Shengcai Liao, Stan Z. Li, ",2017,0
+Person re-identification by deep MAX pooling network,"Guang Han, Meng Duan, Liu Liu, ",2017,0
+Video-Based Person Re-identification by Deep Feature Guided Pooling,"Youjiao Li, Li Zhuo, Jiafeng Li, Jing Zhang, Xi Liang, Qi Tian, ",2017,0
+Performance Monitoring System for driver with light motor vehicle (LMV) learner's license,"Shubham Yadav, Ashwini Pohekar, K. Surender, ",2016,0
+Depth video-based two-stream convolutional neural networks for driver fatigue detection,"Xiaoxi Ma, Lap-Pui Chau, Kim-Hui Yap, ",2017,0
+An unobtrusive Wi-Fi system for human monitoring,"Marco Bassoli, Valentina Bianchi, Ilaria De Munari, Paolo Ciampolini, ",2017,0
+Driver Modeling for Detection and Assessment of Driver Distraction: Examples from the UTDrive Test Bed,"John H. L. Hansen, Carlos Busso, Yang Zheng, Amardeep Sathyanarayana, ",2017,1
+"Errata [for ""Smart Driver Monitoring: When Signal Processing Meets Human Factors""]",,2017,0
+Smart Driver Monitoring: When Signal Processing Meets Human Factors: In the driver's seat,"Amirhossein S. Aghaei, Birsen Donmez, Cheng Chen Liu, Dengbo He, George Liu, Konstantinos N. Plataniotis, Huei-Yen Winnie Chen, Zohreh Sojoudi, ",2016,2,An unobtrusive Wi-Fi system for human monitoring,Driver Modeling for Detection and Assessment of Driver Distraction: Examples from the UTDrive Test Bed,Errata [for Smart Driver Monitoring: When Signal Processing Meets Human Factors]
+Real-time big data analytics for multimedia transmission and storage,"Kun Wang, Jun Mi, Chenhan Xu, Lei Shu, Der-Jiunn Deng, ",2016,0
