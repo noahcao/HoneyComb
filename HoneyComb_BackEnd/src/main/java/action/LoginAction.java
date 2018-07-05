@@ -6,7 +6,6 @@ import model.User;
 import org.apache.struts2.StrutsStatics;
 import service.AppService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 public class LoginAction extends ActionSupport {

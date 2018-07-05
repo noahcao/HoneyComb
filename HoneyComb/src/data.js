@@ -1,5 +1,5 @@
-var LoginUser = null
+var id = null
 
 export default {
-  LoginUser
+  id
 }

@@ -29,18 +29,18 @@
         <div class="r">
           <ul class="nav nav-tabs">
             <li role="presentation" class="active">
-              <a class="tabb" href="#ios" data-toggle="tab">Nets</a>
+              <a class="tabb" href="#net" data-toggle="tab">Nets</a>
             </li>
             <li role="presentation">
-              <a class="tabb" href="#home" data-toggle="tab">Collects</a>
+              <a class="tabb" href="#jmeter" data-toggle="tab">Collects</a>
             </li>
             <li role="presentation">
               <a class="tabb" href="#ejb" data-toggle="tab">Trends</a>
             </li>
           </ul>
           <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade in active" id="home">
-              <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
+            <div class="tab-pane fade in active" id="net">
+              <Net></Net>
             </div>
             <div class="tab-pane fade" id="ios">
               <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
@@ -63,10 +63,12 @@
 <script>
 // import $ from 'jquery'
 import navBar from '../main/NavBar'
+import Net from './infoContent/Net'
 export default {
   name: 'userInfo',
   components: {
-    navBar
+    navBar,
+    Net
   },
   data () {
     return {
@@ -97,20 +99,17 @@ p {
 .r {
   margin-left: 5%;
 }
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover {
-  background-color: rgba(36, 41, 46, 1);
-}
 .tabb {
-  transition: all 0.3s ease;
   color: rgba(36, 41, 46, 0.8);
   font-size: 20px;
-  border-bottom-color: rgba(36, 41, 46, 1);
-}
-.nav-tabs {
   border-bottom-color: rgba(36, 41, 46, 0);
 }
+.nav-tabs {
+  border-bottom-color: rgba(36, 41, 46, 0.5);
+}
 .nav-tabs > li > a {
+  transition: 0.8s ease;
+  transition-property: color;
   margin-right: 0px;
 }
 .nav-tabs > li.active > a,
@@ -119,7 +118,11 @@ p {
   cursor: default;
 
   background-color: rgba(36, 41, 46, 0);
-  border-bottom: 3px solid rgba(36, 41, 46, 1);
+  border-right: 1px solid rgba(36, 41, 46, 0);
+  border-left: 1px solid rgba(36, 41, 46, 0);
+  border-top: 1px solid rgba(36, 41, 46, 0);
+
+  border-bottom: 2px solid rgba(36, 41, 46, 1);
 }
 .tabb {
   transition: all 0.3s ease;
@@ -129,7 +132,7 @@ p {
 .tabb:hover {
   color: #24292e;
   font-size: 20px;
-  border-bottom-color: rgba(36, 41, 46, 1);
+  border-bottom-color: rgba(36, 41, 46, 0);
 }
 .thumbnail {
   display: block;
@@ -138,9 +141,9 @@ p {
   line-height: 1.42857143;
   background-color: rgba(255, 255, 255, 0);
   border: none;
-  border-right: 1px solid rgba(36, 41, 46, 0.6);
+  border-right: 2px solid rgba(36, 41, 46, 0.5);
   border-radius: 0px;
-  border-right-style: groove;
+  border-right-style: inset;
   -webkit-transition: border 0.2s ease-in-out;
   -o-transition: border 0.2s ease-in-out;
   transition: border 0.2s ease-in-out;
@@ -154,6 +157,7 @@ p {
   margin-left: 0px;
 }
 .avatar {
+  border: 1px solid rgba(200, 200, 200, 0.6);
 }
 .btn-default {
   transition: all 0.3s ease;
