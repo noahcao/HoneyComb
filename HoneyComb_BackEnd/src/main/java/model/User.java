@@ -10,6 +10,15 @@ public class User {
     private String name;
     private String icon;
     private Set<Paper> stars;
+    private String bio;
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
     public Set<Paper> getStars() {
         return stars;

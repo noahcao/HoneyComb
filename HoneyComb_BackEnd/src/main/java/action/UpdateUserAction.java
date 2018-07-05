@@ -15,6 +15,15 @@ public class UpdateUserAction extends ActionSupport {
     private String icon;
     private String email;
     private String name;
+    private String bio;
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -61,6 +70,7 @@ public class UpdateUserAction extends ActionSupport {
         setEmail(item.getEmail());
         setId(item.getId());
         setIcon(item.getIcon());
+        setBio(item.getBio());
     }
 
     private AppService appService;
@@ -81,7 +91,7 @@ public class UpdateUserAction extends ActionSupport {
     }
 
     public String updateEmail() throws Exception {
-        if (this.email == null) return ERROR;
+        if (this.email == null || this.id == null) return ERROR;
         User result = appService.getUserById(id);
         if (result != null) {
             result.setEmail(email);
@@ -92,7 +102,7 @@ public class UpdateUserAction extends ActionSupport {
     }
 
     public String updatePassword() throws Exception {
-        if (this.pwd == null) return ERROR;
+        if (this.pwd == null || this.id == null) return ERROR;
         User result = appService.getUserById(id);
         if (result != null) {
             result.setPwd(this.pwd);
@@ -102,27 +112,18 @@ public class UpdateUserAction extends ActionSupport {
         return NONE;
     }
 
-//
-//    public String updateIcon() throws Exception {
-//        User result = appService.getUserById(id);
-//        if (result != null) {
-//            ConfigurableApplicationContext context = null;
-//            context = new ClassPathXmlApplicationContext("mongo.xml");
-//            IconDao iconDao = context.getBean(IconDaoImpl.class);
-//            iconDao.createCollection();
-//            IconEntity e = iconDao.findOne("" + id);
-//            if (e == null) {
-//                setIcon(null);
-//                return "error";
-//            }
-//            e.setIcon(icon);
-//            iconDao.update(e);
-//            return "success";
-//        }
-//        setIcon(null);
-//        return "error";
-//    }
 
+    public String updateIcon() throws Exception {
+        if (this.id == null) return ERROR;
+        User result = appService.getUserById(id);
+        if (result != null) {
+            result.setIcon(this.icon);
+            appService.updateUser(result);
+            return SUCCESS;
+        }
+        setIcon(null);
+        return NONE;
+    }
 
 
 }
