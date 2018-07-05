@@ -4,10 +4,12 @@ import  csv
 import time
 from bs4 import BeautifulSoup as bs
 import re
+import threading
+import traceback
 
 papers_met = {} # 记录了所有已经查询到了的paper的title
 url_header = 'https://ieeexplore.ieee.org' # 在ieee xplore上进行搜索时的url的开头
-
+error_file = open("errorlog.txt", 'a', encoding='utf-8') # 用来记录错误信息的文件
 
 # 初始化需要查询的topic的列表
 def init_topics(topic_list):
@@ -56,8 +58,11 @@ def craw_pages(topics):
     driver.close()
     return soups
 
+
 def innerHTML(element):
     return element.decode_contents(formatter='html')
+
+
 
 def parseCitationPage(citation_url):
     # 解析一个论文对应的引用了它的ieee出版的论文的介绍页面，需要说明的是，这个页面中可能包含了大量的引用了这个论文的论文信息，
@@ -119,6 +124,7 @@ def parseCitationPage(citation_url):
         driver.close()
         return citation_list
 
+
 def parse_paper_body(r):
     # 解析一个页面中的关于论文查询结果的div，返回对应的metadata，具体来说，返回的是一个list
     # 包括了对应论文的title, author_list, year, cited和citation
@@ -126,16 +132,20 @@ def parse_paper_body(r):
     year = r.select('span[ng-if="::record.publicationYear"]')
     author = r.select('span[ng-bind-html="::author.preferredName"]')
     cited = r.select('span[ng-if="::record.citationCount"]')
+    author_list = ""
 
-    title, n = re.subn("\\<.*?\\>", '', innerHTML(title[0]))
-    year, n = re.subn("\\<.*?\\>", '', innerHTML(year[0]))
+    try:
+        title, n = re.subn("\\<.*?\\>", '', innerHTML(title[0]))
+        year, n = re.subn("\\<.*?\\>", '', innerHTML(year[0]))
+    except:
+        return [], True
+
     year, n = re.subn('\s*?', '', year) # 去掉无用的空格
     year, n = re.subn('Year:', '', year) # 去电'Year:'字段
 
     if not author:
         author = u'No author'  # 可能出现没有作者的情况
     else:
-        author_list = ""
         for oneauthor in author:
             oneauthor, n = author, n = re.subn("\\<.*?\\>", '', innerHTML(oneauthor)) # 去掉内容里HTML标签的部分
             author_list += oneauthor + ", "
@@ -143,12 +153,14 @@ def parse_paper_body(r):
     
     title = title.replace("[::", '')
     title = title.replace("::]", '')
-    print(title)
+
+    paper_met = False
+
     if not title in papers_met:
         # 如果这篇论文之前还没有被查询到过，就把他添加到查询字典中，否则，就直接开始下一篇论文的解析
         papers_met[title] = 1
     else:
-        return [], []
+        paper_met = True
 
     if not cited:
         # 一篇文章还没有被其他的文献引用
@@ -171,157 +183,53 @@ def parse_paper_body(r):
     else:
         citation_list = []
 
-    return [title, author_list, year, cited], citation_list
+    row = [title, author_list, year, cited] + citation_list
+    return row, paper_met
 
 
 def analyse_soups(soups):
     # 对抓取道德网页的页面进行解析，这个页面是一个通过关键词查询得到的结果页面，所以内部可能会有多篇的论文信息
-    years = []
-    titles = []
-    authors = []    
-    publishers = []
-    abstracts = []
-    citeds = []
-
     base = 0
+    f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
     for topic in topics:
-        with open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='') as f:
-            header = ['title', 'authors', 'year', 'citation']
-            writer = csv.writer(f, delimiter=',')
-            writer.writerow(header)
         for soup in soups[base:base + topic['page_count']]:
             result = soup.select('div.List-results-items')
             for r in result:
-                '''
-                title = r.select('h2 a.ng-binding')
-                year = r.select('span[ng-if="::record.publicationYear"]')
-                author = r.select('span[ng-bind-html="::author.preferredName"]')
-                cited = r.select('span[ng-if="::record.citationCount"]')
+                row, paper_met = parse_paper_body(r)
 
-                title, n = re.subn("\\<.*?\\>", '', innerHTML(title[0]))
-                year, n = re.subn("\\<.*?\\>", '', innerHTML(year[0]))
-                year, n = re.subn('\s*?', '', year) # 去掉无用的空格
-                year, n = re.subn('Year:', '', year) # 去电'Year:'字段
-
-                if not author:
-                    author = u'No author'  # 可能出现没有作者的情况
-                else:
-                    author_list = ""
-                    for oneauthor in author:
-                        oneauthor, n = author, n = re.subn("\\<.*?\\>", '', innerHTML(oneauthor)) # 去掉内容里HTML标签的部分
-                        author_list += oneauthor + ", "
-                    author_list = author_list[0: int(len(author_list)/2)]
-                
-                title = title.replace("[::", '')
-                title = title.replace("::]", '')
-                print(title)
-                if not title in papers_met:
-                    # 如果这篇论文之前还没有被查询到过，就把他添加到查询字典中，否则，就直接开始下一篇论文的解析
-                    papers_met[title] = 1
-                else:
-                    continue
-
-                if not cited:
-                    cited = u'0'
-                    cited_url = ""
-                else:
-                    content = str(cited[0])
-                    begin = int(content.find('/document'))
-                    end = int(content.find('=papers')) + 7
-                    cited_url = content[begin: end]
-                    cited_url = url_header + cited_url
-                    cited, n = re.subn("<.*?>", '', innerHTML(cited[0]))
-                    cited = cited.replace('Papers (', '')   # 去掉Papers(字段
-                    cited = cited.replace(')', '')          # 去掉）
-                    cited = cited.replace('\t', '')         # 去掉\t
-                    cited = cited.replace('\n', '')         # 去掉\n
-                '''
-
-                metadata, citation_list = parse_paper_body(r)
-                if len(metadata) == 0:
+                if paper_met:
+                    # 这篇论文之前已经被查找过了
                     continue
 
                 # 把它们存在csv中
-                f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
                 writer = csv.writer(f, delimiter=',')
-                #citation_list = parseCitationPage(cited_url)                 
-                #row = [title, author_list, year, cited] + citation_list
-                row = metadata + citation_lists
                 writer.writerow(row)
+                f.flush()
     base += topic['page_count']
+
+
 
 def analyse_onesoup(soup, filename):
     # 解析查询单篇文章得到的详情页面
     result = soup.select('div.List-results-items')
+    file = open(filename, 'a', encoding='utf-8', newline='')
+    writer = csv.writer(file, delimiter=',')
     for r in result:
-        '''
-        title = r.select('h2 a.ng-binding')
-        year = r.select('span[ng-if="::record.publicationYear"]')
-        author = r.select('span[ng-bind-html="::author.preferredName"]')
-        cited = r.select('span[ng-if="::record.citationCount"]')
-
-        title, n = re.subn("\\<.*?\\>", '', innerHTML(title[0]))
-        year, n = re.subn("\\<.*?\\>", '', innerHTML(year[0]))
-        year, n = re.subn('\s*?', '', year) # 去掉无用的空格
-        year, n = re.subn('Year:', '', year) # 去电'Year:'字段
-
-        if not author:
-            author = u'No author'  # 可能出现没有作者的情况
-        else:
-            author_list = ""
-            for oneauthor in author:
-                oneauthor, n = author, n = re.subn("\\<.*?\\>", '', innerHTML(oneauthor)) # 去掉内容里HTML标签的部分
-                author_list += oneauthor + ", "
-            author_list = author_list[0: int(len(author_list)/2)]
-        
-        title = title.replace("[::", '')
-        title = title.replace("::]", '')
-        print(title)
-        if not title in papers_met:
-            # 如果这篇论文之前还没有被查询到过，就把他添加到查询字典中，否则，就直接开始下一篇论文的解析
-            papers_met[title] = 1
-        else:
+        row, paper_met = parse_paper_body(r)
+        if paper_met:
+            # 这篇论文之前已经被查找过了
             continue
-
-        if not cited:
-            # 一篇文章还没有被其他的文献引用
-            cited = u'0'
-            cited_url = ""
-        else:
-            content = str(cited[0])
-            begin = int(content.find('/document'))
-            end = int(content.find('=papers')) + 7
-            cited_url = content[begin: end]
-            cited_url = url_header + cited_url
-            cited, n = re.subn("<.*?>", '', innerHTML(cited[0]))
-            cited = cited.replace('Papers (', '')   # 去掉Papers(字段
-            cited = cited.replace(')', '')          # 去掉）
-            cited = cited.replace('\t', '')         # 去掉\t
-            cited = cited.replace('\n', '')         # 去掉\n
-
-        # 把它们存在csv里
-        file = open(filename, 'a', encoding='utf-8', newline='')
-        writer = csv.writer(file, delimiter=',')
-        if cited_url != "":
-            citation_list = parseCitationPage(cited_url)
-        else:
-            citation_list = [] 
-        '''
-
-        metadata, citation_list = parse_paper_body(r)
-        # row = [title, author_list, year, cited] + citation_list
-        if len(metadata) == 0:
-            continue
-        row = metadata + citation_list
 
         # 把结果写在对应的文件中
-        file = open(filename, 'a', encoding='utf-8', newline='')
-        writer = csv.writer(file, delimiter=',')
         writer.writerow(row)
+        file.flush()
 
+        # csv中一行的前四个内容是title, author, year和cited，之后得内容都是引用该文章的paper的title
+        citation_list = row[4:]
         for paper in citation_list:
             # 对于引用列表中的文献，遍历他们进行查找，进行递归的搜索
-            searchOnePaper(paper)
+            searchOnePaper(paper, filename)
+    file.close()
             
 
 def searchOnePaper(paper_title, filename=None):
@@ -352,12 +260,59 @@ def searchOnePaper(paper_title, filename=None):
     analyse_onesoup(soup, filename)
 
 
-if __name__ == '__main__':
-    #topic_list = ['machine%20learning']
-    #topics = init_topics(topic_list)
-    #soups = craw_pages(topics)
-    #analyse_soups(soups)
-    searchOnePaper("Fat-trees: Universal networks for hardware-efficient supercomputing", "papers.csv")
-    #searchOnePaper("Grounding spatial relations for human-robot interaction")
-    #parseCitationPage("https://ieeexplore.ieee.org/document/6796673/citations?tabFilter=papers")
+class myThread(threading.Thread):
+    # 一个自建的线程类，用于多线程的爬取数据，其中tID是这个线程的编号，keyword是进行爬虫的起始关键词
+    # 可以是一个paper的title，也可以是一个搜索的关键词，methode决定了是从一篇paper开始搜索，还是从一个
+    # filename是爬取结果进行保存的文件的名字
+    def __init__(self, tID, keyword, filename, methode=1):
+        threading.Thread.__init__(self)
+        self.tID = tID
+        self.keyword = keyword
+        self.methode = methode
+        self.filename = filename
 
+    def run(self):
+        # 默认的执行函数，从一篇paper开始，进行论文数据的查找
+        try:
+            print("thread " + str(self.tID) + " begins!")
+            searchOnePaper(self.keyword, self.filename)
+            print("thread " + str(self.tID) + " finished!")
+        except :
+            print("Exception occurs for thread: " + str(self.tID))
+            print('traceback.format_exc():\n%s' % traceback.format_exc())
+            error_file.write("thread " + str(self.tID) + " threw an exception!\n")
+            traceback.print_exc(file=error_file)    # 当产生了错误的信息的时候，保存到错误日志文件中
+            error_file.flush()
+            return
+        
+
+if __name__ == '__main__':
+    '''
+    thread1 = myThread(1, "Cognitive radio: brain-empowered wireless communications", "thread5.csv")
+    thread2 = myThread(2, "Active contours without edges", "thread6.csv")
+    thread3 = myThread(3, "Consensus and Cooperation in Networked Multi-Agent Systems", "thread7.csv")
+    thread4 = myThread(4, "A new optimizer using particle swarm theory", "thread8.csv")
+    
+    thread1 = myThread(1, "Fast R-CNN", "thread1.csv")
+    thread2 = myThread(2, "Sensitive measurement of optical nonlinearities using a single beam", "thread2.csv")
+    thread3 = myThread(3, "The self-organizing map", "thread3.csv")
+    thread4 = myThread(4, "The particle swarm - explosion, stability, and convergence in a multidimensional complex space", "thread4.csv")
+
+    '''
+
+    thread1 = myThread(9, "Fuzzy logic in control systems: fuzzy logic controller", "thread9.csv")
+    thread2 = myThread(10, "A survey on sensor networks", "thread10.csv")
+    thread3 = myThread(11, "Breaking Spectrum Gridlock With Cognitive Radios: An Information Theoretic Perspective", "thread11.csv")
+    thread4 = myThread(12, "Evaluating MapReduce for Multi-core and Multiprocessor Systems", "thread12.csv")
+
+    thread1.start()
+    thread2.start()
+    thread3.start()
+    thread4.start()
+
+    thread1.join()
+    thread2.join()
+    thread3.join()
+    thread4.join()
+
+    print("----------------------------- FINISH ----------------------------------------")
