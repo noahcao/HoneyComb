@@ -1,0 +1,1228 @@
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in searchField
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 47, in craw_pages
+    time.sleep(5)
+KeyboardInterrupt
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in searchField
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 27, in craw_pages
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 99, in start
+    if self.is_connectable():
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 115, in is_connectable
+    return utils.is_connectable(self.port)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\utils.py", line 106, in is_connectable
+    socket_ = socket.create_connection((host, port), 1)
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in searchField
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 27, in craw_pages
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 99, in start
+    if self.is_connectable():
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 115, in is_connectable
+    return utils.is_connectable(self.port)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\utils.py", line 106, in is_connectable
+    socket_ = socket.create_connection((host, port), 1)
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in searchField
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 27, in craw_pages
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 99, in start
+    if self.is_connectable():
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 115, in is_connectable
+    return utils.is_connectable(self.port)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\utils.py", line 106, in is_connectable
+    socket_ = socket.create_connection((host, port), 1)
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 285, in run
+    searchOnePaper(self.keyword, self.filename)
+AttributeError: 'myThread' object has no attribute 'keyword'
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in searchField
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 50, in craw_pages
+    driver.execute_script("window.scrollTo(0, " + str(100000) + ");")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 629, in execute_script
+    'args': converted_args})['value']
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 472, in execute
+    return self._request(command_info[0], url, body=data)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 534, in _request
+    resp = opener.open(request, timeout=self._timeout)
+  File "D:\Python3.7\lib\urllib\request.py", line 525, in open
+    response = self._open(req, data)
+  File "D:\Python3.7\lib\urllib\request.py", line 543, in _open
+    '_open', req)
+  File "D:\Python3.7\lib\urllib\request.py", line 503, in _call_chain
+    result = func(*args)
+  File "D:\Python3.7\lib\urllib\request.py", line 1345, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "D:\Python3.7\lib\urllib\request.py", line 1320, in do_open
+    r = h.getresponse()
+  File "D:\Python3.7\lib\http\client.py", line 1321, in getresponse
+    response.begin()
+  File "D:\Python3.7\lib\http\client.py", line 296, in begin
+    version, status, reason = self._read_status()
+  File "D:\Python3.7\lib\http\client.py", line 257, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "D:\Python3.7\lib\socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+KeyboardInterrupt
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in searchField
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 27, in craw_pages
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 102, in start
+    time.sleep(1)
+KeyboardInterrupt
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in searchField
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 27, in craw_pages
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 99, in start
+    if self.is_connectable():
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 115, in is_connectable
+    return utils.is_connectable(self.port)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\utils.py", line 106, in is_connectable
+    socket_ = socket.create_connection((host, port), 1)
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in searchField
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 27, in craw_pages
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 99, in start
+    if self.is_connectable():
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 115, in is_connectable
+    return utils.is_connectable(self.port)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\utils.py", line 106, in is_connectable
+    socket_ = socket.create_connection((host, port), 1)
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in run
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 45, in craw_pages
+    driver.get('http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText='+ topic['keyword'] +'&sortType=desc_p_Citation_Count&rowsPerPage=100&pageNumber='+str(i+1))
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 472, in execute
+    return self._request(command_info[0], url, body=data)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 534, in _request
+    resp = opener.open(request, timeout=self._timeout)
+  File "D:\Python3.7\lib\urllib\request.py", line 525, in open
+    response = self._open(req, data)
+  File "D:\Python3.7\lib\urllib\request.py", line 543, in _open
+    '_open', req)
+  File "D:\Python3.7\lib\urllib\request.py", line 503, in _call_chain
+    result = func(*args)
+  File "D:\Python3.7\lib\urllib\request.py", line 1345, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "D:\Python3.7\lib\urllib\request.py", line 1320, in do_open
+    r = h.getresponse()
+  File "D:\Python3.7\lib\http\client.py", line 1321, in getresponse
+    response.begin()
+  File "D:\Python3.7\lib\http\client.py", line 296, in begin
+    version, status, reason = self._read_status()
+  File "D:\Python3.7\lib\http\client.py", line 257, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "D:\Python3.7\lib\socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+KeyboardInterrupt
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in run
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 27, in craw_pages
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 99, in start
+    if self.is_connectable():
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 115, in is_connectable
+    return utils.is_connectable(self.port)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\utils.py", line 106, in is_connectable
+    socket_ = socket.create_connection((host, port), 1)
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in run
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 27, in craw_pages
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 99, in start
+    if self.is_connectable():
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 115, in is_connectable
+    return utils.is_connectable(self.port)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\utils.py", line 106, in is_connectable
+    socket_ = socket.create_connection((host, port), 1)
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 299, in run
+    soups, topic_names = craw_pages(topics)
+  File ".\XploreCraw.py", line 27, in craw_pages
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 99, in start
+    if self.is_connectable():
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 115, in is_connectable
+    return utils.is_connectable(self.port)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\utils.py", line 106, in is_connectable
+    socket_ = socket.create_connection((host, port), 1)
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 303, in run
+    analyse_soups(soups, topic_names)
+  File ".\XploreCraw.py", line 197, in analyse_soups
+    f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
+TypeError: string indices must be integers
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 303, in run
+    analyse_soups(soups, topic_names)
+  File ".\XploreCraw.py", line 197, in analyse_soups
+    f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
+TypeError: string indices must be integers
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 303, in run
+    analyse_soups(soups, topic_names)
+  File ".\XploreCraw.py", line 197, in analyse_soups
+    f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
+TypeError: string indices must be integers
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 303, in run
+    analyse_soups(soups, topic_names)
+  File ".\XploreCraw.py", line 197, in analyse_soups
+    f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
+TypeError: string indices must be integers
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 303, in run
+    analyse_soups(soups, self.topics)
+  File ".\XploreCraw.py", line 197, in analyse_soups
+    f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
+TypeError: string indices must be integers
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 303, in run
+    analyse_soups(soups, self.topics)
+  File ".\XploreCraw.py", line 197, in analyse_soups
+    f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
+TypeError: string indices must be integers
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 303, in run
+    analyse_soups(soups, self.topics)
+  File ".\XploreCraw.py", line 197, in analyse_soups
+    f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
+TypeError: string indices must be integers
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 303, in run
+    analyse_soups(soups, self.topics)
+  File ".\XploreCraw.py", line 197, in analyse_soups
+    f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
+TypeError: string indices must be integers
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 306, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 202, in analyse_soups
+    result = soup.select('div.List-results-items')
+AttributeError: 'list' object has no attribute 'select'
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 306, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 202, in analyse_soups
+    result = soup.select('div.List-results-items')
+AttributeError: 'list' object has no attribute 'select'
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 307, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 203, in analyse_soups
+    result = soup.select('div.List-results-items')
+AttributeError: 'list' object has no attribute 'select'
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 308, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 204, in analyse_soups
+    result = soup.select('div.List-results-items')
+AttributeError: 'list' object has no attribute 'select'
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 307, in run
+    print("thread " + str(self.tID) + " begins!")
+  File ".\XploreCraw.py", line 205, in analyse_soups
+    for r in result:
+  File ".\XploreCraw.py", line 187, in parse_paper_body
+    if cited_url != "":
+  File ".\XploreCraw.py", line 79, in parseCitationPage
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 206, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 188, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 80, in parseCitationPage
+    driver.get(citation_url)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 55, in craw_pages
+    source = driver.page_source
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 672, in page_source
+    return self.execute(Command.GET_PAGE_SOURCE)['value']
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 55, in craw_pages
+    source = driver.page_source
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 672, in page_source
+    return self.execute(Command.GET_PAGE_SOURCE)['value']
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 55, in craw_pages
+    source = driver.page_source
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 672, in page_source
+    return self.execute(Command.GET_PAGE_SOURCE)['value']
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg">无法连接到目标服务器，请刷新页面重试</p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'>该站点可能因使用了非标准 Web 端口而导致无法正常使用，请站点管理员迁移服务至标准 Web 端口(80/8080/8081/443)。</div> <div class='errcode'>Agent v2.2.1.5: ILLEGALPORT</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 52, in craw_pages
+    driver.execute_script("window.scrollTo(0, " + str(100000) + ");")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 629, in execute_script
+    'args': converted_args})['value']
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg">无法连接到目标服务器，请刷新页面重试</p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'>该站点可能因使用了非标准 Web 端口而导致无法正常使用，请站点管理员迁移服务至标准 Web 端口(80/8080/8081/443)。</div> <div class='errcode'>Agent v2.2.1.5: ILLEGALPORT</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 206, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 188, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 79, in parseCitationPage
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 76, in start
+    stdin=PIPE)
+  File "D:\Python3.7\lib\subprocess.py", line 756, in __init__
+    restore_signals, start_new_session)
+  File "D:\Python3.7\lib\subprocess.py", line 1155, in _execute_child
+    startupinfo)
+OSError: [WinError 1455] 页面文件太小，无法完成操作。
+thread 10 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 278, in run
+    self.tID = tID
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 247, in searchOnePaper
+    # 特别说明：
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 76, in start
+    stdin=PIPE)
+  File "D:\Python3.7\lib\subprocess.py", line 756, in __init__
+    restore_signals, start_new_session)
+  File "D:\Python3.7\lib\subprocess.py", line 1155, in _execute_child
+    startupinfo)
+OSError: [WinError 1455] 页面文件太小，无法完成操作。
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 206, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 188, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 91, in parseCitationPage
+    driver.execute_script("arguments[0].click();", element)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 629, in execute_script
+    'args': converted_args})['value']
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 9 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 278, in run
+    self.tID = tID
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 248, in searchOnePaper
+    #   虽然默认的爬虫入口是通过关键词在ieee xplore得到的结果列表开始，但是理论上也可以通过单篇论文的查询网页开始，
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 206, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 188, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 79, in parseCitationPage
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 76, in start
+    stdin=PIPE)
+  File "D:\Python3.7\lib\subprocess.py", line 756, in __init__
+    restore_signals, start_new_session)
+  File "D:\Python3.7\lib\subprocess.py", line 1155, in _execute_child
+    startupinfo)
+OSError: [WinError 1455] 页面文件太小，无法完成操作。
+thread 12 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 79, in parseCitationPage
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 387, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 957, in find_element
+    'value': value})['value']
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg">无法连接到目标服务器，请刷新页面重试</p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'>该站点可能因使用了非标准 Web 端口而导致无法正常使用，请站点管理员迁移服务至标准 Web 端口(80/8080/8081/443)。</div> <div class='errcode'>Agent v2.2.1.5: ILLEGALPORT</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 278, in run
+    self.tID = tID
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 218, in analyse_onesoup
+    base += topic['page_count']
+  File ".\XploreCraw.py", line 182, in parse_paper_body
+    cited = cited.replace('Papers (', '')   # 去掉Papers(字段
+  File ".\XploreCraw.py", line 82, in parseCitationPage
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 681, in close
+    self.execute(Command.CLOSE)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg">无法连接到目标服务器，请刷新页面重试</p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'>该站点可能因使用了非标准 Web 端口而导致无法正常使用，请站点管理员迁移服务至标准 Web 端口(80/8080/8081/443)。</div> <div class='errcode'>Agent v2.2.1.5: ILLEGALPORT</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 11 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 278, in run
+    self.tID = tID
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 260, in searchOnePaper
+    source = driver.page_source
+  File ".\XploreCraw.py", line 231, in analyse_onesoup
+    continue
+  File ".\XploreCraw.py", line 247, in searchOnePaper
+    # 特别说明：
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 76, in start
+    stdin=PIPE)
+  File "D:\Python3.7\lib\subprocess.py", line 756, in __init__
+    restore_signals, start_new_session)
+  File "D:\Python3.7\lib\subprocess.py", line 1155, in _execute_child
+    startupinfo)
+OSError: [WinError 1455] 页面文件太小，无法完成操作。
