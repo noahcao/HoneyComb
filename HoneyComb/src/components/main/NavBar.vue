@@ -9,7 +9,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">HONEYCOMB</a>
+        <router-link :to="{name:'Main'}" class="navbar-brand">HONEYCOMB</router-link>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -22,10 +22,10 @@
             <a href="#" class="tag">Explore</a>
           </li>
           <li>
-            <router-link :to="{name:'userInfo'}">About us</router-link>
+            <a href="#" class="tag">About us</a>
           </li>
           <li>
-            <a href="#">Community</a>
+            <a href="#" class="tag">Community</a>
           </li>
           <!-- <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
@@ -59,32 +59,29 @@
           <button type="submit" class="btn btn-default">Submit</button>
         </form> -->
         <ul class="nav navbar-nav navbar-right">
-          <li>
+          <li v-if="this.id === null">
             <router-link :to="{name:'Login'}">Sign in</router-link>
           </li>
-          <li>
+          <li v-if="this.id === null">
             <router-link :to="{name:'Register'}">Sign up</router-link>
           </li>
-          <!-- <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
-              <span class="caret"></span>
+          <li class="dropdown" v-else>
+            <a href="#" class="dropdown-toggle js-activated" role="button" aria-haspopup="true" aria-expanded="false">{{name}}&nbsp;&nbsp;
+              <span class="glyphicon glyphicon-menu-right"></span>
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="#">Action</a>
+                <router-link :to="{name:'userInfo'}">My Profile</router-link>
               </li>
               <li>
-                <a href="#">Another action</a>
-              </li>
-              <li>
-                <a href="#">Something else here</a>
+                <a href="#">Combs</a>
               </li>
               <li role="separator" class="divider"></li>
               <li>
-                <a href="#">Separated link</a>
+                <a href="#" @click="logOut">Sign out</a>
               </li>
             </ul>
-          </li> -->
+          </li>
         </ul>
       </div>
       <!-- /.navbar-collapse -->
@@ -94,8 +91,77 @@
 </template>
 
 <script>
+/* eslint-disable */
+import $ from 'jquery'
+
 export default {
-  name: 'nav-bar'
+  name: 'nav-bar',
+  data () {
+    return {
+      id: this.data.id,
+      name: null,
+    }
+  },
+  mounted () {
+    this.loginJudge()
+    $('body').append('<style>' +
+      '@keyframes rotatefresh {' +
+      'from {' +
+      'transform: rotate(0deg);' +
+      '}' +
+      'to {' +
+      'transform: rotate(90deg);' +
+      'transition: all 0.5s;' +
+      '}' +
+      '}' +
+      '</style>')
+    $('body').append('<style>' +
+      '@keyframes rotatefresh2 {' +
+      'from {' +
+      'transform: rotate(90deg);' +
+      '}' +
+      'to {' +
+      'transform: rotate(0deg);' +
+      'transition: all 0.5s;' +
+      '}' +
+      '}' +
+      '</style>')
+    $('.dropdown-toggle').mouseover(function () {
+      $('.dropdown-toggle .glyphicon').css({
+        'animation': 'rotatefresh 0.5s',
+        'transform': 'rotate(90deg)'
+      })
+    })
+    $('.dropdown-toggle').mouseout(function () {
+      $('.dropdown-toggle .glyphicon').css({
+        'animation': 'rotatefresh2 0.5s',
+        'transform': 'rotate(0deg)'
+      })
+    })
+  },
+  methods: {
+    loginJudge () {
+      this.$http.get('/loginstatus')
+        .then((res) => {
+          this.data.id = res.data.id
+          this.id = this.data.id
+          console.log('status', this.data.id)
+          this.$http.get('/getuser', { params: { id: this.id } })
+            .then((res) => {
+              this.name = res.data.name
+              console.log('status', this.data)
+            })
+        })
+    },
+    logOut () {
+      this.$http.get('/logout')
+        .then((res) => {
+          this.id = null;
+          var url = window.location.href
+          window.location.href = url
+        })
+    }
+  }
 }
 </script>
 <style scoped>
@@ -197,5 +263,49 @@ export default {
     display: block;
     max-width: 40%;
     height: auto;
+} */
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .open > a {
+  background-image: linear-gradient(to bottom, #24292e 0, #24292e 100%);
+  box-shadow: inset 0 3px 9px rgba(0, 0, 0, 0);
+}
+.dropdown-menu {
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 0px;
+}
+.nav > li:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:hover {
+  background-image: linear-gradient(top, #dedede 0, #dedede 100%);
+}
+.dropdown-menu > li > a {
+  line-height: 2;
+}
+.input-group-btn:last-child > .btn,
+.input-group-btn:last-child > .btn-group {
+  z-index: 2;
+  margin-left: 0px;
+}
+
+/* @keyframes rotatefresh {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+    transition: all 0.5s;
+  }
+}
+@keyframes rotatefresh2 {
+  from {
+    transform: rotate(90deg);
+  }
+  to {
+    transform: rotate(0deg);
+    transition: all 0.5s;
+  }
 } */
 </style>

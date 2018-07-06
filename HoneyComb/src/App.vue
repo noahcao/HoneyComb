@@ -6,14 +6,7 @@
 
 <script>
 export default {
-  name: 'App',
-  mounted () {
-    this.$http.get('/loginstatus')
-      .then((res) => {
-        this.data.id = res.data.id
-        console.log(this.data.id)
-      })
-  }
+  name: 'App'
 }
 </script>
 

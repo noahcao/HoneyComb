@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Paper" table="paper" schema="honeycomb">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name">
+            <column name="name" sql-type="varchar(45)" length="45"/>
+        </property>
+        <property name="url">
+            <column name="url" sql-type="mediumtext"/>
+        </property>
+        <set name="authors" table="author_paper" cascade="save-update, persist" lazy="false">
+            <key column="paper_id"/>
+            <many-to-many class="model.Author" column="author_id"/>
+        </set>
+    </class>
+</hibernate-mapping>

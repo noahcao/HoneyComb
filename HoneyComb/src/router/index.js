@@ -4,6 +4,7 @@ import Main from '@/components/Main'
 import Login from '../components/user/Login'
 import Register from '../components/user/Register'
 import userInfo from '../components/user/userInfo'
+// import navTest from '../components/main/navTest'
 
 Vue.use(Router)
 

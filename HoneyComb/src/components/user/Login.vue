@@ -54,6 +54,10 @@ export default {
           .then((res) => {
             if (res.data.id !== null) {
               alert('success')
+              this.data.id = res.data.id
+              var url = window.location.href
+              url = url.substring(0, url.length - 5)
+              window.location.href = url
             } else {
               alert('用户名或密码错误')
             }

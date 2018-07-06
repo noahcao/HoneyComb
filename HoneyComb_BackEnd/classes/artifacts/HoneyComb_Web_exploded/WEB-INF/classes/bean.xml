@@ -12,7 +12,7 @@
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close" p:driverClass="com.mysql.cj.jdbc.Driver"
           p:jdbcUrl="jdbc:mysql://localhost:3306/honeycomb?serverTimezone=UTC&amp;useSSL=true" p:user="root"
-          p:password="root" p:maxPoolSize="40" p:minPoolSize="1"
+          p:password="990126" p:maxPoolSize="40" p:minPoolSize="1"
           p:initialPoolSize="5" p:maxIdleTime="20"/>
 
     <bean id="sessionFactory"
