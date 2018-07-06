@@ -19,7 +19,7 @@ def init_topics(topic_list):
     for topic in topic_list:
         topic_item = {}
         topic_item['keyword'] = topic
-        topic_item['page_count'] = 20
+        topic_item['page_count'] = 40
         topic_item['total'] = topic_item['page_count'] * 100
         topics.append(topic_item)
     return topics
@@ -84,7 +84,7 @@ def parseCitationPage(citation_url):
     try:
         element = driver.find_element_by_xpath("(//button[@type='button'])[3]")
     except:
-        print("Error")
+        print("Not found the button to unfold 'Citations By Paper'")
         driver.close()         
         return []
     else:               
@@ -124,8 +124,9 @@ def parseCitationPage(citation_url):
             citation = citation[begin+6:end]
             pattern = re.compile('"(.*)"')
             title = pattern.findall(citation)   # 获取论文的标题字符
-            title = title[0]
-            citation_list.append(title)
+            if len(title) > 0:
+                title = title[0]
+                citation_list.append(title)
 
         driver.close()
         return citation_list
@@ -162,11 +163,11 @@ def parse_paper_body(r):
 
     paper_met = False
 
-    if not title in papers_met:
-        # 如果这篇论文之前还没有被查询到过，就把他添加到查询字典中，否则，就直接开始下一篇论文的解析
-        papers_met[title] = 1
-    else:
-        paper_met = True
+    #if not title in papers_met:
+    #    # 如果这篇论文之前还没有被查询到过，就把他添加到查询字典中，否则，就直接开始下一篇论文的解析
+    #    papers_met[title] = 1
+    #else:
+    #    paper_met = True
 
     if not cited:
         # 一篇文章还没有被其他的文献引用
@@ -198,22 +199,24 @@ def analyse_soups(soups, topics):
     base = 0
     print(topics)
     for topic in topics:
-        f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
         for soup_items in soups[base:base + topic['page_count']]:
+            # f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
             for soup in soup_items:
-                result = soup.select('div.List-results-items')
+                try:
+                    result = soup.select('div.List-results-items')
+                except:
+                    continue
                 for r in result:
                     row, paper_met = parse_paper_body(r)
 
-                    if paper_met:
-                        # 这篇论文之前已经被查找过了
-                        continue
+                    #if paper_met:
+                    #    # 这篇论文之前已经被查找过了
+                    #    continue
 
                     # 把它们存在csv中
-                    writer = csv.writer(f, delimiter=',')
-                    writer.writerow(row)
-                    f.flush()
-        f.close()
+                    with open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='') as f:
+                        writer = csv.writer(f, delimiter=',')
+                        writer.writerow(row)
     base += topic['page_count']
 
 
@@ -221,8 +224,6 @@ def analyse_soups(soups, topics):
 def analyse_onesoup(soup, filename):
     # 解析查询单篇文章得到的详情页面
     result = soup.select('div.List-results-items')
-    file = open(filename, 'a', encoding='utf-8', newline='')
-    writer = csv.writer(file, delimiter=',')
     for r in result:
         row, paper_met = parse_paper_body(r)
         if paper_met:
@@ -230,15 +231,15 @@ def analyse_onesoup(soup, filename):
             continue
 
         # 把结果写在对应的文件中
-        writer.writerow(row)
-        file.flush()
+        with open(filename, 'a', encoding='utf-8', newline='') as file:
+            writer = csv.writer(file, delimiter=',')
+            writer.writerow(row)
 
         # csv中一行的前四个内容是title, author, year和cited，之后得内容都是引用该文章的paper的title
         citation_list = row[4:]
         for paper in citation_list:
             # 对于引用列表中的文献，遍历他们进行查找，进行递归的搜索
             searchOnePaper(paper, filename)
-    file.close()
             
 
 def searchOnePaper(paper_title, filename=None):
@@ -334,19 +335,19 @@ if __name__ == '__main__':
     thread3 = myThread(11, "Breaking Spectrum Gridlock With Cognitive Radios: An Information Theoretic Perspective", "thread11.csv")
     thread4 = myThread(12, "Evaluating MapReduce for Multi-core and Multiprocessor Systems", "thread12.csv")
     '''
-    thread1 = myThreadField(20, ["control"])
-    thread2 = myThreadField(21, ["sensor"])
-    thread3 = myThreadField(22, ["cpu"])
-    thread4 = myThreadField(23, ["gpu"])
+    thread1 = myThreadField(20, ["code"])
+    thread2 = myThreadField(21, ["action"])
+    thread3 = myThreadField(22, ["net"])
+    #thread4 = myThreadField(23, ["language"])
 
     thread1.start()
     thread2.start()
     thread3.start()
-    thread4.start()
+    #thread4.start()
 
     thread1.join()
     thread2.join()
     thread3.join()
-    thread4.join()
+    #thread4.join()
 
     print("----------------------------- FINISH ----------------------------------------")

@@ -1226,3 +1226,251 @@ Traceback (most recent call last):
   File "D:\Python3.7\lib\subprocess.py", line 1155, in _execute_child
     startupinfo)
 OSError: [WinError 1455] 页面文件太小，无法完成操作。
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    print("thread " + str(self.tID) + " finished!")
+  File ".\XploreCraw.py", line 206, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 188, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 127, in parseCitationPage
+    title = title[0]
+IndexError: list index out of range
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 204, in analyse_soups
+    result = soup.select('div.List-results-items')
+AttributeError: 'str' object has no attribute 'select'
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 308, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 47, in craw_pages
+    driver.get('http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText='+ topic['keyword'] +'&sortType=desc_p_Citation_Count&rowsPerPage=100&pageNumber='+str(i+1))
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 204, in analyse_soups
+    result = soup.select('div.List-results-items')
+AttributeError: 'str' object has no attribute 'select'
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 204, in analyse_soups
+    result = soup.select('div.List-results-items')
+AttributeError: 'str' object has no attribute 'select'
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 308, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 47, in craw_pages
+    driver.get('http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText='+ topic['keyword'] +'&sortType=desc_p_Citation_Count&rowsPerPage=100&pageNumber='+str(i+1))
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 23 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 206, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 188, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 80, in parseCitationPage
+    driver.get(citation_url)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 206, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 188, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 80, in parseCitationPage
+    driver.get(citation_url)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File "D:\Python3.7\lib\urllib\request.py", line 1317, in do_open
+    encode_chunked=req.has_header('Transfer-encoding'))
+  File "D:\Python3.7\lib\http\client.py", line 1229, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "D:\Python3.7\lib\http\client.py", line 1275, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "D:\Python3.7\lib\http\client.py", line 1224, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "D:\Python3.7\lib\http\client.py", line 1016, in _send_output
+    self.send(msg)
+  File "D:\Python3.7\lib\http\client.py", line 956, in send
+    self.connect()
+  File "D:\Python3.7\lib\http\client.py", line 928, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "D:\Python3.7\lib\socket.py", line 727, in create_connection
+    raise err
+  File "D:\Python3.7\lib\socket.py", line 716, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 206, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 188, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 79, in parseCitationPage
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 62, in __init__
+    desired_capabilities=desired_capabilities)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 156, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 245, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 472, in execute
+    return self._request(command_info[0], url, body=data)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 534, in _request
+    resp = opener.open(request, timeout=self._timeout)
+  File "D:\Python3.7\lib\urllib\request.py", line 525, in open
+    response = self._open(req, data)
+  File "D:\Python3.7\lib\urllib\request.py", line 543, in _open
+    '_open', req)
+  File "D:\Python3.7\lib\urllib\request.py", line 503, in _call_chain
+    result = func(*args)
+  File "D:\Python3.7\lib\urllib\request.py", line 1345, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "D:\Python3.7\lib\urllib\request.py", line 1319, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 206, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 188, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 130, in parseCitationPage
+    driver.close()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 681, in close
+    self.execute(Command.CLOSE)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg">无法连接到目标服务器，请刷新页面重试</p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'>该站点可能因使用了非标准 Web 端口而导致无法正常使用，请站点管理员迁移服务至标准 Web 端口(80/8080/8081/443)。</div> <div class='errcode'>Agent v2.2.1.5: ILLEGALPORT</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 206, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 188, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 127, in parseCitationPage
+    title = title[0]
+IndexError: list index out of range
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 47, in craw_pages
+    driver.get('http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText='+ topic['keyword'] +'&sortType=desc_p_Citation_Count&rowsPerPage=100&pageNumber='+str(i+1))
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 47, in craw_pages
+    driver.get('http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText='+ topic['keyword'] +'&sortType=desc_p_Citation_Count&rowsPerPage=100&pageNumber='+str(i+1))
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 47, in craw_pages
+    driver.get('http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText='+ topic['keyword'] +'&sortType=desc_p_Citation_Count&rowsPerPage=100&pageNumber='+str(i+1))
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 207, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 189, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 79, in parseCitationPage
+    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\phantomjs\webdriver.py", line 56, in __init__
+    self.service.start()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 98, in start
+    self.assert_process_still_running()
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\common\service.py", line 111, in assert_process_still_running
+    % (self.path, return_code)
+selenium.common.exceptions.WebDriverException: Message: Service .\\phantomjs\\bin\\phantomjs.exe unexpectedly exited. Status code was: 1
+
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 205, in analyse_soups
+    result = soup.select('div.List-results-items')
+AttributeError: 'str' object has no attribute 'select'
