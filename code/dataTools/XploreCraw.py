@@ -335,19 +335,19 @@ if __name__ == '__main__':
     thread3 = myThread(11, "Breaking Spectrum Gridlock With Cognitive Radios: An Information Theoretic Perspective", "thread11.csv")
     thread4 = myThread(12, "Evaluating MapReduce for Multi-core and Multiprocessor Systems", "thread12.csv")
     '''
-    thread1 = myThreadField(20, ["code"])
-    thread2 = myThreadField(21, ["action"])
-    thread3 = myThreadField(22, ["net"])
+    thread1 = myThreadField(20, ["use"])
+    thread2 = myThreadField(21, ["dynamic"])
+    #thread3 = myThreadField(22, ["net"])
     #thread4 = myThreadField(23, ["language"])
 
     thread1.start()
     thread2.start()
-    thread3.start()
+    #thread3.start()
     #thread4.start()
 
     thread1.join()
     thread2.join()
-    thread3.join()
+    #thread3.join()
     #thread4.join()
 
     print("----------------------------- FINISH ----------------------------------------")

@@ -1474,3 +1474,267 @@ Traceback (most recent call last):
   File ".\XploreCraw.py", line 205, in analyse_soups
     result = soup.select('div.List-results-items')
 AttributeError: 'str' object has no attribute 'select'
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 47, in craw_pages
+    driver.get('http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText='+ topic['keyword'] +'&sortType=desc_p_Citation_Count&rowsPerPage=100&pageNumber='+str(i+1))
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 207, in analyse_soups
+    except:
+  File ".\XploreCraw.py", line 189, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 80, in parseCitationPage
+    driver.get(citation_url)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 472, in execute
+    return self._request(command_info[0], url, body=data)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 534, in _request
+    resp = opener.open(request, timeout=self._timeout)
+  File "D:\Python3.7\lib\urllib\request.py", line 525, in open
+    response = self._open(req, data)
+  File "D:\Python3.7\lib\urllib\request.py", line 543, in _open
+    '_open', req)
+  File "D:\Python3.7\lib\urllib\request.py", line 503, in _call_chain
+    result = func(*args)
+  File "D:\Python3.7\lib\urllib\request.py", line 1345, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "D:\Python3.7\lib\urllib\request.py", line 1320, in do_open
+    r = h.getresponse()
+  File "D:\Python3.7\lib\http\client.py", line 1321, in getresponse
+    response.begin()
+  File "D:\Python3.7\lib\http\client.py", line 296, in begin
+    version, status, reason = self._read_status()
+  File "D:\Python3.7\lib\http\client.py", line 257, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "D:\Python3.7\lib\socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+socket.timeout: timed out
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 207, in analyse_soups
+    except:
+  File ".\XploreCraw.py", line 189, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 80, in parseCitationPage
+    driver.get(citation_url)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 472, in execute
+    return self._request(command_info[0], url, body=data)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 534, in _request
+    resp = opener.open(request, timeout=self._timeout)
+  File "D:\Python3.7\lib\urllib\request.py", line 525, in open
+    response = self._open(req, data)
+  File "D:\Python3.7\lib\urllib\request.py", line 543, in _open
+    '_open', req)
+  File "D:\Python3.7\lib\urllib\request.py", line 503, in _call_chain
+    result = func(*args)
+  File "D:\Python3.7\lib\urllib\request.py", line 1345, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "D:\Python3.7\lib\urllib\request.py", line 1320, in do_open
+    r = h.getresponse()
+  File "D:\Python3.7\lib\http\client.py", line 1321, in getresponse
+    response.begin()
+  File "D:\Python3.7\lib\http\client.py", line 296, in begin
+    version, status, reason = self._read_status()
+  File "D:\Python3.7\lib\http\client.py", line 257, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "D:\Python3.7\lib\socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+socket.timeout: timed out
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 210, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 189, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 80, in parseCitationPage
+    driver.get(citation_url)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 472, in execute
+    return self._request(command_info[0], url, body=data)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 534, in _request
+    resp = opener.open(request, timeout=self._timeout)
+  File "D:\Python3.7\lib\urllib\request.py", line 525, in open
+    response = self._open(req, data)
+  File "D:\Python3.7\lib\urllib\request.py", line 543, in _open
+    '_open', req)
+  File "D:\Python3.7\lib\urllib\request.py", line 503, in _call_chain
+    result = func(*args)
+  File "D:\Python3.7\lib\urllib\request.py", line 1345, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "D:\Python3.7\lib\urllib\request.py", line 1320, in do_open
+    r = h.getresponse()
+  File "D:\Python3.7\lib\http\client.py", line 1321, in getresponse
+    response.begin()
+  File "D:\Python3.7\lib\http\client.py", line 296, in begin
+    version, status, reason = self._read_status()
+  File "D:\Python3.7\lib\http\client.py", line 257, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "D:\Python3.7\lib\socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+socket.timeout: timed out
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 207, in analyse_soups
+    except:
+  File ".\XploreCraw.py", line 189, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 80, in parseCitationPage
+    driver.get(citation_url)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 472, in execute
+    return self._request(command_info[0], url, body=data)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 534, in _request
+    resp = opener.open(request, timeout=self._timeout)
+  File "D:\Python3.7\lib\urllib\request.py", line 525, in open
+    response = self._open(req, data)
+  File "D:\Python3.7\lib\urllib\request.py", line 543, in _open
+    '_open', req)
+  File "D:\Python3.7\lib\urllib\request.py", line 503, in _call_chain
+    result = func(*args)
+  File "D:\Python3.7\lib\urllib\request.py", line 1345, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "D:\Python3.7\lib\urllib\request.py", line 1320, in do_open
+    r = h.getresponse()
+  File "D:\Python3.7\lib\http\client.py", line 1321, in getresponse
+    response.begin()
+  File "D:\Python3.7\lib\http\client.py", line 296, in begin
+    version, status, reason = self._read_status()
+  File "D:\Python3.7\lib\http\client.py", line 257, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "D:\Python3.7\lib\socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+socket.timeout: timed out
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 47, in craw_pages
+    driver.get('http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText='+ topic['keyword'] +'&sortType=desc_p_Citation_Count&rowsPerPage=100&pageNumber='+str(i+1))
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 21 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 309, in run
+    soups = craw_pages(topic_dict_list)
+  File ".\XploreCraw.py", line 47, in craw_pages
+    driver.get('http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText='+ topic['keyword'] +'&sortType=desc_p_Citation_Count&rowsPerPage=100&pageNumber='+str(i+1))
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 314, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 208, in check_response
+    raise exception_class(value)
+selenium.common.exceptions.WebDriverException: Message: <html> <head> <meta charset="utf-8"> <style> body { color: #646464; background: #f7f7f7; font-size: 1em; line-height: 150%; } h1 { font-weight: normal; color: #333; } .main { position: absolute; top: 50%; height: 300px; margin-top: -150px; left: 50%; width: 500px; margin-left: -250px; } .btn { background: rgb(66, 133, 244); border: 0; border-radius: 2px; box-sizing: border-box; color: #fff; cursor: pointer; font-size: .875em; margin: 0; padding: 10px 24px; transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1); float: left; } .errmsg { line-height: 2em; } .errcode { color: #aaa; font-size: 70%; } .errinfo { color: #aaa; font-size: 70%; } </style> </head> <body> <div class="main"> <div class="icon"></div> <h1>无法访问此网站</h1> <p class="errmsg"></p> <p>请试试以下办法：</p> <ul> <li>刷新页面重试。</li> <li>确认是否已经在 iOA 上完成身份验证。</li> <li>企业微信或 RTX 联系 <b>iOA助手</b> 协助查看。</li> </ul> <div class='errinfo'></div> <div class='errcode'>Agent v2.2.1.5: ECONNRESET</div> <p><button class="btn" onclick="location.reload(true)">重新加载</button></p> </div> </body> </html>
+
+thread 22 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 207, in analyse_soups
+    except:
+  File ".\XploreCraw.py", line 189, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 80, in parseCitationPage
+    driver.get(citation_url)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 472, in execute
+    return self._request(command_info[0], url, body=data)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 534, in _request
+    resp = opener.open(request, timeout=self._timeout)
+  File "D:\Python3.7\lib\urllib\request.py", line 525, in open
+    response = self._open(req, data)
+  File "D:\Python3.7\lib\urllib\request.py", line 543, in _open
+    '_open', req)
+  File "D:\Python3.7\lib\urllib\request.py", line 503, in _call_chain
+    result = func(*args)
+  File "D:\Python3.7\lib\urllib\request.py", line 1345, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "D:\Python3.7\lib\urllib\request.py", line 1320, in do_open
+    r = h.getresponse()
+  File "D:\Python3.7\lib\http\client.py", line 1321, in getresponse
+    response.begin()
+  File "D:\Python3.7\lib\http\client.py", line 296, in begin
+    version, status, reason = self._read_status()
+  File "D:\Python3.7\lib\http\client.py", line 257, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "D:\Python3.7\lib\socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+socket.timeout: timed out
+thread 20 threw an exception!
+Traceback (most recent call last):
+  File ".\XploreCraw.py", line 310, in run
+    analyse_soups(soups, topic_dict_list)
+  File ".\XploreCraw.py", line 210, in analyse_soups
+    row, paper_met = parse_paper_body(r)
+  File ".\XploreCraw.py", line 189, in parse_paper_body
+    citation_list = parseCitationPage(cited_url)
+  File ".\XploreCraw.py", line 80, in parseCitationPage
+    driver.get(citation_url)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 326, in get
+    self.execute(Command.GET, {'url': url})
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 472, in execute
+    return self._request(command_info[0], url, body=data)
+  File "D:\Python3.7\lib\site-packages\selenium\webdriver\remote\remote_connection.py", line 534, in _request
+    resp = opener.open(request, timeout=self._timeout)
+  File "D:\Python3.7\lib\urllib\request.py", line 525, in open
+    response = self._open(req, data)
+  File "D:\Python3.7\lib\urllib\request.py", line 543, in _open
+    '_open', req)
+  File "D:\Python3.7\lib\urllib\request.py", line 503, in _call_chain
+    result = func(*args)
+  File "D:\Python3.7\lib\urllib\request.py", line 1345, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "D:\Python3.7\lib\urllib\request.py", line 1320, in do_open
+    r = h.getresponse()
+  File "D:\Python3.7\lib\http\client.py", line 1321, in getresponse
+    response.begin()
+  File "D:\Python3.7\lib\http\client.py", line 296, in begin
+    version, status, reason = self._read_status()
+  File "D:\Python3.7\lib\http\client.py", line 257, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "D:\Python3.7\lib\socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+socket.timeout: timed out
