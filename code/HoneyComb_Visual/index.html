@@ -8,20 +8,20 @@
 <style>
   .labeltext {
     font-size: 16px;
-    font-family: STXihei, "Microsoft YaHei";
+    font-family: SimHei, "Microsoft YaHei";
     fill: #000000;
   }
 
   .nodetext {
     font-size: 12px;
-    font-family: STXihei, "Microsoft YaHei";
+    font-family: SimHei, "Microsoft YaHei";
     fill: #000000;
     fill-opacity: 0.0;
   }
 
   .linetext {
     font-size: 12px;
-    font-family: STXihei, "Microsoft YaHei";
+    font-family: SimHei, "Microsoft YaHei";
     fill: #000000;
     fill-opacity: 0.0;
   }
@@ -99,17 +99,17 @@
         .data(root.edges)
         .enter()
         .append("line")
-        .style("stroke", function(d){
-          if(d.relation == "引用")
+        .style("stroke", function (d) {
+          if (d.relation == "引用")
             return "#ccc"
           else
             return "#000"
         })
-        .style("stroke-width", 2)
-        .style("stroke-dasharray", function(d){
-          if(d.relation == "撰写")
+        .style("stroke-width", 2.0)
+        .style("stroke-dasharray", function (d) {
+          if (d.relation == "撰写")
             return "20,10,5,5,10";
-          else if(d.relation == "其他")
+          else if (d.relation == "其他")
             return "5,5";
         });
 
@@ -130,8 +130,14 @@
 
       var drag = force.drag()
         .on("dragstart", function (d, i) {
+
+          root.nodes.forEach(function (node) {
+            if(node != d)
+              node.fixed = false;
+          });
+
           d.fixed = true;    //拖拽开始后设定被拖拽对象为固定
-          tooltip.style("opacity",0.0)
+          tooltip.style("opacity", 0.0)
           //label_text_2.text("拖拽状态：开始");
         })
         .on("dragend", function (d, i) {
@@ -151,17 +157,41 @@
           return d.image;
         })
         .on("mouseover", function (d, i) {
+
           //显示连接线上的文字
           edges_text.style("fill-opacity", function (edge) {
             if (edge.source === d || edge.target === d) {
               return 1.0;
             }
           });
+          
+          //加粗关联线
+          edges_line.style("stroke-width", function (edge) {
+            if (edge.source === d || edge.target === d)
+              return 3.0;
+            else
+              return 2.0;            
+          });
+
+          //图片放大
+          nodes_img.attr("width",function(node){
+            if(node == d)
+              return node.width * 1.2;
+            else
+              return node.width;
+          })
+
+          nodes_img.attr("height",function(node){
+            if(node == d)
+              return node.height * 1.2;
+            else
+              return node.height;
+          })
 
           tooltip.html("<p>" + d.name + "</p>")
             .style("left", (d.x + 30) + "px")
             .style("top", (d.y + 30) + "px")
-            .style("opacity",1.0)
+            .style("opacity", 1.0)
 
         })
         .on("mouseout", function (d, i) {
@@ -171,12 +201,19 @@
               return 0.0;
             }
           });
+          
+          //连接线粗细变正常
+          edges_line.style("stroke-width", function (edge) {
+              return 2.0;
+          });
 
-          tooltip.style("opacity",0.0)
+          //图片大小变正常
+
+
+          tooltip.style("opacity", 0.0)
         })
-        .on("dblclick", function (d, i) {
-          //显示提示框
-          d.fixed = false;
+        .on("click", function (d, i) {
+          //跳转至论文界面
         })
         .call(drag);
 
