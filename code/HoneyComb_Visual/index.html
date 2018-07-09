@@ -132,7 +132,7 @@
         .on("dragstart", function (d, i) {
 
           root.nodes.forEach(function (node) {
-            if(node != d)
+            if (node != d)
               node.fixed = false;
           });
 
@@ -164,31 +164,32 @@
               return 1.0;
             }
           });
-          
+
           //加粗关联线
           edges_line.style("stroke-width", function (edge) {
             if (edge.source === d || edge.target === d)
               return 3.0;
             else
-              return 2.0;            
+              return 2.0;
           });
 
           //图片放大
-          nodes_img.attr("width",function(node){
-            if(node == d)
-              return node.width * 1.2;
-            else
-              return node.width;
-          })
-
-          nodes_img.attr("height",function(node){
-            if(node == d)
-              return node.height * 1.2;
-            else
-              return node.height;
-          })
+          nodes_img.transition()
+            .attr("width", function (node) {
+              if (node == d)
+                return img_w * 1.1;
+              else
+                return img_w;
+            })
+            .attr("height", function (node) {
+              if (node == d)
+                return img_h * 1.1;
+              else
+                return img_h;
+            })
 
           tooltip.html("<p>" + d.name + "</p>")
+            .transition()
             .style("left", (d.x + 30) + "px")
             .style("top", (d.y + 30) + "px")
             .style("opacity", 1.0)
@@ -201,14 +202,15 @@
               return 0.0;
             }
           });
-          
+
           //连接线粗细变正常
           edges_line.style("stroke-width", function (edge) {
-              return 2.0;
+            return 2.0;
           });
 
           //图片大小变正常
-
+          nodes_img.attr("width", img_w)
+          nodes_img.attr("height", img_h)
 
           tooltip.style("opacity", 0.0)
         })
