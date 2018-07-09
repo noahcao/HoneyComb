@@ -1,18 +1,15 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import data.IconDao;
 import data.impl.IconDaoImpl;
 import data.model.IconEntity;
-import model.Paper;
 import model.User;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
 import service.AppService;
 
-import java.util.Set;
+import javax.annotation.Resource;
 
-
+@ContextConfiguration(locations = { "classpath:bean.xml", "classpath:mongo.xml" })
 public class UpdateUserAction extends ActionSupport {
     private Integer id;
 
@@ -77,6 +74,8 @@ public class UpdateUserAction extends ActionSupport {
         setBio(item.getBio());
     }
 
+    @Resource
+    private IconDaoImpl iconDao;
     private AppService appService;
 
     public void setAppService(AppService appService) {
@@ -88,12 +87,12 @@ public class UpdateUserAction extends ActionSupport {
         User result = appService.getUserById(id);
         if (result != null) {
             setUserInfo(result);
-            // Hibernate.initialize(result.getOrders());
+//             Hibernate.initialize(result.getOrders());
 
-            ConfigurableApplicationContext context = null;
-            context = new ClassPathXmlApplicationContext("mongo.xml");
-            IconDao iconDao = context.getBean(IconDaoImpl.class);
-            iconDao.createCollection();
+//            ConfigurableApplicationContext context;
+//            context = new ClassPathXmlApplicationContext("mongo.xml");
+//            IconDao iconDao = context.getBean(IconDaoImpl.class);
+//            iconDao.createCollection();
             IconEntity e = iconDao.findOne("" + id);
             if (e == null) {
                 e = new IconEntity();
@@ -145,10 +144,6 @@ public class UpdateUserAction extends ActionSupport {
         if (this.id == null) return ERROR;
         User result = appService.getUserById(this.id);
         if (result != null) {
-            ConfigurableApplicationContext context;
-            context = new ClassPathXmlApplicationContext("mongo.xml");
-            IconDao iconDao = context.getBean(IconDaoImpl.class);
-            iconDao.createCollection();
             IconEntity e = iconDao.findOne("" + this.id);
             if (e == null) {
                 setIcon(null);
@@ -171,5 +166,15 @@ public class UpdateUserAction extends ActionSupport {
             return SUCCESS;
         }
         return NONE;
+    }
+
+    public String queryUserName() throws Exception {
+        if (this.id == null) return ERROR;
+        User result = appService.getUserById(id);
+        if (result != null) {
+            setName(result.getName());
+            return SUCCESS;
+        }
+        return ERROR;
     }
 }

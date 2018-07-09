@@ -3,7 +3,6 @@ package data.impl;
 import com.mongodb.DB;
 import data.IconDao;
 import data.model.IconEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
@@ -13,13 +12,14 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Set;
 
-@Repository
+@Repository("IconDaoImpl")
 public class IconDaoImpl implements IconDao {
 
-    @Autowired
+    @Resource
     private MongoTemplate mongoTemplate;
 
     @Override

@@ -47,8 +47,12 @@
             <result name="error" type="httpheader">
                 <param name="status">400</param>
             </result>
-            <result name="none" type="httpheader">
-                <param name="status">404</param>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="getusername" class="action.UpdateUserAction" method="queryUserName">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
             </result>
             <interceptor-ref name="demostack"/>
         </action>

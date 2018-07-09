@@ -1,11 +1,9 @@
 package data;
 
 import data.model.IconEntity;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
 public interface IconDao {
 
     public abstract void _test();
