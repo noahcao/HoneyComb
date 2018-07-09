@@ -149,7 +149,7 @@ export default {
           this.$http.get('/getuser', { params: { id: this.id } })
             .then((res) => {
               this.name = res.data.name
-              console.log('status', this.data)
+              console.log('status', res.data)
             })
         })
     },

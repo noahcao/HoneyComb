@@ -6,16 +6,18 @@
       <div class="col-sm-0 col-md-1"></div>
       <div class="col-xs-12 col-sm-4 col-md-3">
         <div class="thumbnail">
-          <img class="img-rounded avatar" src="../../assets/pic/dft-header.png" alt="70x70">
+          <img class="img-rounded avatar" :src="defaulti" alt="70x70" @click="upload_img" v-if="icon === null">
+          <img class="img-rounded avatar" :src="icon" alt="70x70" @click="upload_img" v-else>
+          <input type="file" accept="image/*" id="icon" class="hidden" v-on:change="change_img" />
           <div class="caption">
-            <h3>Lena Oxton</h3>
+            <h3>{{name}}</h3>
             <p v-if="editBio">{{bio}}</p>
             <p>
               <button class="btn btn-default" type="button" @click="edit_bio" v-if="editBio">
                 Edit Bio
               </button>
-              <textarea rows="5" v-else v-model="bio"></textarea>
-              <button class="btn btn-default" v-if="!editBio" type="button">save</button>
+              <textarea rows="5" v-else v-model="bios"></textarea>
+              <button class="btn btn-default" v-if="!editBio" type="button" @click="save_bio">save</button>
               <button class="btn btn-default" v-if="!editBio" type="button" @click="edit_bio">cancel</button>
               <br/>
               <button class="btn btn-default" type="button">
@@ -61,7 +63,7 @@
 </template>
 
 <script>
-// import $ from 'jquery'
+import $ from 'jquery'
 import navBar from '../main/NavBar'
 import Net from './infoContent/Net'
 export default {
@@ -74,12 +76,76 @@ export default {
     return {
       editBio: true,
       bio:
-        'The former Overwatch agent known as Tracer is a time-jumping adventurer and an irrepressible force for good.'
+        'Oops, empty here!',
+      id: this.data.id,
+      name: null,
+      icon: null,
+      bios: 'Oops, empty here!',
+      iconInput: null,
+      defaulti: null
     }
   },
+  mounted () {
+    $("canvas").remove();
+    this.loginJudge()
+  },
   methods: {
+    save_bio () {
+      this.$http.get('/updatebio', { params: { id: this.id, bio: this.bios } })
+        .then((res) => {
+          this.bio = this.bios
+          this.editBio = !this.editBio
+        })
+    },
+    loginJudge () {
+      this.$http.get('/loginstatus')
+        .then((res) => {
+          if (res.data.id !== null) {
+            this.data.id = res.data.id
+            this.id = res.data.id
+            this.getUserInfo()
+          }
+        })
+    },
     edit_bio () {
       this.editBio = !this.editBio
+      this.bios = this.bio
+      console.log(this.iconInput)
+    },
+    upload_img () {
+      $('#icon').click()
+    },
+    change_img () {
+      var icon = document.getElementById('icon').files[0]
+      var imgSize = icon.size
+      if (imgSize > 300 * 1024) {
+        alert('file is too big!!!')
+        $('#icon').val('')
+        return
+      }
+      if (icon) {
+        var r = new FileReader() // 本地预览
+        r.readAsDataURL(icon) // Base64
+        r.onload = () => {
+          this.$http.post('/updateicon', { icon: r.result, id: this.id })
+            .then((res) => {
+              this.icon = res.data.icon
+            })
+        }
+      }
+    },
+    getUserInfo () {
+      this.$http.get('/getuser', { params: { id: this.id } })
+        .then((res) => {
+          this.name = res.data.name
+          if (res.data.bio != null) {
+            this.bio = res.data.bio
+            this.bios = res.data.bio
+          }
+          this.icon = res.data.icon
+          this.defaulti = '../../../static/pic/dft-header.png'
+          console.log('getuser', res.data)
+        })
     }
   }
 }

@@ -24,5 +24,8 @@
             <key column="user_id"/>
             <many-to-many class="model.Paper" column="paper_id"/>
         </set>
+        <property name="bio">
+            <column name="bio" sql-type="mediumtext"/>
+        </property>
     </class>
 </hibernate-mapping>

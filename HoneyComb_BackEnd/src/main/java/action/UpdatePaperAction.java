@@ -5,13 +5,23 @@ import model.Author;
 import model.Paper;
 import service.AppService;
 
+import java.time.Year;
 import java.util.Set;
 
 public class UpdatePaperAction extends ActionSupport {
     private Integer id;
     private String name;
     private String url;
+    private Year year;
     private Set<Author> authors;
+
+    public void setYear(Year year) {
+        this.year = year;
+    }
+
+    public Year getYear() {
+        return year;
+    }
 
     public Set<Author> getAuthors() {
         return authors;
@@ -58,6 +68,7 @@ public class UpdatePaperAction extends ActionSupport {
             setAuthors(result.getAuthors());
             setName(result.getName());
             setUrl(result.getUrl());
+            setYear(result.getYear());
             return SUCCESS;
         }
         return NONE;

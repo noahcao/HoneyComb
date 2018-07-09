@@ -5,7 +5,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import model.User;
 import org.apache.struts2.StrutsStatics;
 import service.AppService;
-
 import java.util.Map;
 
 public class LoginAction extends ActionSupport {
@@ -54,6 +53,8 @@ public class LoginAction extends ActionSupport {
             setId(result.getId());
             usersession.put("username", name);
         }
+        setPwd(null);
+        setName(null);
         return SUCCESS;
     }
 
