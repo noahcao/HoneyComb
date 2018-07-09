@@ -19,7 +19,7 @@
             <a href="#" class="title">Honeycomb</a>
           </li> -->
           <li>
-            <a class="tag">Explore</a>
+            <router-link :to="{name:'sideBar'}" class="tag">Explore</router-link>
           </li>
           <li>
             <a href="#" class="tag">About us</a>

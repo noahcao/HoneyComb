@@ -10,13 +10,6 @@
       </div>
       <div class="form-group">
         <div class="col-xs-1 col-md-2"></div>
-        <label class="col-md-2 control-label col-xs-2">Phone Number</label>
-        <div class="col-md-4 col-xs-6">
-          <input type="tel" class="form-control" id="phone" aria-describedby="phone-help" placeholder="Phone">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-1 col-md-2"></div>
         <label class="col-md-2 control-label col-xs-2">Email</label>
         <div class="col-md-4 col-xs-6">
           <input type="email" class="form-control" id="email" aria-describedby="email-help" placeholder="Email">
@@ -59,7 +52,6 @@ export default {
       var repeat = document.getElementById('repeat').value
       var name = document.getElementById('name').value
       var email = document.getElementById('email').value
-      var phone = document.getElementById('phone').value
       var flag = true
       if (repeat !== pwd) alert('两次密码输入不一致')
       else {
@@ -71,11 +63,6 @@ export default {
           if (!re.test(email)) {
             $('#email').parent().parent().addClass('has-error')
             $('#email').after('<span id="email-help" class="help-block">邮箱格式错误</span>')
-            flag = false
-          }
-          if (isNaN(Number(phone)) || phone.length !== 11) {
-            $('#phone').parent().parent().addClass('has-error')
-            $('#phone').after('<span id="phone-help" class="help-block">手机格式错误</span>')
             flag = false
           }
           if (!alphabet.test(pwd) || !number.test(pwd)) {
@@ -99,7 +86,6 @@ export default {
             id: len,
             name: name,
             pwd: pwd,
-            phone: phone,
             buy: [],
             email: email,
             icon: ''
