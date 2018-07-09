@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 from selenium import webdriver
 import progressbar
 import  csv
@@ -26,7 +27,7 @@ def init_topics(topic_list):
 
 # 抓取source分步
 def craw_pages(topics):
-    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+    driver = webdriver.PhantomJS()
     soups = []
     topics_names = []
     for topic in topics:
@@ -76,7 +77,7 @@ def parseCitationPage(citation_url):
     # 传入的citation_url是一个论文的被引用介绍页面，比如https://ieeexplore.ieee.org/document/6796673/citations?tabFilter=papers
     # 传出的是一个list，list中的每个element是一个字典，字典内包含了对应论文的title, author, publisher
 
-    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+    driver = webdriver.PhantomJS()
     driver.get(citation_url)
     time.sleep(3)
 
@@ -198,7 +199,7 @@ def analyse_soups(soups, topics):
     base = 0
     print(topics)
     for topic in topics:
-        f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
+        f = open('./data/' + topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
         for soup_items in soups[base:base + topic['page_count']]:
             for soup in soup_items:
                 result = soup.select('div.List-results-items')
@@ -253,7 +254,7 @@ def searchOnePaper(paper_title, filename=None):
     search_url_header = "https://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText="
     search_url = search_url_header + paper_title
 
-    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+    driver = webdriver.PhantomJS()
     driver.get(search_url)
 
     source = driver.page_source
@@ -264,7 +265,7 @@ def searchOnePaper(paper_title, filename=None):
         soup = bs(source, 'html.parser')
 
     if filename == None:
-        filename = 'papermetadata.csv'
+        filename = './data/papermetadata.csv'
     driver.close()
     analyse_onesoup(soup, filename)
 
@@ -334,10 +335,10 @@ if __name__ == '__main__':
     thread3 = myThread(11, "Breaking Spectrum Gridlock With Cognitive Radios: An Information Theoretic Perspective", "thread11.csv")
     thread4 = myThread(12, "Evaluating MapReduce for Multi-core and Multiprocessor Systems", "thread12.csv")
     '''
-    thread1 = myThreadField(20, ["control"])
-    thread2 = myThreadField(21, ["sensor"])
-    thread3 = myThreadField(22, ["cpu"])
-    thread4 = myThreadField(23, ["gpu"])
+    thread1 = myThreadField(20, ["cmos"])
+    thread2 = myThreadField(21, ["sensors"])
+    thread3 = myThreadField(22, ["proxy"])
+    thread4 = myThreadField(23, ["information"])
 
     thread1.start()
     thread2.start()
