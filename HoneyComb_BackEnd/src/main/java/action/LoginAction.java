@@ -55,6 +55,8 @@ public class LoginAction extends ActionSupport {
             setId(result.getId());
             usersession.put("username", name);
         }
+        setPwd(null);
+        setName(null);
         return SUCCESS;
     }
 

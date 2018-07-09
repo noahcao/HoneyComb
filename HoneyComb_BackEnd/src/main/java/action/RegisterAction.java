@@ -61,6 +61,9 @@ public class RegisterAction extends ActionSupport {
             appService.addUser(user);
             setId(user.getId());
         }
+        setName(null);
+        setEmail(null);
+        setPwd(null);
         return SUCCESS;
     }
 }
