@@ -35,11 +35,12 @@
   </section>
 </template>
 <script>
-// eslint-disable-next-line
+/* eslint-disable */
 //import a from "../../assets/js/canvas-nest";
 export default {
   name: 'main-body',
   mounted () {
+    $('canvas').remove()
     !(function () {
       function o (w, v, i) {
         return w.getAttribute(v) || i

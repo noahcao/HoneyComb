@@ -86,7 +86,7 @@ export default {
     }
   },
   mounted () {
-    $("canvas").remove();
+    $('canvas').remove()
     this.loginJudge()
   },
   methods: {

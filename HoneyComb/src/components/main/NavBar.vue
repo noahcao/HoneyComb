@@ -19,7 +19,7 @@
             <a href="#" class="title">Honeycomb</a>
           </li> -->
           <li>
-            <a href="#" class="tag">Explore</a>
+            <a class="tag">Explore</a>
           </li>
           <li>
             <a href="#" class="tag">About us</a>
