@@ -20,10 +20,42 @@
               <button class="btn btn-default" v-if="!editBio" type="button" @click="save_bio">save</button>
               <button class="btn btn-default" v-if="!editBio" type="button" @click="edit_bio">cancel</button>
               <br/>
-              <button class="btn btn-default" type="button">
+              <button class="btn btn-default" data-toggle="modal" data-target="#profile_modal" type="button">
                 Edit Profile
               </button>
             </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="profile_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="exampleModalLabel">Edit Profile</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">New Email:</label>
+                  <input type="text" class="form-control" id="email" placeholder="Empty to not changed">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="control-label">New Password:</label>
+                  <input class="form-control" type="text" id="pwd1" placeholder="Empty to not changed" v-on:change="passsChange" v-model="message">
+                </div>
+                <div class="form-group" v-show="passs">
+                  <label for="message-text" class="control-label">Confirm Password:</label>
+                  <input class="form-control" type="text" id="pwd2">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Submit</button>
+            </div>
           </div>
         </div>
       </div>
@@ -82,7 +114,9 @@ export default {
       icon: null,
       bios: 'Oops, empty here!',
       iconInput: null,
-      defaulti: null
+      defaulti: null,
+      passs: false,
+      message: ''
     }
   },
   mounted () {
@@ -90,6 +124,15 @@ export default {
     this.loginJudge()
   },
   methods: {
+    passsChange () {
+      if (this.message === '') {
+        console.log('disable')
+        this.passs = false
+      } else {
+        console.log('enable')
+        this.passs = true
+      }
+    },
     save_bio () {
       this.$http.get('/updatebio', { params: { id: this.id, bio: this.bios } })
         .then((res) => {
@@ -241,10 +284,39 @@ p {
   background-color: rgba(255, 255, 255, 0.9);
   border-color: rgba(36, 41, 46, 0);
 }
+
+.btn-primary {
+  transition: all 0.3s ease;
+  background: rgba(36, 41, 46, 0.9);
+  border-color: rgba(36, 41, 46, 0);
+  margin-top: 5px;
+  color: white;
+}
+.btn-primary:active:focus {
+  color: #333;
+  background-color: #ffffff;
+  border-color: rgba(36, 41, 46, 0);
+}
+.btn-primary:hover {
+  color: #333;
+  background-color: rgba(36, 41, 46, 0.2);
+  border-color: rgba(36, 41, 46, 0);
+}
+
 .btn:active,
 .btn:focus {
   z-index: 2;
   box-shadow: none;
   outline: none;
+}
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 600px;
+    margin: 50px auto;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-bottom: 50px;
+    margin-left: auto;
+  }
 }
 </style>
