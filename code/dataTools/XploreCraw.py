@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 from selenium import webdriver
 import progressbar
 import  csv
@@ -6,7 +7,9 @@ from bs4 import BeautifulSoup as bs
 import re
 import threading
 import traceback
+import socket
 
+socket.setdefaulttimeout(900)
 papers_met = {} # 记录了所有已经查询到了的paper的title
 url_header = 'https://ieeexplore.ieee.org' # 在ieee xplore上进行搜索时的url的开头
 error_file = open("errorlog.txt", 'a', encoding='utf-8') # 用来记录错误信息的文件
@@ -17,49 +20,53 @@ def init_topics(topic_list):
     for topic in topic_list:
         topic_item = {}
         topic_item['keyword'] = topic
-        topic_item['page_count'] = 1
+        topic_item['page_count'] = 20
         topic_item['total'] = topic_item['page_count'] * 100
         topics.append(topic_item)
     return topics
 
 # 抓取source分步
 def craw_pages(topics):
-    driver = webdriver.Chrome()
+    driver = webdriver.PhantomJS()
     soups = []
+    topics_names = []
     for topic in topics:
         print('Topic: %s', topic['keyword'])
+        topics_names.append(topic["keyword"])
 
-    page_num = topic['page_count']
-    pbar = progressbar.ProgressBar(page_num)
-    pbar.start()
+        page_num = topic['page_count']
+        pbar = progressbar.ProgressBar(page_num)
+        pbar.start()
 
-    for i in range(page_num):
-        # 使用给定的topic中的keyword在xplore中进行搜索，默认每页显示100个搜索结果
-        # Parameter:
-        #   queryText='keyword'                 # 指定了在xplore中进行搜索使用的查询关键词
-        #   sortType=desc_p_Citation_Count      # 将返回的结果按照其被其他论文引用的次数进行降序排列
-        #   rowsPerPage                         # 每一页显示的查询结果的数量，默认为100
-        #   pageNUmber                          # 需要获取的当前的查询页面的index
-        driver.get('http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText='+ topic['keyword'] +'&sortType=desc_p_Citation_Count&rowsPerPage=100&pageNumber='+str(i+1))
+        for i in range(page_num):
+            # 使用给定的topic中的keyword在xplore中进行搜索，默认每页显示100个搜索结果
+            # Parameter:
+            #   queryText='keyword'                 # 指定了在xplore中进行搜索使用的查询关键词
+            #   sortType=desc_p_Citation_Count      # 将返回的结果按照其被其他论文引用的次数进行降序排列
+            #   rowsPerPage                         # 每一页显示的查询结果的数量，默认为100
+            #   pageNUmber                          # 需要获取的当前的查询页面的index
+            driver.get('http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText='+ topic['keyword'] +'&sortType=desc_p_Citation_Count&rowsPerPage=100&pageNumber='+str(i+1))
 
-        time.sleep(5)
-        for j in range(5):
-            # 当每页显示100个搜索结果的时候，需要页面下拉5次才可以完整的得到显示，对于每一次显示，给浏览器一秒的响应时间
-            driver.execute_script("window.scrollTo(0, " + str(100000) + ");")
-            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            time.sleep(1)
-        source = driver.page_source
-        soup =  bs(source, "html.parser")
-        soups.append(soup)
+            time.sleep(5)
+            for j in range(5):
+                # 当每页显示100个搜索结果的时候，需要页面下拉5次才可以完整的得到显示，对于每一次显示，给浏览器一秒的响应时间
+                driver.execute_script("window.scrollTo(0, " + str(100000) + ");")
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(1)
+            source = driver.page_source
+            soup =  bs(source, "html.parser")
+            soups.append(soup)
+            
 
-        pbar.update(i+1)
+            pbar.update(i+1)
 
-    pbar.finish() 
+        pbar.finish() 
     driver.close()
-    return soups
+    return soups, topics_names
 
 
 def innerHTML(element):
+    # 获取一个html元素的内部信息
     return element.decode_contents(formatter='html')
 
 
@@ -70,7 +77,7 @@ def parseCitationPage(citation_url):
     # 传入的citation_url是一个论文的被引用介绍页面，比如https://ieeexplore.ieee.org/document/6796673/citations?tabFilter=papers
     # 传出的是一个list，list中的每个element是一个字典，字典内包含了对应论文的title, author, publisher
 
-    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+    driver = webdriver.PhantomJS()
     driver.get(citation_url)
     time.sleep(3)
 
@@ -187,24 +194,27 @@ def parse_paper_body(r):
     return row, paper_met
 
 
-def analyse_soups(soups):
+def analyse_soups(soups, topics):
     # 对抓取道德网页的页面进行解析，这个页面是一个通过关键词查询得到的结果页面，所以内部可能会有多篇的论文信息
     base = 0
-    f = open(topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
+    print(topics)
     for topic in topics:
-        for soup in soups[base:base + topic['page_count']]:
-            result = soup.select('div.List-results-items')
-            for r in result:
-                row, paper_met = parse_paper_body(r)
+        f = open('./data/' + topic['keyword']+'.csv', 'a', encoding='utf-8', newline='')
+        for soup_items in soups[base:base + topic['page_count']]:
+            for soup in soup_items:
+                result = soup.select('div.List-results-items')
+                for r in result:
+                    row, paper_met = parse_paper_body(r)
 
-                if paper_met:
-                    # 这篇论文之前已经被查找过了
-                    continue
+                    if paper_met:
+                        # 这篇论文之前已经被查找过了
+                        continue
 
-                # 把它们存在csv中
-                writer = csv.writer(f, delimiter=',')
-                writer.writerow(row)
-                f.flush()
+                    # 把它们存在csv中
+                    writer = csv.writer(f, delimiter=',')
+                    writer.writerow(row)
+                    f.flush()
+        f.close()
     base += topic['page_count']
 
 
@@ -244,7 +254,7 @@ def searchOnePaper(paper_title, filename=None):
     search_url_header = "https://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText="
     search_url = search_url_header + paper_title
 
-    driver = webdriver.PhantomJS(executable_path=r".\\phantomjs\\bin\\phantomjs.exe")
+    driver = webdriver.PhantomJS()
     driver.get(search_url)
 
     source = driver.page_source
@@ -255,20 +265,18 @@ def searchOnePaper(paper_title, filename=None):
         soup = bs(source, 'html.parser')
 
     if filename == None:
-        filename = 'papermetadata.csv'
+        filename = './data/papermetadata.csv'
     driver.close()
     analyse_onesoup(soup, filename)
 
 
 class myThread(threading.Thread):
     # 一个自建的线程类，用于多线程的爬取数据，其中tID是这个线程的编号，keyword是进行爬虫的起始关键词
-    # 可以是一个paper的title，也可以是一个搜索的关键词，methode决定了是从一篇paper开始搜索，还是从一个
-    # filename是爬取结果进行保存的文件的名字
-    def __init__(self, tID, keyword, filename, methode=1):
+    # 可以是一个paper的title，
+    def __init__(self, tID, keyword, filename):
         threading.Thread.__init__(self)
         self.tID = tID
         self.keyword = keyword
-        self.methode = methode
         self.filename = filename
 
     def run(self):
@@ -285,6 +293,30 @@ class myThread(threading.Thread):
             error_file.flush()
             return
         
+class myThreadField(threading.Thread):
+    # 同myThread类类似，但是搜索的开始点不是一篇特定的paper而是一个通用的关键词，对于该关键词，xplore会返回
+    # 一系列的搜索结果，默认的，搜索结果按照被引用的数量大小进行排序
+    def __init__(self, tID, topic_list):
+        threading.Thread.__init__(self)
+        self.tID = tID
+        self.topics = topic_list
+
+    def run(self):
+        try:
+            topic_list = self.topics
+            print("thread " + str(self.tID) + " begins!")
+            topic_dict_list = init_topics(topic_list)
+            soups = craw_pages(topic_dict_list)
+            analyse_soups(soups, topic_dict_list)
+            print("thread " + str(self.tID) + " finished!")
+        except :
+            print("Exception occurs for thread: " + str(self.tID))
+            print('traceback.format_exc():\n%s' % traceback.format_exc())
+            error_file.write("thread " + str(self.tID) + " threw an exception!\n")
+            traceback.print_exc(file=error_file)    # 当产生了错误的信息的时候，保存到错误日志文件中
+            error_file.flush()
+            return
+
 
 if __name__ == '__main__':
     '''
@@ -298,12 +330,15 @@ if __name__ == '__main__':
     thread3 = myThread(3, "The self-organizing map", "thread3.csv")
     thread4 = myThread(4, "The particle swarm - explosion, stability, and convergence in a multidimensional complex space", "thread4.csv")
 
-    '''
-
     thread1 = myThread(9, "Fuzzy logic in control systems: fuzzy logic controller", "thread9.csv")
     thread2 = myThread(10, "A survey on sensor networks", "thread10.csv")
     thread3 = myThread(11, "Breaking Spectrum Gridlock With Cognitive Radios: An Information Theoretic Perspective", "thread11.csv")
     thread4 = myThread(12, "Evaluating MapReduce for Multi-core and Multiprocessor Systems", "thread12.csv")
+    '''
+    thread1 = myThreadField(20, ["cmos"])
+    thread2 = myThreadField(21, ["sensors"])
+    thread3 = myThreadField(22, ["proxy"])
+    thread4 = myThreadField(23, ["information"])
 
     thread1.start()
     thread2.start()
