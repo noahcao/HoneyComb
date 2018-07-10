@@ -5,10 +5,6 @@ import model.User;
 
 import java.util.List;
 
-/**
- * @author seniyuting
- * @version 1.0
- */
 public interface AppService {
 
     /**
@@ -35,7 +31,7 @@ public interface AppService {
     /**
      * paper
      */
-    Paper getPaperById(Integer id);
+    Paper getPaperById(java.lang.Long id);
 
     List<Paper> queryPaper(String name);
 

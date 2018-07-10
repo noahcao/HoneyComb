@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PaperDao {
 
-	public Paper getPaperById(int id);
+	public Paper getPaperById(long id);
 
 	public List<Paper> queryPapers(String name);
 

@@ -65,7 +65,7 @@ public class AppServiceImpl implements AppService {
      * paper
      */
     @Override
-    public Paper getPaperById(Integer id) {
+    public Paper getPaperById(java.lang.Long id) {
         return paperDao.getPaperById(id);
     }
 

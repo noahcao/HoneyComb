@@ -1,8 +1,11 @@
 package model;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.Set;
 
 public class User {
+    @Id
     private Integer id;
 
     private String pwd;

@@ -9,17 +9,26 @@ import java.time.Year;
 import java.util.Set;
 
 public class UpdatePaperAction extends ActionSupport {
-    private Integer id;
-    private String name;
+    private java.lang.Long id;
+    private String title;
     private String url;
-    private Year year;
+    private Integer year;
     private Set<Author> authors;
+    private Integer cited;
 
-    public void setYear(Year year) {
+    public Integer getCited() {
+        return cited;
+    }
+
+    public void setCited(Integer cited) {
+        this.cited = cited;
+    }
+
+    public void setYear(Integer year) {
         this.year = year;
     }
 
-    public Year getYear() {
+    public Integer getYear() {
         return year;
     }
 
@@ -39,19 +48,19 @@ public class UpdatePaperAction extends ActionSupport {
         this.url = url;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Integer getId() {
+    public java.lang.Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(java.lang.Long id) {
         this.id = id;
     }
 
@@ -66,8 +75,9 @@ public class UpdatePaperAction extends ActionSupport {
         Paper result = appService.getPaperById(id);
         if (result != null) {
             setAuthors(result.getAuthors());
-            setName(result.getName());
+            setTitle(result.getTitle());
             setUrl(result.getUrl());
+            setCited(result.getCited());
             setYear(result.getYear());
             return SUCCESS;
         }

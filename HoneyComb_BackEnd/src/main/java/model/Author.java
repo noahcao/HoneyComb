@@ -1,9 +1,12 @@
 package model;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.Set;
 
 public class Author {
-    private Integer id;
+    @Id
+    private Long id;
     private String name;
     private String url;
     private Set<Paper> papers;
@@ -32,11 +35,11 @@ public class Author {
         this.name = name;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

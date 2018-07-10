@@ -12,7 +12,7 @@
         <property name="url" column="url"/>
         <set name="papers" table="author_paper" cascade="save-update, persist" lazy="false">
             <key column="author_id"/>
-            <many-to-many class="model.Paper" column="paper_id"/>
+            <element column="paper_id" type="java.lang.Long"/>
         </set>
     </class>
 </hibernate-mapping>

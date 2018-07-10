@@ -96,9 +96,6 @@
             <result name="error" type="httpheader">
                 <param name="status">400</param>
             </result>
-            <result name="none" type="httpheader">
-                <param name="status">404</param>
-            </result>
             <interceptor-ref name="demostack"/>
         </action>
         <action name="searchpaper" class="action.QueryPapersAction" method="search">

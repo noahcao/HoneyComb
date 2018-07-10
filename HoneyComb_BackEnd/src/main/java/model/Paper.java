@@ -1,29 +1,49 @@
 package model;
 
-import java.time.Year;
+import org.springframework.data.annotation.Id;
+
 import java.util.Set;
 
 public class Paper {
-    private Integer id;
-    private String name;
+
+    @Id
+    private Long id;
     private String url;
     private Set<Author> authors;
-    private Year year;
-    private Set<Paper> reference;
+    private Integer year;
+    private Set<Long> reference;
+    private String title;
+    private Integer cited;
 
-    public Set<Paper> getReference() {
+    public Integer getCited() {
+        return cited;
+    }
+
+    public void setCited(Integer cited) {
+        this.cited = cited;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Set<Long> getReference() {
         return reference;
     }
 
-    public void setReference(Set<Paper> reference) {
+    public void setReference(Set<Long> reference) {
         this.reference = reference;
     }
 
-    public Year getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(Year year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
@@ -43,19 +63,11 @@ public class Paper {
         this.url = url;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

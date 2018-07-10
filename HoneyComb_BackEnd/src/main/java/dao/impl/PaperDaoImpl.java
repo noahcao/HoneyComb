@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
 
-    public Paper getPaperById(int id) {
+    public Paper getPaperById(long id) {
         @SuppressWarnings("unchecked")
         List<Paper> papers = (List<Paper>) getHibernateTemplate().find(
                 "from Paper as p where p.id=?", id);
@@ -20,7 +20,7 @@ public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
     public List<Paper> queryPapers(String name) {
         @SuppressWarnings("unchecked")
         List<Paper> papers = (List<Paper>) getHibernateTemplate().find(
-                "from Paper as p where p.name like ?",
+                "from Paper as p where p.title like ?",
                 "%" + name + "%");
         return papers;
     }
