@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <D3Force></D3Force>
   </div>
 </template>
 
 <script>
+import D3Force from './components/D3_force.vue'
 export default {
-  name: 'App'
+  name: 'app',
+  components: { D3Force }
 }
 </script>
 
@@ -18,6 +19,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
