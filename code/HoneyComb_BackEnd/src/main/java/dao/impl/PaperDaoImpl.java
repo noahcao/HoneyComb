@@ -18,6 +18,7 @@ public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
 
     @Override
     public List<Paper> queryPapers(String name) {
+        /* need to implement tf-idf */
         @SuppressWarnings("unchecked")
         List<Paper> papers = (List<Paper>) getHibernateTemplate().find(
                 "from Paper as p where p.title like ?",
