@@ -1,20 +1,20 @@
 <template>
   <div>
     <nav-bar></nav-bar>
-    <comb></comb>
+    <d3-force></d3-force>
   </div>
 </template>
 
 <script>
 import NavBar from '../main/NavBar'
 import Footer from '../main/Footer'
-import comb from './comb'
+import d3Force from './D3_force'
 export default {
   name: 'outcomb',
   components: {
     NavBar,
     Footer,
-    comb
+    d3Force
   }
 }
 </script>

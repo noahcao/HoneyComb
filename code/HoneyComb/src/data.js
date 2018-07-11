@@ -1,7 +1,11 @@
 var id = null
-var status = null
+var LRList = [
+  {
+    status: false
+  }
+]
 
 export default {
   id,
-  status
+  LRList
 }

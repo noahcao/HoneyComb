@@ -51,15 +51,12 @@ export default {
   data () {
     return {
       username: '',
-      userpwd: '',
-      status: this.data.status
+      userpwd: ''
     }
   },
   methods: {
     toRegister () {
-      console.log($('#sign-up'))
-      $('#sign-up').click()
-      $('#sign-up').click()
+      this.data.LRList[0].status = false
     },
     login () {
       if (this.username !== '' && this.userpwd !== '') {

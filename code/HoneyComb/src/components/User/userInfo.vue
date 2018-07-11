@@ -40,7 +40,7 @@
               <form>
                 <div class="form-group">
                   <label for="recipient-name" class="control-label">New Email:</label>
-                  <input type="text" class="form-control" id="email" placeholder="Empty to not changed">
+                  <input type="text" class="form-control" id="email1" placeholder="Empty to not changed">
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="control-label">New Password:</label>

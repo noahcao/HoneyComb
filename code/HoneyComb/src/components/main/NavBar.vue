@@ -19,7 +19,7 @@
             <a href="#" class="title">Honeycomb</a>
           </li> -->
           <li>
-            <a class="tag">Explore</a>
+            <router-link :to="{name:'outcomb'}" class="tag">Explore</router-link>
           </li>
           <li>
             <a href="#" class="tag">About us</a>
@@ -92,14 +92,15 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">{{ status ? 'Login' : 'Register'}}</h4>
+            <h4 class="modal-title" id="myModalLabel">{{ status[0].status ? 'Login' : 'Register'}}</h4>
           </div>
           <div class="modal-body">
-            <wrapper-lr :status="status"></wrapper-lr>
+            <wrapper-lr></wrapper-lr>
           </div>
         </div>
       </div>
     </div>
+    <h2 class="hide">{{status}}</h2>
   </nav>
 </template>
 
@@ -110,10 +111,14 @@ import wrapperLr from '../user/wrapperLr'
 export default {
   name: 'nav-bar',
   data () {
+    var status = []
+    for (var i of this.data.LRList) {
+      status.push(i)
+    }
     return {
       id: this.data.id,
       name: null,
-      status: null
+      status: status
     }
   },
   components: {
@@ -189,13 +194,9 @@ export default {
     },
     changeStatus (e) {
       if (e) {
-        this.data.status = true
-        this.status = true
-        console.log(this.data.status)
+        this.data.LRList[0].status = true
       } else {
-        this.data.status = false
-        this.status = false
-        console.log(this.data.status)
+        this.data.LRList[0].status = false
       }
     }
   }

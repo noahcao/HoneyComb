@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
 import userInfo from '../components/user/userInfo'
-// import outcomb from '../components/Combs/outComb'
+import outcomb from '../components/Combs/outComb'
 // import navTest from '../components/main/navTest'
 
 Vue.use(Router)
@@ -18,11 +18,11 @@ export default new Router({
       path: '/userInfo',
       name: 'userInfo',
       component: userInfo
+    },
+    {
+      path: '/comb',
+      name: 'outcomb',
+      component: outcomb
     }
-    // {
-    //   path: '/comb',
-    //   name: 'outcomb',
-    //   component: outcomb
-    // }
   ]
 })
