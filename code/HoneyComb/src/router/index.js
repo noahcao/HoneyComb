@@ -11,6 +11,7 @@ export default new Router({
   routes: [
     {
       path: '/',
+
       name: 'Main',
       component: Main
     },
@@ -23,6 +24,7 @@ export default new Router({
       path: '/comb',
       name: 'outcomb',
       component: outcomb
+
     }
   ]
 })
