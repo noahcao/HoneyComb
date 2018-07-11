@@ -1,5 +1,5 @@
 <template>
-    <svg width="1300" height="800"></svg>
+    <svg width="1300" height="650"></svg>
 
 </template>
 <script>
@@ -351,12 +351,25 @@ export default {
   },
   mounted() {
     let this_ = this;
+    var img_w = 20;
+    var img_h = 20;
+    var zoom = d3.zoom()
+                .scaleExtent([-5,2])
+                .on("zoom",zoomed)
+
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+
     var svg = d3.select("svg"),
       width = +svg.attr("width"),
       height = +svg.attr("height");
-    
-    var img_w = 20;
-    var img_h = 20;
+
+    svg.call(zoom)
+
+    function zoomed() {
+      svg.selectAll("g")
+      .attr("transform",  d3.event.transform)
+    }
+  
 
     var attractForce = d3
       .forceManyBody()
@@ -395,12 +408,6 @@ export default {
       .append("line")
       .attr("stroke-width", function(d) {
         return Math.sqrt(d.value);
-      })
-      .style("stroke-dasharray", function (d) {
-          if (d.relation == "撰写")
-            return "20,10,5,5,10";
-          else if (d.relation == "其他")
-            return "5,5";
       });
 
     var tooltip = d3.select("body")
@@ -408,8 +415,7 @@ export default {
         .attr("class", "tooltip")
         .style("display", "none")
 
-    var node = svg
-      .append("g")
+    var node = svg.append("g")
       .attr("class", "nodes")
       .selectAll("circle")
       .data(data.nodes)
@@ -417,7 +423,8 @@ export default {
       .append("circle")
       .attr("r", 20)
       .attr("fill", function(d, i) {
-        var defs = svg.append("defs").attr("id", "imgdefs")
+        return color(d.group)
+        /*var defs = svg.append("defs").attr("id", "imgdefs")
 
         var catpattern = defs.append("pattern")
                             .attr("id","catpattern" + i)
@@ -431,7 +438,7 @@ export default {
                 .attr("height", img_h*2)
                 .attr("xlink:href", d.image)
 
-        return "url(#catpattern" + i + ")"; 
+        return "url(#catpattern" + i + ")"; */
        })
       .call(
         d3
@@ -446,15 +453,17 @@ export default {
       .on("mouseover",function(d,i){
         tooltip.html("<p>" + d.id + "</p>")
             .transition()
-            .style("left", (d.x + 50) + "px")
-            .style("top", (d.y + 30) + "px")
+            .style("left", (d.x) + "px")
+            .style("top", (d.y) + "px")
             .style("display", "block")
       })
       .on("mouseout",function(d){
         tooltip.style("display", "none")
       })
 
-    var text = svg
+    /*var text = svg
+      .append("g")
+      .attr("class","texts")
       .selectAll("text")
       .data(data.nodes)
       .enter()
@@ -462,7 +471,7 @@ export default {
       .attr("font-family", "sans-serif")
       .attr("font-size", "11px")
       .attr("fill", "black")
-      .attr("fill-opacity", "0.0")
+      .attr("fill-opacity", "0.0")*/
 
     function ticked() {
       link
@@ -487,7 +496,7 @@ export default {
           return d.y;
         });
 
-      text
+      /*text
         .text(function(d) {
           return d.id;
         })
@@ -498,9 +507,10 @@ export default {
           return d.y;
         })
         .attr("dx", "-3.5")
-        .attr("dy", "20");
+        .attr("dy", "20");*/
     }
     function dragstarted(d) {
+      tooltip.style("display","none")
       if (!d3.event.active) simulation.alphaTarget(0.3).restart();
       d.fx = d.x;
       d.fy = d.y;
