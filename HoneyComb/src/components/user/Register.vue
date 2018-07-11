@@ -2,36 +2,48 @@
   <section class="container">
     <form class="form-horizontal">
       <div class="form-group">
-        <div class="col-xs-1 col-md-2"></div>
-        <label class="col-xs-2 control-label col-md-2">User Name</label>
-        <div class="col-xs-6 col-md-4">
+        <div class="col-xs-1 col-md-1"></div>
+        <label class="col-xs-6 control-label col-md-6">User Name</label>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-1 col-md-1"></div>
+        <div class="col-xs-10 col-md-10">
           <input type="text" class="form-control" id="name" aria-describedby="name-help" placeholder="User">
         </div>
       </div>
       <div class="form-group">
-        <div class="col-xs-1 col-md-2"></div>
-        <label class="col-md-2 control-label col-xs-2">Email</label>
-        <div class="col-md-4 col-xs-6">
+        <div class="col-xs-1 col-md-1"></div>
+        <label class="col-md-6 control-label col-xs-6">Email</label>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-1 col-md-1"></div>
+        <div class="col-md-10 col-xs-10">
           <input type="email" class="form-control" id="email" aria-describedby="email-help" placeholder="Email">
         </div>
       </div>
       <div class="form-group">
-        <div class="col-xs-1 col-md-2"></div>
-        <label class="col-xs-2 control-label col-md-2">Password</label>
-        <div class="col-xs-6 col-md-4">
+        <div class="col-xs-1 col-md-1"></div>
+        <label class="col-xs-6 control-label col-md-6">Password</label>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-1 col-md-1"></div>
+        <div class="col-xs-10 col-md-10">
           <input type="password" class="form-control" id="password" aria-describedby="password-help" placeholder="Password">
         </div>
       </div>
       <div class="form-group">
-        <div class="col-xs-1 col-md-2"></div>
-        <label class="col-xs-2 control-label col-md-2">Confirm Your Password</label>
-        <div class="col-xs-6 col-md-4">
+        <div class="col-xs-1 col-md-1"></div>
+        <label class="col-xs-6 control-label col-md-6">Confirm Your Password</label>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-1 col-md-1"></div>
+        <div class="col-xs-10 col-md-10">
           <input type="password" class="form-control" id="repeat" placeholder="Password Again">
         </div>
       </div>
       <div class="form-group">
-        <div class="col-xs-offset-4 col-xs-6 col-md-4">
-          <button type="button" @click="register" class="btn btn-default">
+        <div class="col-xs-offset-1 col-xs-6 col-md-4">
+          <button type="button" @click="register" class="btn btn-default pull-left">
             <strong>Submit</strong>
           </button>
         </div>
@@ -62,37 +74,27 @@ export default {
           var re = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/
           if (!re.test(email)) {
             $('#email').parent().parent().addClass('has-error')
-            $('#email').after('<span id="email-help" class="help-block">邮箱格式错误</span>')
+            $('#email').after('<span id="email-help" class="help-block">Email format error</span>')
             flag = false
           }
           if (!alphabet.test(pwd) || !number.test(pwd)) {
             $('#password').parent().parent().addClass('has-error')
-            $('#password').after('<span id="password-help" class="help-block">密码必须包含数字和字母</span>')
+            $('#password').after('<span id="password-help" class="help-block">Password must contains alphabet and number</span>')
             flag = false
             document.getElementById('repeat').value = ''
             document.getElementById('password').value = ''
           }
-          for (var user of this.data.UserList) {
-            if (user.name === name) {
-              $('#name').parent().parent().addClass('has-error')
-              $('#name').after('<span id="name-help" class="help-block">用户名已被注册</span>')
-              flag = false
-              break
-            }
-          }
           if (!flag) return
-          var len = this.data.UserList.length
-          this.data.UserList.push({
-            id: len,
-            name: name,
-            pwd: pwd,
-            buy: [],
-            email: email,
-            icon: ''
-          })
-          var url = window.location.href
-          url = url.substring(0, url.length - 8)
-          window.location.href = url + 'login'
+          this.$http.post('/registerhandle', {name: name, email: email, pwd: pwd})
+            .then((response) => {
+              if (response.data.id === null) {
+                $('#name').parent().parent().addClass('has-error')
+                $('#name').after('<span id="name-help" class="help-block">User name existed</span>')
+              } else {
+                this.data.id = response.data.id
+                window.location.reload()
+              }
+            })
         }
       }
     },
@@ -116,11 +118,16 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  width: 375px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
 .form-horizontal {
   margin-top: 5%;
 }
 .form-group {
-  text-align: center;
+  width: 375px;
 }
 .form-control {
   border: none;
@@ -177,5 +184,15 @@ input:focus {
 .btn-default:focus {
   box-shadow: none;
   outline: none;
+}
+@media (min-width: 768px) {
+  .form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: left;
+  }
+}
+.form-horizontal {
+  width: 375px;
 }
 </style>

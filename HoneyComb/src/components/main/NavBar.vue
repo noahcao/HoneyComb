@@ -19,7 +19,7 @@
             <a href="#" class="title">Honeycomb</a>
           </li> -->
           <li>
-            <router-link :to="{name:'sideBar'}" class="tag">Explore</router-link>
+            <a class="tag">Explore</a>
           </li>
           <li>
             <a href="#" class="tag">About us</a>
@@ -60,10 +60,10 @@
         </form> -->
         <ul class="nav navbar-nav navbar-right">
           <li v-if="this.id === null">
-            <router-link :to="{name:'Login'}">Sign in</router-link>
+            <a data-toggle="modal" data-target="#myModal" @click="changeStatus(1)">Sign in</a>
           </li>
           <li v-if="this.id === null">
-            <router-link :to="{name:'Register'}">Sign up</router-link>
+            <a data-toggle="modal" data-target="#myModal" @click="changeStatus(0)" id="sign-up">Sign up</a>
           </li>
           <li class="dropdown" v-else>
             <a href="#" class="dropdown-toggle js-activated" role="button" aria-haspopup="true" aria-expanded="false">{{name}}&nbsp;&nbsp;
@@ -87,22 +87,43 @@
       <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
+    <!-- 弹出层 modal -->
+    <div class="modal right fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">{{ status ? 'Login' : 'Register'}}</h4>
+          </div>
+          <div class="modal-body">
+            <wrapper-lr :status="status"></wrapper-lr>
+          </div>
+        </div>
+      </div>
+    </div>
   </nav>
 </template>
 
 <script>
 /* eslint-disable */
 import $ from 'jquery'
-
+import wrapperLr from '../user/wrapperLr'
 export default {
   name: 'nav-bar',
   data () {
     return {
       id: this.data.id,
       name: null,
+      status: null
     }
   },
+  components: {
+    wrapperLr
+  },
   mounted () {
+    $('#myModal').on('hidden.bs.modal', '.modal', function () {
+      $(this).removeData("bs.modal");
+      $(".modal-body").children().remove();
+    });
     this.loginJudge()
     $('body').append('<style>' +
       '@keyframes rotatefresh {' +
@@ -138,6 +159,9 @@ export default {
         'transform': 'rotate(0deg)'
       })
     })
+    $("#myModal").on("hidden.bs.modal", function () {
+      $(this).removeData("bs.modal");
+    });
   },
   methods: {
     loginJudge () {
@@ -146,11 +170,13 @@ export default {
           this.data.id = res.data.id
           this.id = this.data.id
           console.log('status', this.data.id)
-          this.$http.get('/getuser', { params: { id: this.id } })
+          if(this.data.id !== null){
+          this.$http.get('/getusername', { params: { id: this.id } })
             .then((res) => {
               this.name = res.data.name
               console.log('status', res.data)
             })
+          }
         })
     },
     logOut () {
@@ -160,6 +186,17 @@ export default {
           var url = window.location.href
           window.location.href = url
         })
+    },
+    changeStatus (e) {
+      if (e) {
+        this.data.status = true
+        this.status = true
+        console.log(this.data.status)
+      } else {
+        this.data.status = false
+        this.status = false
+        console.log(this.data.status)
+      }
     }
   }
 }
@@ -290,6 +327,91 @@ export default {
   margin-left: 0px;
 }
 
+.mybtn {
+  position: fixed;
+  right: 10px;
+  bottom: 20px;
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  padding: 0px;
+  text-align: center;
+  line-height: 50px;
+}
+
+.modal.left .modal-dialog,
+.modal.right .modal-dialog {
+  position: fixed;
+  margin: auto;
+  width: 375px;
+  height: 100%;
+  -webkit-transform: translate3d(0%, 0, 0);
+  -ms-transform: translate3d(0%, 0, 0);
+  -o-transform: translate3d(0%, 0, 0);
+  transform: translate3d(0%, 0, 0);
+}
+
+.modal.left .modal-content,
+.modal.right .modal-content {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.modal.left .modal-body,
+.modal.right .modal-body {
+  padding: 15px 15px 80px;
+}
+
+/*Left*/
+.modal.left.fade .modal-dialog {
+  left: -320px;
+  -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+  -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+  -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+  transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.fade.in .modal-dialog {
+  left: 0;
+}
+
+/*Right*/
+.modal.right.fade .modal-dialog {
+  right: -320px;
+  -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+  -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+  -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+  transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+  right: 0;
+}
+
+/* ----- MODAL STYLE ----- */
+.modal-content {
+  border-radius: 0;
+  border: none;
+}
+
+.modal-header {
+  color: white;
+  border-bottom-color: #eeeeee;
+  background-color: rgba(18, 21, 23, 1);
+  padding: 20px;
+  height: 72px;
+  border-bottom: 0.5px solid rgba(200, 200, 200, 1);
+}
+.modal-content {
+  background-color: rgba(200, 200, 200, 1);
+}
+.modal.right .modal-body {
+  padding-top: 15px;
+  padding-right: 0px;
+  padding-bottom: 80px;
+  padding-left: 0px;
+}
 /* @keyframes rotatefresh {
   from {
     transform: rotate(0deg);

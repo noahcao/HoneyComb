@@ -35,10 +35,17 @@
   </section>
 </template>
 <script>
+// import Login from '../User/Login'
+// import Register from '../User/Register'
 /* eslint-disable */
 //import a from "../../assets/js/canvas-nest";
 export default {
   name: 'main-body',
+  data () {
+    return {
+      status
+    }
+  },
   mounted () {
     $('canvas').remove()
     !(function () {
@@ -201,8 +208,9 @@ input:focus {
   margin-left: 60%;
   box-shadow: none;
 }
-.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
-    z-index: 2;
-    margin-left: 0px;
+.input-group-btn:last-child > .btn,
+.input-group-btn:last-child > .btn-group {
+  z-index: 2;
+  margin-left: 0px;
 }
 </style>

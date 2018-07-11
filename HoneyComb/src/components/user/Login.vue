@@ -2,32 +2,39 @@
   <section class="container">
     <form class="form-horizontal">
       <div class="form-group">
-        <div class="col-xs-1 col-md-2"></div>
-        <label class="col-xs-2 control-label col-md-2">User Name</label>
-        <div class="col-md-4 col-xs-6">
+        <div class="col-xs-1 col-md-1"></div>
+        <label class="col-xs-6 control-label col-md-6">User Name</label>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-1 col-md-1"></div>
+        <div class="col-md-10 col-xs-10">
           <input type="text" class="form-control" placeholder="User" v-model="username">
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-1 col-md-2"></div>
         <label class="col-xs-2 control-label col-md-2">Password</label>
-        <div class="col-md-4 col-xs-6">
+      </div>
+      <div class="form-group">
+        <div class="col-xs-1 col-md-1"></div>
+        <div class="col-md-10 col-xs-10">
           <input type="password" class="form-control" placeholder="Password" v-model="userpwd">
         </div>
       </div>
       <div class="form-group">
-        <div class="col-xs-offset-4 col-xs-10 col-md-4">
+        <div class="col-xs-1 col-md-1"></div>
+        <div class=" col-xs-10 col-md-10">
           <label class="pull-left">
             <input type="checkbox">Remember Me
           </label>
-          <router-link :to="{ name: 'Register' }" class="pull-right">
+          <a class="pull-right" @click="toRegister">
             No Account?
-          </router-link>
+          </a>
         </div>
       </div>
       <div class="form-group">
-        <div class="col-xs-offset-2 col-xs-10 col-md-8">
-          <button type="button" @click="login" class="btn btn-default" id="login-button">Login</button>
+        <div class="col-xs-offset-1 col-xs-10">
+          <button type="button" @click="login" class="btn btn-default pull-left" id="login-button">Login</button>
           <!-- <router-link :to="{ name: 'Register' }">
           <button type="button" class="btn btn-default">注册</button>
         </router-link> -->
@@ -44,10 +51,16 @@ export default {
   data () {
     return {
       username: '',
-      userpwd: ''
+      userpwd: '',
+      status: this.data.status
     }
   },
   methods: {
+    toRegister () {
+      console.log($('#sign-up'))
+      $('#sign-up').click()
+      $('#sign-up').click()
+    },
     login () {
       if (this.username !== '' && this.userpwd !== '') {
         this.$http.post('/loginhandle', { name: this.username, pwd: this.userpwd })
@@ -55,11 +68,9 @@ export default {
             if (res.data.id !== null) {
               alert('success')
               this.data.id = res.data.id
-              var url = window.location.href
-              url = url.substring(0, url.length - 5)
-              window.location.href = url
+              window.location.reload()
             } else {
-              alert('用户名或密码错误')
+              alert('username or password error')
             }
           })
       }
@@ -77,11 +88,16 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  width: 375px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
 .form-horizontal {
   margin-top: 5%;
 }
 .form-group {
-  text-align: center;
+  width: 375px;
 }
 .form-control {
   border: none;
@@ -138,5 +154,15 @@ input:focus {
 .btn-default:focus {
   box-shadow: none;
   outline: none;
+}
+@media (min-width: 768px) {
+  .form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: left;
+  }
+}
+.form-horizontal {
+  width: 375px;
 }
 </style>

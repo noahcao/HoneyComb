@@ -1,5 +1,7 @@
 var id = null
+var status = null
 
 export default {
-  id
+  id,
+  status
 }
