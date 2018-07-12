@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-    <D3Force></D3Force>
+    <paper-net></paper-net>
+
   </div>
 </template>
 
 <script>
-import D3Force from './components/D3_force.vue'
+import PaperNet from './components/PaperNet.vue'
 export default {
-  name: 'app',
-  components: { D3Force }
-}
+  name: "app",
+  components: {
+    PaperNet
+  }
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

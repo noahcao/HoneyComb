@@ -1,9 +1,9 @@
 <template>
-    <svg width="1300" height="650"></svg>
+    <svg width="1000" height="600"></svg>
 
 </template>
 <script>
-import * as d3 from "d3";
+import * as d3 from 'd3'
 const data = {
   nodes: [
     { id: "Myriel", group: 1, image:"../../static/paper.png" },
@@ -351,8 +351,8 @@ export default {
   },
   mounted() {
     let this_ = this;
-    var img_w = 20;
-    var img_h = 20;
+    var img_w = 10;
+    var img_h = 10;
     var zoom = d3.zoom()
                 .scaleExtent([-5,2])
                 .on("zoom",zoomed)
@@ -421,7 +421,7 @@ export default {
       .data(data.nodes)
       .enter()
       .append("circle")
-      .attr("r", 20)
+      .attr("r", 10)
       .attr("fill", function(d, i) {
         return color(d.group)
         /*var defs = svg.append("defs").attr("id", "imgdefs")
