@@ -3,86 +3,86 @@
 
 </template>
 <script>
-import * as d3 from 'd3'
-const data = {
+import * as d3 from "d3";
+var data = {
   nodes: [
-    { id: "Myriel", group: 1, image:"../../static/paper.png" },
-    { id: "Napoleon", group: 1, image:"../../static/paper.png" },
-    { id: "Mlle.Baptistine", group: 1, image:"../../static/paper.png" },
-    { id: "Mme.Magloire", group: 1, image:"../../static/paper.png" },
-    { id: "CountessdeLo", group: 1, image:"../../static/paper.png" },
-    { id: "Geborand", group: 1, image:"../../static/paper.png" },
-    { id: "Champtercier", group: 1, image:"../../static/paper.png" },
-    { id: "Cravatte", group: 1, image:"../../static/paper.png" },
-    { id: "Count", group: 1, image:"../../static/paper.png" },
-    { id: "OldMan", group: 1, image:"../../static/paper.png" },
-    { id: "Labarre", group: 2, image:"../../static/paper.png" },
-    { id: "Valjean", group: 2, image:"../../static/paper.png" },
-    { id: "Marguerite", group: 3, image:"../../static/paper.png" },
-    { id: "Mme.deR", group: 2, image:"../../static/paper.png" },
-    { id: "Isabeau", group: 2, image:"../../static/paper.png" },
-    { id: "Gervais", group: 2, image:"../../static/paper.png" },
-    { id: "Tholomyes", group: 3, image:"../../static/paper.png" },
-    { id: "Listolier", group: 3, image:"../../static/paper.png" },
-    { id: "Fameuil", group: 3, image:"../../static/paper.png" },
-    { id: "Blacheville", group: 3, image:"../../static/paper.png" },
-    { id: "Favourite", group: 3, image:"../../static/paper.png" },
-    { id: "Dahlia", group: 3, image:"../../static/paper.png" },
-    { id: "Zephine", group: 3, image:"../../static/paper.png" },
-    { id: "Fantine", group: 3, image:"../../static/paper.png" },
-    { id: "Mme.Thenardier", group: 4, image:"../../static/paper.png" },
-    { id: "Thenardier", group: 4, image:"../../static/paper.png" },
-    { id: "Cosette", group: 5, image:"../../static/paper.png" },
-    { id: "Javert", group: 4, image:"../../static/paper.png" },
-    { id: "Fauchelevent", group: 0, image:"../../static/paper.png" },
-    { id: "Bamatabois", group: 2, image:"../../static/paper.png" },
-    { id: "Perpetue", group: 3, image:"../../static/paper.png" },
-    { id: "Simplice", group: 2, image:"../../static/paper.png" },
-    { id: "Scaufflaire", group: 2, image:"../../static/paper.png" },
-    { id: "Woman1", group: 2, image:"../../static/paper.png" },
-    { id: "Judge", group: 2, image:"../../static/paper.png" },
-    { id: "Champmathieu", group: 2, image:"../../static/paper.png" },
-    { id: "Brevet", group: 2, image:"../../static/paper.png" },
-    { id: "Chenildieu", group: 2, image:"../../static/paper.png" },
-    { id: "Cochepaille", group: 2, image:"../../static/paper.png" },
-    { id: "Pontmercy", group: 4, image:"../../static/paper.png" },
-    { id: "Boulatruelle", group: 6, image:"../../static/paper.png" },
-    { id: "Eponine", group: 4, image:"../../static/paper.png" },
-    { id: "Anzelma", group: 4, image:"../../static/paper.png" },
-    { id: "Woman2", group: 5, image:"../../static/paper.png" },
-    { id: "MotherInnocent", group: 0, image:"../../static/paper.png" },
-    { id: "Gribier", group: 0, image:"../../static/paper.png" },
-    { id: "Jondrette", group: 7, image:"../../static/paper.png" },
-    { id: "Mme.Burgon", group: 7, image:"../../static/paper.png" },
-    { id: "Gavroche", group: 8, image:"../../static/paper.png" },
-    { id: "Gillenormand", group: 5, image:"../../static/paper.png" },
-    { id: "Magnon", group: 5, image:"../../static/paper.png" },
-    { id: "Mlle.Gillenormand", group: 5, image:"../../static/paper.png" },
-    { id: "Mme.Pontmercy", group: 5, image:"../../static/paper.png" },
-    { id: "Mlle.Vaubois", group: 5, image:"../../static/paper.png" },
-    { id: "Lt.Gillenormand", group: 5, image:"../../static/paper.png" },
-    { id: "Marius", group: 8, image:"../../static/paper.png" },
-    { id: "BaronessT", group: 5, image:"../../static/paper.png" },
-    { id: "Mabeuf", group: 8, image:"../../static/paper.png" },
-    { id: "Enjolras", group: 8, image:"../../static/paper.png" },
-    { id: "Combeferre", group: 8, image:"../../static/paper.png" },
-    { id: "Prouvaire", group: 8, image:"../../static/paper.png" },
-    { id: "Feuilly", group: 8, image:"../../static/paper.png" },
-    { id: "Courfeyrac", group: 8, image:"../../static/paper.png" },
-    { id: "Bahorel", group: 8, image:"../../static/paper.png" },
-    { id: "Bossuet", group: 8, image:"../../static/paper.png" },
-    { id: "Joly", group: 8, image:"../../static/paper.png" },
-    { id: "Grantaire", group: 8, image:"../../static/paper.png" },
-    { id: "MotherPlutarch", group: 9, image:"../../static/paper.png" },
-    { id: "Gueulemer", group: 4, image:"../../static/paper.png" },
-    { id: "Babet", group: 4, image:"../../static/paper.png" },
-    { id: "Claquesous", group: 4, image:"../../static/paper.png" },
-    { id: "Montparnasse", group: 4, image:"../../static/paper.png" },
-    { id: "Toussaint", group: 5, image:"../../static/paper.png" },
-    { id: "Child1", group: 10, image:"../../static/paper.png" },
-    { id: "Child2", group: 10, image:"../../static/paper.png" },
-    { id: "Brujon", group: 4, image:"../../static/paper.png" },
-    { id: "Mme.Hucheloup", group: 8, image:"../../static/paper.png" }
+    { id: "Myriel", group: 1 },
+    { id: "Napoleon", group: 1 },
+    { id: "Mlle.Baptistine", group: 1 },
+    { id: "Mme.Magloire", group: 1 },
+    { id: "CountessdeLo", group: 1 },
+    { id: "Geborand", group: 1 },
+    { id: "Champtercier", group: 1 },
+    { id: "Cravatte", group: 1 },
+    { id: "Count", group: 1 },
+    { id: "OldMan", group: 1 },
+    { id: "Labarre", group: 2 },
+    { id: "Valjean", group: 2 },
+    { id: "Marguerite", group: 3 },
+    { id: "Mme.deR", group: 2 },
+    { id: "Isabeau", group: 2 },
+    { id: "Gervais", group: 2 },
+    { id: "Tholomyes", group: 3 },
+    { id: "Listolier", group: 3 },
+    { id: "Fameuil", group: 3 },
+    { id: "Blacheville", group: 3 },
+    { id: "Favourite", group: 3 },
+    { id: "Dahlia", group: 3 },
+    { id: "Zephine", group: 3 },
+    { id: "Fantine", group: 3 },
+    { id: "Mme.Thenardier", group: 4 },
+    { id: "Thenardier", group: 4 },
+    { id: "Cosette", group: 5 },
+    { id: "Javert", group: 4 },
+    { id: "Fauchelevent", group: 0 },
+    { id: "Bamatabois", group: 2 },
+    { id: "Perpetue", group: 3 },
+    { id: "Simplice", group: 2 },
+    { id: "Scaufflaire", group: 2 },
+    { id: "Woman1", group: 2 },
+    { id: "Judge", group: 2 },
+    { id: "Champmathieu", group: 2 },
+    { id: "Brevet", group: 2 },
+    { id: "Chenildieu", group: 2 },
+    { id: "Cochepaille", group: 2 },
+    { id: "Pontmercy", group: 4 },
+    { id: "Boulatruelle", group: 6 },
+    { id: "Eponine", group: 4 },
+    { id: "Anzelma", group: 4 },
+    { id: "Woman2", group: 5 },
+    { id: "MotherInnocent", group: 0 },
+    { id: "Gribier", group: 0 },
+    { id: "Jondrette", group: 7 },
+    { id: "Mme.Burgon", group: 7 },
+    { id: "Gavroche", group: 8 },
+    { id: "Gillenormand", group: 5 },
+    { id: "Magnon", group: 5 },
+    { id: "Mlle.Gillenormand", group: 5 },
+    { id: "Mme.Pontmercy", group: 5 },
+    { id: "Mlle.Vaubois", group: 5 },
+    { id: "Lt.Gillenormand", group: 5 },
+    { id: "Marius", group: 8 },
+    { id: "BaronessT", group: 5 },
+    { id: "Mabeuf", group: 8 },
+    { id: "Enjolras", group: 8 },
+    { id: "Combeferre", group: 8 },
+    { id: "Prouvaire", group: 8 },
+    { id: "Feuilly", group: 8 },
+    { id: "Courfeyrac", group: 8 },
+    { id: "Bahorel", group: 8 },
+    { id: "Bossuet", group: 8 },
+    { id: "Joly", group: 8 },
+    { id: "Grantaire", group: 8 },
+    { id: "MotherPlutarch", group: 9 },
+    { id: "Gueulemer", group: 4 },
+    { id: "Babet", group: 4 },
+    { id: "Claquesous", group: 4 },
+    { id: "Montparnasse", group: 4 },
+    { id: "Toussaint", group: 5 },
+    { id: "Child1", group: 10 },
+    { id: "Child2", group: 10 },
+    { id: "Brujon", group: 4 },
+    { id: "Mme.Hucheloup", group: 8 }
   ],
   links: [
     { source: "Napoleon", target: "Myriel", value: 1 },
@@ -344,18 +344,53 @@ const data = {
 
 export default {
   name: "D3Force",
+  data() {
+    return {
+      nodes: data.nodes,
+      links: data.links
+    };
+  },
   methods: {
     print_id: function(id) {
       console.log(id);
     }
   },
+  created() {
+    this.bus.$on("SelectPaper", function(message) {
+      console.log(message);
+      var newnodes = []
+      var newlinks = []
+      for (var i = 0; i < data.nodes.length; i++) {
+        if(data.nodes[i].group == 1){
+          newnodes.push(data.nodes[i])
+        }
+      }
+      /*for(var i= 0;i<data.links.length;i++){
+        for(var j = 0;j<newnodes.length;j++){
+          if(newnodes[j].id == data.links[i].target && newnodes[j].id == data.links[i].source){
+            newlinks.push(data.links[i])
+          }
+        }
+      }*/
+      console.log(newlinks)
+      var svg = d3.select("svg")
+      var node = svg.selectAll("circle").data(newnodes)
+      //var link = svg.selectAll("line").data(newlinks)
+      node.exit().remove()
+      //link.exit().remove()
+    });
+
+    
+  },
   mounted() {
     let this_ = this;
+    console.log("mounted!");
     var img_w = 10;
     var img_h = 10;
-    var zoom = d3.zoom()
-                .scaleExtent([-5,2])
-                .on("zoom",zoomed)
+    var zoom = d3
+      .zoom()
+      .scaleExtent([-5, 2])
+      .on("zoom", zoomed);
 
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -363,13 +398,11 @@ export default {
       width = +svg.attr("width"),
       height = +svg.attr("height");
 
-    svg.call(zoom)
+    svg.call(zoom);
 
     function zoomed() {
-      svg.selectAll("g")
-      .attr("transform",  d3.event.transform)
+      svg.selectAll("g").attr("transform", d3.event.transform);
     }
-  
 
     var attractForce = d3
       .forceManyBody()
@@ -410,12 +443,13 @@ export default {
         return Math.sqrt(d.value);
       });
 
-    var tooltip = d3.select("body")
-        .append("div")
-        .attr("class", "tooltip")
-        .style("display", "none")
+    // var tooltip = d3.select("body")
+    //     .append("div")
+    //     .attr("class", "tooltip")
+    //     .style("display", "none")
 
-    var node = svg.append("g")
+    var node = svg
+      .append("g")
       .attr("class", "nodes")
       .selectAll("circle")
       .data(data.nodes)
@@ -423,7 +457,7 @@ export default {
       .append("circle")
       .attr("r", 10)
       .attr("fill", function(d, i) {
-        return color(d.group)
+        return color(d.group);
         /*var defs = svg.append("defs").attr("id", "imgdefs")
 
         var catpattern = defs.append("pattern")
@@ -439,7 +473,7 @@ export default {
                 .attr("xlink:href", d.image)
 
         return "url(#catpattern" + i + ")"; */
-       })
+      })
       .call(
         d3
           .drag()
@@ -450,16 +484,16 @@ export default {
       .on("click", function(d) {
         this_.print_id(d.id);
       })
-      .on("mouseover",function(d,i){
-        tooltip.html("<p>" + d.id + "</p>")
-            .transition()
-            .style("left", (d.x + 80) + "px")
-            .style("top", (d.y + 20) + "px")
-            .style("display", "block")
+      .on("mouseover", function(d, i) {
+        // tooltip.html("<p>" + d.id + "</p>")
+        //     .transition()
+        //     .style("left", (d.x + 80) + "px")
+        //     .style("top", (d.y + 20) + "px")
+        //     .style("display", "block")
       })
-      .on("mouseout",function(d){
-        tooltip.style("display", "none")
-      })
+      .on("mouseout", function(d) {
+        // tooltip.style("display", "none")
+      });
 
     /*var text = svg
       .append("g")
@@ -510,7 +544,7 @@ export default {
         .attr("dy", "20");*/
     }
     function dragstarted(d) {
-      tooltip.style("display","none")
+      //tooltip.style("display","none")
       if (!d3.event.active) simulation.alphaTarget(0.3).restart();
       d.fx = d.x;
       d.fy = d.y;
@@ -544,43 +578,43 @@ export default {
 }
 
 .text {
-  fill-opacity: 0.0;
+  fill-opacity: 0;
 }
 
 .tooltip {
-    position: absolute;
-    top: 100px;
-    left: 100px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    border: 2px solid #DDD;
-    background: #fff;
-    opacity: 1;
-    color: #000;
-    padding: 10px;
-    width: 300px;
-    font-size: 15px;
-    z-index: 120;
-  }
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 2px solid #ddd;
+  background: #fff;
+  opacity: 1;
+  color: #000;
+  padding: 10px;
+  width: 300px;
+  font-size: 15px;
+  z-index: 120;
+}
 
-  .tooltip p {
-    font-size: 15px;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-  }
+.tooltip p {
+  font-size: 15px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
 
-  hr.tooltip-hr {
-    padding: 3px 0 0 0;
-    margin: 3px 0 3px 0;
-  }
+hr.tooltip-hr {
+  padding: 3px 0 0 0;
+  margin: 3px 0 3px 0;
+}
 
-  .tooltip .title {
-    font-size: 20px;
-    line-height: 24px;
-  }
+.tooltip .title {
+  font-size: 20px;
+  line-height: 24px;
+}
 
-  .tooltip .name {
-    font-weight: bold;
-  }
+.tooltip .name {
+  font-weight: bold;
+}
 </style>

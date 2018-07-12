@@ -4,15 +4,12 @@
 		<input type="checkbox" id="tm" />
 		<!-- The menu -->
 		<ul class="sidenav">
-		    <li><a href="#"><i class="fa fa-circle"></i><b>Papers</b></a></li>
-			<li><a href="#"><i class="fa fa-circle"></i><b>Authors</b></a></li>
-			<li><a href="#"><i class="fa fa-circle"></i><b>All</b></a></li>
-			<li><a href="#"><i class="fa fa-cog"></i><b>Settings</b></a></li>
-			<li><a href="#"><i class="fa fa-star"></i><b>Starred</b></a></li>
-			<li><a href="#"><i class="fa fa-power-off"></i><b>Logout</b></a></li>
+		    <li><a href="#" v-on:click="SelectPaper"><i class="fa fa-circle"></i><b>Papers</b></a></li>
+			<li><a href="#" v-on:click="SelectAuthor"><i class="fa fa-circle"></i><b>Authors</b></a></li>
+			<li><a href="#" v-on:click="SelectAll"><i class="fa fa-circle"></i><b>All</b></a></li>
 		</ul>
 		<!-- Content area -->
-		<section>
+		<section id='net'>
 			<!-- Label for #tm checkbox -->
 			<label for="tm">Select Here</label>
 		</section>
@@ -20,16 +17,27 @@
 </template>
 
 <script>
-import * as d3 from 'd3'
+import * as d3 from "d3";
 export default {
   name: "SelectBox",
+  methods: {
+    SelectPaper: function() {
+      var sth = ["1", "2"];
+      console.log("clicked!");
+      this.bus.$emit("SelectPaper", sth);
+    },
+    SelectAuthor: function() {},
+    SelectAll: function() {}
+  },
   
 };
 </script>
 
 <style>
-@import url(http://libs.useso.com/js/font-awesome/4.0.1/css/font-awesome.min.css);
-* {margin: 0; padding: 0;}
+* {
+  margin: 0;
+  padding: 0;
+}
 #wrapper {
   width: 645px;
   height: 500px;
@@ -46,8 +54,8 @@ h2 {
 
 .mobile {
   float: left;
-  position: relative;
-  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.5);
+  position: absolute;
+  box-shadow: 0 0 25px 0 rgba(27, 27, 27, 0.5);
   overflow: hidden;
 }
 /*Hiding the checkbox*/
@@ -56,9 +64,10 @@ h2 {
 }
 /*Content area*/
 .mobile section {
-  background: url("../../static/mb1.png");
-  width: 285px;
-  height: 500px;
+  background: #595959;
+  opacity: 1;
+  width: 320px;
+  height: 600px;
   position: relative;
   transition: all 0.25s;
 }
@@ -73,19 +82,20 @@ h2 {
   width: 60%;
   position: absolute;
   left: 20%;
-  top: 100px;
+  top: 150px;
   cursor: pointer;
   text-transform: uppercase;
 }
 /*Nav styles*/
 .sidenav {
   background: rgb(50, 60, 60);
-  width: 150px;
+  width: 200px;
   position: absolute;
-  left: 0;
+  right: 0;
   top: 0;
   bottom: 0;
   padding-top: 100px;
+  margin-bottom: 0px;
 }
 .sidenav li {
   list-style-type: none;
@@ -98,7 +108,7 @@ h2 {
   font: bold 12px/48px Montserrat;
   display: block;
   opacity: 0;
-  transform: translateX(50px);
+  transform: translateX(-50px);
   transition: all 0.4s;
 }
 .sidenav i {
@@ -112,7 +122,7 @@ h2 {
 /*Animation controls using checkbox hack*/
 /*Animate content area to the right*/
 #tm:checked ~ section {
-  transform: translateX(150px);
+  transform: translateX(-200px);
 }
 /*Animate links from right to left + fade in effect*/
 #tm:checked ~ .sidenav b {

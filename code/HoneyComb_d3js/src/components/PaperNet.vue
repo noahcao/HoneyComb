@@ -1,11 +1,8 @@
 <template>
-<div>
-    <div class='col-md-2'>
-        <select-box></select-box>
-    </div>
-    <div class='col-md-10'>
-        <d3-force></d3-force>
-    </div>
+<div class='container-fluid'>
+    <select-box></select-box>
+    <d3-force></d3-force>
+
 </div>
 </template>
 
@@ -20,3 +17,21 @@ export default {
   }
 };
 </script>
+
+<style>
+.container-fluid {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.col-md-2 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.col-md-10 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+</style>
+

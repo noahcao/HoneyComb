@@ -7,6 +7,9 @@ import '../static/font-awesome-4.7.0/css/font-awesome.min.css'
 
 Vue.config.productionTip = false
 
+let bus = new Vue()
+Vue.prototype.bus = bus
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
