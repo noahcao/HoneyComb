@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html class=" js postmessage history draganddrop borderimage borderradius boxshadow textshadow cssgradients csstransforms csstransforms3d csstransitions generatedcontent localstorage sessionstorage" lang="en-US"><head><style type="text/css">.uib-position-measure{display:block !important;visibility:hidden !important;position:absolute !important;top:-9999px !important;left:-9999px !important;}.uib-position-scrollbar-measure{position:absolute !important;top:-9999px !important;width:50px !important;height:50px !important;overflow:scroll !important;}.uib-position-body-scrollbar-measure{overflow:scroll !important;}</style><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+<meta content="IEEE Xplore. Delivering full text access to the world's highest quality technical literature in engineering and technology." name="Description"/>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<!-- Disable "click" touch event 300ms delay for Chrome/Firefox on Android -->
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IEEE Xplore Search Results</title>
+<script src="https://securepubads.g.doubleclick.net/gpt/pubads_impl_rendering_225.js"></script><script async="" src="https://www.googletagservices.com/tag/js/gpt.js"></script><script async="" src="//tags.tiqcdn.com/utag/ieeexplore/main/prod/utag.js" type="text/javascript"></script><script async="" src="https://www.googletagservices.com/tag/js/gpt.js" type="text/javascript"></script><script src="https://s3-us-west-2.amazonaws.com/ieeeshutpages/gdpr/settings.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+ window.cookieconsent.initialise(json)
+});
+</script>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="IE=Edge" http-equiv="X-UA-Compatible"/>
+<style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><link href="https://adservice.google.com/adsid/integrator.js?domain=ieeexplore.ieee.org" rel="preload"/><script src="https://adservice.google.com/adsid/integrator.js?domain=ieeexplore.ieee.org" type="text/javascript"></script><script async="" src="https://securepubads.g.doubleclick.net/gpt/pubads_impl_225.js"></script><script async="" charset="utf-8" id="utag_ieeexplore.main_32" src="//tags.tiqcdn.com/utag/ieeexplore/main/prod/utag.32.js?utv=ut4.41.201804171524" type="text/javascript"></script><script async="" charset="utf-8" id="tiqapp" src="//tags.tiqcdn.com/utag/tiqapp/utag.v.js?a=ieeexplore/main/201804171524&amp;cb=1531383641511" type="text/javascript"></script><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style></style></head><body class="body-resp"><div aria-describedby="cookieconsent:desc" aria-label="cookieconsent" aria-live="polite" class="cc-window cc-banner cc-type-info cc-theme-block cc-bottom cc-color-override-170793312 cc-invisible" role="dialog" style=""><!--googleoff: all--><span class="cc-message" id="cookieconsent:desc">IEEE websites place cookies on your device to give you the best user experience. By using our websites, you agree to the placement of these cookies. To learn more, read our <a aria-label="learn more about cookies" class="cc-link" href="https://www.ieee.org/about/help/security_privacy.html" role="button" tabindex="0" target="_blank">Privacy Policy.</a></span><div class="cc-compliance"><a aria-label="dismiss cookie message" class="cc-btn cc-dismiss" role="button" tabindex="0">Accept &amp; Close</a></div><!--googleon: all--></div><div id="MathJax_Message" style="">Loading [MathJax]/extensions/MathZoom.js</div><g:compress>
+<link href="https://staticieeexplore.ieee.org/assets/css/simplePassMeter.min.css?cv=20180522_000000" rel="stylesheet"/>
+<link href="https://staticieeexplore.ieee.org/assets/css/styles.css?cv=20180522_000000" media="screen, print" rel="stylesheet" type="text/css"/>
+<link href="https://staticieeexplore.ieee.org/assets/vendor/swiper/dist/idangerous.swiper.css?cv=20180522_000000" rel="stylesheet"/>
+<link href="https://staticieeexplore.ieee.org/assets/css/jquery-ui-1.8.19.custom.css?cv=20180522_000000" media="screen, print" rel="stylesheet" type="text/css"/>
+</g:compress>
+<script type="text/javascript">
+		var googletag = googletag || {};
+		googletag.cmd = googletag.cmd || [];
+		(function() {
+		var gads = document.createElement('script');
+		gads.async = true;
+		gads.type = 'text/javascript';
+		var useSSL = 'https:' == document.location.protocol;
+		gads.src = (useSSL ? 'https:' : 'http:') + 
+		'//www.googletagservices.com/tag/js/gpt.js';
+		var node = document.getElementsByTagName('script')[0];
+		node.parentNode.insertBefore(gads, node);
+		})();
+	</script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/vendor/jquery/jquery.js?cv=20180522_000000" type="text/javascript"></script>
+<!--[if gt IE 8]>
+				<link rel="stylesheet" type="text/css" href="https://staticieeexplore.ieee.org/assets/css/ie9.css?cv=20180522_000000" />
+		<![endif]-->
+<!--[if IE 8]>
+				<link rel="stylesheet" type="text/css" href="https://staticieeexplore.ieee.org/assets/css/ie8.css?cv=20180522_000000" />
+		<![endif]-->
+<!--[if IE 7]>
+				<link rel="stylesheet" type="text/css" href="https://staticieeexplore.ieee.org/assets/css/ie7.css?cv=20180522_000000" />
+		<![endif]-->
+<!--[if IE 6]>
+				<link rel="stylesheet" type="text/css" href="https://staticieeexplore.ieee.org/assets/css/ie6.css?cv=20180522_000000" />
+		<![endif]-->
+<p class="JumpLink" id="PageTop"><a accesskey="s" href="#" title="Click here to Skip to main content">Skip to Main Content</a></p>
+<div class="row stats-global-notification" id="global-notification">
+<div class="hide col Notification Notification--global Notification--fixed">
+<a class="Notification-close js-close" href=""><i class="fa fa-close"></i></a>
+<div class="Notification-header"></div>
+<div class="Notification-text"></div>
+</div>
+</div>
+<div class="" id="LayoutWrapper">
+<div class="container-fluid">
+<div class="row">
+<div class="col">
+<!-- what is this script for? -->
+<script src="https://staticieeexplore.ieee.org/assets/vendor/jwplayer/jwplayer.js?cv=20180522_000000" type="text/javascript"></script>
+<div class="Metanav stats-metanav">
+<div class="Metanav-ieee-links">
+<ul class="Menu Menu--horizontal Menu--dividers">
+<li class="Menu-item stats-extLink stats-Unav_exit_aaa"><a class="ieeeorg" href="http://www.ieee.org/" id="u-home">IEEE.org</a></li>
+<li class="Menu-item stats-extLink">IEEE <em>Xplore</em> Digital Library</li>
+<li class="Menu-item stats-extLink"><a class="exitstandardsorg" href="http://standards.ieee.org/" id="u-standards">IEEE-SA</a></li>
+<li class="Menu-item stats-extLink"><a class="exitspectrum" href="http://spectrum.ieee.org/" id="u-spectrum">IEEE Spectrum</a></li>
+<li class="Menu-item stats-extLink"><a class="exitmoreieeesites" href="http://www.ieee.org/sitemap.html" id="u-more">More Sites</a></li>
+</ul>
+</div>
+<div class="Metanav-user-links">
+<ul class="Menu Menu--horizontal u-pullRight Menu--dividers u-relative">
+<li class="Menu-item stats-mnEvLinks" id="global-header-cart-count">
+<a class="cart stats-Unav_exit_Cart" href="https://www.ieee.org/cart/public/myCart/page.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE%20Xplore" tabindex="0" title="View Cart"><span id="cartCount">Cart (0)</span></a>
+<div class="content-r cart-summary product-cart" id="mc_ieee-mini-cart-include_wrapper" style="display:none">
+<a class="cart-close" onclick="closeCart(event);" tabindex="0"></a>
+<span id="mc_ieee-mini-cart-include" style="display:none"></span><div class="mc-minicart-content" id="mc_minicart-container"></div>
+</div>
+</li>
+<li class="Menu-item stats-mnEvLinks"><a class="create-account stats-Unav_CreateAcct" href="#" title="Create Account">Create Account</a></li>
+<li class="Menu-item stats-mnEvLinks">
+<a class="sign-in stats-Unav_P_SignIn" href="#" title="Sign In">Personal Sign In</a>
+<div aria-hidden="true" class="hide Overlay Overlay--right stats-metanav-signin-modal" id="personal-sign-in">
+<div class="Overlay-tab">
+<span class="Overlay-label">Personal Sign In</span>
+</div>
+<div class="Overlay-body">
+<div class="Notification hide u-mb-1">
+<div class="Notification-header"></div>
+<div class="Notification-text"></div>
+</div>
+<!-- If for signin forms that need to be hidden, use this template -->
+<div class="gdpr-signin-container col-md-12" id="gdpr-hidden-personal-signin-gdpr-container" style="display: none;">
+<div class="welcome-msg u-pb-1">
+                For IEEE to continue sending you helpful information on our products
+                and services, please consent to our updated Privacy Policy.
+            </div>
+<div class="checkbox-disclaimer row">
+<div class="col-1">
+<label class="custom-checkbox">
+<input id="gdpr-hidden-personal-signin-gdpr-checkbox" onchange="acceptGdpr(this)" type="checkbox"/>
+<span class="checkmark"></span>
+</label>
+</div>
+<div class="col">
+                    I have read and accepted the <a href="https://www.ieee.org/security-privacy.html" target="_blank">IEEE Privacy Policy</a>.
+                </div>
+</div>
+<div class="u-pt-1 u-align-right col-12">
+<button class="layout-btn-blue disabled" id="gdpr-hidden-personal-signin-back-signin-btn">Accept &amp; Sign In
+            
+        
+        
+               		<span class="hide" id="gdpr-hidden-personal-signin-SpinnerImage">
+<img src="https://staticieeexplore.ieee.org/assets/img/move-spinner.gif?cv=20180522_000000"/>
+</span>
+</button>
+</div>
+</div>
+<script>
+        	function acceptGdpr(checkBox){
+                var gdprTextBox=jQuery(".gdpr-hidden-personal-signin").find(".gdprAccepted");
+                if(!gdprTextBox || !gdprTextBox.val() || !gdprTextBox.val()==='unknown'){
+                	alert("Required \n <input type='hidden' name='gdprAccepted' class='gdprAccepted' value='unknown' /> \n In Form gdpr-hidden-personal-signin")
+                }                
+                gdprTextBox.val(checkBox.checked);
+        	}
+        	function showGdpr(){
+         		jQuery(".gdpr-hidden-personal-signin").addClass('hidden-signin-form');
+                jQuery('#gdpr-hidden-personal-signin-gdpr-container').show();
+                jQuery('#gdpr-hidden-personal-signin-SpinnerImage').hide();
+        	}
+        	function hideGdpr(){
+                jQuery('#gdpr-hidden-personal-signin-gdpr-container').hide();
+                jQuery(".gdpr-hidden-personal-signin").removeClass('hidden-signin-form');
+        	}    
+            // On GDPR checkbox click, toggle enable/disable back to sign in button.
+            jQuery('#gdpr-hidden-personal-signin-gdpr-checkbox').change(function(){
+                if (jQuery(this).is(':checked')) {
+                    jQuery('#gdpr-hidden-personal-signin-back-signin-btn').removeClass('disabled');
+                } else {
+                    jQuery('#gdpr-hidden-personal-signin-back-signin-btn').addClass('disabled');
+                }
+            });
+        	jQuery('#gdpr-hidden-personal-signin-back-signin-btn').on('dblclick',function(event){
+        		event.preventDefault();
+        		return false;
+        	});
+            // On Back to sign in button click, show sign in form.
+            jQuery('#gdpr-hidden-personal-signin-back-signin-btn').click(function(){
+            	jQuery(this).attr("disabled","disabled")
+        		jQuery('#gdpr-hidden-personal-signin-SpinnerImage').show();
+                jQuery(".gdpr-hidden-personal-signin").find(".js-submit").click();
+            });    
+            // On Back to sign in button click, show sign in form.
+
+        </script>
+<script>
+          // If checkbox is show, hide the sign in form until checkbox accepted.
+          jQuery(document).ready(function(){
+          	hideGdpr();
+          });
+        </script>
+<form action="https://ieeexplore.ieee.org/servlet/LoginModalController" class="gdpr-hidden-personal-signin form-personal-signin pure-form row justify-content-center">
+<input id="src2" name="src2" type="hidden" value="loginModalWindow"/>
+<input id="url2" name="url2" type="hidden" value="/xpl/loginModal.jsp"/>
+<div class="col-6 col-md-5 u-pr-1">
+<label class="overlabel" for="username">Username</label>
+<input autocomplete="off" class="pure-input-1 username" name="username" placeholder="Username" type="text"/>
+</div>
+<div class="col-6 col-md-5 u-pr-1">
+<label class="overlabel" for="password">Password</label>
+<input class="pure-input-1 password" name="password" placeholder="Password" type="password"/>
+</div>
+<input class="gdprAccepted" name="gdprAccepted" type="hidden" value="unknown"/>
+<div class="col-3 col-md-2">
+<button class="js-submit pure-button pure-button-primary stats-Unav_Per_SignIn">Sign In</button>
+</div>
+</form>
+<i aria-label="IEEE Account usernames and passwords are case sensitive. If you have recently visited IEEE, you may have transitioned your username to your e-mail address. If not, you may be asked to do so after you sign in with your existing IEEE username. " class="gdpr-hidden-personal-signin qtooltip icon icon-help-blue" title="IEEE Account usernames and passwords are case sensitive. If you have recently visited IEEE, you may have transitioned your username to your e-mail address. If not, you may be asked to do so after you sign in with your existing IEEE username. "></i>
+<a class="gdpr-hidden-personal-signin u-pullRight js-forgotUserPass stats-forgotUserPass stats-Unav_Per_SignIn_Forgot_UP" href="#">Forgot Password?</a>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div> <!-- Metanav -->
+<!--
+TODOS
+* update the way the shopping cart updates counts.  It's inserting string text + count.
+* port logic for modal service unavailable to js
+ -->
+<div class="Header" data-inst="" data-service="true" data-web="false" id="xplore-header">
+<div class="row">
+<div class="logo-container logo-container-left">
+<a accesskey="1" alt="IEEE Advancing Technology for Humanity" class="logo-xplore" href="/Xplore/home.jsp" title="Delivering full text access to the world's highest quality technical literature in engineering and technology"></a>
+</div>
+<div class="institutional-sign-in-container">
+<div id="loggedInLogo">
+<div id="loggedinlogo-wrapper">
+<div class="branding-container">
+<span class="branding-text">
+<span>Access provided by:</span>
+<h4>Shanghai Jiaotong University</h4>
+<a accesskey="3" class="sign-out" href="/servlet/Login?logout=/Xplore/guesthome.jsp" title="Sign Out"><i class="icon icon-double-caret"></i>Sign Out</a>
+</span>
+</div>
+</div>
+</div>
+<div id="contAdminWindowContent">
+<a class="mwclose">X</a>
+<table>
+</table>
+</div>
+</div>
+<div class="logo-container logo-container-right">
+<span class="logo-ieee u-pullRight"></span>
+</div>
+</div>
+</div>
+<!--  code for desktop capturing removed -->
+<div class="Toolbar stats-toolbar-menu">
+<ul class="Toolbar-list">
+<li class="Toolbar-item Toolbar-item-browse is-menu" id="primary-browse">
+<a class="Toolbar-button Toolbar-button-browse stats-browse-content" tabindex="0">
+<span class="Toolbar-button-browse-text">Browse<i class="Toolbar-dropdown-icon"></i></span>
+</a>
+<ul class="Menu Menu--overlay Toolbar-subnav-menu Toolbar-browse-subnav-menu">
+<li><a class="Books stats-browse-book" href="/browse/books/title/">Books</a></li>
+<li><a accesskey="c" class="ConfProceedings stats-browse-conf" href="/browse/conferences/title/">Conferences</a></li>
+<li><a class="EducationCourses stats-browse-course" href="/xpl/courses.jsp">Courses</a></li>
+<li><a accesskey="j" class="Journals_Mag stats-browse-jrnl" href="/browse/periodicals/title/">Journals &amp; Magazines</a></li>
+<li><a accesskey="b" class="Standards stats-browse-std" href="/browse/standards/collection/ieee">Standards</a></li>
+<li>
+<a class="ByTopic stats-browse-by-topic" id="byTopicLink" tabindex="0">Topics <i class="Toolbar-topics-caret-icon fa fa-angle-right"></i></a>
+<script>
+	function goToTopic(topic) {
+		var topicMap = applySpecialCharacterMapping(topic); 
+		var url = "/xpl/topicbrowse.jsp?topic=" + escape(topicMap);
+		window.top.location.href = url;
+	}
+</script>
+<div class="Overlay stats-browsebytopic-menu" id="browse-by-topic">
+<div class="Overlay-body">
+<ul class="List List--no-style">
+<li><a href="/browse/topics/Aerospace">Aerospace</a></li>
+<li><a href="/browse/topics/Bioengineering">Bioengineering</a></li>
+<li><a href="/browse/topics/Communication, Networking &amp; Broadcasting">Communication, Networking &amp; Broadcasting</a></li>
+<li><a href="/browse/topics/Components, Circuits, Devices &amp; Systems">Components, Circuits, Devices &amp; Systems</a></li>
+<li><a href="/browse/topics/Computing &amp; Processing">Computing &amp; Processing</a></li>
+<li><a href="/browse/topics/Engineered Materials, Dielectrics &amp; Plasmas">Engineered Materials, Dielectrics &amp; Plasmas</a></li>
+<li><a href="/browse/topics/Engineering Profession">Engineering Profession</a></li>
+<li><a href="/browse/topics/Fields, Waves &amp; Electromagnetics">Fields, Waves &amp; Electromagnetics</a></li>
+<li><a href="/browse/topics/General Topics for Engineers">General Topics for Engineers</a></li>
+<li><a href="/browse/topics/Geoscience">Geoscience</a></li>
+<li><a href="/browse/topics/Nuclear Engineering">Nuclear Engineering</a></li>
+<li><a href="/browse/topics/Photonics &amp; Electro-Optics">Photonics &amp; Electro-Optics</a></li>
+<li><a href="/browse/topics/Power, Energy, &amp; Industry Applications">Power, Energy, &amp; Industry Applications</a></li>
+<li><a href="/browse/topics/Robotics &amp; Control Systems">Robotics &amp; Control Systems</a></li>
+<li><a href="/browse/topics/Signal Processing &amp; Analysis">Signal Processing &amp; Analysis</a></li>
+<li><a href="/browse/topics/Transportation">Transportation</a></li>
+</ul>
+</div>
+</div>
+</li>
+</ul>
+</li>
+<li class="Toolbar-item is-menu hide-mobile">
+<a class="Toolbar-button Toolbar-button-settings" tabindex="0">My Settings<i class="Toolbar-dropdown-icon"></i></a>
+<ul class="Menu Menu--overlay Toolbar-subnav-menu stats-my-settings">
+<li><a class="ALERTS" href="/xpl/tocalerts_list.jsp">Content Alerts</a></li>
+<li><a href="/servlet/remote.jsp">Remote Access</a></li>
+<li><a class="stats-saved-searches" href="/search/savedsearches">Search Alerts</a></li>
+<li><a class="stats-my-xplore" href="/my-settings/my-xplore"><i>MyXplore</i> App</a></li>
+<li><a class="" href="/Xplore/login.jsp?reason=fromPreferencesMenu" id="">Preferences</a></li>
+<li><a class="PURCHASEHISTORY" href="/articleSale/purchaseHistory.jsp" id="PURCHASEHISTORY">Purchase History</a></li>
+<li><a class="searchhistory" href="/search/searchHistoryMore.jsp" id="search-history">Search History</a></li>
+<li><a class="WHATCANIACCESS" href="/Xplore/accessinfo.jsp" id="WHATCANIACCESS">What can I access?</a></li>
+</ul>
+</li>
+<li class="Toolbar-item is-menu hide-mobile">
+<a class="Toolbar-button Toolbar-button-help" tabindex="0">Get Help<i class="Toolbar-dropdown-icon"></i></a>
+<ul class="Menu Menu--overlay Toolbar-subnav-menu stats-get-help">
+<li><a href="/xpl/feedback.jsp" id="Feedback">Feedback</a></li>
+<li><a href="/xpl/techform.jsp" id="TechSupport">Technical Support</a></li>
+<li><a href="/Xplorehelp/Help_start.html" id="Resources">Resources and Help</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="global-alert-message"></div>
+<!-- Set title property for sitemesh to use in v2/common/template.jsp -->
+<!--[if lte IE 8]>
+	<script type="text/javascript">
+		var redirectURL = location.protocol + '//' + location.host + '/search/freesearchresult.jsp' + location.search;
+		location.replace(redirectURL);
+	</script>
+<![endif]-->
+<script type="text/javascript">
+document.write('<base href="/search/" />');
+</script><base href="/search/"/>
+<div class="stats-search-page xpl-serp ng-scope" ng-app="xpl.search">
+<div class="Search ng-isolate-scope" ng-class="{'Search-with-count': showCount}" show-count="false">
+<!-- TODO Start: Integrate latest count -->
+<!-- ngIf: showCount -->
+<!-- TODO End: Integrate latest count -->
+<div class="Search-main-container">
+<select aria-invalid="false" class="Search-control stats-search-type-dropdown ng-pristine ng-untouched ng-valid ng-not-empty" ng-change="onToggle(activeSearchType)" ng-model="activeSearchType" ng-options="s.name for s in search"><option label="All" selected="selected" value="object:5">All</option><option label="Books" value="object:6">Books</option><option label="Conferences" value="object:7">Conferences</option><option label="Courses" value="object:8">Courses</option><option label="Journals &amp; Magazines" value="object:9">Journals &amp; Magazines</option><option label="Standards" value="object:10">Standards</option><option label="Authors" value="object:11">Authors</option><option label="Citations" value="object:12">Citations</option></select>
+<form autocomplete="off" class="js-inputs Search-inputs ng-pristine ng-valid">
+<div class="Notification Notification--float hide" style="opacity: 0; display: none;">
+<div class="Notification-header"></div>
+<div class="Notification-text"></div>
+</div>
+<div class="Search-group-input-wrapper">
+<div class="Search-group-container">
+<fieldset aria-hidden="false" class="Search-group stats-search-basic" ng-show="search.basic.isActive">
+<div class="Search-input-container Search-fullwidth-input">
+<div aria-invalid="false" class="u-relative stats-basic-input Typeahead ng-isolate-scope ng-valid ng-not-empty" min-chars="3" ng-model="search.basic.input.query" on-return="onTypeaheadReturn($event)" placeholder="Enter keywords or short phrases (searches metadata only by default)" service-method="getSuggestions()" style="" ul-class="Search-basic-typeahead ui-autocomplete ui-front ui-menu ui-widget ui-widget-content">
+<input aria-invalid="false" class="Typeahead-input ng-pristine ng-untouched ng-valid ng-not-empty" ng-blur="onBlur($event)" ng-keydown="onKeyDown($event)" ng-keyup="onKeyUp($event)" ng-model="ngModel" placeholder="Enter keywords or short phrases (searches metadata only by default)" style="" type="text"/>
+<ul aria-hidden="true" class="Typeahead-menu Search-basic-typeahead ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ng-hide" ng-hide="!items || !items.length || items.length &lt; 1">
+<!-- ngRepeat: item in items track by $index -->
+</ul>
+</div></div>
+</fieldset>
+<!-- NOTE: <fieldset> elements render whitespace characters as textnodes with widths and structuring the div's like so helps get rid of spacing issues -->
+<fieldset aria-hidden="true" class="Search-group stats-search-author ng-hide" ng-show="search.author.isActive">
+<input autocomplete="off" name="matchBoolean" type="hidden" value="true"/>
+<div class="Search-input-container Search-halfwidth-input">
+<label class="overlabel" for="fname">First Name / Given Name</label>
+<input aria-invalid="false" class="stats-fname-input ng-pristine ng-untouched ng-valid ng-empty" id="fname" ng-model="search.author.input.searchWithin.firstName" placeholder="First Name / Given Name" type="text"/>
+</div><div class="Search-input-container Search-halfwidth-input">
+<label class="overlabel" for="lname">Family Name / Last Name / Surname</label>
+<input aria-invalid="false" class="stats-lname-input ng-pristine ng-untouched ng-valid ng-empty" id="lname" ng-model="search.author.input.searchWithin.lastName" placeholder="Family Name / Last Name / Surname" type="text"/>
+</div>
+</fieldset>
+<fieldset aria-hidden="true" class="Search-group stats-search-books ng-hide" ng-show="search.books.isActive">
+<div class="Search-input-container Search-fullwidth-input">
+<label class="overlabel" for="bk_query">Enter keyword or title</label>
+<input aria-invalid="false" class="stats-books-query-input ng-pristine ng-untouched ng-valid ng-empty" id="bk_query" ng-model="search.books.input.query" placeholder="Enter keyword or title" type="text"/>
+</div>
+</fieldset>
+<fieldset aria-hidden="true" class="Search-group stats-search-conferences ng-hide" ng-show="search.conferences.isActive">
+<div class="Search-input-container Search-fullwidth-input">
+<label class="overlabel" for="conf_title">Enter keyword or title</label>
+<input aria-invalid="false" class="stats-conf-title-input ng-pristine ng-untouched ng-valid ng-empty" id="conf_title" ng-model="search.conferences.input.query" placeholder="Enter keyword or title" type="text"/>
+</div>
+</fieldset>
+<fieldset aria-hidden="true" class="Search-group stats-search-courses ng-hide" ng-show="search.courses.isActive">
+<div class="Search-input-container Search-fullwidth-input">
+<label class="overlabel" for="crs_query">Enter keyword or title</label>
+<input aria-invalid="false" class="stats-courses-query-input ng-pristine ng-untouched ng-valid ng-empty" id="crs_query" ng-model="search.courses.input.query" placeholder="Enter keyword or title" type="text"/>
+</div>
+</fieldset>
+<fieldset aria-hidden="true" class="Search-group stats-search-periodicals ng-hide" ng-show="search.periodicals.isActive">
+<div class="Search-input-container Search-fullwidth-input">
+<label class="overlabel" for="per_title">Enter keyword or title</label>
+<input aria-invalid="false" class="stats-jm-query-input ng-pristine ng-untouched ng-valid ng-empty" id="per_title" ng-model="search.periodicals.input.query" placeholder="Enter keyword or title" type="text"/>
+</div>
+</fieldset>
+<fieldset aria-hidden="true" class="Search-group stats-search-standards ng-hide" ng-show="search.standards.isActive">
+<div class="Search-input-container Search-fullwidth-input">
+<label class="overlabel" for="std_query">Enter keyword or title</label>
+<input aria-invalid="false" class="stats-standards-query-input ng-pristine ng-untouched ng-valid ng-empty" id="std_query" ng-model="search.standards.input.query" placeholder="Enter keyword or title" type="text"/>
+</div>
+</fieldset>
+<fieldset aria-hidden="true" class="Search-group stats-search-pubs ng-hide" ng-show="search.publication.isActive">
+<div class="Search-input-container Search-pubtitle-input">
+<label class="overlabel" for="pqs_title">Publication Title</label>
+<input aria-invalid="false" class="stats-citations-query-input ng-pristine ng-untouched ng-valid ng-empty" id="pqs_title" ng-model="search.publication.input.searchWithin.title" placeholder="Publication Title" type="text"/>
+</div><div class="Search-input-container Search-pubvol-input">
+<label class="overlabel" for="pqs_volume">Volume</label>
+<input aria-invalid="false" class="stats-citations-vol-input ng-pristine ng-untouched ng-valid ng-empty" id="pqs_volume" ng-model="search.publication.input.searchWithin.volume" placeholder="Volume" type="text"/>
+</div><div class="Search-input-container Search-pubissue-input">
+<label class="overlabel" for="pqs_issue">Issue</label>
+<input aria-invalid="false" class="stats-citations-issue-input ng-pristine ng-untouched ng-valid ng-empty" id=" pqs_issue" ng-model="search.publication.input.searchWithin.issue" placeholder="Issue" type="text"/>
+</div><div class="Search-input-container Search-pubpage-input">
+<label class="overlabel" for="pqs_spage">Start Page</label>
+<input aria-invalid="false" class="stats-citations-page-input ng-pristine ng-untouched ng-valid ng-empty" id="pqs_spage" ng-model="search.publication.input.searchWithin.startPage" placeholder="Start Page" type="text"/>
+</div>
+</fieldset>
+</div>
+<div class="Search-form-submit-container">
+<button aria-label="Search" class="js-search Search-submit Button btn-search stats-search-submit" type="submit">
+<i class="fa fa-search Search-submit-icon"></i>
+</button>
+</div>
+</div>
+</form>
+</div>
+<div class="Search-misc-container">
+<div class="Search-within-publication-container">
+<!-- ngIf: $ctrl.withinPublication.isActive -->
+</div>
+<div class="Search-options-container">
+<div class="Search-option stats-search-menu">
+<a class="Search-option-title" href="/search/advsearch.jsp" id="advancedSearch" target="_self">Advanced Search</a>
+</div>
+<div class="Search-option Search-menu stats-search-menu" ng-class="{ 'active': showMenu} " ng-mouseleave="showMenu = false">
+<a class="Search-option-title" href="#" id="otherSearchOptions" ng-click="showMenu = !showMenu">Other Search Options<i class="icon icon--flip icon-more-options-caret"></i></a>
+<ul class="Menu Menu--overlay">
+<li><a class="CommandSearch" href="/search/advsearch.jsp?expression-builder" id="commandSearch" target="_self">Command Search</a></li>
+<li><a class="CitationSearch" href="/search/advsearch.jsp?quick-search" id="citationSearch" target="_self">Citation Search</a></li>
+<li><a class="SAVEDSEARCHES" href="/search/savedsearches" id="savedSearches" target="_self">Search Alerts</a></li>
+<li><a class="searchhistory" href="/search/searchHistoryMore.jsp" id="searchHistory" target="_self">Search History</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="Spinner ng-hide" ng-show="stateIsLoading"></div>
+<!-- uiView: --><div class="" ui-view=""><main class="ng-isolate-scope" id="xplMainContent">
+<div class="search-results row" id="xplResultsContainer">
+<section breadcrumbs="vm.breadcrumbs" class="Dashboard col-12 Dashboard--results ng-isolate-scope" content-type-facet="vm.contentTypeFacet" end-record="vm.data.endRecord" loading="vm.loading" start-record="vm.data.startRecord" terms="vm.searchTerms" total-records="vm.data.totalRecords">
+<!-- ngIf: !vm.loading --><div class="ng-scope" ng-if="!vm.loading" ng-transclude="" style="">
+<!-- ngIf: vm.data.totalRecords >= 1 --><xpl-cmpt-action-bar bulk-selected-items="vm.bulkSelectedItems" class="ng-scope ng-isolate-scope" ng-if="vm.data.totalRecords &gt;= 1" records="vm.data.records" selected-items="vm.selectedItems" toggle-mobile-facets="vm.toggleMobileFacets()" total-records="vm.data.totalRecords" user="vm.user"><div class="action-bar">
+<div class="action-bar-searchwithin-container hide-mobile">
+<xpl-search-within class="ng-isolate-scope" placeholder="Search within results"><form class="search-within-cmpt ng-pristine ng-valid">
+<div class="search-within-typeahead-container">
+<div aria-invalid="false" class="Typeahead ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty" min-chars="3" ng-model="vm.searchWithin" placeholder="Search within results" service-method="vm.getSuggestions()" ul-class="search-within-results ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all">
+<input aria-invalid="false" class="Typeahead-input ng-pristine ng-untouched ng-valid ng-empty" ng-blur="onBlur($event)" ng-keydown="onKeyDown($event)" ng-keyup="onKeyUp($event)" ng-model="ngModel" placeholder="Search within results" type="text"/>
+<ul aria-hidden="true" class="Typeahead-menu search-within-results ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all ng-hide" ng-hide="!items || !items.length || items.length &lt; 1">
+<!-- ngRepeat: item in items track by $index -->
+</ul>
+</div></div>
+<button aria-label="Search Within Results" class="search-within-submit-button fa fa-search stats-SearchResults_SrchWithin" data-tealium_data='{"searchWithin": ""}' ng-click="vm.searchWithinResults()" type="submit"></button>
+</form>
+</xpl-search-within>
+</div>
+<!-- ngIf: $ctrl.totalRecords > 1 -->
+<ul class="Menu Menu--horizontal Menu--dividers action-bar-actions action-bar-actions-single" ng-class="{'action-bar-actions-single': $ctrl.totalRecords &lt;= 1}">
+<li class="Menu-item inline-flexed mobile-alert hide-desktop">
+<a class="action-bar-mobile-link ng-isolate-scope" content="access-denied" data-hasqtip="0" href="" qtip-config='{"style": {"classes":"qtip-set-search-alerts", "tip": {"offset": 5, "mimic": "center"}}, "position": {"my": "top right", "at": "bottom right", "adjust": {"x": -3}}}' qtip-config-mobile='{"style": {"tip": {"offset": 0, "mimic": "center"}}, "position": {"my": "top right", "at": "bottom right", "adjust": {"x": 0}}}' qtip-config-mobile-max-viewport="400" qtip-popover="">
+<span><i class="icon action-bar-icon-alert"></i>Alert</span>
+</a>
+</li>
+<!-- ngIf: $ctrl.totalRecords > 1 -->
+<!-- ngIf: $ctrl.showPagingFilter -->
+<!-- ngIf: ::$ctrl.showDownloadPdfsLink --><li class="Menu-item inline-flexed hide-mobile ng-scope" ng-if="::$ctrl.showDownloadPdfsLink">
+<a class="ng-isolate-scope" content="download-pdf" data-hasqtip="3" href="" qtip-config='{"style": {"classes":"qtip-download-pdf", "tip": {"offset": 100}}, "position": {"my": "top center", "at": "bottom center", "adjust": {"scroll": false, "method": "none"}}}' qtip-popover="" selected-items="$ctrl.bulkSelectedItems">
+				Download PDFs <i class="icon icon-caret-down"></i>
+</a>
+</li><!-- end ngIf: ::$ctrl.showDownloadPdfsLink -->
+<li class="Menu-item inline-flexed hide-mobile">
+<a class="ng-isolate-scope" content="export-download" data-hasqtip="1" href="" individual-user="::$ctrl.user.individual" qtip-config='{"style": {"classes":"qtip-export-download", "tip": {"offset": 5, "mimic": "center"}}, "position": {"my": "top right", "at": "bottom right", "adjust": {"x": -3}}}' qtip-popover="" selected-items="$ctrl.selectedItems">
+				Export <i class="icon icon-caret-down"></i>
+</a>
+</li>
+<li class="Menu-item inline-flexed mobile-alert hide-mobile">
+<a class="action-bar-mobile-link ng-isolate-scope" content="access-denied" data-hasqtip="2" href="" qtip-config='{"style": {"classes":"qtip-set-search-alerts", "tip": {"offset": 5, "mimic": "center"}}, "position": {"my": "top right", "at": "bottom right", "adjust": {"x": -3}}}' qtip-config-mobile='{"style": {"tip": {"offset": 0, "mimic": "center"}}, "position": {"my": "top right", "at": "bottom right", "adjust": {"x": 0}}}' qtip-config-mobile-max-viewport="400" qtip-popover="">
+<span>Set Search Alerts <i class="icon icon-caret-down"></i></span>
+</a>
+</li>
+<li class="Menu-item inline-flexed hide-mobile">
+<a class="stats-SearchResults_History" href="/search/searchHistoryMore.jsp" target="_self">Search History</a>
+</li>
+<li class="Menu-item inline-flexed hide-desktop mobile-sort">
+<!-- ngIf: $ctrl.totalRecords > 1 -->
+</li>
+</ul>
+</div></xpl-cmpt-action-bar><!-- end ngIf: vm.data.totalRecords >= 1 -->
+</div><!-- end ngIf: !vm.loading -->
+<div class="Dashboard-section Dashboard-section-gray">
+<!-- ngIf: !vm.loading --><div class="Dashboard-header ng-scope" ng-if="!vm.loading" style="">
+<!-- ngIf: !vm.totalRecords -->
+<!-- ngIf: vm.totalRecords === 1 --><span class="ng-scope" ng-if="vm.totalRecords === 1">Displaying <span class="strong">1</span> of <span class="strong">1</span> result</span><!-- end ngIf: vm.totalRecords === 1 -->
+<!-- ngIf: vm.totalRecords > 1 -->
+<!-- ngIf: vm.terms --><span class="ng-scope" ng-if="vm.terms">for <strong><div breadcrumb="vm.terms" class="Breadcrumb-collection js-collection ng-isolate-scope Breadcrumb-collection-inline" ng-class="{'Breadcrumb-collection-inline': noLabel}" no-label="true">
+<!-- ngIf: breadcrumb.type !== 'search' && !noLabel -->
+<!-- type-search -->
+<!-- ngRepeat: crumb in breadcrumb.children --><!-- ngIf: breadcrumb.type === 'search' --><span class="Breadcrumb js-crumb ng-scope" ng-if="breadcrumb.type === 'search'" ng-repeat="crumb in breadcrumb.children">
+<span class="Breadcrumb-title">
+<!-- ngIf: crumb.key --> <span class="ng-binding" ng-bind-html="::crumb.value">Design Methods for 3D RFID Antennas Located on a Conducting Ground Plane</span>
+</span>
+<!-- ngIf: ::crumb.reference --><i class="fa fa-times Breadcrumb-close js-close ng-scope" data-id="Design Methods for 3D RFID Antennas Located on a Conducting Ground Plane" data-type="search" ng-click="onClick({id: crumb.reference, type: 'search'})" ng-if="::crumb.reference" role="button" tabindex="0"></i><!-- end ngIf: ::crumb.reference -->
+</span><!-- end ngIf: breadcrumb.type === 'search' --><!-- end ngRepeat: crumb in breadcrumb.children -->
+<!-- type-refinement -->
+<!-- ngRepeat: crumb in breadcrumb.children --><!-- ngIf: breadcrumb.type === 'refinement' --><!-- end ngRepeat: crumb in breadcrumb.children -->
+<!-- type-range -->
+<!-- ngIf: breadcrumb.type === 'range' -->
+</div></strong></span><!-- end ngIf: vm.terms -->
+<!-- ngIf: !vm.terms && !vm.breadcrumbs -->
+</div><!-- end ngIf: !vm.loading -->
+<!-- ngIf: vm.breadcrumbs && vm.breadcrumbs.length -->
+<!-- ngIf: !vm.loading && vm.contentTypeFacet -->
+</div>
+</section>
+<section class="results-facets-container u-printing-invisible-ff hide-mobile" ng-class="{'results-facets-container-active': vm.isFacetsMobileActive}" ng-style="{display: {true:'block'}[vm.isFacetsMobileActive]}">
+<div aria-disabled="true" class="results-facets-background">
+<div class="results-facets-background-close" ng-click="vm.closeMobileFacets()" role="button" tabindex="0"></div>
+<div class="results-facets-wrapper">
+<xpl-cmpt-facets class="ng-isolate-scope" close-mobile-facets="vm.closeMobileFacets()" content-type-facet="vm.contentTypeFacet" error="vm.error" facets="vm.facets" loading="vm.loading" result-length="vm.data.records.length" should-resize-container="true"><!-- ngIf: !$ctrl.loading && !$ctrl.error && $ctrl.resultLength > 1 -->
+</xpl-cmpt-facets>
+</div>
+</div>
+</section>
+<section class="results-list-container u-printing-display-inline-ff">
+<!-- ngIf: !vm.loading && vm.data.totalRecords >= 1 --><xpl-cmpt-results-actions bulk-selected-items="vm.bulkSelectedItems" class="ng-scope ng-isolate-scope" ng-if="!vm.loading &amp;&amp; vm.data.totalRecords &gt;= 1" records="vm.data.records" selected-items="vm.selectedItems" total-records="vm.data.totalRecords"><div class="results-actions hide-mobile">
+<label class="results-actions-selectall" tabindex="0">
+<input class="results-actions-selectall-checkbox" ng-checked="$ctrl.allSelected()" ng-click="$ctrl.toggleSelection()" type="checkbox"/>
+<span>Select All on Page</span>
+</label>
+<!-- ngIf: $ctrl.totalRecords > 1 -->
+</div></xpl-cmpt-results-actions><!-- end ngIf: !vm.loading && vm.data.totalRecords >= 1 -->
+<div class="article-list List-results ng-isolate-scope" error="vm.error" length="vm.data.records.length" loading="vm.loading" suggestions="vm.data.suggestions" terms="vm.searchTerms" xpl-lazy-load="vm.appendRecords()">
+<div ng-transclude="">
+<!-- ngRepeat: record in vm.records track by record.articleNumber --><div class="List-results-items ng-scope" ng-repeat="record in vm.records track by record.articleNumber" style="">
+<xpl-result bulk-selected-items="vm.bulkSelectedItems" class="ng-isolate-scope" record="::record" records="::vm.data.records" selected-items="vm.selectedItems" user="::vm.user"><div class="row hide-desktop">
+<div class="col-22-24" xpl-displayer="">
+<h2 class="result-item-title">
+<!-- ngIf: ::(!(record.documentLink)) -->
+<!-- ngIf: ::(record.documentLink) --><a class="ng-binding ng-scope" href="/document/4804075/" mathjax-bind="" ng-bind-html="::record.title.replace('Redline','&lt;font color=\'red\'&gt;Redline&lt;/font&gt;')" ng-if="::(record.documentLink)" xpl-highlight=""><span class="highlight">Design</span> <span class="highlight">Methods</span> for <span class="highlight">3D</span> <span class="highlight">RFID</span> <span class="highlight">Antennas</span> <span class="highlight">Located</span> on a <span class="highlight">Conducting</span> <span class="highlight">Ground</span> <span class="highlight">Plane</span></a><!-- end ngIf: ::(record.documentLink) -->
+</h2>
+<p class="author">
+<!-- ngRepeat: author in ::record.authors --><span class="ng-scope" ng-repeat="author in ::record.authors">
+<span class="ng-binding" ng-bind-html="::author.preferredName">Amir Galehdar</span>
+<!-- ngIf: ::author.nativeName -->
+<!-- ngIf: ::(($index + 1) !== record.authors.length) --><span class="ng-scope" ng-if="::(($index + 1) !== record.authors.length)"> | </span><!-- end ngIf: ::(($index + 1) !== record.authors.length) -->
+</span><!-- end ngRepeat: author in ::record.authors --><span class="ng-scope" ng-repeat="author in ::record.authors">
+<span class="ng-binding" ng-bind-html="::author.preferredName">David V. Thiel</span>
+<!-- ngIf: ::author.nativeName -->
+<!-- ngIf: ::(($index + 1) !== record.authors.length) --><span class="ng-scope" ng-if="::(($index + 1) !== record.authors.length)"> | </span><!-- end ngIf: ::(($index + 1) !== record.authors.length) -->
+</span><!-- end ngRepeat: author in ::record.authors --><span class="ng-scope" ng-repeat="author in ::record.authors">
+<span class="ng-binding" ng-bind-html="::author.preferredName">Steven G. O'Keefe</span>
+<!-- ngIf: ::author.nativeName -->
+<!-- ngIf: ::(($index + 1) !== record.authors.length) -->
+</span><!-- end ngRepeat: author in ::record.authors -->
+</p>
+<div class="description">
+<div aria-hidden="false" class="" ng-hide="::record.handleProduct">
+<a class="ng-binding" href="/xpl/RecentIssue.jsp?punumber=8" ng-bind-html="::record.displayPublicationTitle" ng-href="/xpl/RecentIssue.jsp?punumber=8" xpl-highlight="">IEEE Transactions on <span class="highlight">Antennas</span> and Propagation</a>
+</div>
+<!-- ngIf: ::((record.publicationYear || record.volume || record.issue) && !record.vj) --><div aria-hidden="false" class="ng-scope" ng-hide="::record.handleProduct" ng-if="::((record.publicationYear || record.volume || record.issue) &amp;&amp; !record.vj)">
+<!-- ngIf: ::record.publicationYear --><span class="ng-binding ng-scope" ng-if="::record.publicationYear" xpl-highlight="">Year: 2009</span><!-- end ngIf: ::record.publicationYear -->
+<!-- ngIf: ::record.affirmedDate -->
+<!-- ngIf: ::record.volume --><span class="ng-binding ng-scope" ng-if="::record.volume" xpl-highlight="">
+<!-- ngIf: ::record.publicationYear --><span class="ng-scope" ng-if="::record.publicationYear"> | </span><!-- end ngIf: ::record.publicationYear -->Volume: 57
+				</span><!-- end ngIf: ::record.volume -->
+<!-- ngIf: ::record.issue --><span class="ng-scope" ng-if="::record.issue">
+<!-- ngIf: ::record.volume --><span class="ng-scope" ng-if="::record.volume"> | </span><!-- end ngIf: ::record.volume -->
+					Issue: <span class="ng-binding" xpl-highlight="">2</span>
+</span><!-- end ngIf: ::record.issue -->
+</div><!-- end ngIf: ::((record.publicationYear || record.volume || record.issue) && !record.vj) -->
+</div>
+</div>
+<div class="col-2-24">
+<div class="icon-access-container">
+<span class="icon-access-subscribed" title="Included in Your Digital Subscription"></span>
+</div>
+</div>
+</div>
+<div class="row hide-mobile">
+<div class="col-1-24 hide-mobile">
+<!-- ngIf: ::record.showCheckbox --><input aria-label="Select search result" class="search-results-group ng-scope" ng-checked="isSelected()" ng-click="toggleSelect()" ng-if="::record.showCheckbox" type="checkbox"/><!-- end ngIf: ::record.showCheckbox -->
+</div>
+<div class="col-22-24" xpl-displayer="">
+<h2>
+<!-- ngIf: ::(!(record.documentLink)) -->
+<!-- ngIf: ::(record.documentLink) --><a class="ng-binding ng-scope" href="/document/4804075/" mathjax-bind="" ng-bind-html="::record.title.replace('Redline','&lt;font color=\'red\'&gt;Redline&lt;/font&gt;')" ng-if="::(record.documentLink)" xpl-highlight=""><span class="highlight">Design</span> <span class="highlight">Methods</span> for <span class="highlight">3D</span> <span class="highlight">RFID</span> <span class="highlight">Antennas</span> <span class="highlight">Located</span> on a <span class="highlight">Conducting</span> <span class="highlight">Ground</span> <span class="highlight">Plane</span></a><!-- end ngIf: ::(record.documentLink) -->
+</h2>
+<!-- ngIf: ::user.showMeta --><p class="author ng-scope" ng-if="::user.showMeta">
+<!-- ngRepeat: author in ::record.authors --><span class="ng-scope" ng-repeat="author in ::record.authors">
+<a href='/search/searchresult.jsp?searchWithin="Authors":.QT.Amir%20Galehdar.QT.&amp;newsearch=true' ng-href='/search/searchresult.jsp?searchWithin="Authors":.QT.Amir%20Galehdar.QT.&amp;newsearch=true' xpl-highlight=""><span class="ng-binding" ng-bind-html="::author.preferredName">Amir Galehdar</span><!-- ngIf: ::author.nativeName --></a><!-- ngIf: ::(($index + 1) !== record.authors.length) --><span class="ng-scope" ng-if="::(($index + 1) !== record.authors.length)">; </span><!-- end ngIf: ::(($index + 1) !== record.authors.length) -->
+</span><!-- end ngRepeat: author in ::record.authors --><span class="ng-scope" ng-repeat="author in ::record.authors">
+<a href='/search/searchresult.jsp?searchWithin="Authors":.QT.David%20V.%20Thiel.QT.&amp;newsearch=true' ng-href='/search/searchresult.jsp?searchWithin="Authors":.QT.David%20V.%20Thiel.QT.&amp;newsearch=true' xpl-highlight=""><span class="ng-binding" ng-bind-html="::author.preferredName">David V. Thiel</span><!-- ngIf: ::author.nativeName --></a><!-- ngIf: ::(($index + 1) !== record.authors.length) --><span class="ng-scope" ng-if="::(($index + 1) !== record.authors.length)">; </span><!-- end ngIf: ::(($index + 1) !== record.authors.length) -->
+</span><!-- end ngRepeat: author in ::record.authors --><span class="ng-scope" ng-repeat="author in ::record.authors">
+<a href="/search/searchresult.jsp?searchWithin=&quot;Authors&quot;:.QT.Steven%20G.%20O'Keefe.QT.&amp;newsearch=true" ng-href="/search/searchresult.jsp?searchWithin=&quot;Authors&quot;:.QT.Steven%20G.%20O'Keefe.QT.&amp;newsearch=true" xpl-highlight=""><span class="ng-binding" ng-bind-html="::author.preferredName">Steven G. O'Keefe</span><!-- ngIf: ::author.nativeName --></a><!-- ngIf: ::(($index + 1) !== record.authors.length) -->
+</span><!-- end ngRepeat: author in ::record.authors -->
+</p><!-- end ngIf: ::user.showMeta -->
+<div class="description u-mb-1">
+<!-- ngIf: ::user.showMeta --><a aria-hidden="false" class="ng-binding ng-scope" href="/xpl/RecentIssue.jsp?punumber=8" ng-bind-html="::record.displayPublicationTitle" ng-hide="::record.handleProduct" ng-href="/xpl/RecentIssue.jsp?punumber=8" ng-if="::user.showMeta" xpl-highlight="">IEEE Transactions on <span class="highlight">Antennas</span> and Propagation</a><!-- end ngIf: ::user.showMeta -->
+<!-- ngIf: ::((record.publicationYear || record.volume || record.issue) && user.showMeta && !record.vj) --><div aria-hidden="false" class="ng-scope" ng-hide="::record.handleProduct" ng-if="::((record.publicationYear || record.volume || record.issue) &amp;&amp; user.showMeta &amp;&amp; !record.vj)">
+<!-- ngIf: ::record.publicationYear --><span class="ng-binding ng-scope" ng-if="::record.publicationYear" xpl-highlight="">Year: 2009</span><!-- end ngIf: ::record.publicationYear --><!-- ngIf: ::record.affirmedDate --><!-- ngIf: !record.isEarlyAccess --><span class="ng-scope" ng-if="!record.isEarlyAccess"><!-- ngIf: ::record.volume --><span class="ng-binding ng-scope" ng-if="::record.volume" xpl-highlight=""><!-- ngIf: ::record.publicationYear --><span class="ng-scope" ng-if="::record.publicationYear">, </span><!-- end ngIf: ::record.publicationYear -->Volume: 57</span><!-- end ngIf: ::record.volume --><!-- ngIf: ::record.issue --><span class="ng-scope" ng-if="::record.issue"><!-- ngIf: ::record.volume --><span class="ng-scope" ng-if="::record.volume">, </span><!-- end ngIf: ::record.volume --><a href="/xpl/tocresult.jsp?isnumber=4804064" ng-href="/xpl/tocresult.jsp?isnumber=4804064">Issue: <span class="ng-binding" xpl-highlight="">2</span></a></span><!-- end ngIf: ::record.issue --></span><!-- end ngIf: !record.isEarlyAccess --><!-- ngIf: record.isEarlyAccess -->
+</div><!-- end ngIf: ::((record.publicationYear || record.volume || record.issue) && user.showMeta && !record.vj) -->
+<!-- ngIf: ::((record.externalId || record.startPage || record.endPage || record.doi) && user.showMeta) --><div aria-hidden="false" class="ng-scope" ng-hide="::record.handleProduct" ng-if="::((record.externalId || record.startPage || record.endPage || record.doi) &amp;&amp; user.showMeta)">
+<!-- ngIf: ::record.externalId --><!-- ngIf: ::!record.externalId --><span class="ng-scope" ng-if="::!record.externalId"><!-- ngIf: ::(record.startPage || record.endPage) --><span class="ng-scope" ng-if="::(record.startPage || record.endPage)">Page<!-- ngIf: ::record.endPage --><span class="ng-scope" ng-if="::record.endPage">s</span><!-- end ngIf: ::record.endPage -->:</span><!-- end ngIf: ::(record.startPage || record.endPage) --> <!-- ngIf: ::record.startPage --><span class="ng-binding ng-scope" ng-if="::record.startPage" xpl-highlight="">339</span><!-- end ngIf: ::record.startPage --><!-- ngIf: ::(record.startPage && record.endPage) --><span class="ng-scope" ng-if="::(record.startPage &amp;&amp; record.endPage)"> - </span><!-- end ngIf: ::(record.startPage && record.endPage) --><!-- ngIf: ::record.endPage --><span class="ng-binding ng-scope" ng-if="::record.endPage" xpl-highlight="">346</span><!-- end ngIf: ::record.endPage --></span><!-- end ngIf: ::!record.externalId -->
+</div><!-- end ngIf: ::((record.externalId || record.startPage || record.endPage || record.doi) && user.showMeta) -->
+<div aria-hidden="true" class="ng-hide" ng-show="::(record.virtualJournals &amp;&amp; user.showMeta)">
+				Referenced in: <!-- ngRepeat: vj_pub in record.virtualJournals -->
+</div>
+<!-- ngIf: ::((record.citationCount || record.patentCitationCount) && user.showMeta) --><div aria-hidden="false" class="ng-scope" ng-hide="::record.handleProduct" ng-if="::((record.citationCount || record.patentCitationCount) &amp;&amp; user.showMeta)">
+				Cited by:
+				<!-- ngIf: ::record.citationCount --><span class="ng-scope" ng-if="::record.citationCount">
+<a class="ng-binding" href="/document/4804075/citations?tabFilter=papers" ng-href="/document/4804075/citations?tabFilter=papers" xpl-highlight="">
+						Papers (7)
+					</a>
+</span><!-- end ngIf: ::record.citationCount -->
+<!-- ngIf: ::(record.citationCount && record.patentCitationCount) -->
+<!-- ngIf: ::record.patentCitationCount -->
+</div><!-- end ngIf: ::((record.citationCount || record.patentCitationCount) && user.showMeta) -->
+<div xpl-highlight="">
+<strong class="ng-binding">IEEE Journals &amp; Magazines</strong> <!-- ngIf: ::record.redline -->
+</div>
+</div>
+<!-- ngIf: ::!record.vj --><ul class="List List--horizontal ng-scope" ng-if="::!record.vj" ​="">
+<!-- ngIf: ::(record.abstract && !record.ephemera) --><li class="List-item u-mr-2 ng-scope" ng-if="::(record.abstract &amp;&amp; !record.ephemera)">
+<a class="js-displayer-control abstract-control" ng-class="{'active': user.openAbstract}">
+<i class="icon-caret-abstract"></i><span>Abstract</span>
+</a>
+</li><!-- end ngIf: ::(record.abstract && !record.ephemera) -->
+<!-- ngIf: ::record.showHtml --><li class="List-item u-mr-2 ng-scope" ng-if="::record.showHtml">
+<a class="icon-html" data-artnum="4804075" data-bkn="false" data-url="/document/4804075/" href="/document/4804075/" ng-attr-data-bkn="{{::record.articleContentType === 'Books' ? record.publicationNumber : false}}" ng-class="{'open-html': record.accessType.type === 'file-cabinet'}"></a>
+</li><!-- end ngIf: ::record.showHtml -->
+<!-- ngIf: ::record.pdfLink --><li aria-hidden="false" class="List-item u-mr-2 ng-scope" ng-hide="::record.handleProduct" ng-if="::record.pdfLink">
+<!-- ngIf: ::record.pdfLinkLabel -->
+<!-- ngIf: ::(!record.pdfLinkLabel) --><div class="u-flex-display-flex u-flex-align-items-center ng-scope" ng-if="::(!record.pdfLinkLabel)">
+<!-- ngIf: ::record.pdfLink --><a aria-label="PDF" class="icon-pdf ng-scope" data-artnum="4804075" data-bkn="false" href="/stamp/stamp.jsp?tp=&amp;arnumber=4804075" ng-attr-data-bkn="{{::record.articleContentType === 'Books' ? record.publicationNumber : false}}" ng-class="{'open-pdf': record.accessType.type === 'file-cabinet'}" ng-if="::record.pdfLink"></a><!-- end ngIf: ::record.pdfLink -->
+<!-- ngIf: ::record.pdfSize --><span class="pdf-size-display ng-binding ng-scope" ng-if="::record.pdfSize">(1649 Kb)</span><!-- end ngIf: ::record.pdfSize -->
+</div><!-- end ngIf: ::(!record.pdfLinkLabel) -->
+</li><!-- end ngIf: ::record.pdfLink -->
+<!-- ngIf: ::record.course -->
+<!-- ngIf: ::record.rightslinkFlag --><li class="List-item u-mr-2 stats-SearchResults_DocResult_Exit_ReqPermission ng-scope" ng-if="::record.rightslinkFlag">
+<a class="icon-copyright" ng-click="pdfPopup(record.rightsLink,'RightsLink')" title="Request permission for commercial reuse"></a>
+</li><!-- end ngIf: ::record.rightslinkFlag -->
+<!-- ngIf: ::!record.rightslinkFlag && !record.vj -->
+<!-- ngIf: ::record.multiMediaLink -->
+<!-- ngIf: ::record.showAlgorithm -->
+<!-- ngIf: ::record.showDataset -->
+</ul><!-- end ngIf: ::!record.vj -->
+<!-- ngIf: ::(record.abstract && !record.ephemera) --><div class="js-displayer-content u-mt-1 stats-SearchResults_DocResult_ViewMore ng-scope hide" ng-class="{'hide': !user.openAbstract}" ng-if="::(record.abstract &amp;&amp; !record.ephemera)" xpl-highlight="">
+<span class="ng-binding" ng-bind-html="::record.abstract">Based on 2D meander line <span class="highlight">methods</span>, 3 times 3 times 3 point, symmetrical, <span class="highlight">3D</span> dipole <span class="highlight">antennas</span> structure was investigated exhaustively to identify those configurations with the highest efficiency and lowest resonant frequency for a fixed length. Maximum efficiency and input impedance occurs when adjacent high current segments in the <span class="highlight">antenna</span> are oppositely directed. The optimal ...</span>
+<a href="/document/4804075/" ng-href="/document/4804075/">View more</a>
+</div><!-- end ngIf: ::(record.abstract && !record.ephemera) -->
+</div>
+<div class="col-1-24">
+<span class="icon-access-subscribed" title="Included in Your Digital Subscription"></span>
+<span>
+<!-- ngIf: ::record.openUrlLink -->
+</span>
+</div>
+</div>
+</xpl-result>
+</div><!-- end ngRepeat: record in vm.records track by record.articleNumber -->
+</div>
+<!-- ngIf: vm.loading -->
+<!-- ngIf: vm.error -->
+<!-- ngIf: !vm.length && !vm.loading && !vm.error -->
+</div>
+<!-- ngIf: !vm.loading && vm.data.records --><nav aria-invalid="false" class="c-Pagination ng-pristine ng-untouched ng-valid ng-scope ng-isolate-scope ng-not-empty" items-per-page="vm.rowCount" ng-change="vm.changePage()" ng-if="!vm.loading &amp;&amp; vm.data.records" ng-model="vm.page" style="" total-items="vm.data.totalRecords">
+<ul class="c-Pagination-nodes">
+<!-- ngIf: boundaryLinks --><li class="c-Pagination-node first hide-mobile ng-scope disabled" ng-class="{disabled: noPrevious()}" ng-if="boundaryLinks" style="">
+<a class="ng-binding" href="" ng-click="selectPage(1)">« First</a>
+</li><!-- end ngIf: boundaryLinks -->
+<!-- ngIf: directionLinks --><li class="c-Pagination-node prev ng-scope disabled" ng-class="{disabled: noPrevious()}" ng-if="directionLinks" style="">
+<a class="hide-mobile ng-binding" href="" ng-click="selectPage(page - 1)">&lt;</a>
+<a class="hide-desktop" href="" ng-click="selectPage(page - 1)"><i class="fa fa-angle-left"></i></a>
+</li><!-- end ngIf: directionLinks -->
+<!-- ngRepeat: page in pages track by $index --><li class="c-Pagination-node page-numbers ng-scope active" ng-class="{active: page.active}" ng-repeat="page in pages track by $index" style="">
+<a class="ng-binding" href="" ng-click="selectPage(page.number)">1</a>
+</li><!-- end ngRepeat: page in pages track by $index -->
+<!-- ngIf: directionLinks --><li class="c-Pagination-node next ng-scope disabled" ng-class="{disabled: noNext()}" ng-if="directionLinks" style="">
+<a class="hide-mobile ng-binding" href="" ng-click="selectPage(page + 1)">&gt;</a>
+<a class="hide-desktop" href="" ng-click="selectPage(page + 1)"><i class="fa fa-angle-right"></i></a>
+</li><!-- end ngIf: directionLinks -->
+<!-- ngIf: boundaryLinks --><li class="c-Pagination-node last hide-mobile ng-scope disabled" ng-class="{disabled: noNext()}" ng-if="boundaryLinks" style="">
+<a class="ng-binding" href="" ng-click="selectPage(totalPages)">Last »</a>
+</li><!-- end ngIf: boundaryLinks -->
+</ul>
+</nav><!-- end ngIf: !vm.loading && vm.data.records -->
+</section>
+<section class="results-rightrail-container u-printing-invisible-ff">
+<xpl-customer-survey class="ng-isolate-scope" user="vm.user"></xpl-customer-survey>
+<!-- ngIf: !vm.loading --><div class="Ads ng-scope" google-ad-targeting="vm.googleAdTargeting" loading="vm.loading" ng-if="!vm.loading" style="" xpl-google-ad-services="">
+<div ng-transclude=""></div>
+<div class="ad-panel">
+<div class="ad google-ad Ads-leadGen ng-isolate-scope" google-ad-targeting="vm.googleAdTargeting" xpl-google-ad=""><script type="text/javascript">Xplore = Xplore || {}; Xplore.googleAdSlotsStore = Xplore.googleAdSlotsStore || {}; googletag.cmd.push(function() {Xplore.googleAdSlotsStore["div-gpt-ad-1366327280661-2"] = googletag.defineSlot("/3890430/xplore_subscription_leadgen", [180,150], "div-gpt-ad-1366327280661-2").addService(googletag.pubads()).setTargeting("usertype", "inst").setTargeting("sub_type", "IEL|VDE|NOKIA BELL LABS|").setTargeting("cust_type", "Academic").setTargeting("geoip", "202.120.40.120").setTargeting("userid", "7865").setTargeting("isinst", "true").setTargeting("search", "Design Methods for 3D RFID Antennas Located on a Conducting Ground Plane").setTargeting("pu_number", "").setTargeting("content_ID", "");googletag.pubads().collapseEmptyDivs();googletag.pubads().enableSingleRequest();googletag.enableServices();});</script><div data-google-query-id="CMzJoMqQmdwCFQJivQod9xUHrQ" id="div-gpt-ad-1366327280661-2" style="width: 180px; display: none;"><script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1366327280661-2"); });</script><div id="google_ads_iframe_/3890430/xplore_subscription_leadgen_0__container__" style="border: 0pt none;"><iframe frameborder="0" height="150" id="google_ads_iframe_/3890430/xplore_subscription_leadgen_0" marginheight="0" marginwidth="0" name="google_ads_iframe_/3890430/xplore_subscription_leadgen_0" scrolling="no" srcdoc="" style="border: 0px; vertical-align: bottom;" title="3rd party ad content" width="180"></iframe></div></div></div>
+</div>
+<div class="ad-panel">
+<div class="ad google-ad Ads-thirdParty ng-isolate-scope" google-ad-targeting="vm.googleAdTargeting" xpl-google-ad=""><script type="text/javascript">Xplore = Xplore || {}; Xplore.googleAdSlotsStore = Xplore.googleAdSlotsStore || {}; googletag.cmd.push(function() {Xplore.googleAdSlotsStore["div-gpt-ad-1366327280661-5"] = googletag.defineSlot("/3890430/xplore_third_party", [160,600], "div-gpt-ad-1366327280661-5").addService(googletag.pubads()).setTargeting("usertype", "inst").setTargeting("sub_type", "IEL|VDE|NOKIA BELL LABS|").setTargeting("cust_type", "Academic").setTargeting("geoip", "202.120.40.120").setTargeting("userid", "7865").setTargeting("isinst", "true").setTargeting("search", "Design Methods for 3D RFID Antennas Located on a Conducting Ground Plane").setTargeting("pu_number", "").setTargeting("content_ID", "");googletag.pubads().collapseEmptyDivs();googletag.pubads().enableSingleRequest();googletag.enableServices();});</script><div data-google-query-id="CI_81cqQmdwCFYiMvQodWXILgg" id="div-gpt-ad-1366327280661-5" style="width: 160px; display: none;"><script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1366327280661-5"); });</script><div id="google_ads_iframe_/3890430/xplore_third_party_0__container__" style="border: 0pt none;"><iframe frameborder="0" height="600" id="google_ads_iframe_/3890430/xplore_third_party_0" marginheight="0" marginwidth="0" name="google_ads_iframe_/3890430/xplore_third_party_0" scrolling="no" srcdoc="" style="border: 0px; vertical-align: bottom;" title="3rd party ad content" width="160"></iframe></div></div></div>
+</div>
+</div><!-- end ngIf: !vm.loading -->
+<!-- ngIf: !vm.loading --><xpl-standards-dictionary class="u-align-left ng-scope ng-isolate-scope" listing="vm.standardsDictionaryTerms" ng-if="!vm.loading"><!-- ngIf: listing -->
+</xpl-standards-dictionary><!-- end ngIf: !vm.loading -->
+</section>
+</div>
+</main></div>
+</div>
+<section id="xploreFooter">
+<div class="Footer stats-footer hide-mobile">
+<div class="pure-g Footer-sections u-mt-1">
+<div class="pure-u-1-4">
+<h3 class="Footer-header">IEEE Account</h3>
+<ul class="Footer-list">
+<li><a href="https://www.ieee.org/profile/changeusrpwd/showChangeUsrPwdPage.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Change Username/Password</a></li>
+<li><a href="https://www.ieee.org/profile/address/getAddrInfoPage.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Update Address</a></li>
+</ul>
+</div>
+<div class="pure-u-1-4">
+<h3 class="Footer-header">Purchase Details</h3>
+<ul class="Footer-list">
+<li><a href="https://www.ieee.org/profile/payment/showPaymentHome.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Payment Options</a></li>
+<li><a href="https://www.ieee.org/profile/vieworder/showOrderHistory.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Order History</a></li>
+<li><a href="/articleSale/purchaseHistory.jsp">View Purchased Documents</a></li>
+</ul>
+</div>
+<div class="pure-u-1-4">
+<h3 class="Footer-header">Profile Information</h3>
+<ul class="Footer-list">
+<li><a href="https://www.ieee.org/profile/commprefs/showcommPrefpage.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Communications Preferences</a></li>
+<li><a href="https://www.ieee.org/profile/profedu/getProfEduInformation.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Profession and Education</a></li>
+<li><a href="https://www.ieee.org/profile/tips/getTipsInfo.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Technical Interests</a></li>
+</ul>
+</div>
+<div class="pure-u-1-4">
+<h3 class="Footer-header">Need Help?</h3>
+<ul class="Footer-list">
+<li><strong>US &amp; Canada:</strong> +1 800 678 4333</li>
+<li><strong>Worldwide: </strong> +1 732 981 0060<br/>
+</li>
+<li><a href="/xpl/techform.jsp">Contact &amp; Support</a></li>
+</ul>
+</div>
+</div>
+<div class="pure-g">
+<div class="pure-u-1 Footer-bottom">
+<div class="logo-ieee-white u-pullRight"></div>
+<ul class="Menu Menu--horizontal Menu--dividers u-mb-1">
+<li class="Menu-item"><a href="/Xplorehelp/about-ieee-xplore.html">About IEEE <em>Xplore</em></a></li>
+<li class="Menu-item"><a href="/xpl/techform.jsp">Contact Us</a></li>
+<li class="Menu-item"><a href="/Xplorehelp/Help_start.html" target="blank">Help</a></li>
+<li class="Menu-item"><a href="/Xplorehelp/accessibility-statement.html" target="blank">Accessibility</a></li>
+<li class="Menu-item"><a href="/xpl/termsOfUse.jsp">Terms of Use</a></li>
+<li class="Menu-item"><a href="http://www.ieee.org/web/aboutus/whatis/policies/p9-26.html">Nondiscrimination Policy</a></li>
+<li class="Menu-item"><a href="/xpl/sitemap.jsp">Sitemap</a></li>
+<li class="Menu-item"><a href="http://www.ieee.org/about/help/security_privacy.html" target="blank">Privacy &amp; Opting Out of Cookies</a></li>
+</ul>
+<p class="Footer-bottom-terms">
+					A not-for-profit organization, IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.<br/>© Copyright 2018 IEEE - All rights reserved. Use of this web site signifies your agreement to the terms and conditions.
+				</p>
+</div>
+</div>
+</div>
+<footer class="footer-mobile stats-footer">
+<nav class="footer-nav">
+<div class="row">
+<div class="col-12">
+<div class="footer-nav-accordion">
+<div class="accordion-header">
+<h3 class="footer-nav-subheader">IEEE Account</h3>
+<div class="accordion-chevron">
+<i class="icon--min icon-caret-white-down"></i>
+</div>
+</div>
+<div class="accordion-body">
+<ul class="footer-nav-list">
+<li class="footer-nav-list-item">
+<a href="https://www.ieee.org/profile/changeusrpwd/showChangeUsrPwdPage.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Change Username/Password</a>
+</li>
+<li class="footer-nav-list-item">
+<a href="https://www.ieee.org/profile/address/getAddrInfoPage.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Update Address</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-12">
+<div class="footer-nav-accordion">
+<div class="accordion-header">
+<h3 class="footer-nav-subheader">Profile Information</h3>
+<div class="accordion-chevron">
+<i class="icon--min icon-caret-white-down"></i>
+</div>
+</div>
+<div class="accordion-body">
+<ul class="footer-nav-list">
+<li class="footer-nav-list-item">
+<a href="https://www.ieee.org/profile/commprefs/showcommPrefpage.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Communications Preferences</a>
+</li>
+<li class="footer-nav-list-item">
+<a href="https://www.ieee.org/profile/profedu/getProfEduInformation.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Profession and Education</a>
+</li>
+<li class="footer-nav-list-item">
+<a href="https://www.ieee.org/profile/tips/getTipsInfo.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Technical Interests</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-12">
+<div class="footer-nav-accordion">
+<div class="accordion-header">
+<h3 class="footer-nav-subheader">Purchase Details</h3>
+<div class="accordion-chevron">
+<i class="icon--min icon-caret-white-down"></i>
+</div>
+</div>
+<div class="accordion-body">
+<ul class="footer-nav-list">
+<li class="footer-nav-list-item">
+<a href="https://www.ieee.org/profile/payment/showPaymentHome.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Payment Options</a>
+</li>
+<li class="footer-nav-list-item">
+<a href="https://www.ieee.org/profile/vieworder/showOrderHistory.html?refSite=http://ieeexplore.ieee.org&amp;refSiteName=IEEE Xplore">Order History</a>
+</li>
+<li class="footer-nav-list-item">
+<a href="/articleSale/purchaseHistory.jsp">View Purchased Documents</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-12">
+<div class="footer-nav-accordion">
+<div class="accordion-header">
+<h3 class="footer-nav-subheader">Need Help?</h3>
+<div class="accordion-chevron">
+<i class="icon--min icon-caret-white-down"></i>
+</div>
+</div>
+<div class="accordion-body">
+<ul class="footer-nav-list">
+<li class="footer-nav-list-item">
+<a href="/xpl/techform.jsp">Contact &amp; Support</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="footer-nav-accordion">
+<div class="accordion-header">
+<h3 class="footer-nav-subheader">Other</h3>
+<div class="accordion-chevron">
+<i class="icon--min icon-caret-white-down"></i>
+</div>
+</div>
+<div class="accordion-body">
+<ul class="footer-nav-list">
+<li class="footer-nav-list-item">
+<a href="/Xplorehelp/about-ieee-xplore.html">About IEEE <em>Xplore</em></a>
+</li>
+<li class="footer-nav-list-item">
+<a href="/xpl/techform.jsp">Contact Us</a>
+</li>
+<li class="footer-nav-list-item">
+<a href="/Xplorehelp/Help_start.html" target="blank">Help</a>
+</li>
+<li class="footer-nav-list-item">
+<a href="/Xplorehelp/accessibility-statement.html" target="blank">Accessibility</a>
+</li>
+<li class="footer-nav-list-item">
+<a href="/xpl/termsOfUse.jsp">Terms of Use</a>
+</li>
+<li class="footer-nav-list-item">
+<a href="http://www.ieee.org/web/aboutus/whatis/policies/p9-26.html">Nondiscrimination Policy</a>
+</li>
+<li class="footer-nav-list-item">
+<a href="/xpl/sitemap.jsp">Sitemap</a>
+</li>
+<li class="footer-nav-list-item">
+<a href="http://www.ieee.org/about/help/security_privacy.html" target="blank">Privacy &amp; Opting Out of Cookies</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="footer-bottom">
+<div class="row">
+<div class="col-12">
+<div class="footer-bottom-terms">
+						A not-for-profit organization, IEEE is the world's largest technical professional organization dedicated to advancing technology for the benefit of humanity.
+						<br/>
+						© Copyright 2018 IEEE - All rights reserved. Use of this web site signifies your agreement to the terms and conditions.
+					</div>
+</div>
+<div class="col-12">
+<div class="footer-bottom-info-container">
+<div class="footer-bottom-info">
+<div>
+								US &amp; Canada: <a href="tel:+18006784333">+1 800 678 4333</a>
+</div>
+<div>
+								Worldwide: <a href="tel:+17329810060">+1 732 981 0060</a>
+</div>
+</div>
+<div class="footer-bottom-logo-container">
+<i class="footer-bottom-logo logo-ieee-white"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</section>
+<link href="https://staticieeexplore.ieee.org/assets/css/ie7Sniffer.css?cv=20180522_000000" rel="stylesheet"/>
+<div id="popup_overlay" style="width: 1263px;"></div>
+<g:compress>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/vendor/modernizr/modernizr.js?cv=20180522_000000" type="text/javascript"></script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/dist/js/vendor.js?cv=20180522_000000" type="text/javascript"></script>
+<script>
+	var $j = jQuery.noConflict();
+	var j$ = jQuery.noConflict();
+	var membershipIncomplete;
+    var IS_INDIVIDUAL_USER=false;
+
+	var searchPropertiesParamQueryText = 'queryText';
+	var searchPropertiesParamNewSearch = 'newsearch';
+	var searchPropertiesParamMatchBoolean = 'matchBoolean';
+	var searchPropertiesParamSearchWithin = 'searchWithin';
+	var searchInterfaceArticleIndexTermReference = 'Search_Index_Terms';
+	var searchPropertiesParamRecordsPerPage = 'rowsPerPage';
+	var searchPropertiesParamPageNumber = 'pageNumber';
+	var searchPropertiesParamRemoveRefinement = 'removeRefinement';	
+	var searchPropertiesParamSearchField = 'searchField';
+	var searchPropertiesParamArticleNumber = 'arnumber';
+	
+	var authorsGetDisplay = 'Authors';
+	var authorsFirstNameProperty = 'First Name';
+	var authorsLastNameProperty = 'Last Name';
+	var authorsMiddleNameProperty = 'Middle Name';
+	var pubTitleDispNameProperty = 'Publication Title';
+	var volumeDispNameProperty = 'Volume';
+	var issueDispNameProperty = 'Issue';
+	var startPageDispNameProperty = 'Start Page';
+	var endPageDispNameProperty = 'Start Page';
+
+	var searchIcsTermProperty = 'Standards ICS Terms';
+	var SearchMapperParamSearchField = 'searchField';
+	
+	var SearchMapperParamNewSearch = 'newsearch';
+	var SearchMapperParamArticleNumber = 'arnumber';	
+	
+	var NTPT_IMAGE_LOCATION = '';
+	var XPLORE_SSL_HOST = 'https://ieeexplore.ieee.org';	
+	var SSL_YES_NO = 'yes';
+	if (SSL_YES_NO.toUpperCase() == "NO"){
+		var XPLORE_SSL_YES_NO = false;
+	}else{
+		var XPLORE_SSL_YES_NO = true;
+	}
+	var WEBSERVICES_SSL_YES_NO = 'yes';
+	if (WEBSERVICES_SSL_YES_NO.toUpperCase() == "NO"){
+		var XPLORE_WEBSERV_YES_NO = false;
+	}else{
+		var XPLORE_WEBSERV_YES_NO = true;
+	}
+	var IBP_MEMBEER_SIGNIN_TIME_WAIT_IN_MILLIES = '800';
+	var ASSETS_RELATIVE_PATH = 'https://staticieeexplore.ieee.org/assets'; // NOTE: AngularJS code relies on this
+	var ASSETS_RELATIVE_PATH_NO_SERVER = '/assets';
+	var ASSETS_VERSION = '20180522_000000'; // NOTE: AngularJS code relies on this
+	var IBP_WS_ASSETS='https://www.ieee.org';
+	var IBP_WS_ENABLED_FLAG = true;
+	var ENTERPRISE_CART_URL = 'https://www.ieee.org/cart/public/myCart/page.html?refSite=http://ieeexplore.ieee.org&refSiteName=IEEE%20Xplore';
+
+	var SPECIAL_CHARACTER_MAPS = '&:.AND.,=:.EQ.,+:.PLS.,#:.HSH.,(:.LB.,):.RB.,":.QT.,<:.LT.,>:.GT.';
+	var SPECIAL_CHARACTERS = new Array();
+	var SPECIAL_CHARACTER_REPLACEMENTS = new Array();
+	var characterMaps = SPECIAL_CHARACTER_MAPS.split(",");
+	for (var i = 0; i < characterMaps.length; i++) {
+		parts = characterMaps[i].split(":");
+		SPECIAL_CHARACTERS[i] = parts[0];
+		SPECIAL_CHARACTER_REPLACEMENTS[i] = parts[1];
+	}
+
+	var ALL_SEARCH_FIELDS = 'Search_Index_Terms:Index Terms,Search_All_Text:Full Text & Metadata,Search_All:Metadata Only,Search_Publication_Title:Search Publication Title,Search_Related_Terms:Search Related Terms,Search_Authors:Author Name,Search_Publication_Title_ICS_Terms:ICE Terms,p_Id:Article Number,ID:ID,p_Module_Number:Module Number,p_Part_Num:Part_Num,p_ISSN:ISSN,p_ISBN:ISBN,p_EISBN:EISBN,p_IS_Number:IS Number,p_Accession_Number:Accession Number,p_Copyright_Holder:Copyright Holder,p_Copyright_Year:Copyright Year,p_License:License,p_Title:Document Title,p_Abstract:Abstract,p_Publication_Number:Publication Number,p_Parent_Publication_Number:Parent Publication Number,p_Parent_Publication_Title:Parent Publication Title,p_Publication_Title:Publication Title,p_Publication_Display_Title:Publication Display Title,p_Volume:Volume,p_Issue:Issue,p_Padded_Issue_Number:Padded Issue Number,p_Part:Part,p_Start_Page:Start Page,p_End_Page:End Page,p_File_Path:File Path,p_Publication_Date:Publication Date,p_Publication_Year:Publication_Year,p_Online_Date:Online Date,p_Month:Month,p_Author_Pref_Names:Author Pref Names,p_Author_Norm_Names:Author Norm Names,p_Authors:Authors,p_Author_Ids:Author Ids,p_First_Names:First Name,p_Middle_Names:Middle Name,p_Last_Names:Last Name,p_Author_Affiliations:Author Affiliations,p_Author_Bio:Author Bio,p_Author_Img:Author Img,p_Reference_Count:Reference Count,p_Citation_Count:Citation Count,p_Patent_Count:Patent Count,p_Multimedia_Flag:Multimedia Flag,p_Biomedical_Eng_Flag:Biomedical Eng Flag,p_Non_IEEE:Non IEEE,p_STDS_Product_Number:STDS Product Number,p_Status:Status,p_DOI:DOI,p_Pdf_Path:Pdf Path,p_Pdf_Size:Pdf Size,p_Content_Type:Content Type,p_Publisher:Publisher,p_Controlled_Terms:INSPEC Controlled Terms,p_Free_Terms:INSPEC Non-Controlled Terms,p_IEEE_Terms:IEEE Terms,p_Author_Terms:Author Keywords,p_Mesh_Terms:Mesh_Terms,p_PACS_Terms:PACS Terms,p_Insert_Date:Insert Date,p_Conference_Location:Conference Location,p_Index_Content:Index Content,p_CODEN:CODEN,p_Document_Text:Document Text,p_Standard_Number:Standard Number,p_Preprint_Flag:Preprint Flag,p_Rapid_Post_Flag:Rapid Post Flag,p_Last_Update:Last Update,p_New_Flag:New Flag,p_Open_Access_Flag:Open Access Flag,p_Promo_Flag:Promo Flag,p_Pubmed_Id:Pubmed Id,p_Duration:Duration,p_Society:Society,p_Conference:Conference,p_Society_URL:Society URL,p_Id_Subject:Id Subject,p_Book_Number:Book Number,p_Pages:Pages,p_Edition_Number:Edition Number,p_Sequence:Sequence,p_Related_Info_Type:Related Info Type,p_Related_Info:Related Info,p_Format_ISBN:Format ISBN,p_Meeting_Date:Meeting Date,p_Course_level:Course level,p_Course_ID:Course ID,p_About_Url:About Url,p_Additional_Url:Additional Url,p_Authors_Url:Authors Url,p_Open_Access_Url:Open Access Url,p_Open_Access_flag:Open Access flag,p_Partnum_VendorURL_MediaType:Partnum VendorURL MediaType,p_Branding_Image_File:Branding Image File,p_Cover_Image_File:Cover Image File,p_Frequency:Frequency,p_Field_Of_Interest:Field Of Interest,p_G_Parent_Publication_Number:G Parent Publication Number,p_Ms_Url:Ms Url,p_Relationship:Relationship,p_Society_Image:Society Image,p_Visit_Url:Visit Url,p_Visit_Website:Visit Website,p_Start_Year:Start Year,p_End_Year:End Year,p_Record_Type:Record Type,p_RolluKey:RolluKey,p_Epub:Epub,p_Pic_Code_Description:Pic Code Description,p_Pic_Code:Pic Code,p_Sponsors:Sponsors,p_Notes:Notes,p_Conference_Date:Conference Date,p_Publication_Contact:Publication Contact,p_isBuyable:isBuyable,p_Publication_Files:Publication Files,p_Unavailable_for_Sale:Unavailable for Sale,p_Publication_Sort:Publication Sort,p_Standard_Family:Standard Family,p_Standard_Group:Standard Group,p_Product_Url:Product Url,p_ISBN_MediaType:ISBN MediaType,p_Html_Flag:Html Flag,p_Rightslink_Flag:Rightslink Flag,p_Page_Count:Page Count,p_Name:Name,p_Table_of_Contents:Table of Contents,p_Time_Stamp:Time Stamp,p_Sub_Title:Sub Title,p_Related_Item:Related Item,p_Reference_Material:Reference Material,p_Latest_Issue_Time:Latest Issue Time,p_Search_Latest_Date:Search Latest Date,p_Pbd_Flag:Pbd Flag,p_Lms_Url:Lms Url,p_Current_Volume:Current Volume,p_Graphical_File:Graphical File,p_Graphical_Image:Graphical Cover Image,p_Graphical_Summary:Graphical Summary,p_Graphical_Type:Graphical Type,p_Native_Names:Native Name,p_External_Id:Article Page Number,p_Standard_Bundles:Standard Bundles,p_Standard_Bundle_Parts:Standard Bundle Parts,p_Virtual_Title:Virtual Title,p_Series_Name:Series Name,p_Series_Id:Series Id,p_ML_Html_flag:ML Html flag,p_Promo_Start_Date:Promo Start Date,p_Promo_End_Date:Promo End Date,p_Issue_Complete_Flag:Issue Complete Flag,p_Scope:Scope,p_Purpose:Purpose,p_Standard_Family_Title:Standard Family Title,p_Thumbnail_Img:Thumbnail Img,p_Supplement_File:Supplement File,p_Pdhs:Pdhs,p_Ceus:Ceus,p_FirstFrame_Img:FirstFrame Img,p_Id_Sub_Topic:Id Sub Topic,p_Certificate_Url:Certificate Url,p_Standard_Root:Standard Root,p_ICS_Terms:Standards ICS Terms,p_Impact_Statement:Impact Statement,p_Plagiarized_Flag:Plagiarized Flag,p_Course_Affirmed_Date:Affirmed Date,p_Pdf_Source_Name:Source Pdf,p_Author_ORCID:Author ORCID,p_Algorithm_Flag:Algorithm Flag,p_Funding_Agency:Funding Agency,p_Map_Pricing_Key:Map Pricing Key,p_Rollup_Key:Rollup Key,p_Collection:Collection,Type_Ahead_Terms:Type Ahead Terms,IEEE_Term:IEEE Term,Content_Type:Content Type,Author:Author,Affiliation:Affiliation,Topic:Topic,Publication_Title:Publication Title,Publication_Year:Year,Publisher:Publisher,Conference_Country:Conference Country,Conference_Location:Conference Location,Standard_Status:Standard Status,Conference_Year:Conference Year,Publication_Package:Subscribed Content,Standard_Package:Standard Package,Standard_Title:Standard Title,Standard_Term:Standards Dictionary Terms,Publication_Range:Publication Range,Standard_Range:Standard Range,Record_Type:Record Type,Media_Type:Media Type,Book_Type:Book Type,Course_Type:Course Type,Publication_Standard_Range:Publication Standard Range,Perpetual_Year:Perpetual Year,Opac_Title_Range:Opac Title Range,Book_Series:Book Series,Subject_Category:Subject Category,Type_Ahead_Publication:Type Ahead Publication,Sub_Topic:Sub Topic,Course_Duration:Course Duration,Course_Level:Course Level,Standard_Type:Standard Type,Standard_SubType:Standard SubType,Standard_Topic:Standard Topic,Standard_Modifier:Standard Modifier,Ics_Terms_1:Ics Terms 1,Ics_Terms_2:Ics Terms 2,Ics_Terms_3:Ics Terms 3,Supplemental_Items:Supplemental Items,Course_Duration:Course Duration,Special_Sections:Topics,INSPEC_Controlled_Terms:INSPEC Controlled Terms';
+	var SEARCH_FIELD_REFERENCES = new Array();
+	var SEARCH_FIELD_DISPLAYS = new Array();
+	var searchFields = ALL_SEARCH_FIELDS.split(",");
+	for (var j = 0; j < searchFields.length; j++) {
+		parts = searchFields[j].split(":");
+		SEARCH_FIELD_REFERENCES[j] = parts[0];
+		SEARCH_FIELD_DISPLAYS[j] = parts[1];
+	}
+	
+
+	var refSite='https://ieeexplore.ieee.org';
+	var refSiteName="IEEE Xplore";
+	var applicationName = 'Xplore';
+	var MC_OPERATION_DELAY_TIMEOUT='5000';
+	var MC_ADDING_DELAY_MSG='Please wait.The selected item(s) is being added to the cart.';
+	var MC_TIMEOUT='60000';
+	var MC_OPERATION_DELAY_MSG_FLAG='true';
+
+	var MEMBER_PROFILE_CHANGE_USERNAMEPASS_LINK = 'https://www.ieee.org/profile/changeusrpwd/showChangeUsrPwdPage.html?refSite=http://ieeexplore.ieee.org&refSiteName=IEEE Xplore';
+	var MEMBER_PROFILE_ADDRESSINFO_LINK = 'https://www.ieee.org/profile/address/getAddrInfoPage.html?refSite=http://ieeexplore.ieee.org&refSiteName=IEEE Xplore';
+	var MEMBER_PROFILE_PAYMENTINFO_LINK = 'https://www.ieee.org/profile/payment/showPaymentHome.html?refSite=http://ieeexplore.ieee.org&refSiteName=IEEE Xplore';
+	var MEMBER_PROFILE_ORDER_HISTORY_LINK = 'https://www.ieee.org/profile/vieworder/showOrderHistory.html?refSite=http://ieeexplore.ieee.org&refSiteName=IEEE Xplore';
+	var MEMBER_USER_COMMUNICATION_LINK = 'https://www.ieee.org/profile/commprefs/showcommPrefpage.html?refSite=http://ieeexplore.ieee.org&refSiteName=IEEE Xplore';
+	var MEMBER_EDUCATIONAL_PROFILE_LINK = 'https://www.ieee.org/profile/profedu/getProfEduInformation.html?refSite=http://ieeexplore.ieee.org&refSiteName=IEEE Xplore';
+	var MEMBER_TECHNICAL_INTERESTS_LINK = 'https://www.ieee.org/profile/tips/getTipsInfo.html?refSite=http://ieeexplore.ieee.org&refSiteName=IEEE Xplore';
+	var HELPFILE_RELATIVE_PATH = '/Xplorehelp';
+	
+	//content types
+	var CONTENT_TYPE_PARAM = 'contentType';
+	var CONTENT_TYPE_BOOKS = 'Books';
+	var CONTENT_TYPE_COURSES = 'Courses';
+	var CONTENT_TYPE_STANDARDS = 'Standards';
+	var CONTENT_TYPE_CONFERENCES = 'Conferences';
+	var CONTENT_TYPE_JOURNALS = 'Journals & Magazines';
+	var CONTENT_TYPE_EARLY_ACCESS = 'Early Access Articles';
+	
+	//User Preferences
+	var citFormat = "";
+	var dlFormat = "";
+	
+	//Google ReCaptcha public Key 
+	var RECAPTCHA_PUBLIC_KEY = '6Ld6GEUUAAAAALdaAmeGUhZyz1KFFHnd5oCaTW-t';
+</script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/dist/js/history.js?cv=20180522_000000" type="text/javascript"></script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/js/lib/conditional/cartScroll.js?cv=20180522_000000" type="text/javascript"></script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/js/lib/conditional/minicart.js?cv=20180522_000000" type="text/javascript"></script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/dist/js/core.js?cv=20180522_000000" type="text/javascript"></script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/dist/ng/xpl.js?cv=20180522_000000" type="text/javascript"></script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/dist/ng/xpl.search.js?cv=20180522_000000" type="text/javascript"></script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/dist/ng/templates.xpl.js?cv=20180522_000000" type="text/javascript"></script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/dist/ng/templates.xpl.search.js?cv=20180522_000000" type="text/javascript"></script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/dist/js/ads.js?cv=20180522_000000" type="text/javascript"></script>
+<script charset="utf-8" src="https://staticieeexplore.ieee.org/assets/dist/js/master.js?cv=20180522_000000" type="text/javascript"></script>
+<script>
+
+j$('document').ready(function(){
+	if (Cookies.get('legacyUserName')) {
+		if (IBP_WS_ENABLED_FLAG){
+			Modal.refreshLegacyAccountTransition('/xpl/mwLegacyAccountTransition.jsp');
+		}
+	}
+});
+
+</script>
+</g:compress>
+<script>
+	// Get/Set XPL namespace.
+	window.xpl = window.xpl || {};
+	
+	// Set constants/application properties.
+	xpl.properties = { 
+			collabratec: { 
+					url: 'https://ieee-collabratec.ieee.org/app/library'
+			}
+	};
+	
+	xpl.properties.details = {
+			oqs: ''
+	};
+</script>
+<!--Begin Optional Configuration-->
+<script src="https://www.ieee.org/ieee-mashup/js/common/jquery.json-2.2.min.js" type="text/javascript"></script>
+<script src="https://www.ieee.org/ieee-mashup/js/common/postmessage-min.js" type="text/javascript"></script>
+<script src="https://www.ieee.org/ieee-mashup/js/common/jquery.cookie-min.js" type="text/javascript"></script>
+<script src="https://www.ieee.org/ieee-mashup/js/auth/ieee-auth-constants-min.js" type="text/javascript"></script>
+<script src="https://www.ieee.org/ieee-mashup/js/auth/ieee-auth-include-min.js" type="text/javascript"></script>
+<script src="https://www.ieee.org/ieee-mashup/js/minicart/ieee-mini-cart-constants-min.js" type="text/javascript"></script>
+<script src="https://www.ieee.org/ieee-mashup/js/minicart/ieee-mashup-util-min.js" type="text/javascript"></script>
+<script src="https://www.ieee.org/ieee-mashup/js/common/jquery.ba-jqmq-min.js" type="text/javascript"></script>
+<script src="https://www.ieee.org/ieee-mashup/js/minicart/ieee-minicart-include-min.js" type="text/javaScript"> </script>
+<!--End Optional Configuration-->
+<script defer="" type="text/javascript">
+	(function(j$){ 
+		"use strict";
+
+		j$('document').ready(function(){
+			j$('.footer-nav .accordion-header').click(function() {
+				var $clickedAccordion = j$(this),
+					$accordionBody = $clickedAccordion.siblings('.accordion-body'),
+					$accordionChevron = $clickedAccordion.find('accordion-chevron');
+
+				$accordionChevron.toggleClass('accordion-chevron-active');
+				$accordionBody.toggleClass('accordion-body-open');
+			});
+		});
+	})(j$)
+</script>
+<!-- Removed due to network issues when loading in China -->
+<!-- <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-5005a435228f9245" async="async"></script>-->
+<!-- Load Mathjax and process the document for Mathjax characters -->
+<script src="https://staticieeexplore.ieee.org/xploreAssets/MathJax-2.6.1/MathJax.js?config=default" type="text/javascript"></script>
+<script defer="">
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.body]);
+</script>
+<!-- BEGIN: tealium in v2/common/template.jsp. NOTE since we need jQuery in tealiumAnalytics.js, let this include be here after commonjs.jsp include above -->
+<!-- BEGIN: TealiumAnalytics.jsp -->
+<script type="text/javascript">
+ 				// tealium config vars
+				var TEALIUM_CONFIG_TAGGING_ENABLED = true;		
+				var TEALIUM_CONFIG_CDN_URL = '//tags.tiqcdn.com/utag/';
+				var TEALIUM_CONFIG_ACCOUNT_PROFILE_ENV = 'ieeexplore/main/prod';
+				
+				// tealium utag_data values for user 
+				var TEALIUM_userType = 'Institute';
+				var TEALIUM_userInstitutionId = '7865';
+				var TEALIUM_userId = '';
+				var TEALIUM_user_third_party = '';
+				
+				var TEALIUM_products = 'IEL|VDE|NOKIA BELL LABS|';
+			</script>
+<script type="text/javascript">
+			// asynchronously load tealium's utag.js , which declares tealium JS variables like; utag_data, utag
+			(function(a,b,c,d){
+			
+				a=TEALIUM_CONFIG_CDN_URL + TEALIUM_CONFIG_ACCOUNT_PROFILE_ENV + '/utag.js';
+				b=document;c='script';d=b.createElement(c);d.src=a;
+				d.type='text/java'+c;d.async=true;
+				a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+			})();
+			</script>
+<script src="https://staticieeexplore.ieee.org/assets/js/analytics/tealiumTagsData.js?cv=20180522_000000" type="text/javascript"></script>
+<script src="https://staticieeexplore.ieee.org/assets/js/analytics/tealiumAnalytics.js?cv=20180522_000000" type="text/javascript"></script>
+<!-- END: TealiumAnalytics.jsp -->
+<!-- END: tealium in v2/common/template.jsp -->
+</div>
+</div>
+</div>
+<script>
+					// set $ alias back to jQuery because noConflict mode is used in legacy pages
+					window.$ = jQuery;
+				</script><iframe src="https://tpc.googlesyndication.com/safeframe/1-0-29/html/container.html" style="visibility: hidden; display: none;"></iframe>
+</div><!-- /#LayoutWrapper -->
+<div id="cboxOverlay" style="display: none;"></div><div class="" id="colorbox" role="dialog" style="display: none;" tabindex="-1"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxTitle" style="float: left;"></div><div id="cboxCurrent" style="float: left;"></div><button id="cboxPrevious" type="button"></button><button id="cboxNext" type="button"></button><button id="cboxSlideshow"></button><div id="cboxLoadingOverlay" style="float: left;"></div><div id="cboxLoadingGraphic" style="float: left;"></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div></div><div class="pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links" style="width: 1px !important; height: 1px !important; position: absolute !important; left: -10000px !important; top: -1000px !important;"></div></body></html>
