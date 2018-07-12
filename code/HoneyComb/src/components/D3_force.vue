@@ -453,8 +453,8 @@ export default {
       .on("mouseover",function(d,i){
         tooltip.html("<p>" + d.id + "</p>")
             .transition()
-            .style("left", (d.x) + "px")
-            .style("top", (d.y) + "px")
+            .style("left", (d.x + 80) + "px")
+            .style("top", (d.y + 20) + "px")
             .style("display", "block")
       })
       .on("mouseout",function(d){
