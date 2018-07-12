@@ -44,17 +44,17 @@
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="control-label">New Password:</label>
-                  <input class="form-control" type="text" id="pwd1" placeholder="Empty to not changed" v-on:change="passsChange" v-model="message">
+                  <input class="form-control" type="password" id="pwd1" placeholder="Empty to not changed" v-on:change="passsChange" v-model="message">
                 </div>
                 <div class="form-group" v-show="passs">
                   <label for="message-text" class="control-label">Confirm Password:</label>
-                  <input class="form-control" type="text" id="pwd2">
+                  <input class="form-control" type="password" id="pwd2">
                 </div>
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Submit</button>
+              <button type="button" id="close" class="btn btn-primary" data-dismiss="modal" @click="closeProfile">Close</button>
+              <button type="button" class="btn btn-primary" @click="submitProfile">Submit</button>
             </div>
           </div>
         </div>
@@ -124,6 +124,92 @@ export default {
     this.loginJudge()
   },
   methods: {
+    closeProfile () {
+      console.log($('#email1').val())
+      $('#email1').val('')
+      console.log($('#email1').val())
+      console.log($('#pwd1').val())
+      $('#pwd1').val('')
+      this.message = ''
+      console.log($('#pwd1').val())
+      $('#pwd2').val('')
+      this.passs = false
+      $('#email1').parent().removeClass('has-error')
+      $('#pwd1').parent().removeClass('has-error')
+      $('#pwd2').parent().removeClass('has-error')
+    },
+    submitProfile () {
+      var email = $('#email1').val()
+      var pwd1 = $('#pwd1').val()
+      var pwd2 = $('#pwd2').val()
+      var alphabet = /[a-z]/i
+      var number = /[0-9]/
+      var flag = true
+      console.log(email)
+      console.log(pwd1)
+      console.log(pwd2)
+      if (pwd1 !== '' && pwd1 !== pwd2) {
+        console.log('pwd error')
+        $('#pwd1').parent().addClass('has-error')
+        $('#pwd2').parent().addClass('has-error')
+        $('#password-help').remove()
+        $('#pwd2').after('<span id="password-help" class="help-block">Password Inconsistency</span>')
+        flag = false
+        $('#pwd1').val('')
+        this.message = ''
+        $('#pwd2').val('')
+      }
+      // eslint-disable-next-line
+      var re = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/
+      if (email !== '' && !re.test(email)) {
+        console.log('email error')
+        $('#email1').parent().addClass('has-error')
+        $('#email-help').remove()
+        $('#email1').after('<span id="email-help" class="help-block">Email format error</span>')
+        flag = false
+        return
+      }
+      if (pwd1 !== '' && (!alphabet.test(pwd1) || !number.test(pwd1))) {
+        console.log('pwd error')
+        $('#pwd1').parent().addClass('has-error')
+        $('#pwd2').parent().addClass('has-error')
+        $('#password-help').remove()
+        $('#pwd2').after('<span id="password-help" class="help-block">Password Inconsistency</span>')
+        flag = false
+        $('#pwd1').val('')
+        this.message = ''
+        $('#pwd2').val('')
+      }
+      if (!flag) return
+      console.log('hi there')
+      if (email !== '' && pwd1 !== '') {
+        this.$http.get('/updateemail', { params: { id: this.id, email: email } })
+          .then((res) => {
+            this.$http.get('/updatepwd', { params: { id: this.id, pwd: pwd1 } })
+              .then((res) => {
+                alert('success')
+                $("#close").click()
+                return
+              })
+          })
+      } else if (email === '' && pwd1 !== '') {
+        this.$http.get('/updatepwd', { params: { id: this.id, pwd: pwd1 } })
+          .then((res) => {
+            alert('success')
+            $("#close").click()
+            return
+          })
+      } else if (email !== '' && pwd1 === '') {
+        this.$http.get('/updateemail', { params: { id: this.id, email: email } })
+          .then((res) => {
+            alert('success')
+            $("#close").click()
+            return
+          })
+      }
+      $("#close").click()
+      return
+    },
     passsChange () {
       if (this.message === '') {
         console.log('disable')
