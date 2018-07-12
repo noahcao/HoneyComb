@@ -9,6 +9,7 @@ import threading
 import traceback
 import socket
 
+
 socket.setdefaulttimeout(900)
 papers_met = {} # 记录了所有已经查询到了的paper的title
 url_header = 'https://ieeexplore.ieee.org' # 在ieee xplore上进行搜索时的url的开头
@@ -69,8 +70,6 @@ def innerHTML(element):
     # 获取一个html元素的内部信息
     return element.decode_contents(formatter='html')
 
-
-
 def parseCitationPage(citation_url):
     # 解析一个论文对应的引用了它的ieee出版的论文的介绍页面，需要说明的是，这个页面中可能包含了大量的引用了这个论文的论文信息，
     # 但是默认情况下，我们只获得排名前三十的论文信息
@@ -85,7 +84,7 @@ def parseCitationPage(citation_url):
     try:
         element = driver.find_element_by_xpath("(//button[@type='button'])[3]")
     except:
-        print("Error")
+        # print("Error")
         driver.close()         
         return []
     else:               
@@ -242,32 +241,75 @@ def analyse_onesoup(soup, filename):
     file.close()
             
 
-def searchOnePaper(paper_title, filename=None):
+def searchOnePaper(paper_title, filename=None, driver=None):
     # 通过一个paper的标题，在ieee xplore上查找他的相关信息
     # 特别说明：
     #   虽然默认的爬虫入口是通过关键词在ieee xplore得到的结果列表开始，但是理论上也可以通过单篇论文的查询网页开始，
     #   只要这个论文在ieee xplore上的被引用次数不是0，就可以了
-    if paper_title in papers_met:
-        return
+    # 查询的时候，给一个title，输出的内容为一个list,内部的元素依次为：
+    # list[0]: title
+    # list[1]: author_list (一个字符串，作者名由','隔开)
+    # list[2]: year
+    # list[3]: cited
+    # list[5]: document_num (ieee中的论文对应的特征号)
+    # list[6]: url (ieee系统中论文的详情页面)
+    # list[7]: abstract
+    # list[8:]: citation_list (引用了该论文的部分论文的title)
+
+    #if paper_title in papers_met:
+    #    return
 
     paper_title = paper_title.replace(' ', '%20')
     search_url_header = "https://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText="
     search_url = search_url_header + paper_title
 
-    driver = webdriver.PhantomJS()
+    if driver == None:
+        driver = webdriver.PhantomJS()
     driver.get(search_url)
 
     source = driver.page_source
     soup = bs(source, 'html.parser')
-
+    
     while str(soup).find("Getting results...") != -1:
         source = driver.page_source
         soup = bs(source, 'html.parser')
 
+    result = soup.select('div.List-results-items')
+    result = result[0]
+    row, _ = parse_paper_body(result)
+    title = row[0]
+    author_list = row[1]
+    year = int(row[2])
+    cited = int(row[3])
+    citation_list = row[4:]
+
+    result = str(result)
+    begin = result.find('data-artnum=')
+    end = result.find('data-bkn=')
+    docnum = int(result[begin+13: end-2])
+
+    paper_detail_url = "https://ieeexplore.ieee.org/document/%d/" % (docnum)
+
+    driver.get(paper_detail_url)
+
+    source = driver.page_source
+    soup = bs(source, 'html.parser')
+
+    abstract = soup.select('.abstract-text')[0]
+    abstract = abstract.get_text()
+
+    row = [title, author_list, year, cited, docnum, paper_detail_url, abstract] + citation_list
+
     if filename == None:
-        filename = './data/papermetadata.csv'
-    driver.close()
-    analyse_onesoup(soup, filename)
+        filename = './papermetadata.csv'
+    f = open(filename, 'a', encoding='utf-8', newline='')
+    
+    writer = csv.writer(f, delimiter=',')
+    writer.writerow(row)
+    f.close()
+
+    # driver.close()
+    # analyse_onesoup(soup, filename)
 
 
 class myThread(threading.Thread):
@@ -319,35 +361,4 @@ class myThreadField(threading.Thread):
 
 
 if __name__ == '__main__':
-    '''
-    thread1 = myThread(1, "Cognitive radio: brain-empowered wireless communications", "thread5.csv")
-    thread2 = myThread(2, "Active contours without edges", "thread6.csv")
-    thread3 = myThread(3, "Consensus and Cooperation in Networked Multi-Agent Systems", "thread7.csv")
-    thread4 = myThread(4, "A new optimizer using particle swarm theory", "thread8.csv")
-    
-    thread1 = myThread(1, "Fast R-CNN", "thread1.csv")
-    thread2 = myThread(2, "Sensitive measurement of optical nonlinearities using a single beam", "thread2.csv")
-    thread3 = myThread(3, "The self-organizing map", "thread3.csv")
-    thread4 = myThread(4, "The particle swarm - explosion, stability, and convergence in a multidimensional complex space", "thread4.csv")
-
-    thread1 = myThread(9, "Fuzzy logic in control systems: fuzzy logic controller", "thread9.csv")
-    thread2 = myThread(10, "A survey on sensor networks", "thread10.csv")
-    thread3 = myThread(11, "Breaking Spectrum Gridlock With Cognitive Radios: An Information Theoretic Perspective", "thread11.csv")
-    thread4 = myThread(12, "Evaluating MapReduce for Multi-core and Multiprocessor Systems", "thread12.csv")
-    '''
-    thread1 = myThreadField(20, ["cmos"])
-    thread2 = myThreadField(21, ["sensors"])
-    thread3 = myThreadField(22, ["proxy"])
-    thread4 = myThreadField(23, ["information"])
-
-    thread1.start()
-    thread2.start()
-    thread3.start()
-    thread4.start()
-
-    thread1.join()
-    thread2.join()
-    thread3.join()
-    thread4.join()
-
-    print("----------------------------- FINISH ----------------------------------------")
+    searchOnePaper("Design Methods for 3D RFID Antennas Located on a Conducting Ground Plane")
