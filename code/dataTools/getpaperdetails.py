@@ -64,4 +64,7 @@ if __name__ == '__main__':
     f = open(filename, 'r')
     reader = csv.reader(f)
     total_paper_list = [row[1] for row in reader]
-    search(2, 0, 4, total_paper_list)
+    begin = 9000
+    for i in range(10):
+        begin = i*1000 + begin
+        search(4, begin, 1000, total_paper_list)
