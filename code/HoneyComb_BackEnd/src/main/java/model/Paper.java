@@ -14,6 +14,15 @@ public class Paper {
     private Set<Long> reference;
     private String title;
     private Integer cited;
+    private String _abstract;
+
+    public String get_abstract() {
+        return _abstract;
+    }
+
+    public void set_abstract(String _abstract) {
+        this._abstract = _abstract;
+    }
 
     public Integer getCited() {
         return cited;

@@ -129,17 +129,6 @@ public class UpdateUserAction extends ActionSupport {
         return NONE;
     }
 
-//    public String updateIcon() throws Exception {
-//        if (this.id == null) return ERROR;
-//        User result = appService.getUserById(id);
-//        if (result != null) {
-//            result.setIcon(this.icon);
-//            appService.updateUser(result);
-//            return SUCCESS;
-//        }
-//        return NONE;
-//    }
-
     public String updateIcon() throws  Exception {
         if (this.id == null) return ERROR;
         User result = appService.getUserById(this.id);
