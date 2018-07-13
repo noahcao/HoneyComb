@@ -85,7 +85,7 @@ export default {
             document.getElementById('password').value = ''
           }
           if (!flag) return
-          this.$http.post('/registerhandle', {name: name, email: email, pwd: pwd})
+          this.$http.post('/registerhandle', { name: name, email: email, pwd: pwd })
             .then((response) => {
               if (response.data.id === null) {
                 $('#name').parent().parent().addClass('has-error')
@@ -118,6 +118,10 @@ export default {
 </script>
 
 <style scoped>
+.form-horizontal .form-group {
+  margin-right: 0px;
+  margin-left: 0px;
+}
 .container {
   width: 375px;
   padding-left: 0px;
