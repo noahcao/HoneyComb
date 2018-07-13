@@ -60,7 +60,7 @@
         </form> -->
         <ul class="nav navbar-nav navbar-right">
           <li v-if="this.id === null">
-            <a data-toggle="modal" data-target="#myModal" @click="changeStatus(1)">Sign in</a>
+            <a id="signIn" data-toggle="modal" data-target="#myModal" @click="changeStatus(1)">Sign in</a>
           </li>
           <li v-if="this.id === null">
             <a data-toggle="modal" data-target="#myModal" @click="changeStatus(0)" id="sign-up">Sign up</a>
@@ -92,7 +92,8 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">{{ status[0].status ? 'Login' : 'Register'}}</h4>
+            <h4 class="modal-title" id="myModalLabel">{{ status[0].status ? 'Login' : 'Register'}}<span class="glyphicon glyphicon-menu-right pull-right" @click="closeToggle" data-dismiss="modal"></span></h4>
+            
           </div>
           <div class="modal-body">
             <wrapper-lr></wrapper-lr>
@@ -130,45 +131,49 @@ export default {
       $(".modal-body").children().remove();
     });
     this.loginJudge()
-    $('body').append('<style>' +
-      '@keyframes rotatefresh {' +
-      'from {' +
-      'transform: rotate(0deg);' +
-      '}' +
-      'to {' +
-      'transform: rotate(90deg);' +
-      'transition: all 0.5s;' +
-      '}' +
-      '}' +
-      '</style>')
-    $('body').append('<style>' +
-      '@keyframes rotatefresh2 {' +
-      'from {' +
-      'transform: rotate(90deg);' +
-      '}' +
-      'to {' +
-      'transform: rotate(0deg);' +
-      'transition: all 0.5s;' +
-      '}' +
-      '}' +
-      '</style>')
-    $('.dropdown-toggle').mouseover(function () {
-      $('.dropdown-toggle .glyphicon').css({
-        'animation': 'rotatefresh 0.5s',
-        'transform': 'rotate(90deg)'
-      })
-    })
-    $('.dropdown-toggle').mouseout(function () {
-      $('.dropdown-toggle .glyphicon').css({
-        'animation': 'rotatefresh2 0.5s',
-        'transform': 'rotate(0deg)'
-      })
-    })
-    $("#myModal").on("hidden.bs.modal", function () {
-      $(this).removeData("bs.modal");
-    });
+    // $('body').append('<style>' +
+    //   '@keyframes rotatefresh {' +
+    //   'from {' +
+    //   'transform: rotate(0deg);' +
+    //   '}' +
+    //   'to {' +
+    //   'transform: rotate(90deg);' +
+    //   'transition: all 0.5s;' +
+    //   '}' +
+    //   '}' +
+    //   '</style>')
+    // $('body').append('<style>' +
+    //   '@keyframes rotatefresh2 {' +
+    //   'from {' +
+    //   'transform: rotate(90deg);' +
+    //   '}' +
+    //   'to {' +
+    //   'transform: rotate(0deg);' +
+    //   'transition: all 0.5s;' +
+    //   '}' +
+    //   '}' +
+    //   '</style>')
+    // $('.dropdown-toggle').mouseover(function () {
+    //   $('.dropdown-toggle .glyphicon').css({
+    //     'animation': 'rotatefresh 0.5s',
+    //     'transform': 'rotate(90deg)'
+    //   })
+    // })
+    // $('.dropdown-toggle').mouseout(function () {
+    //   $('.dropdown-toggle .glyphicon').css({
+    //     'animation': 'rotatefresh2 0.5s',
+    //     'transform': 'rotate(0deg)'
+    //   })
+    // })
+    // $("#myModal").on("hidden.bs.modal", function () {
+    //   $(this).removeData("bs.modal");
+    // });
   },
   methods: {
+    closeToggle () {
+      console.log($('#signIn'))
+      $('#signIn').click()
+    },
     loginJudge () {
       this.$http.get('/loginstatus')
         .then((res) => {
@@ -203,6 +208,9 @@ export default {
 }
 </script>
 <style scoped>
+.glyphicon-menu-right{
+  cursor: pointer;
+}
 .navbar-inverse {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -311,9 +319,9 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 0px;
 }
-.nav > li:hover .dropdown-menu {
+/* .nav > li:hover .dropdown-menu {
   display: block;
-}
+} */
 
 .dropdown-menu > li > a:focus,
 .dropdown-menu > li > a:hover {
@@ -412,6 +420,9 @@ export default {
   padding-right: 0px;
   padding-bottom: 80px;
   padding-left: 0px;
+}
+.glyphicon-menu-right{
+  margin-top: 2px;
 }
 /* @keyframes rotatefresh {
   from {
