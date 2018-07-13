@@ -65,7 +65,7 @@ export default {
       var name = document.getElementById('name').value
       var email = document.getElementById('email').value
       var flag = true
-      if (repeat !== pwd) alert('两次密码输入不一致')
+      if (repeat !== pwd) alert('Password Inconsistency')
       else {
         if (pwd !== '' && name !== '') {
           var alphabet = /[a-z]/i

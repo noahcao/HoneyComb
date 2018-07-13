@@ -48,6 +48,7 @@ export default {
   },
   mounted () {
     $('canvas').remove()
+    if ($(window).width() > 768) {
     !(function () {
       function o (w, v, i) {
         return w.getAttribute(v) || i
@@ -140,6 +141,7 @@ export default {
         b()
       }, 100)
     }())
+    }
   }
 }
 </script>
