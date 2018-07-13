@@ -33,6 +33,8 @@ public interface AppService {
      */
     Paper getPaperById(java.lang.Long id);
 
-    List<Paper> queryPaper(String name);
+    List<String> queryTitles(String name);
+
+    List<Paper> getPaperByTitle(String title);
 
 }
