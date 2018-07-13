@@ -26,14 +26,18 @@ export default {
       console.log("clicked!");
       this.bus.$emit("SelectPaper", sth);
     },
-    SelectAuthor: function() {},
-    SelectAll: function() {}
+    SelectAuthor: function() {
+      this.bus.$emit("SelectAuthor","SelectAuthor")
+    },
+    SelectAll: function() {
+      this.bus.$emit("SelectAll","SelectAll")
+    }
   },
   
 };
 </script>
 
-<style>
+<style scoped>
 * {
   margin: 0;
   padding: 0;
