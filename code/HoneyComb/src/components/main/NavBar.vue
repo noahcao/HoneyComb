@@ -60,13 +60,13 @@
         </form> -->
         <ul class="nav navbar-nav navbar-right">
           <li v-if="this.id === null">
-            <a data-toggle="modal" data-target="#myModal" @click="changeStatus(1)">Sign in</a>
+            <a id="signIn" data-toggle="modal" data-target="#myModal" @click="changeStatus(1)">Sign in</a>
           </li>
           <li v-if="this.id === null">
             <a data-toggle="modal" data-target="#myModal" @click="changeStatus(0)" id="sign-up">Sign up</a>
           </li>
           <li class="dropdown" v-else>
-            <a href="#" class="dropdown-toggle js-activated" role="button" aria-haspopup="true" aria-expanded="false">{{name}}&nbsp;&nbsp;
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{name}}&nbsp;&nbsp;
               <span class="glyphicon glyphicon-menu-right"></span>
             </a>
             <ul class="dropdown-menu">
@@ -92,7 +92,10 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">{{ status[0].status ? 'Login' : 'Register'}}</h4>
+            <h4 class="modal-title" id="myModalLabel">{{ status[0].status ? 'Login' : 'Register'}}
+              <span class="glyphicon glyphicon-menu-right pull-right" @click="closeToggle" data-dismiss="modal"></span>
+            </h4>
+
           </div>
           <div class="modal-body">
             <wrapper-lr></wrapper-lr>
@@ -130,57 +133,61 @@ export default {
       $(".modal-body").children().remove();
     });
     this.loginJudge()
-    $('body').append('<style>' +
-      '@keyframes rotatefresh {' +
-      'from {' +
-      'transform: rotate(0deg);' +
-      '}' +
-      'to {' +
-      'transform: rotate(90deg);' +
-      'transition: all 0.5s;' +
-      '}' +
-      '}' +
-      '</style>')
-    $('body').append('<style>' +
-      '@keyframes rotatefresh2 {' +
-      'from {' +
-      'transform: rotate(90deg);' +
-      '}' +
-      'to {' +
-      'transform: rotate(0deg);' +
-      'transition: all 0.5s;' +
-      '}' +
-      '}' +
-      '</style>')
-    $('.dropdown-toggle').mouseover(function () {
-      $('.dropdown-toggle .glyphicon').css({
-        'animation': 'rotatefresh 0.5s',
-        'transform': 'rotate(90deg)'
-      })
-    })
-    $('.dropdown-toggle').mouseout(function () {
-      $('.dropdown-toggle .glyphicon').css({
-        'animation': 'rotatefresh2 0.5s',
-        'transform': 'rotate(0deg)'
-      })
-    })
-    $("#myModal").on("hidden.bs.modal", function () {
-      $(this).removeData("bs.modal");
-    });
+    // $('body').append('<style>' +
+    //   '@keyframes rotatefresh {' +
+    //   'from {' +
+    //   'transform: rotate(0deg);' +
+    //   '}' +
+    //   'to {' +
+    //   'transform: rotate(90deg);' +
+    //   'transition: all 0.5s;' +
+    //   '}' +
+    //   '}' +
+    //   '</style>')
+    // $('body').append('<style>' +
+    //   '@keyframes rotatefresh2 {' +
+    //   'from {' +
+    //   'transform: rotate(90deg);' +
+    //   '}' +
+    //   'to {' +
+    //   'transform: rotate(0deg);' +
+    //   'transition: all 0.5s;' +
+    //   '}' +
+    //   '}' +
+    //   '</style>')
+    // $('.dropdown-toggle').mouseover(function () {
+    //   $('.dropdown-toggle .glyphicon').css({
+    //     'animation': 'rotatefresh 0.5s',
+    //     'transform': 'rotate(90deg)'
+    //   })
+    // })
+    // $('.dropdown-toggle').mouseout(function () {
+    //   $('.dropdown-toggle .glyphicon').css({
+    //     'animation': 'rotatefresh2 0.5s',
+    //     'transform': 'rotate(0deg)'
+    //   })
+    // })
+    // $("#myModal").on("hidden.bs.modal", function () {
+    //   $(this).removeData("bs.modal");
+    // });
   },
   methods: {
+    closeToggle () {
+      console.log($('#signIn'))
+      $('#signIn').click()
+    },
     loginJudge () {
       this.$http.get('/loginstatus')
         .then((res) => {
           this.data.id = res.data.id
           this.id = this.data.id
           console.log('status', this.data.id)
-          if(this.data.id !== null){
-          this.$http.get('/getusername', { params: { id: this.id } })
-            .then((res) => {
-              this.name = res.data.name
-              console.log('status', res.data)
-            })
+          if (this.data.id !== null) {
+            this.$http.get('/getusername', { params: { id: this.id } })
+              .then((res) => {
+                this.name = res.data.name
+                console.log('status', res.data)
+              })
           }
         })
     },
@@ -203,6 +210,9 @@ export default {
 }
 </script>
 <style scoped>
+.glyphicon-menu-right {
+  cursor: pointer;
+}
 .navbar-inverse {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -311,9 +321,9 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 0px;
 }
-.nav > li:hover .dropdown-menu {
+/* .nav > li:hover .dropdown-menu {
   display: block;
-}
+} */
 
 .dropdown-menu > li > a:focus,
 .dropdown-menu > li > a:hover {
@@ -341,16 +351,32 @@ export default {
   line-height: 50px;
 }
 
+
+
 .modal.left .modal-dialog,
 .modal.right .modal-dialog {
   position: fixed;
   margin: auto;
-  width: 375px;
+  width: 100vw;
   height: 100%;
   -webkit-transform: translate3d(0%, 0, 0);
   -ms-transform: translate3d(0%, 0, 0);
   -o-transform: translate3d(0%, 0, 0);
   transform: translate3d(0%, 0, 0);
+}
+
+@media (min-width: 768px) {
+  .modal.left .modal-dialog,
+  .modal.right .modal-dialog {
+    position: fixed;
+    margin: auto;
+    width: 375px;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+  }
 }
 
 .modal.left .modal-content,
@@ -366,7 +392,7 @@ export default {
 
 /*Left*/
 .modal.left.fade .modal-dialog {
-  left: -320px;
+  left: -100vw;
   -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
   -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
   -o-transition: opacity 0.3s linear, left 0.3s ease-out;
@@ -377,9 +403,18 @@ export default {
   left: 0;
 }
 
+@media (min-width: 768px) {
+  .modal.right.fade .modal-dialog {
+    right: -320px;
+  }
+  .modal.left.fade .modal-dialog {
+    left: -320px;
+  }
+}
+
 /*Right*/
 .modal.right.fade .modal-dialog {
-  right: -320px;
+  right: -100vw;
   -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
   -o-transition: opacity 0.3s linear, right 0.3s ease-out;
@@ -413,6 +448,10 @@ export default {
   padding-bottom: 80px;
   padding-left: 0px;
 }
+.glyphicon-menu-right {
+  margin-top: 2px;
+}
+
 /* @keyframes rotatefresh {
   from {
     transform: rotate(0deg);

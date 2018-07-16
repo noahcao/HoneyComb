@@ -65,7 +65,7 @@ export default {
       var name = document.getElementById('name').value
       var email = document.getElementById('email').value
       var flag = true
-      if (repeat !== pwd) alert('两次密码输入不一致')
+      if (repeat !== pwd) alert('Password Inconsistency')
       else {
         if (pwd !== '' && name !== '') {
           var alphabet = /[a-z]/i
@@ -85,12 +85,13 @@ export default {
             document.getElementById('password').value = ''
           }
           if (!flag) return
-          this.$http.post('/registerhandle', {name: name, email: email, pwd: pwd})
+          this.$http.post('/registerhandle', { name: name, email: email, pwd: pwd })
             .then((response) => {
               if (response.data.id === null) {
                 $('#name').parent().parent().addClass('has-error')
                 $('#name').after('<span id="name-help" class="help-block">User name existed</span>')
               } else {
+                alert('success')
                 this.data.id = response.data.id
                 window.location.reload()
               }
@@ -118,6 +119,10 @@ export default {
 </script>
 
 <style scoped>
+.form-horizontal .form-group {
+  margin-right: 0px;
+  margin-left: 0px;
+}
 .container {
   width: 375px;
   padding-left: 0px;
@@ -154,7 +159,7 @@ input:focus {
   box-shadow: none;
 }
 .container {
-  margin-top: 80px;
+  margin-top: 30px;
   text-align: center;
 }
 .btn-default {
