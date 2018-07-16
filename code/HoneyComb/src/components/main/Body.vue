@@ -15,12 +15,12 @@
     <img src="../../../static/pic/蜜蜂数据.png" alt="80x80" class="img-rounded">
     <h3>An Academic Document Management Project.</h3>
     <div class="input-group input-group-lg">
-      <input type="text" class="form-control" placeholder="Search for...">
-      <span class="input-group-btn">
-        <router-link :to="{name:'search'}" class="btn btn-default" type="button">
+      <input type="text" class="form-control" placeholder="Search for..." v-model="content">
+      <router-link :to="{name:'search',  params: {content: content} }" class="input-group-btn">
+        <button class="btn btn-default" type="button" id="search233">
           <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        </router-link>
-      </span>
+        </button>
+      </router-link>
     </div>
 
     <div class="panel panel-default">
@@ -29,12 +29,12 @@
       </div>
     </div>
     <!-- /input-group -->
-
     <!-- /.col-lg-6 -->
 
   </section>
 </template>
 <script>
+import $ from 'jquery'
 // import Login from '../User/Login'
 // import Register from '../User/Register'
 /* eslint-disable */
@@ -43,10 +43,20 @@ export default {
   name: 'main-body',
   data () {
     return {
-      status
+      status,
+      content: ''
+    }
+  },
+  methods: {
+    keyListener (e) {
+      console.log($('#search233'))
+      if (e.keyCode === 13) {
+        $('#search233').click()
+      }
     }
   },
   mounted () {
+    document.onkeydown = this.keyListener
     $('canvas').remove()
     if ($(window).width() > 768) {
       !(function () {
@@ -207,13 +217,13 @@ input:focus {
   }
 }
 .panel-default {
-    background-color: rgba(255, 255, 255, 0);
-    border-color: rgba(255, 255, 255, 0);
-    position: fixed;
-    bottom: 0px;
-    height: 70px;
-    box-shadow: none;
-  }
+  background-color: rgba(255, 255, 255, 0);
+  border-color: rgba(255, 255, 255, 0);
+  position: fixed;
+  bottom: 0px;
+  height: 70px;
+  box-shadow: none;
+}
 .input-group-btn:last-child > .btn,
 .input-group-btn:last-child > .btn-group {
   z-index: 2;
