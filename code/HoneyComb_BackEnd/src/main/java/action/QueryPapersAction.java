@@ -1,10 +1,11 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import javafx.util.Pair;
 import model.Paper;
 import service.AppService;
 import tfidf.Tfidf;
+
 import java.util.*;
 
 public class QueryPapersAction extends ActionSupport {
@@ -65,6 +66,24 @@ public class QueryPapersAction extends ActionSupport {
 
     private String key;
     private ArrayList<Paper> papers;
+    private Integer start;
+    private Integer end;
+
+    public void setEnd(Integer end) {
+        this.end = end;
+    }
+
+    public Integer getEnd() {
+        return end;
+    }
+
+    public void setStart(Integer start) {
+        this.start = start;
+    }
+
+    public Integer getStart() {
+        return start;
+    }
 
     public void setPapers(ArrayList<Paper> papers) {
         this.papers = papers;
@@ -90,11 +109,34 @@ public class QueryPapersAction extends ActionSupport {
 
     public String search() throws Exception {
         this.papers = new ArrayList<>();
-        if (this.key == null) return ERROR;
+        if (this.key == null || this.start == null || this.end == null) return ERROR;
+        if (this.start > this.end) return ERROR;
+        String SEARCH = "search";
+        String SEARCHRESULT = "searchresult";
+
+        Map<String, Object> usersession = ActionContext.getContext().getSession();
+        if (usersession.get(SEARCH) != null) {
+            if ((usersession.get(SEARCH)).equals(key)) {
+                if (usersession.get(SEARCHRESULT) != null) {
+                    ArrayList<Paper> searchList = (ArrayList<Paper>) usersession.get(SEARCHRESULT);
+                    if (start + 1 > searchList.size()) return SUCCESS;
+                    if (end + 1 > searchList.size()) {
+                        end = searchList.size();
+                    }
+                    this.papers.addAll(searchList.subList(start, end));
+                    return SUCCESS;
+                }
+            } else {
+                usersession.replace(SEARCH, key);
+            }
+        } else {
+            usersession.put(SEARCH, key);
+        }
 
         List<Paper> results = appService.getPaperByTitle(key);
         if (results.size() == 1) {
             this.papers.addAll(results);
+            usersession.put(SEARCHRESULT, this.papers);
             return SUCCESS;
         }
         String[] temp = this.key.split(" ");
@@ -132,14 +174,17 @@ public class QueryPapersAction extends ActionSupport {
         }
         ComparePair com = new ComparePair();
         candidates.sort(com);
-        int end = limit <= candidates.size() ? limit : candidates.size();
-        for (int i = 0; i < end; i++) {
+        int listend = limit <= candidates.size() ? limit : candidates.size();
+        ArrayList<Paper> searchList = new ArrayList<>();
+        for (int i = 0; i < listend; i++) {
             results = appService.getPaperByTitle(candidates.get(i).getKey());
             if (results == null) continue;
             for (Paper result : results) {
-                if (!this.papers.contains(result)) this.papers.add(result);
+                if (!searchList.contains(result)) searchList.add(result);
             }
         }
+        usersession.put(SEARCHRESULT, searchList);
+        this.papers.addAll(searchList.subList(start, end));
 //        int limit = 100 / ((keys.size() * keys.size() + 1) / 2);
 //        if (limit == 0) limit = 10;
 //        int tot = 0;
