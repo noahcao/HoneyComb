@@ -92,6 +92,11 @@ public class QueryPapersAction extends ActionSupport {
         this.papers = new ArrayList<>();
         if (this.key == null) return ERROR;
 
+        List<Paper> results = appService.getPaperByTitle(key);
+        if (results.size() == 1) {
+            this.papers.addAll(results);
+            return SUCCESS;
+        }
         String[] temp = this.key.split(" ");
         if (temp.length == 0) return SUCCESS;
         ArrayList<String> allKeys = new ArrayList<>();
@@ -129,7 +134,7 @@ public class QueryPapersAction extends ActionSupport {
         candidates.sort(com);
         int end = limit <= candidates.size() ? limit : candidates.size();
         for (int i = 0; i < end; i++) {
-            List<Paper> results = appService.getPaperByTitle(candidates.get(i).getKey());
+            results = appService.getPaperByTitle(candidates.get(i).getKey());
             if (results == null) continue;
             for (Paper result : results) {
                 if (!this.papers.contains(result)) this.papers.add(result);
