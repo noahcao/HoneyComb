@@ -17,15 +17,15 @@
     <div class="input-group input-group-lg">
       <input type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button">
+        <router-link :to="{name:'search'}" class="btn btn-default" type="button">
           <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        </button>
+        </router-link>
       </span>
     </div>
 
     <div class="panel panel-default">
       <div class="panel-body pull-right">
-        Copyright © 2018 Honeycomb. All Rights Reserved
+        Copyright © 2018 Honeycomb. All Rights Reserved Ver. 1.0.1
       </div>
     </div>
     <!-- /input-group -->

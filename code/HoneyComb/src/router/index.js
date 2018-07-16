@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import userInfo from '../components/user/userInfo'
 import outcomb from '../components/Combs/outComb'
+import search from '../components/Search/search'
 // import navTest from '../components/main/navTest'
 
 Vue.use(Router)
@@ -24,6 +25,12 @@ export default new Router({
       path: '/comb',
       name: 'outcomb',
       component: outcomb
+
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: search
 
     }
   ]
