@@ -53,7 +53,7 @@ public class RegisterAction extends ActionSupport {
         if (this.email == null || this.name == null || this.pwd == null) return ERROR;
         System.out.println(this.email + "\n" + this.name);
         User resultEmail = appService.getUserByEmail(email);
-        User resultName = appService.getUserByEmail(name);
+        User resultName = appService.getUserByName(name);
         if (resultEmail == null && resultName == null) {
             User user = new User();
             user.setName(name);
