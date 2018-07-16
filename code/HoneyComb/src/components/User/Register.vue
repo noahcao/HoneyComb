@@ -91,6 +91,7 @@ export default {
                 $('#name').parent().parent().addClass('has-error')
                 $('#name').after('<span id="name-help" class="help-block">User name existed</span>')
               } else {
+                alert('success')
                 this.data.id = response.data.id
                 window.location.reload()
               }
@@ -158,7 +159,7 @@ input:focus {
   box-shadow: none;
 }
 .container {
-  margin-top: 80px;
+  margin-top: 30px;
   text-align: center;
 }
 .btn-default {
