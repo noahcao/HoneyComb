@@ -48,12 +48,15 @@ def check_reference_indb(title, citation):
     else:
         return True
 
-def insert_paper(title, author_list, year, cited, citation_list):
+def insert_paper(title, author_list, year, cited, doc_id, url, abstract, citation_list):
     # 把一篇论文的数据插入到数据库中，其中title和year直接插入到paper表中
     # citation_list和author_list插入到author_paper和paper_paper_reference
     # 这两个联系集生成的table中，同时，在author这个table中尝试插入对应的author
     # Note: 在尝试调用这个函数对一篇paper的信息进行插入之前，应该已经确认其当前不在数据库中
-    sql = "INSERT INTO paper (title, year, cited) VALUES (\'%s\', %d, %d)" % (pymysql.escape_string(str(title)), int(year), int(cited))
+    sql = "INSERT INTO paper \
+        (title, year, cited, doc_id, url, abstract) VALUES \
+        (\'%s\', %d, %d, %d, \'%s\', \'%s\')"\
+        % (pymysql.escape_string(str(title)), int(year), int(cited), int(doc_id),pymysql.escape_string(str(url)), pymysql.escape_string(str(abstract))) 
     cursor.execute(sql)
     db.commit()
     id = get_paperid(title)
@@ -137,12 +140,90 @@ def insert_all(data_path):
         except:
             continue
 
+def update_paper(id, title, year, cited, doc_id, url, abstract):
+    # 对于一篇已经存在于数据库中的论文，填充它的额外的数据信息
+    sql = 'UPDATE paper set \
+            doc_id = %d,\
+            year = %d,\
+            cited = %d,\
+            url = \'%s\',\
+            abstract = \'%s\' WHERE\
+            id = %d' %(int(doc_id), int(year), int(cited), pymysql.escape_string(url), pymysql.escape_string(abstract), int(id))
+    cursor.execute(sql)
+    db.commit()
+ 
+def update_all(dir_path):
+    # 遍历文件目录下的所有.csv文件，将其中的更新后的论文信息插入到数据库中
+    data_files = os.listdir(dir_path)
+    for filename in data_files:
+        print(filename)
+        file_path = dir_path + filename
+        csvfile = open(file_path, 'r', encoding='utf-8')
+        reader = csv.reader(csvfile)
+        idx = 1
+        print(filename)
+        for line in reader:
+            print(idx)
+            idx += 1
+            #try:
+            title = line[0]
+            authors = line[1]
+            year = line[2]
+            cited = line[3]
+            doc_id = line[4]
+            url = line[5]
+            abstract = line[6]
+            citation_list = line[7: len(line)]
+            authors = authors.split(',')
+            '''
+            print("-------------")
+            print(title)
+            print(authors)
+            print(year)
+            print(cited)
+            print(doc_id)
+            print(url)
+            print("-------------")
+            '''
+
+            # 对于作者名字中的空格进行删除，同时排除掉一些实际为空的作者名元素
+            real_authors = []
+
+            for i in range(len(authors)):
+                authorname = authors[i].replace(' ', '')
+                if len(authorname) > 1:
+                    real_authors.append(authorname)
+            try:
+                if check_indatabase(title, 'paper', 'title'):
+                    # 这篇论文之前已经被插入到数据库中了
+                    print("paper already in database, attemp to update it ")
+                    paper_id = get_paperid(title)
+                    update_paper(paper_id, title, year, cited, doc_id, url, abstract)
+                    db.commit()
+                else:
+                    print("insert a new paper")
+                    insert_paper(title, real_authors, year, cited, doc_id, url, abstract, citation_list)
+                    db.commit()
+
+                for citation in citation_list:
+                    if check_indatabase(citation, 'paper', 'title'):
+                        # 如果这篇citation对应的论文也在现在的paper表中的话，插入这个引用关系
+                        insert_reference(title, citation)
+                    else:
+                        # 这个citation对应的论文没有在paper的话，不但添加这个引用关系，而且将
+                        # citation对应的论文添加到paper这个数据表中
+                        insert_reference(title, citation, True)
+            except:
+                continue
+
+
 if __name__ == '__main__':
     data_path = './data/'    # data where the csv files placed
-    insert_all(data_path)
-    sql = "SELECT * from paper WHERE id = 11"
-    in_database = check_indatabase(1, 'paper', 'id')
-    print(in_database)
-    db.commit()
+    update_all(data_path)
+    #insert_all(data_path)
+    #sql = "SELECT * from paper WHERE id = 11"
+    #in_database = check_indatabase(1, 'paper', 'id')
+    #print(in_database)
+    #db.commit()
 
 
