@@ -25,7 +25,7 @@
 
     <div class="panel panel-default">
       <div class="panel-body pull-right">
-        Copyright © 2018 Honeycomb. All Rights Reserved Ver. 1.0.1
+        Copyright © 2018 Honeycomb. All Rights Reserved. Build 1.0.1
       </div>
     </div>
     <!-- /input-group -->
@@ -203,7 +203,7 @@ input:focus {
 }
 @media (min-width: 768px) {
   .panel-default {
-    margin-left: 60%;
+    margin-left: 55%;
   }
 }
 .panel-default {
