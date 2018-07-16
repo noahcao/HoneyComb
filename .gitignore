@@ -1,7 +1,15 @@
+
 **/HoneyComb/node_modules
 **/*.csv
 **/__pycache__/
 **/.vscode/
 **/*.txt
 !**/paper.csv
-
+.idea/
+out/
+target/
+*.iml
+./code/dataTools/*.txt
+./code/dataTools/*.csv
+./code/dataTools/__pycache__/
+**/ghostdriver.log
