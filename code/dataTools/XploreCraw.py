@@ -107,17 +107,6 @@ def parseCitationPage(citation_url):
         citation_list = []
 
         for citation in citations:
-            '''
-            meta = {}
-            citation = str(citation)
-            begin = citation.find('Text">')
-            end = citation.find('</div>')
-            citation = citation[begin+6:end]
-            authors = citation[:citation.find("\"") - 2]
-            authors = authors.replace(' ', '')
-            authors = authors.split(',')
-            meta["authors"] = authors # 获取论文的作者信息，作者可能不止一个人
-            '''
             citation = str(citation)
             begin = citation.find('Text">')
             end = citation.find('</div>')
