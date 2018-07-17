@@ -1,0 +1,160 @@
+<template>
+  <div>
+    <nav-bar></nav-bar>
+    <div class='loader loader--audioWave' id="loading1"></div>
+    <div v-for="paper in papers">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{paper.title}}</h3>
+        </div>
+        <div class="panel-body">
+          <div class="body-author">Authors: </div>
+          <div class="body-author" v-for="author in paper.authors">
+            <strong>
+              {{author.name}}
+            </strong>
+          </div>
+          <div class="body-cited">
+            cited:
+            <strong>{{paper.cited}}</strong>
+          </div>
+          <div class="body-cited">
+            Year:
+            <strong>{{paper.year}}</strong>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="body-abstract">
+            {{paper._abstract}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import $ from 'jquery'
+import NavBar from '../main/NavBar'
+export default {
+  name: 'search',
+  components: {
+    NavBar
+  },
+  data () {
+    return {
+      content: this.$route.params.content,
+      papers: null
+    }
+  },
+  mounted () {
+    $('canvas').remove()
+    this.$http.get('/searchpaper', { params: { key: this.content } })
+      .then((res) => {
+        this.papers = res.data.papers
+        console.log(this.papers)
+        $('#loading1').remove()
+      })
+  }
+}
+
+</script>
+
+<style scoped>
+.body-abstract {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.body-author {
+  margin-right: 8px;
+  float: left;
+}
+
+.panel {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+.panel-default > .panel-heading {
+  background-image: -webkit-linear-gradient(top, #f5f5f5 0, #e8e8e8 100%);
+  background-image: linear-gradient(to bottom, #f5f5f5 0, #e8e8e8 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#ffe8e8e8', GradientType=0);
+  background-repeat: repeat-x;
+}
+.panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 18px;
+  color: inherit;
+}
+
+/* loading component */
+.loader {
+  margin: 4em auto;
+}
+.loader--audioWave {
+  width: 3em;
+  height: 2em;
+  background: linear-gradient(#24292e, #24292e) 0 50%,
+    linear-gradient(#24292e, #24292e) 0.625em 50%,
+    linear-gradient(#24292e, #24292e) 1.25em 50%,
+    linear-gradient(#24292e, #24292e) 1.875em 50%,
+    linear-gradient(#24292e, #24292e) 2.5em 50%;
+  background-repeat: no-repeat;
+  background-size: 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em,
+    0.5em 0.25em;
+  animation: audioWave 1.5s linear infinite;
+}
+@keyframes audioWave {
+  25% {
+    background: linear-gradient(#3498db, #3498db) 0 50%,
+      linear-gradient(#24292e, #24292e) 0.625em 50%,
+      linear-gradient(#24292e, #24292e) 1.25em 50%,
+      linear-gradient(#24292e, #24292e) 1.875em 50%,
+      linear-gradient(#24292e, #24292e) 2.5em 50%;
+    background-repeat: no-repeat;
+    background-size: 0.5em 2em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em,
+      0.5em 0.25em;
+  }
+  37.5% {
+    background: linear-gradient(#24292e, #24292e) 0 50%,
+      linear-gradient(#3498db, #3498db) 0.625em 50%,
+      linear-gradient(#24292e, #24292e) 1.25em 50%,
+      linear-gradient(#24292e, #24292e) 1.875em 50%,
+      linear-gradient(#24292e, #24292e) 2.5em 50%;
+    background-repeat: no-repeat;
+    background-size: 0.5em 0.25em, 0.5em 2em, 0.5em 0.25em, 0.5em 0.25em,
+      0.5em 0.25em;
+  }
+  50% {
+    background: linear-gradient(#24292e, #24292e) 0 50%,
+      linear-gradient(#24292e, #24292e) 0.625em 50%,
+      linear-gradient(#3498db, #3498db) 1.25em 50%,
+      linear-gradient(#24292e, #24292e) 1.875em 50%,
+      linear-gradient(#24292e, #24292e) 2.5em 50%;
+    background-repeat: no-repeat;
+    background-size: 0.5em 0.25em, 0.5em 0.25em, 0.5em 2em, 0.5em 0.25em,
+      0.5em 0.25em;
+  }
+  62.5% {
+    background: linear-gradient(#24292e, #24292e) 0 50%,
+      linear-gradient(#24292e, #24292e) 0.625em 50%,
+      linear-gradient(#24292e, #24292e) 1.25em 50%,
+      linear-gradient(#3498db, #3498db) 1.875em 50%,
+      linear-gradient(#24292e, #24292e) 2.5em 50%;
+    background-repeat: no-repeat;
+    background-size: 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 2em,
+      0.5em 0.25em;
+  }
+  75% {
+    background: linear-gradient(#24292e, #24292e) 0 50%,
+      linear-gradient(#24292e, #24292e) 0.625em 50%,
+      linear-gradient(#24292e, #24292e) 1.25em 50%,
+      linear-gradient(#24292e, #24292e) 1.875em 50%,
+      linear-gradient(#3498db, #3498db) 2.5em 50%;
+    background-repeat: no-repeat;
+    background-size: 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em,
+      0.5em 2em;
+  }
+}
+</style>

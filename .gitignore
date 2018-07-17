@@ -1,7 +1,0 @@
-**/HoneyComb/node_modules
-**/*.csv
-**/__pycache__/
-**/.vscode/
-**/*.txt
-!**/paper.csv
-

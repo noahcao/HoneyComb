@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Main from '@/components/Main'
+import userInfo from '../components/user/userInfo'
+import outcomb from '../components/Combs/outComb'
+import search from '../components/Search/search'
+// import navTest from '../components/main/navTest'
 
 Vue.use(Router)
 
@@ -8,8 +12,26 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: '/userInfo',
+      name: 'userInfo',
+      component: userInfo
+    },
+    {
+      path: '/comb',
+      name: 'outcomb',
+      component: outcomb
+
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: search
+
     }
   ]
 })
