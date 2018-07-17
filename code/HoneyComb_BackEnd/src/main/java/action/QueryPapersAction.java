@@ -123,6 +123,7 @@ public class QueryPapersAction extends ActionSupport {
                     if (end + 1 > searchList.size()) {
                         end = searchList.size();
                     }
+                    if (start > end) return SUCCESS;
                     this.papers.addAll(searchList.subList(start, end));
                     return SUCCESS;
                 }
@@ -184,7 +185,14 @@ public class QueryPapersAction extends ActionSupport {
             }
         }
         usersession.put(SEARCHRESULT, searchList);
+
+        if (start + 1 > searchList.size()) return SUCCESS;
+        if (end + 1 > searchList.size()) {
+            end = searchList.size();
+        }
+        if (start > end) return SUCCESS;
         this.papers.addAll(searchList.subList(start, end));
+        return SUCCESS;
 //        int limit = 100 / ((keys.size() * keys.size() + 1) / 2);
 //        if (limit == 0) limit = 10;
 //        int tot = 0;
@@ -195,6 +203,5 @@ public class QueryPapersAction extends ActionSupport {
 //                for (int k = j + 1; k < j + i; k++) {
 //                    key = key.concat(" " + keys.get(k));
 //                }
-        return SUCCESS;
     }
 }
