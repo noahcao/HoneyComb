@@ -570,11 +570,13 @@ export default {
       console.log(svg_node);
       var newnodes = [];
       var newlinks = [];
+
       for (var i = 0; i < data.nodes.length; i++) {
         if (data.nodes[i].group != 3) {
           newnodes.push(data.nodes[i]);
         }
       }
+
       for (var i = 0; i < data.links.length; i++) {
         if (
           data.links[i].source.id == "cjk" ||
@@ -585,16 +587,18 @@ export default {
           continue;
         } else newlinks.push(data.links[i]);
       }
+
       svg_node = svg_node.data(newnodes);
       svg_link = svg_link.data(newlinks);
       svg_node.exit().remove();
       svg_link.exit().remove();
       console.log(svg_node);
+
     });
 
     this.bus.$on("SelectAll", function(message) {
       var color = d3.scaleOrdinal(d3.schemeCategory10);
-
+      
       svg_link = svg_link.data(data.links, d => {
         return d.source.id + "-" + d.target.id;
       });
