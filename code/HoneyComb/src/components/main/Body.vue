@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     keyListener (e) {
-      console.log($('#search233'))
       if (e.keyCode === 13) {
         $('#search233').click()
       }
