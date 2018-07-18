@@ -1,22 +1,46 @@
 <template>
   <div>
     <svg width='1000' height='600'></svg>
+    <div class='tooltip'>
+      <div v-if='unselected' class='title'>
+        <p class='title'>Move the mouse</p>
+        <p class='title'>to the node for</p>
+        <p class='title'>detailed information</p>
+      </div>
+      <div v-else-if='ispaper'>
+        <p class='title'>{{paper.title}}</p>
+        <p class='year'>{{paper.year}}</p>
+      </div>
+      <div v-else class='title'>
+        <p class='title'>{{author.name}}</p>
+      </div>
+      <div v-if='selected'>
+        <hr class='tooltip-hr'>
+        <div v-if='ispaper'>
+          <p>{{paper.abstract}}</p>
+        </div>
+        <div v-else>
+
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import * as d3 from 'd3';
+import * as d3 from 'd3'
+import AbstractBox from './AbstractBox.vue'
 var data = {
   nodes: [
-    { id: 'mk', group: 1 },
-    { id: 'mk1', group: 1 },
-    { id: 'mk2', group: 1 },
-    { id: 'mk3', group: 1 },
-    { id: 'zjh', group: 2 },
-    { id: 'zjh1', group: 2 },
-    { id: 'zjh2', group: 2 },
-    { id: 'zjh3', group: 2 },
-    { id: 'cjk', group: 3 },
-    { id: 'cjk1', group: 3 }
+    { id: 'mk', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
+    { id: 'mk1', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
+    { id: 'mk2', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
+    { id: 'mk3', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
+    { id: 'zjh', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
+    { id: 'zjh1', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
+    { id: 'zjh2', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
+    { id: 'zjh3', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
+    { id: 'cjk', group: 3, type: 'author', name: 'author!', publication: ['publication1', 'publication2'], co_author: ['author1', 'author2'] },
+    { id: 'cjk1', group: 3, type: 'author', name: 'author!',publication: ['publication1', 'publication2'], co_author: ['author1', 'author2']}
   ],
   links: [
     { source: 'mk', target: 'mk1', value: 1 },
@@ -36,7 +60,20 @@ export default {
   data () {
     return {
       nodes: data.nodes,
-      links: data.links
+      links: data.links,
+      unselected: true,
+      selected: false,
+      ispaper: true,
+      paper: {
+        title: 'title',
+        year: '2018',
+        abstract: 'paper abstract'
+      },
+      author: {
+        name: 'name',
+        publication: ['paper1', 'paper2'],
+        co_author: ['co_author1', 'co_author2']
+      }
     }
   },
   methods: {
@@ -44,13 +81,8 @@ export default {
       console.log(id)
     }
   },
-  created () {
-    this.bus.$on('SelectAuthor', function (message) {
-      //waiting for finished!
-    })
-  },
   mounted () {
-    let this_ = this
+    let that = this
     console.log('mounted!')
     var img_w = 10
     var img_h = 10
@@ -110,11 +142,6 @@ export default {
         return Math.sqrt(d.value)
       })
 
-    // var tooltip = d3.select('body')
-    //     .append('div')
-    //     .attr('class', 'tooltip')
-    //     .style('display', 'none')
-
     var svg_node = svg
       .append('g')
       .attr('class', 'nodes')
@@ -152,11 +179,22 @@ export default {
         this_.print_id(d.id)
       })
       .on('mouseover', function (d, i) {
-        // tooltip.html('<p>' + d.id + '</p>')
-        //     .transition()
-        //     .style('left', (d.x + 80) + 'px')
-        //     .style('top', (d.y + 20) + 'px')
-        //     .style('display', 'block')
+        if (d.type == "paper") {
+          that.unselected = false
+          that.selected = true
+          that.ispaper = true
+          that.paper.title = d.title
+          that.paper.year = d.year
+          that.paper.abstract = d.abstract
+        }
+        else {
+          that.unselected = false
+          that.selected = true
+          that.ispaper = false
+          that.author.name = d.name
+          that.author.publication = d.publication
+          that.author.co_author = d.co_author
+        }
       })
       .on('mouseout', function (d) {
         // tooltip.style('display', 'none')
@@ -187,7 +225,7 @@ export default {
         })
         .attr('y2', function (d) {
           return d.target.y
-        });
+        })
 
       svg_node
         .attr('cx', function (d) {
@@ -195,7 +233,7 @@ export default {
         })
         .attr('cy', function (d) {
           return d.y
-        });
+        })
 
       /*text
         .text(function(d) {
@@ -231,7 +269,6 @@ export default {
     }
 
     this.bus.$on('SelectPaper', function (message) {
-      console.log(svg_node);
       var newnodes = []
       var newlinks = []
 
@@ -256,12 +293,12 @@ export default {
       svg_link = svg_link.data(newlinks)
       svg_node.exit().remove()
       svg_link.exit().remove()
-    });
+    })
 
     this.bus.$on('SelectAll', function (message) {
       svg_link = svg_link.data(data.links, d => {
         return d.source.id + '-' + d.target.id
-      });
+      })
 
       svg_link = svg_link
         .enter()
@@ -288,14 +325,14 @@ export default {
             .on('start', dragstarted)
             .on('drag', dragged)
             .on('end', dragended)
-        );
+        )
 
       simulation.nodes(data.nodes)
       simulation.force('link').links(data.links)
       simulation.alpha(1).restart()
-    });
+    })
   }
-};
+}
 </script>
 <style>
 .links line {
@@ -315,8 +352,8 @@ export default {
 
 .tooltip {
   position: absolute;
-  top: 100px;
-  left: 100px;
+  top: 30px;
+  right: 20px;
   -moz-border-radius: 3px;
   border-radius: 3px;
   border: 2px solid #ddd;
@@ -325,6 +362,7 @@ export default {
   color: #000;
   padding: 10px;
   width: 300px;
+  height: 400px;
   font-size: 15px;
   z-index: 120;
 }
@@ -342,8 +380,14 @@ hr.tooltip-hr {
 }
 
 .tooltip .title {
+  text-align: left;
+  padding-left: 20px;
   font-size: 20px;
   line-height: 24px;
+}
+.tooltip .year {
+  text-align: left;
+  padding-left: 20px;
 }
 
 .tooltip .name {
