@@ -70,7 +70,12 @@ public class AppServiceImpl implements AppService {
     }
 
     @Override
-    public List<Paper> queryPaper(String name) {
-        return paperDao.queryPapers(name);
+    public List<String> queryTitles(String name) {
+        return paperDao.queryTitles(name);
+    }
+
+    @Override
+    public List<Paper> getPaperByTitle(String title) {
+        return paperDao.getPaperByTitle(title);
     }
 }

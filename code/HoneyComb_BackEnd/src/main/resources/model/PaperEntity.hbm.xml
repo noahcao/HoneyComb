@@ -11,6 +11,7 @@
         <property name="title" column="title"/>
         <property name="cited" column="cited"/>
         <property name="url" column="url"/>
+        <property name="_abstract" column="abstract"/>
         <set name="authors" table="author_paper" cascade="save-update, persist" lazy="false">
             <key column="paper_id"/>
             <many-to-many class="model.Author" column="author_id"/>
