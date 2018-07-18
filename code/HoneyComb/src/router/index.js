@@ -29,7 +29,7 @@ export default new Router({
 
     },
     {
-      path: '/search',
+      path: '/search?content=:content',
       name: 'search',
       component: search
 
