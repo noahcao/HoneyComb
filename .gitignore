@@ -1,6 +1,1 @@
-
-**/HoneyComb/node_modules
-.idea/
-out/
-target/
-*.iml
+**/node_modules

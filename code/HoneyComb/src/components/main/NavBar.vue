@@ -25,7 +25,7 @@
             <a href="#" class="tag">About us</a>
           </li>
           <li>
-            <a href="#" class="tag">Community</a>
+            <router-link :to="{name:'community'}" class="tag">Community</router-link>
           </li>
           <!-- <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
