@@ -8,20 +8,23 @@
           <h3 class="panel-title">{{paper.title}}</h3>
         </div>
         <div class="panel-body">
-          <div class="body-author">Authors: </div>
-          <div class="body-author" v-for="author in paper.authors">
-            <strong>
-              {{author.name}}
-            </strong>
+          <div class="col-xs-1 col-md-6 author-group">
+            <div class="body-author">Authors: </div>
+            <div class="body-author" v-for="author in paper.authors">
+              <strong>
+                {{author.name}}
+              </strong>
+            </div>
           </div>
-          <div class="body-cited">
+          <div class="col-xs-1 col-md-2 body-cited">
             cited:
             <strong>{{paper.cited}}</strong>
           </div>
-          <div class="body-cited">
+          <div class="col-xs-1 col-md-2 body-cited">
             Year:
             <strong>{{paper.year}}</strong>
           </div>
+          <a class="col-xs-1 col-md-2" :href="paper.url" target="_blank">more..</a>
         </div>
         <div class="panel-body">
           <div class="body-abstract">
@@ -69,15 +72,26 @@ export default {
 .body-author {
   margin-right: 8px;
   float: left;
+  
 }
-
+.author-group{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .panel {
   margin-left: 15%;
   margin-right: 15%;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 0px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
+
 .panel-default > .panel-heading {
-  background-image: -webkit-linear-gradient(top, #f5f5f5 0, #e8e8e8 100%);
-  background-image: linear-gradient(to bottom, #f5f5f5 0, #e8e8e8 100%);
+  background-image: linear-gradient(to bottom, #dedede 0, #dedede 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#ffe8e8e8', GradientType=0);
   background-repeat: repeat-x;
 }
