@@ -1,13 +1,15 @@
+/* eslint-disable */
 <template>
-  <div>
+  <div id="community">
     <nav-bar></nav-bar>
     <editor></editor>
   </div>
 </template>
 
 <script>
+  /* eslint-disable */
   import NavBar from '../main/NavBar'
-  import editor from './index'
+  import editor from './editor'
   export default {
     name: 'outcomb',
     components: {
@@ -18,4 +20,7 @@
 </script>
 
 <style scoped>
+  #community{
+    height: 500px;
+  }
 </style>

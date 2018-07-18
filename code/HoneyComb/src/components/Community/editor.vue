@@ -1,8 +1,6 @@
-/* eslint-disable */
 <template>
-  <div class="mdContainer" :class="{ fullPage: fullPageStatus }">
+  <div class="mdContainer" >
     <div class="navContainer" v-if="navStatus">
-      <div class="nameContainer" v-if="icoStatusP" @click="happyDay">OVEN-mdEditor</div>
       <div class="markContainer">
         <ul class="markListGroup">
           <li class="markListItem" @click="addStrong" title="strong"><b>B</b></li>
@@ -22,24 +20,25 @@
           <li class="markListItem" @click="addTable" title="table"><i class="fa fa-table" aria-hidden="true"></i></li>
           <li class="markListItem" @click="addUl" title="ul-list"><i class="fa fa-list-ul" aria-hidden="true"></i></li>
           <li class="markListItem" @click="addOl" title="ol-list"><i class="fa fa-list-ol" aria-hidden="true"></i></li>
-          <li class="markListItem" @click="fullPageFn" title="fullpage"><i class="fa fa-arrows-alt" aria-hidden="true"></i></li>
           <li class="markListItem" @click="previewFn" title="preview"><i class="fa fa-eye-slash" aria-hidden="true"></i></li>
           <li class="markListItem" @click="previewAllFn" title="previewAll"><i class="fa fa-eye" aria-hidden="true"></i></li>
+          <li class="btn" style="margin-left: 80%;margin-right: 5%" @click="Save">暂存</li>
+          <li class="btn" @click="Post">发布</li>
         </ul>
-
       </div>
     </div>
     <div class="mdBodyContainer" :class="{ noMenu: !navStatus }">
       <div class="editContainer" v-if="editStatus">
         <textarea name="" class="mdEditor" @keydown.9="tabFn" v-scroll="editScroll" v-model="input"></textarea>
       </div>
-      <div class="previewContainer markdown-body" v-scroll="previewScroll" v-html="compiledMarkdown" v-if="previewStatus">
+      <div class="previewContainer markdown-body" v-scroll="previewScroll" v-html="htmlValue" v-if="previewStatus">
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  /* eslint-disable */
   import Vue from 'vue'
   import marked from 'marked'
   import scroll from 'vue-scroll'
@@ -76,9 +75,10 @@
   }
   export default {
     name: 'markdown',
-    props: ['mdValuesP', 'fullPageStatusP', 'editStatusP', 'previewStatusP', 'navStatusP', 'icoStatusP'],
+    //props: ['mdValuesP', 'fullPageStatusP', 'editStatusP', 'previewStatusP', 'navStatusP', 'icoStatusP'],
     data() {
       return {
+        //input: this.msg.mdValue || '',
         input: this.mdValuesP || '',
         editStatus: Boolean(this.editStatusP),
         previewStatus: Boolean(this.previewStatusP),
@@ -86,7 +86,10 @@
         navStatus: Boolean(this.navStatusP),
         icoStatus: Boolean(this.icoStatusP),
         maxEditScrollHeight:0,
-        maxPreviewScrollHeight:0
+        maxPreviewScrollHeight:0,
+        msgShow:'我要显示的内容',
+        dilogStatus:false,
+        htmlValue: ''
       }
     },
     created: function() {
@@ -95,7 +98,26 @@
         this.previewStatus = true;
       }
     },
+    mounted(){
+      this.input = '# Welcome to HoneyComb';
+      //this.mdValuesP=this.msg.mdValue;
+      this.fullPageStatusP=false;
+      this.editStatusP=true;
+      this.previewStatus=true;
+      this.previewStatusP=true;
+      this.navStatusP=true;
+      this.icoStatusP=true;
+      this.navStatus=true;
+    },
     methods: {
+      Save(){
+        alert(this.input);
+        alert(this.htmlValue)
+      },
+      Post(){
+        alert(this.input);
+        alert(this.htmlValue)
+      },
       tabFn: function(evt) {
         insertContent("    ", this);
         // 屏蔽屌tab切换事件
@@ -233,13 +255,6 @@
           this.previewStatus = true;
         }
       },
-      fullPageFn: function() {
-        this.fullPageStatus = !this.fullPageStatus;
-        let maxEditScrollHeight=document.querySelector('.mdEditor').scrollHeight-document.querySelector('.mdEditor').clientHeight;
-        let maxPreviewScrollHeight=document.querySelector('.previewContainer').scrollHeight-document.querySelector('.previewContainer').clientHeight;
-        this.maxEditScrollHeight = maxEditScrollHeight
-        this.maxPreviewScrollHeight = maxPreviewScrollHeight
-      },
       previewScroll: function(e, position) {
         if(this.maxEditScrollHeight!==0){
           let topPercent=position.scrollTop/this.maxPreviewScrollHeight;
@@ -256,135 +271,23 @@
         window.open('https://github.com/ovenslove/vue-mdEditor');
       }
     },
-    computed: {
-      compiledMarkdown: function() {
-        return marked(this.input, {
-          sanitize: true
-        })
-      }
-    },
+
     watch: {
       input: function() {
-        let data = {};
-        data.mdValue = this.input;
-        data.htmlValue = marked(this.input, {
+        this.mdValue = this.input;
+        this.htmlValue = marked(this.input, {
           sanitize: true
         });
-        this.$emit('childevent', data);
         let maxEditScrollHeight=document.querySelector('.mdEditor').scrollHeight-document.querySelector('.mdEditor').clientHeight;
         let maxPreviewScrollHeight=document.querySelector('.previewContainer').scrollHeight-document.querySelector('.previewContainer').clientHeight;
-        this.maxEditScrollHeight = maxEditScrollHeight
-        this.maxPreviewScrollHeight = maxPreviewScrollHeight
+        this.maxEditScrollHeight = maxEditScrollHeight;
+        this.maxPreviewScrollHeight = maxPreviewScrollHeight;
       }
     }
   }
 </script>
 
-<style lang="scss">
-  /*引入reset文件*/
-
-  @import "../../../static/css/reset";
-
-  /*引入github的markdown样式文件*/
-
-  @import "../../../static/css/github-markdown.css";
-
-  /*引入atom的代码高亮样式文件*/
-
-  @import "../../../static/css/atom-one-dark.min.css";
-  .mdContainer {
-    width: 100%;
-    height: 100%;
-    background: lightblue;
-  &.fullPage {
-     position: fixed;
-     z-index: 1000;
-     left: 0;
-     top: 0;
-   }
-  .navContainer {
-    width: 100%;
-    height: 36px;
-    background: #fff;
-    box-sizing: border-box;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 10px;
-  .nameContainer {
-    color: lightblue;
-    margin-right: 10px;
-    cursor:pointer;
-  }
-  .markContainer {
-    width: auto;
-    height: 100%;
-    margin-left: 0px;
-  ul.markListGroup {
-    height: 100%;
-    width: auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  li.markListItem {
-    list-style: none;
-    width: 20px;
-    height: 20px;
-    margin: 0 2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 12px;
-    color: #333;
-  &:hover {
-     background: #eee;
-   }
-  }
-  }
-  }
-  }
-  .mdBodyContainer {
-    width: 100%;
-    height: calc(100% - 36px);
-    background: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-  &.noMenu{
-     height: 100%;
-   }
-  }
-  }
-
-  // 编辑区域
-     .editContainer {
-       height: 100%;
-       width: 100%;
-       box-sizing: border-box;
-       border-right: 1px solid #ddd;
-       background: #333;
-       color: #fff;
-       padding: 10px;
-  .mdEditor {
-    height: 100%;
-    width: 100%;
-    background: transparent;
-    outline: none;
-    color: #fff;
-    resize: none;
-  }
-  }
-
-  // 预览区
-     .previewContainer {
-       width: 100%;
-       height: 100%;
-       box-sizing: border-box;
-       background: #fff;
-       overflow: auto;
-       padding: 10px;
-     }
+<style scoped>
+  @import '../../../static/css/editor.css';
 </style>
+

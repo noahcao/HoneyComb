@@ -15,6 +15,7 @@ export default {
   font-family: "Century Gothic", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%
 }
 a:link,
 a:visited,
