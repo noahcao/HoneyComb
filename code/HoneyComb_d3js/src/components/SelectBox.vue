@@ -1,39 +1,53 @@
 <template>
-    <div class="mobile">
-		<!-- Checkbox to toggle the menu -->
-		<input type="checkbox" id="tm" />
-		<!-- The menu -->
-		<ul class="sidenav">
-		    <li><a href="#" v-on:click="SelectPaper"><i class="fa fa-circle"></i><b>Papers</b></a></li>
-			<li><a href="#" v-on:click="SelectAuthor"><i class="fa fa-circle"></i><b>Authors</b></a></li>
-			<li><a href="#" v-on:click="SelectAll"><i class="fa fa-circle"></i><b>All</b></a></li>
-		</ul>
-		<!-- Content area -->
-		<section id='net'>
-			<!-- Label for #tm checkbox -->
-			<label for="tm">Select Here</label>
-		</section>
-	</div>
+  <div class='mobile'>
+    <!-- Checkbox to toggle the menu -->
+    <input type='checkbox' id='tm' />
+    <!-- The menu -->
+    <ul class='sidenav'>
+      <li>
+        <a href='#' v-on:click='SelectPaper'>
+          <i class='fa fa-circle'></i>
+          <b>Papers</b>
+        </a>
+      </li>
+      <li>
+        <a href='#' v-on:click='SelectAuthor'>
+          <i class='fa fa-circle'></i>
+          <b>Authors</b>
+        </a>
+      </li>
+      <li>
+        <a href='#' v-on:click='SelectAll'>
+          <i class='fa fa-circle'></i>
+          <b>All</b>
+        </a>
+      </li>
+    </ul>
+    <!-- Content area -->
+    <section id='net'>
+      <!-- Label for #tm checkbox -->
+      <label for='tm'>Select Here</label>
+    </section>
+  </div>
 </template>
 
 <script>
-import * as d3 from "d3";
+import * as d3 from 'd3';
 export default {
-  name: "SelectBox",
+  name: 'SelectBox',
   methods: {
-    SelectPaper: function() {
-      var sth = ["1", "2"];
-      console.log("clicked!");
-      this.bus.$emit("SelectPaper", sth);
+    SelectPaper: function () {
+      var sth = ['1', '2']
+      this.bus.$emit('SelectPaper', sth)
     },
-    SelectAuthor: function() {
-      this.bus.$emit("SelectAuthor","SelectAuthor")
+    SelectAuthor: function () {
+      this.bus.$emit('SelectAuthor', 'SelectAuthor')
     },
-    SelectAll: function() {
-      this.bus.$emit("SelectAll","SelectAll")
+    SelectAll: function () {
+      this.bus.$emit('SelectAll', 'SelectAll')
     }
   },
-  
+
 };
 </script>
 
@@ -50,7 +64,7 @@ export default {
 
 h2 {
   color: #fff;
-  font: 300 40px "Open Sans";
+  font: 300 40px 'Open Sans';
   width: 300px;
   padding: 30px;
   float: left;
@@ -70,7 +84,7 @@ h2 {
 .mobile section {
   background: #595959;
   opacity: 1;
-  width: 320px;
+  width: 200px;
   height: 600px;
   position: relative;
   transition: all 0.25s;
@@ -93,7 +107,7 @@ h2 {
 /*Nav styles*/
 .sidenav {
   background: rgb(50, 60, 60);
-  width: 200px;
+  width: 150px;
   position: absolute;
   right: 0;
   top: 0;
@@ -117,6 +131,7 @@ h2 {
 }
 .sidenav i {
   display: block;
+  padding-left: 50px;
   width: 50px;
   float: left;
   font-size: 16px;
@@ -126,7 +141,7 @@ h2 {
 /*Animation controls using checkbox hack*/
 /*Animate content area to the right*/
 #tm:checked ~ section {
-  transform: translateX(-200px);
+  transform: translateX(-120px);
 }
 /*Animate links from right to left + fade in effect*/
 #tm:checked ~ .sidenav b {

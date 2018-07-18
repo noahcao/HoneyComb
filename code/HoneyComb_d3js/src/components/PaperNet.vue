@@ -1,16 +1,16 @@
 <template>
-<div class='container-fluid'>
+  <div class='container-fluid'>
     <select-box></select-box>
     <d3-force></d3-force>
 
-</div>
+  </div>
 </template>
 
 <script>
-import D3Force from "./D3_Force.vue";
-import SelectBox from "./SelectBox.vue";
+import D3Force from './D3_Force.vue'
+import SelectBox from './SelectBox.vue'
 export default {
-  name: "PaperNet",
+  name: 'PaperNet',
   components: {
     D3Force,
     SelectBox
