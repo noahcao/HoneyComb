@@ -120,7 +120,7 @@ public class QueryPapersAction extends ActionSupport {
                 if (usersession.get(SEARCHRESULT) != null) {
                     ArrayList<Paper> searchList = (ArrayList<Paper>) usersession.get(SEARCHRESULT);
                     if (start + 1 > searchList.size()) return SUCCESS;
-                    if (end + 1 > searchList.size()) {
+                    if (end > searchList.size()) {
                         end = searchList.size();
                     }
                     if (start > end) return SUCCESS;
@@ -187,7 +187,7 @@ public class QueryPapersAction extends ActionSupport {
         usersession.put(SEARCHRESULT, searchList);
 
         if (start + 1 > searchList.size()) return SUCCESS;
-        if (end + 1 > searchList.size()) {
+        if (end > searchList.size()) {
             end = searchList.size();
         }
         if (start > end) return SUCCESS;

@@ -1,7 +1,7 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import data.impl.IconDaoImpl;
+import data.dao.impl.IconDaoImpl;
 import data.model.IconEntity;
 import model.User;
 import org.springframework.test.context.ContextConfiguration;

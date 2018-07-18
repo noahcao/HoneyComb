@@ -1,7 +1,7 @@
-package data.impl;
+package data.dao.impl;
 
 import com.mongodb.DB;
-import data.IconDao;
+import data.dao.IconDao;
 import data.model.IconEntity;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
