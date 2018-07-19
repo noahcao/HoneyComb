@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <nav-bar></nav-bar>
@@ -61,8 +62,10 @@
 </template>
 
 <script>
+
 import $ from 'jquery'
 import NavBar from '../main/NavBar'
+/* eslint-disable */
 export default {
   name: 'search',
   components: {

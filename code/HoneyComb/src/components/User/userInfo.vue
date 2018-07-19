@@ -188,27 +188,23 @@ export default {
             this.$http.get('/updatepwd', { params: { id: this.id, pwd: pwd1 } })
               .then((res) => {
                 alert('success')
-                $("#close").click()
-                return
+                $('#close').click()
               })
           })
       } else if (email === '' && pwd1 !== '') {
         this.$http.get('/updatepwd', { params: { id: this.id, pwd: pwd1 } })
           .then((res) => {
             alert('success')
-            $("#close").click()
-            return
+            $('#close').click()
           })
       } else if (email !== '' && pwd1 === '') {
         this.$http.get('/updateemail', { params: { id: this.id, email: email } })
           .then((res) => {
             alert('success')
-            $("#close").click()
-            return
+            $('#close').click()
           })
       }
-      $("#close").click()
-      return
+      $('#close').click()
     },
     passsChange () {
       if (this.message === '') {
