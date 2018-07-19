@@ -68,4 +68,5 @@ if __name__ == '__main__':
     pr = PRIterator(dg)
     page_ranks = pr.page_rank()
 
-    print("The final page rank is\n", page_ranks)
+    for keys in page_ranks:
+        print (keys,page_ranks[keys])
