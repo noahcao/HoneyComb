@@ -23,4 +23,8 @@
   #community{
     height: 500px;
   }
+  #sidebar{
+    background-color: black;
+    height: 100%
+  }
 </style>

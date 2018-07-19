@@ -5,7 +5,12 @@ var LRList = [
   }
 ]
 
+var EditorContent = ""
+var inMarkdown = false
+
 export default {
   id,
-  LRList
+  LRList,
+  EditorContent,
+  inMarkdown
 }

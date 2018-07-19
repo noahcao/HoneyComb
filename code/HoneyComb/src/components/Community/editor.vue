@@ -1,12 +1,13 @@
 <template>
     <div id='editor'>
         <div id='editorNavBar'>
-            <button class='barbtn btn-link pull-right'>暂存</button>
-            <button class='barbtn btn-link pull-right'>发布</button>
-            <button class='barbtn btn-link pull-right' @click='alterEditor'>切换到{{anotherEditor}}</button>
+            <button class='barbtn btn-link pull-right' @click="saveContent">Save</button>
+            <button class='barbtn btn-link pull-right'>Post</button>
+            <button class='barbtn btn-link pull-right' @click='alterEditor'>{{anotherEditor}}</button>
         </div>
         <markdown v-if="!showMarkdown"></markdown>
-        <quillEditor v-if="showMarkdown"></quillEditor>
+        <quill-editor class="quill" v-model="data.EditorContent"
+        v-if="showMarkdown"></quill-editor>
     </div>
 </template>
 
@@ -18,27 +19,34 @@ import '../../../static/css/quill.bubble.css'
 import markdown from './markdown'
 import { quillEditor } from 'vue-quill-editor'
 export default {
-    name: 'outcomb',
+    name: 'editor',
     components: {
       markdown,
-      quillEditor
+      quillEditor,
     },
     data() {
         return{
             showMarkdown: true,
-            anotherEditor: '富文本编辑器'
+            anotherEditor: 'RichText Mode',
         }
     },
     methods:{
         alterEditor(){
             if(this.showMarkdown){
                 this.showMarkdown = false;
-                this.anotherEditor = 'Markdown编辑器';
+                this.anotherEditor = 'MarkDown Mode';
+                this.data.EditorContent = "";
+                this.data.inMarkdown = true
             }
             else{
                 this.showMarkdown = true;
-                this.anotherEditor = '富文本编辑器';
+                this.anotherEditor = 'RichText Mode';
+                this.data.EditorContent = "";
+                this.data.inMarkdown = true
             }
+        },
+        saveContent(){
+            alert("存储内容进入数据库:" + this.data.EditorContent)
         }
     }
 }

@@ -269,10 +269,12 @@
         window.open('https://github.com/ovenslove/vue-mdEditor');
       }
     },
-
     watch: {
       input: function() {
         this.mdValue = this.input;
+        if(this.data.inMarkdown){
+          this.data.EditorContent = this.input;
+        }
         this.htmlValue = marked(this.input, {
           sanitize: true
         });
