@@ -10,12 +10,12 @@
           <b>Papers</b>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href='#' v-on:click='SelectAuthor'>
           <i class='fa fa-circle'></i>
           <b>Authors</b>
         </a>
-      </li>
+      </li> -->
       <li>
         <a href='#' v-on:click='SelectAll'>
           <i class='fa fa-circle'></i>
@@ -37,8 +37,7 @@ export default {
   name: 'SelectBox',
   methods: {
     SelectPaper: function () {
-      var sth = ['1', '2']
-      this.bus.$emit('SelectPaper', sth)
+      this.bus.$emit('SelectPaper', 'SelectPaper')
     },
     SelectAuthor: function () {
       this.bus.$emit('SelectAuthor', 'SelectAuthor')

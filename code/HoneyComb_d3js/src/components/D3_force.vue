@@ -11,7 +11,7 @@
         <p class='title'>{{paper.title}}</p>
         <p class='year'>{{paper.year}}</p>
       </div>
-      <div v-else class='title'>
+      <div v-else>
         <p class='title'>{{author.name}}</p>
       </div>
       <div v-if='selected'>
@@ -28,30 +28,29 @@
 </template>
 <script>
 import * as d3 from 'd3'
-import AbstractBox from './AbstractBox.vue'
 var data = {
   nodes: [
-    { id: 'mk', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
-    { id: 'mk1', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
-    { id: 'mk2', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
-    { id: 'mk3', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
-    { id: 'zjh', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
-    { id: 'zjh1', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
-    { id: 'zjh2', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
-    { id: 'zjh3', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract' },
-    { id: 'cjk', group: 3, type: 'author', name: 'author!', publication: ['publication1', 'publication2'], co_author: ['author1', 'author2'] },
-    { id: 'cjk1', group: 3, type: 'author', name: 'author!',publication: ['publication1', 'publication2'], co_author: ['author1', 'author2']}
+    { id: 'mk', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.1 },
+    { id: 'mk1', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.2 },
+    { id: 'mk2', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.12 },
+    { id: 'mk3', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.02 },
+    { id: 'zjh', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.05 },
+    { id: 'zjh1', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.11 },
+    { id: 'zjh2', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.01 },
+    { id: 'zjh3', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.22 },
+    { id: 'cjk', group: 3, type: 'author', name: 'author!', publication: ['publication1', 'publication2'], co_author: ['author1', 'author2'], pagerank: 0.01 },
+    { id: 'cjk1', group: 3, type: 'author', name: 'author!', publication: ['publication1', 'publication2'], co_author: ['author1', 'author2'], pagerank: 0.16 }
   ],
   links: [
-    { source: 'mk', target: 'mk1', value: 1 },
-    { source: 'mk1', target: 'mk2', value: 1 },
-    { source: 'mk3', target: 'mk1', value: 1 },
-    { source: 'zjh', target: 'mk', value: 1 },
-    { source: 'zjh', target: 'zjh1', value: 1 },
-    { source: 'mk3', target: 'zjh2', value: 1 },
-    { source: 'zjh3', target: 'zjh1', value: 1 },
-    { source: 'zjh3', target: 'cjk', value: 1 },
-    { source: 'cjk1', target: 'cjk', value: 1 }
+    { source: 'mk', target: 'mk1', value: 1, sourcetype: 'paper', targettype: 'paper' },
+    { source: 'mk1', target: 'mk2', value: 1, sourcetype: 'paper', targettype: 'paper' },
+    { source: 'mk3', target: 'mk1', value: 1, sourcetype: 'paper', targettype: 'paper' },
+    { source: 'zjh', target: 'mk', value: 1, sourcetype: 'paper', targettype: 'paper' },
+    { source: 'zjh', target: 'zjh1', value: 1, sourcetype: 'paper', targettype: 'paper' },
+    { source: 'mk3', target: 'zjh2', value: 1, sourcetype: 'paper', targettype: 'paper' },
+    { source: 'zjh3', target: 'zjh1', value: 1, sourcetype: 'paper', targettype: 'paper' },
+    { source: 'zjh3', target: 'cjk', value: 1, sourcetype: 'paper', targettype: 'author' },
+    { source: 'cjk1', target: 'cjk', value: 1, sourcetype: 'author', targettype: 'author' }
   ]
 }
 
@@ -64,6 +63,7 @@ export default {
       unselected: true,
       selected: false,
       ispaper: true,
+      totalPR: 1,
       paper: {
         title: 'title',
         year: '2018',
@@ -149,7 +149,9 @@ export default {
       .data(data.nodes)
       .enter()
       .append('circle')
-      .attr('r', 10)
+      .attr('r', function (d, i) {
+        return Math.sqrt(d.pagerank / that.totalPR * 2000)
+      })
       .attr('fill', function (d, i) {
         return color(d.group)
         /*var defs = svg.append('defs').attr('id', 'imgdefs')
@@ -179,21 +181,21 @@ export default {
         this_.print_id(d.id)
       })
       .on('mouseover', function (d, i) {
-        if (d.type == "paper") {
-          that.unselected = false
-          that.selected = true
-          that.ispaper = true
+        if (d.type == 'paper') {
           that.paper.title = d.title
           that.paper.year = d.year
           that.paper.abstract = d.abstract
-        }
-        else {
           that.unselected = false
           that.selected = true
-          that.ispaper = false
+          that.ispaper = true
+        }
+        else {
           that.author.name = d.name
           that.author.publication = d.publication
           that.author.co_author = d.co_author
+          that.unselected = false
+          that.selected = true
+          that.ispaper = false
         }
       })
       .on('mouseout', function (d) {
@@ -273,20 +275,22 @@ export default {
       var newlinks = []
 
       for (var i = 0; i < data.nodes.length; i++) {
-        if (data.nodes[i].group != 3) {
+        if (data.nodes[i].type == 'paper') {
           newnodes.push(data.nodes[i])
         }
       }
 
       for (var i = 0; i < data.links.length; i++) {
         if (
-          data.links[i].source.id == 'cjk' ||
-          data.links[i].target.id == 'cjk' ||
-          data.links[i].source.id == 'cjk1' ||
-          data.links[i].target.id == 'cjk1'
+          data.links[i].source.type != 'paper' ||
+          data.links[i].target.type != 'paper' ||
+          data.links[i].source.type != 'paper' ||
+          data.links[i].target.type != 'paper'
         ) {
           continue
-        } else newlinks.push(data.links[i])
+        }
+        else
+          newlinks.push(data.links[i])
       }
 
       svg_node = svg_node.data(newnodes)
@@ -314,7 +318,9 @@ export default {
         })
         .enter()
         .append('circle')
-        .attr('r', 10)
+        .attr('r', function (d, i) {
+          return Math.sqrt(d.pagerank / that.totalPR * 2000)
+        })
         .attr('fill', function (d, i) {
           return color(d.group)
         })
@@ -326,6 +332,31 @@ export default {
             .on('drag', dragged)
             .on('end', dragended)
         )
+        .on('click', function (d) {
+          this_.print_id(d.id)
+        })
+        .on('mouseover', function (d, i) {
+          if (d.type == 'paper') {
+            that.paper.title = d.title
+            that.paper.year = d.year
+            that.paper.abstract = d.abstract
+            that.unselected = false
+            that.selected = true
+            that.ispaper = true
+          }
+          else {
+            that.author.name = d.name
+            that.author.publication = d.publication
+            that.author.co_author = d.co_author
+            that.unselected = false
+            that.selected = true
+            that.ispaper = false
+          }
+        })
+        .on('mouseout', function (d) {
+          // tooltip.style('display', 'none')
+        })
+
 
       simulation.nodes(data.nodes)
       simulation.force('link').links(data.links)
