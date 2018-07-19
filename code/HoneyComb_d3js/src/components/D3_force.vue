@@ -2,25 +2,36 @@
   <div>
     <svg width='1000' height='600'></svg>
     <div class='tooltip'>
-      <div v-if='unselected' class='title'>
-        <p class='title'>Move the mouse</p>
-        <p class='title'>to the node for</p>
-        <p class='title'>detailed information</p>
+      <div v-if='unselected' class='tip'>
+        <p>Detailed Information</p>
+        <p>Here!</p>
+        <span class='glyphicon glyphicon-list-alt'></span>
       </div>
       <div v-else-if='ispaper'>
         <p class='title'>{{paper.title}}</p>
-        <p class='year'>{{paper.year}}</p>
+        <p class='year'>year: {{paper.year}}</p>
       </div>
       <div v-else>
         <p class='title'>{{author.name}}</p>
       </div>
       <div v-if='selected'>
-        <hr class='tooltip-hr'>
+        <hr class='tooltip-hr'></hr>
         <div v-if='ispaper'>
-          <p>{{paper.abstract}}</p>
+          <p class='abstract'>{{paper.abstract}}</p>
         </div>
         <div v-else>
-
+          <p class='authorinfo'>Publications:</p>
+          <ul>
+            <li v-for='item in author.publication'>
+              {{item.title}}
+            </li>
+          </ul>
+          <p class='authorinfo'>Co-workers:</p>
+          <ul>
+            <li v-for='item in author.co_author'>
+              {{item.name}}
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -30,16 +41,16 @@
 import * as d3 from 'd3'
 var data = {
   nodes: [
-    { id: 'mk', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.1 },
+    { id: 'mk', group: 1, type: 'paper', title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels', year: '2007', abstract: 'Studies the performance advantage offered by the wideband multipath RAKE structure receiver in a cellular radio direct sequence code division multiple access system (CDMA). The base to mobile link is modeled as a Nakagami fading frequency selective channel. The performance of a RAKE structure receiver employing coherent reception with maximal ratio combining in a frequency selective channel is analyzed and compared with the flat fading case. The degradation in the performance of the receiver as a result of imperfect channel estimation is also studied.', pagerank: 0.1 },
     { id: 'mk1', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.2 },
-    { id: 'mk2', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.12 },
-    { id: 'mk3', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.02 },
+    { id: 'mk2', group: 1, type: 'paper', title: 'sth', year: '1917', abstract: 'this is abstract', pagerank: 0.12 },
+    { id: 'mk3', group: 1, type: 'paper', title: 'sth', year: '2003', abstract: 'this is abstract', pagerank: 0.02 },
     { id: 'zjh', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.05 },
-    { id: 'zjh1', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.11 },
-    { id: 'zjh2', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.01 },
-    { id: 'zjh3', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.22 },
-    { id: 'cjk', group: 3, type: 'author', name: 'author!', publication: ['publication1', 'publication2'], co_author: ['author1', 'author2'], pagerank: 0.01 },
-    { id: 'cjk1', group: 3, type: 'author', name: 'author!', publication: ['publication1', 'publication2'], co_author: ['author1', 'author2'], pagerank: 0.16 }
+    { id: 'zjh1', group: 2, type: 'paper', title: 'sth', year: '1983', abstract: 'this is abstract', pagerank: 0.11 },
+    { id: 'zjh2', group: 2, type: 'paper', title: 'sth', year: '2007', abstract: 'this is abstract', pagerank: 0.01 },
+    { id: 'zjh3', group: 2, type: 'paper', title: 'sth', year: '2001', abstract: 'this is abstract', pagerank: 0.22 },
+    { id: 'cjk', group: 3, type: 'author', name: 'I. M. Salama', publication: [{title:'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'}, {title:'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'}], co_author: [{name:'author1'}, {name:'author2'}], pagerank: 0.01 },
+    { id: 'cjk1', group: 3, type: 'author', name: 'author!', publication: [{title:'publication1'}, {title:'publication2'}], co_author: [{name:'author1'}, {name:'author2'}], pagerank: 0.16 }
   ],
   links: [
     { source: 'mk', target: 'mk1', value: 1, sourcetype: 'paper', targettype: 'paper' },
@@ -153,22 +164,13 @@ export default {
         return Math.sqrt(d.pagerank / that.totalPR * 2000)
       })
       .attr('fill', function (d, i) {
-        return color(d.group)
-        /*var defs = svg.append('defs').attr('id', 'imgdefs')
+        if (d.type == 'author') {
+          return '#2c3e50'
+        }
+        else {
+          return color((d.year / 5) % 10)
+        }
 
-        var catpattern = defs.append('pattern')
-                            .attr('id','catpattern' + i)
-                            .attr('height', 1)
-                            .attr('width', 1)
-
-        catpattern.append('image')
-                .attr('x',-(img_w - 20))
-                .attr('y', (img_h - 20))
-                .attr('width', img_w*2)
-                .attr('height', img_h*2)
-                .attr('xlink:href', d.image)
-
-        return 'url(#catpattern' + i + ')'; */
       })
       .call(
         d3
@@ -178,7 +180,7 @@ export default {
           .on('end', dragended)
       )
       .on('click', function (d) {
-        this_.print_id(d.id)
+        that.print_id(d.id)
       })
       .on('mouseover', function (d, i) {
         if (d.type == 'paper') {
@@ -383,17 +385,20 @@ export default {
 
 .tooltip {
   position: absolute;
-  top: 30px;
-  right: 20px;
+  top: 0px;
+  right: 0px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  border: 2px solid #ddd;
-  background: #fff;
+  border-left: 1.5px solid #ddd;
+  background: #eee;
   opacity: 1;
   color: #000;
-  padding: 10px;
+  padding-left: 15px;
+  padding-right: 10px;
+  padding-top: 50px;
+  padding-bottom: 20px;
   width: 300px;
-  height: 400px;
+  height: 600px;
   font-size: 15px;
   z-index: 120;
 }
@@ -406,6 +411,7 @@ export default {
 }
 
 hr.tooltip-hr {
+  color: #ddd;
   padding: 3px 0 0 0;
   margin: 3px 0 3px 0;
 }
@@ -413,8 +419,27 @@ hr.tooltip-hr {
 .tooltip .title {
   text-align: left;
   padding-left: 20px;
+  margin-bottom: 10px;
   font-size: 20px;
   line-height: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tooltip .tip{
+  text-align: center;
+  margin-top: 50px;
+}
+
+.tooltip .tip p{
+  font-size: 20px;
+}
+
+.tooltip .tip span{
+  margin-top: 20px;
+  font-size:40px;
 }
 .tooltip .year {
   text-align: left;
@@ -423,5 +448,31 @@ hr.tooltip-hr {
 
 .tooltip .name {
   font-weight: bold;
+}
+
+.tooltip .abstract {
+  padding-left: 5px;
+  text-indent: 1em;
+  text-align: left;
+  position: relative;
+  line-height: 20px;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.tooltip .authorinfo {
+  text-align: left;
+  padding-left:15px;
+}
+
+.tooltip .abstract::after {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-left: 40px;
+  background: -webkit-linear-gradient(left, transparent, #eee 55%);
+  background: -o-linear-gradient(right, transparent, #eee 55%);
+  background: -moz-linear-gradient(right, transparent, #eee 55%);
+  background: linear-gradient(to right, transparent, #eee 55%);
 }
 </style>
