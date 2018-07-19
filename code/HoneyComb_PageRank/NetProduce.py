@@ -41,15 +41,15 @@ class HoneyCombIterator:
     def construct(self):
         # 先将图中没有出链的节点改为对所有节点都有出链
         try:
-            print("start construct!")
+            # print("start construct!")
             for node in self.graph.nodes():
                 if len(self.graph.neighbors(node)) == 0:
-                    print("ops!no neighbor!")
+                    # print("ops!no neighbor!")
                     print(node)
                     for neighbor_node in self.graph.nodes():
                         digraph.add_edge(self.graph, (node, neighbor_node))
 
-            print("edge append completed!")
+            # print("edge append completed!")
 
         except Exception as e:
             raise e
@@ -76,16 +76,16 @@ class HoneyCombIterator:
                 change += abs(newPR - page_rank[node])  # 节点PR值绝对值变化
                 page_rank[node] = newPR
 
-            print("This is N0.%d iteration" % (i+1))
-            print(page_rank)
+            # print("This is N0.%d iteration" % (i+1))
+            # print(page_rank)
 
             if change < self.min_delta:
                 flag = True
-                print("finished in %d iteration!" % (i+1))
+                # print("finished in %d iteration!" % (i+1))
                 break
 
-        if not(flag):
-            print("finished out of 100 iterations!")
+        # if not(flag):
+            # print("finished out of 100 iterations!")
         return page_rank
 
 
@@ -129,11 +129,15 @@ if __name__ == '__main__':
     for net_node in honey_comb_net:
         if(net_node[0] == 'p'):
             newpaper = {}
-            newpaper[net_node[1:len(net_node)]] = honey_comb_net[net_node]
+            newpaper['paperid'] = net_node[1:len(net_node)]
+            newpaper['pagerank'] = honey_comb_net[net_node]
+            # newpaper[net_node[1:len(net_node)]] = honey_comb_net[net_node]
             paper_pr['paper'].append(newpaper)
         else:
             newauthor = {}
-            newauthor[net_node[1:len(net_node)]] = honey_comb_net[net_node]
+            newauthor['authorid'] = net_node[1:len(net_node)]
+            newauthor['pagerank'] = honey_comb_net[net_node]
+            # newauthor[net_node[1:len(net_node)]] = honey_comb_net[net_node]
             author_pr['author'].append(newauthor)
 
 
