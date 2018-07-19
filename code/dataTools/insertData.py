@@ -14,7 +14,8 @@ def connectdb(database, username, password, url='localhost'):
     return db
 
 # 建立和数据库的连接并且申请一个操作数据库需要的游标
-db = connectdb('honeycomb', 'root', 'caojinkun123')
+db = connectdb('honeycomb', 'root', 'root')
+#db = pymysql.connect(host='178.128.185.93', port=3306, user='remote', password='honeycomb', db='honeycomb', charset='utf8')
 cursor = db.cursor()
 
 def get_paperid(title):
@@ -218,7 +219,7 @@ def update_all(dir_path):
 
 
 if __name__ == '__main__':
-    data_path = './data/'    # data where the csv files placed
+    data_path = './data/new/new2/'    # data where the csv files placed
     update_all(data_path)
     #insert_all(data_path)
     #sql = "SELECT * from paper WHERE id = 11"
