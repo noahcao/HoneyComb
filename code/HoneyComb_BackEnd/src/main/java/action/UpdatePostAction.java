@@ -3,10 +3,12 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import data.dao.impl.PanelDaoImpl;
 import data.dao.impl.PostDaoImpl;
+import data.model.CommentEntity;
 import data.model.PostEntity;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class UpdatePostAction extends ActionSupport{
@@ -16,6 +18,24 @@ public class UpdatePostAction extends ActionSupport{
     private String content;
     private Integer userId;
     private Date time;
+    private String type;
+    private ArrayList<CommentEntity> comments;
+
+    public ArrayList<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<CommentEntity> comments) {
+        this.comments = comments;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
 
     public String getPanelId() {
         return panelId;
@@ -67,6 +87,8 @@ public class UpdatePostAction extends ActionSupport{
         PostEntity post = new PostEntity();
         post.setContent(this.content);
         post.setUserId(this.userId);
+        post.setType(this.type);
+        post.setComments(new ArrayList<>());
 
         postDao.insert(panelId, post);
         this.id = post.getId();
@@ -80,9 +102,11 @@ public class UpdatePostAction extends ActionSupport{
         post.setId(this.id);
         post.setContent(this.content);
         post.setUserId(this.userId);
+        post.setType(this.type);
 
         postDao.update(panelId, post);
         this.time = post.getTime();
+        this.comments = post.getComments();
         return SUCCESS;
     }
 

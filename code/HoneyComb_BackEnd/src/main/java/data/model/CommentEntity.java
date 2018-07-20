@@ -10,8 +10,6 @@ public class CommentEntity {
     private Integer userId;
     private String content;
     private Date time;
-    private Integer postId;
-    private String panelId;
     private Integer target;
 
     public Integer getUserId() {
@@ -42,28 +40,12 @@ public class CommentEntity {
         this.id = id;
     }
 
-    public void setPostId(Integer postId) {
-        this.postId = postId;
-    }
-
-    public void setPanelId(String panelId) {
-        this.panelId = panelId;
-    }
-
-    public String getPanelId() {
-        return panelId;
-    }
-
     public void setTarget(Integer target) {
         this.target = target;
     }
 
     public Integer getId() {
         return id;
-    }
-
-    public Integer getPostId() {
-        return postId;
     }
 
     public Integer getTarget() {

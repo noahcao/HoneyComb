@@ -161,5 +161,19 @@
             </result>
             <interceptor-ref name="demostack"/>
         </action>
+        <action name="addcomment" class="action.UpdateCommentAction" method="add">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="deletecomment" class="action.UpdateCommentAction" method="delete">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
     </package>
 </struts>

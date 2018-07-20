@@ -82,6 +82,7 @@ public class PostDaoImpl implements PostDao {
         update.set("posts.$.content", entity.getContent());
         update.set("posts.$.time", entity.getTime());
         update.set("posts.$.userId", entity.getUserId());
+        update.set("posts.$.type", entity.getType());
         this.mongoTemplate.updateFirst(query, update, PanelEntity.class);
     }
 

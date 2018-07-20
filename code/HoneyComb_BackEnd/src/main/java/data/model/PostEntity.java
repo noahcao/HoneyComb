@@ -13,6 +13,7 @@ public class PostEntity {
     private Integer userId;
     private Date time;
     private Integer commentId = 0;
+    private String type;
     private ArrayList<CommentEntity> comments;
 
     public ArrayList<CommentEntity> getComments() {
@@ -21,6 +22,14 @@ public class PostEntity {
 
     public void setComments(ArrayList<CommentEntity> comments) {
         this.comments = comments;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Integer getCommentId() {
