@@ -10,8 +10,8 @@
     <div v-else>
       <div class="col-xs-1 col-md-2">
         <div class="bar">
-          <div >
-            <a href="" class="bar-c" >Since 2018</a>
+          <div>
+            <a href="" class="bar-c">Since 2018</a>
           </div>
           <div>
             <a href="" class="bar-c">Since 2017</a>
@@ -57,6 +57,30 @@
           </div>
         </div>
       </div>
+      <ul class="pagination">
+        <li>
+          <a href="#">&laquo;</a>
+        </li>
+        <li>
+          <a href="#">1</a>
+        </li>
+        <li>
+          <a href="#">2</a>
+        </li>
+        <li>
+          <a href="#">3</a>
+        </li>
+        <li>
+          <a href="#">4</a>
+        </li>
+        <li>
+          <a href="#">5</a>
+        </li>
+        <li>
+          <a href="#">&raquo;</a>
+        </li>
+      </ul>
+
     </div>
   </div>
 </template>
@@ -80,7 +104,7 @@ export default {
   },
   mounted () {
     $('canvas').remove()
-    this.$http.get('/searchpaper', { params: { key: this.content } })
+    this.$http.get('/searchpaper', { params: { key: this.content, start: 0, end: 5 } })
       .then((res) => {
         this.papers = res.data.papers
         console.log(this.papers)
@@ -95,7 +119,7 @@ export default {
 .bar {
   margin-left: 25%;
 }
-.bar-c{
+.bar-c {
   font-size: 22px;
 }
 .waveFather {
