@@ -175,5 +175,12 @@
             </result>
             <interceptor-ref name="demostack"/>
         </action>
+        <action name="graphdata" class="action.GraphDataAction">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
     </package>
 </struts>

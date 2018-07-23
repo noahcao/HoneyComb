@@ -18,8 +18,8 @@
         </set>
         <property name="year" column="year"/>
         <set name="reference" table="paper_paper_reference" cascade="save-update, persist" lazy="false">
-            <key column="paper_id"/>
-            <element column="citation_id" type="java.lang.Long"/>
+            <key column="citation_id"/>
+            <element column="paper_id" type="java.lang.Long"/>
         </set>
     </class>
 </hibernate-mapping>
