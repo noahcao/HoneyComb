@@ -5,9 +5,9 @@
             <button class='barbtn btn-link pull-right'>Post</button>
             <button class='barbtn btn-link pull-right' @click='alterEditor'>{{anotherEditor}}</button>
         </div>
-        <markdown v-if="!showMarkdown"></markdown>
+        <markdown v-if="showMarkdown"></markdown>
         <quill-editor class="quill" v-model="data.EditorContent"
-        v-if="showMarkdown"></quill-editor>
+        v-if="!showMarkdown"></quill-editor>
     </div>
 </template>
 
