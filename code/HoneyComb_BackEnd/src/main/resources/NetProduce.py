@@ -96,24 +96,18 @@ if __name__ == '__main__':
     paper_json = sys.argv[1]
     author_json = sys.argv[2]
 
-    print(paper_json)
-    print(author_json)
-
     # 下列数据测试可行
-    # paper_json = '{papers: [{id: 1, authors: [{id:1},{id:3}], reference: [{id:2}] },{id: 2, authors: [{id:2}],reference: []}]}'
-    # author_json = '{authors:[{id:1},{id:2},{id:3}]}'
+    # paper_json = '{`papers`: [{`id`: 1, `authors`: [{`id`:1},{`id`:3}], `reference`: [{`id`:2}] },{`id`: 2, `authors`: [{`id`:2}],`reference`: []}]}'
+    # author_json = '{`authors`:[{`id`:1},{`id`:2},{`id`:3}]}'
 
+    paper_json = paper_json.replace("`",'"')
+    author_json = author_json.replace("`",'"')
+    
     papers = json.loads(paper_json)
     authors = json.loads(author_json)
 
-    print(papers)
-    print(authors)
-
     paper_list = papers['papers']
     author_list = authors['authors']
-
-    print(paper_list)
-    print(author_list)
 
     # 添加节点
     for paper in paper_list:
@@ -129,8 +123,8 @@ if __name__ == '__main__':
         for paper_refer in paper['reference']:
             dg.add_edge(('p'+str(paper['id']), 'p'+str(paper_refer['id'])))
 
-    paper_pr = {'paper': []}
-    author_pr = {'author': []}
+    paper_pr = {"paper": []}
+    author_pr = {"author": []}
 
     honey_comb = HoneyCombIterator(dg)
     honey_comb_net = honey_comb.construct()
@@ -138,16 +132,16 @@ if __name__ == '__main__':
     for net_node in honey_comb_net:
         if(net_node[0] == 'p'):
             newpaper = {}
-            newpaper['paperid'] = int(net_node[1:len(net_node)])
-            newpaper['pagerank'] = honey_comb_net[net_node]
+            newpaper["paperid"] = int(net_node[1:len(net_node)])
+            newpaper["pagerank"] = honey_comb_net[net_node]
             # newpaper[net_node[1:len(net_node)]] = honey_comb_net[net_node]
-            paper_pr['paper'].append(newpaper)
+            paper_pr["paper"].append(newpaper)
         else:
             newauthor = {}
-            newauthor['authorid'] = int(net_node[1:len(net_node)])
-            newauthor['pagerank'] = honey_comb_net[net_node]
+            newauthor["authorid"] = int(net_node[1:len(net_node)])
+            newauthor["pagerank"] = honey_comb_net[net_node]
             # newauthor[net_node[1:len(net_node)]] = honey_comb_net[net_node]
-            author_pr['author'].append(newauthor)
+            author_pr["author"].append(newauthor)
 
     print(paper_pr)
     print(author_pr)

@@ -68,6 +68,15 @@ public class QueryPapersAction extends ActionSupport {
     private ArrayList<Paper> papers;
     private Integer start;
     private Integer end;
+    private Integer total;
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
 
     public void setEnd(Integer end) {
         this.end = end;
@@ -111,6 +120,7 @@ public class QueryPapersAction extends ActionSupport {
         this.papers = new ArrayList<>();
         if (this.key == null || this.start == null || this.end == null) return ERROR;
         if (this.start > this.end) return ERROR;
+        this.key = this.key.toLowerCase();
         String SEARCH = "search";
         String SEARCHRESULT = "searchresult";
 
@@ -119,6 +129,8 @@ public class QueryPapersAction extends ActionSupport {
             if ((usersession.get(SEARCH)).equals(key)) {
                 if (usersession.get(SEARCHRESULT) != null) {
                     ArrayList<Paper> searchList = (ArrayList<Paper>) usersession.get(SEARCHRESULT);
+
+                    this.total = searchList.size();
                     if (start + 1 > searchList.size()) return SUCCESS;
                     if (end > searchList.size()) {
                         end = searchList.size();
@@ -138,6 +150,7 @@ public class QueryPapersAction extends ActionSupport {
         if (results.size() == 1) {
             this.papers.addAll(results);
             usersession.put(SEARCHRESULT, this.papers);
+            this.total = results.size();
             return SUCCESS;
         }
         String[] temp = this.key.split(" ");
@@ -151,6 +164,7 @@ public class QueryPapersAction extends ActionSupport {
         ArrayList<TfPair> candidates = new ArrayList<>();
         for (String key : allKeys) {
             if (key == null) continue;
+            if (key.length() < 4) continue;
             List<String> titles = appService.queryTitles(key);
             HashMap<String, HashMap<String, Float>> tf = Tfidf.tfOfAll(titles, 100);
             for (String i : tf.keySet()) {
@@ -178,7 +192,7 @@ public class QueryPapersAction extends ActionSupport {
         int listend = limit <= candidates.size() ? limit : candidates.size();
         ArrayList<Paper> searchList = new ArrayList<>();
         for (int i = 0; i < listend; i++) {
-            results = appService.getPaperByTitle(candidates.get(i).getKey());
+            results = appService.getPaperByTitle(candidates.get(i).getKey().toLowerCase());
             if (results == null) continue;
             for (Paper result : results) {
                 if (!searchList.contains(result)) searchList.add(result);
@@ -186,6 +200,7 @@ public class QueryPapersAction extends ActionSupport {
         }
         usersession.put(SEARCHRESULT, searchList);
 
+        this.total = searchList.size();
         if (start + 1 > searchList.size()) return SUCCESS;
         if (end > searchList.size()) {
             end = searchList.size();

@@ -23,7 +23,7 @@ public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
     public List<String> queryTitles(String name) {
         @SuppressWarnings("unchecked")
         List<String> titles = (List<String>) getHibernateTemplate().find(
-                "select p.title from Paper as p where p.title like ?",
+                "select p.title from Paper as p where lower(p.title) like ?",
                 "%" + name + "%");
         return titles;
     }
@@ -32,7 +32,7 @@ public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
     public List<Paper> getPaperByTitle(String title) {
         @SuppressWarnings("unchecked")
         List<Paper> papers = (List<Paper>) getHibernateTemplate().find(
-                "from Paper as p where p.title=?", title);
+                "from Paper as p where lower(p.title)=?", title);
         return papers;
     }
 }

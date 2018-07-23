@@ -16,6 +16,15 @@ public class UpdatePaperAction extends ActionSupport {
     private Set<Author> authors;
     private Integer cited;
     private String _abstract;
+    private Set<Long> reference;
+
+    public Set<Long> getReference() {
+        return reference;
+    }
+
+    public void setReference(Set<Long> reference) {
+        this.reference = reference;
+    }
 
     public void set_abstract(String _abstract) {
         this._abstract = _abstract;
@@ -89,6 +98,7 @@ public class UpdatePaperAction extends ActionSupport {
             setCited(result.getCited());
             setYear(result.getYear());
             set_abstract(result.get_abstract());
+            setReference(result.getReference());
             return SUCCESS;
         }
         return NONE;

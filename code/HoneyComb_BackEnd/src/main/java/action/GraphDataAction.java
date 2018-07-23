@@ -9,16 +9,48 @@ import model.Paper;
 import service.AppService;
 import tfidf.GraphData;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.*;
 
 public class GraphDataAction extends ActionSupport {
 
-    private class PaperRank {
-        public Long paperid;
-        public double pagerank;
+    public class PaperRank {
+        private Long paperid;
+        private Double pagerank;
+        private Integer level;
+        private Set<Author> authors;
+
+        public Integer getLevel() {
+            return level;
+        }
+
+        public void setLevel(Integer level) {
+            this.level = level;
+        }
+
+        public Set<Author> getAuthors() {
+            return authors;
+        }
+
+        public void setAuthors(Set<Author> authors) {
+            this.authors = authors;
+        }
+
+        public Double getPagerank() {
+            return pagerank;
+        }
+
+        public Long getPaperid() {
+            return paperid;
+        }
+
+        public void setPagerank(Double pagerank) {
+            this.pagerank = pagerank;
+        }
+
+        public void setPaperid(Long paperid) {
+            this.paperid = paperid;
+        }
 
         @Override
         public boolean equals(Object obj) {
@@ -37,9 +69,43 @@ public class GraphDataAction extends ActionSupport {
         }
     }
 
-    private class AuthorRank {
-        public Long authorid;
-        public double pagerank;
+    public class AuthorRank {
+        private Long authorid;
+        private Double pagerank;
+        private Integer level;
+        private Set<Long> papers;
+
+        public void setLevel(Integer level) {
+            this.level = level;
+        }
+
+        public Integer getLevel() {
+            return level;
+        }
+
+        public void setPapers(Set<Long> papers) {
+            this.papers = papers;
+        }
+
+        public Set<Long> getPapers() {
+            return papers;
+        }
+
+        public void setPagerank(Double pagerank) {
+            this.pagerank = pagerank;
+        }
+
+        public Double getPagerank() {
+            return pagerank;
+        }
+
+        public Long getAuthorid() {
+            return authorid;
+        }
+
+        public void setAuthorid(Long authorid) {
+            this.authorid = authorid;
+        }
 
         @Override
         public boolean equals(Object obj) {
@@ -58,9 +124,18 @@ public class GraphDataAction extends ActionSupport {
         }
     }
 
-    private List<PaperRank> paper;
-    private List<AuthorRank> author;
+    private ArrayList<PaperRank> paper = new ArrayList<>();
+    private ArrayList<AuthorRank> author = new ArrayList<>();
     private Long id;
+    private Integer hierarchyLimit;
+
+    public Integer getHierarchyLimit() {
+        return hierarchyLimit;
+    }
+
+    public void setHierarchyLimit(Integer hierarchyLimit) {
+        this.hierarchyLimit = hierarchyLimit;
+    }
 
     public Long getId() {
         return id;
@@ -70,19 +145,19 @@ public class GraphDataAction extends ActionSupport {
         this.id = id;
     }
 
-    public List<AuthorRank> getAuthor() {
+    public ArrayList<AuthorRank> getAuthor() {
         return author;
     }
 
-    public List<PaperRank> getPaper() {
+    public ArrayList<PaperRank> getPaper() {
         return paper;
     }
 
-    public void setAuthor(List<AuthorRank> author) {
+    public void setAuthor(ArrayList<AuthorRank> author) {
         this.author = author;
     }
 
-    public void setPaper(List<PaperRank> paper) {
+    public void setPaper(ArrayList<PaperRank> paper) {
         this.paper = paper;
     }
 
@@ -92,36 +167,55 @@ public class GraphDataAction extends ActionSupport {
         this.appService = appService;
     }
 
-    private void getData(int hierarchy, JsonArray paperArray, ArrayList<Long> papers, int itPapaer, ArrayList<Long> authors) {
-        if (hierarchy >= 1) return;
+    private void getData(int hierarchy, int hierarchyLimit, JsonArray paperArray, ArrayList<Long> papers, int itPapaer, ArrayList<Long> authors) {
+        if (hierarchy > hierarchyLimit) return;
         int tempSize = papers.size();
         for (int i = itPapaer; i < tempSize; i++) {
             JsonObject obj = new JsonObject();
             Paper paper = appService.getPaperById(papers.get(i));
             obj.addProperty("`id`", paper.getId());
 
+            PaperRank e = new PaperRank();
+            e.paperid = paper.getId();
+            e.level = hierarchy;
+            e.authors = paper.getAuthors();
+            this.paper.add(e);
+
             JsonArray a = new JsonArray();
             JsonArray r = new JsonArray();
-            for (Author author : paper.getAuthors()) {
-                JsonObject temp = new JsonObject();
-                temp.addProperty("`id`", author.getId());
-                a.add(temp);
-                if (!authors.contains(author.getId())) {
-                    authors.add(author.getId());
-                    for (Long paper1: author.getPapers()) {
-                        if (!papers.contains(paper1)) {
-                            papers.add(paper1);
+            if (hierarchy + 1 <= hierarchyLimit) {
+                for (Author author : paper.getAuthors()) {
+                    JsonObject temp = new JsonObject();
+                    temp.addProperty("`id`", author.getId());
+                    a.add(temp);
+                    if (!authors.contains(author.getId())) {
+                        authors.add(author.getId());
+
+                        AuthorRank e1 = new AuthorRank();
+                        e1.authorid = author.getId();
+                        e1.level = hierarchy + 1;
+                        e1.papers = author.getPapers();
+                        this.author.add(e1);
+
+                        if (hierarchy + 2 <= hierarchyLimit) {
+                            for (Long paper1 : author.getPapers()) {
+                                if (!papers.contains(paper1)) {
+                                    papers.add(paper1);
+                                }
+                            }
                         }
                     }
                 }
             }
 
-            for (Long reference : paper.getReference()) {
-                JsonObject temp = new JsonObject();
-                temp.addProperty("`id`", reference);
-                r.add(temp);
-                if (!papers.contains(reference)) {
-                    papers.add(reference);
+            if (hierarchy + 1 <= hierarchyLimit) {
+                for (Long reference : paper.getReference()) {
+                    JsonObject temp = new JsonObject();
+                    temp.addProperty("`id`", reference);
+                    r.add(temp);
+                    if (!papers.contains(reference)) {
+                        papers.add(reference);
+                    }
                 }
             }
 
@@ -130,29 +224,46 @@ public class GraphDataAction extends ActionSupport {
 
             paperArray.add(obj);
         }
-        getData(hierarchy + 1, paperArray, papers, tempSize, authors);
+        getData(hierarchy + 1, hierarchyLimit, paperArray, papers, tempSize, authors);
     }
 
     @Override
     public String execute() throws Exception {
-        if (this.id == null) return ERROR;
+        if (this.id == null || this.hierarchyLimit == null) return ERROR;
         Paper result = appService.getPaperById(id);
         if (result == null) return NONE;
+        this.hierarchyLimit = this.hierarchyLimit > 5 ? 5 : this.hierarchyLimit;
         JsonArray paperArray = new JsonArray();
         JsonArray authorArray = new JsonArray();
         ArrayList<Long> authors = new ArrayList<>();
         ArrayList<Long> papers = new ArrayList<>();
         papers.add(this.id);
-        getData(0, paperArray, papers, 0, authors);
+
+        getData(1, hierarchyLimit, paperArray, papers, 0, authors);
         for (Long i : authors) {
             JsonObject temp = new JsonObject();
             temp.addProperty("`id`", i);
             authorArray.add(temp);
         }
-        JsonObject obj1 = new JsonObject();
-        JsonObject obj2 = new JsonObject();
-        obj1.add("`papers`", paperArray);
-        obj2.add("`authors`", authorArray);
-        return GraphData.run(obj1, obj2);
+
+        JsonObject paper = new JsonObject();
+        JsonObject author = new JsonObject();
+        paper.add("`papers`", paperArray);
+        author.add("`authors`", authorArray);
+        JsonArray resultArray = GraphData.run(paper, author);
+
+        if (resultArray == null) return ERROR;
+        if (resultArray.size() < 2) return ERROR;
+        for (JsonElement i : resultArray.get(0).getAsJsonObject().getAsJsonArray("paper")) {
+            PaperRank temp = new PaperRank();
+            temp.paperid = i.getAsJsonObject().get("paperid").getAsLong();
+            this.paper.get(this.paper.indexOf(temp)).pagerank = i.getAsJsonObject().get("pagerank").getAsDouble();
+        }
+        for (JsonElement i : resultArray.get(1).getAsJsonObject().getAsJsonArray("author")) {
+            AuthorRank temp = new AuthorRank();
+            temp.authorid = i.getAsJsonObject().get("authorid").getAsLong();
+            this.author.get(this.author.indexOf(temp)).pagerank = i.getAsJsonObject().get("pagerank").getAsDouble();
+        }
+        return SUCCESS;
     }
 }
