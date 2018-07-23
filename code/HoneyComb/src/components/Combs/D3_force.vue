@@ -49,8 +49,8 @@ var data = {
     { id: 'zjh1', group: 2, type: 'paper', title: 'sth', year: '1983', abstract: 'this is abstract', pagerank: 0.11 },
     { id: 'zjh2', group: 2, type: 'paper', title: 'sth', year: '2007', abstract: 'this is abstract', pagerank: 0.01 },
     { id: 'zjh3', group: 2, type: 'paper', title: 'sth', year: '2001', abstract: 'this is abstract', pagerank: 0.22 },
-    { id: 'cjk', group: 3, type: 'author', name: 'I. M. Salama', publication: [{title:'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'}, {title:'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'}], co_author: [{name:'author1'}, {name:'author2'}], pagerank: 0.01 },
-    { id: 'cjk1', group: 3, type: 'author', name: 'author!', publication: [{title:'publication1'}, {title:'publication2'}], co_author: [{name:'author1'}, {name:'author2'}], pagerank: 0.16 }
+    { id: 'cjk', group: 3, type: 'author', name: 'I. M. Salama', publication: [{title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'}, {title:'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'}], co_author: [{name:'author1'}, {name:'author2'}], pagerank: 0.01 },
+    { id: 'cjk1', group: 3, type: 'author', name: 'author!', publication: [{title: 'publication1'}, {title: 'publication2'}], co_author: [{name: 'author1'}, {name: 'author2'}], pagerank: 0.16 }
   ],
   links: [
     { source: 'mk', target: 'mk1', value: 1, sourcetype: 'paper', targettype: 'paper' },
@@ -94,9 +94,6 @@ export default {
   },
   mounted () {
     let that = this
-    console.log('mounted!')
-    var img_w = 10
-    var img_h = 10
     var zoom = d3
       .zoom()
       .scaleExtent([-5, 2])
@@ -119,12 +116,12 @@ export default {
       .strength(200)
       .distanceMax(400)
       .distanceMin(60)
-    //自定义引力
+    // 自定义引力
     var repelForce = d3
       .forceManyBody()
       .strength(-500)
       .distanceMax(250)
-    //自定义斥力
+    // 自定义斥力
 
     var simulation = d3
       .forceSimulation()
@@ -164,13 +161,12 @@ export default {
         return Math.sqrt(d.pagerank / that.totalPR * 2000)
       })
       .attr('fill', function (d, i) {
-        if (d.type == 'author') {
+        if (d.type === 'author') {
           return '#2c3e50'
         }
         else {
           return color((d.year / 5) % 10)
         }
-
       })
       .call(
         d3
@@ -183,7 +179,7 @@ export default {
         that.print_id(d.id)
       })
       .on('mouseover', function (d, i) {
-        if (d.type == 'paper') {
+        if (d.type === 'paper') {
           that.paper.title = d.title
           that.paper.year = d.year
           that.paper.abstract = d.abstract
@@ -204,7 +200,7 @@ export default {
         // tooltip.style('display', 'none')
       })
 
-    /*var text = svg
+    /* var text = svg
       .append('g')
       .attr('class','texts')
       .selectAll('text')
@@ -214,7 +210,7 @@ export default {
       .attr('font-family', 'sans-serif')
       .attr('font-size', '11px')
       .attr('fill', 'black')
-      .attr('fill-opacity', '0.0')*/
+      .attr('fill-opacity', '0.0') */
 
     function ticked () {
       svg_link
@@ -239,7 +235,7 @@ export default {
           return d.y
         })
 
-      /*text
+      /* text
         .text(function(d) {
           return d.id;
         })
@@ -250,10 +246,10 @@ export default {
           return d.y;
         })
         .attr('dx', '-3.5')
-        .attr('dy', '20');*/
+        .attr('dy', '20'); */
     }
     function dragstarted (d) {
-      //tooltip.style('display','none')
+      // tooltip.style('display','none')
       if (!d3.event.active) simulation.alphaTarget(0.3).restart()
       d.fx = d.x
       d.fy = d.y
@@ -277,22 +273,23 @@ export default {
       var newlinks = []
 
       for (var i = 0; i < data.nodes.length; i++) {
-        if (data.nodes[i].type == 'paper') {
+        if (data.nodes[i].type === 'paper') {
           newnodes.push(data.nodes[i])
         }
       }
 
       for (var i = 0; i < data.links.length; i++) {
         if (
-          data.links[i].source.type != 'paper' ||
-          data.links[i].target.type != 'paper' ||
-          data.links[i].source.type != 'paper' ||
-          data.links[i].target.type != 'paper'
+          data.links[i].source.type !== 'paper' ||
+          data.links[i].target.type !== 'paper' ||
+          data.links[i].source.type !== 'paper' ||
+          data.links[i].target.type !== 'paper'
         ) {
           continue
         }
-        else
+        else {
           newlinks.push(data.links[i])
+        }
       }
 
       svg_node = svg_node.data(newnodes)
@@ -335,10 +332,10 @@ export default {
             .on('end', dragended)
         )
         .on('click', function (d) {
-          this_.print_id(d.id)
+          that.print_id(d.id)
         })
         .on('mouseover', function (d, i) {
-          if (d.type == 'paper') {
+          if (d.type === 'paper') {
             that.paper.title = d.title
             that.paper.year = d.year
             that.paper.abstract = d.abstract
@@ -358,8 +355,6 @@ export default {
         .on('mouseout', function (d) {
           // tooltip.style('display', 'none')
         })
-
-
       simulation.nodes(data.nodes)
       simulation.force('link').links(data.links)
       simulation.alpha(1).restart()
@@ -367,8 +362,9 @@ export default {
   }
 }
 </script>
+
 <style>
-.links line {
+.links line{
   stroke: #999;
   stroke-opacity: 0.6;
 }
@@ -418,7 +414,7 @@ hr.tooltip-hr {
 
 .tooltip .title {
   text-align: left;
-  padding-left: 20px;
+  padding-left: 10px;
   margin-bottom: 10px;
   font-size: 20px;
   line-height: 24px;
