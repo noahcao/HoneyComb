@@ -1,4 +1,5 @@
 <template>
+  <div>
     <ul>
       <li>
         <a href='#' v-on:click='SelectPaper'>
@@ -19,6 +20,27 @@
         </a>
       </li>
     </ul>
+
+    <ul>
+      <li>
+        <a href='#' v-on:click='SelectTwoLevel'>
+          <i class='fa fa-circle'></i>
+          <b>2-levels</b>
+        </a>
+      </li>
+      <li>
+        <a href='#' v-on:click='SelectThreeLevel'>
+          <i class='fa fa-circle'></i>
+          <b>3-levels</b>
+        </a>
+      </li>
+      <li>
+        <a href='#' v-on:click='SelectFourLevel'>
+          <i class='fa fa-circle'></i>
+          <b>4-levels</b>
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -29,13 +51,18 @@ export default {
     SelectPaper: function () {
       this.bus.$emit('SelectPaper', 'SelectPaper')
     },
-    SelectAuthor: function () {
-      this.bus.$emit('SelectAuthor', 'SelectAuthor')
-    },
     SelectAll: function () {
       this.bus.$emit('SelectAll', 'SelectAll')
+    },
+    SelectTwoLevel: function () {
+      this.bus.$emit('SelectTwoLevel', 'SelectTwoLevel')
+    },
+    SelectThreeLevel: function () {
+      this.bus.$emit('SelectThreeLevel', 'SelectThreeLevel')
+    },
+    SelectFourLevel: function () {
+      this.bus.$emit('SelectFourLevel', 'SelectFourLevel')
     }
   }
-
 }
 </script>
