@@ -15,26 +15,26 @@
     <img src="../../../static/pic/蜜蜂数据.png" alt="80x80" class="img-rounded">
     <h3>An Academic Document Management Project.</h3>
     <div class="input-group input-group-lg">
-      <input type="text" class="form-control" placeholder="Search for...">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">
+      <input type="text" class="form-control" placeholder="Search for..." v-model="content">
+      <router-link :to="{name:'search',  params: {content: content} }" class="input-group-btn">
+        <button class="btn btn-default" type="button" id="search233">
           <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
-      </span>
+      </router-link>
     </div>
 
     <div class="panel panel-default">
-      <div class="panel-body">
-        Copyright © 2018 Honeycomb. All Rights Reserved
+      <div class="panel-body pull-right">
+        Copyright © 2018 Honeycomb. All Rights Reserved. Build 1.0.1
       </div>
     </div>
     <!-- /input-group -->
-
     <!-- /.col-lg-6 -->
 
   </section>
 </template>
 <script>
+import $ from 'jquery'
 // import Login from '../User/Login'
 // import Register from '../User/Register'
 /* eslint-disable */
@@ -43,103 +43,114 @@ export default {
   name: 'main-body',
   data () {
     return {
-      status
+      status,
+      content: ''
+    }
+  },
+  methods: {
+    keyListener (e) {
+      if (e.keyCode === 13) {
+        $('#search233').click()
+      }
     }
   },
   mounted () {
+    document.onkeydown = this.keyListener
     $('canvas').remove()
-    !(function () {
-      function o (w, v, i) {
-        return w.getAttribute(v) || i
-      }
-
-      function j (i) {
-        return document.getElementsByTagName(i)
-      }
-
-      function l () {
-        var i = j('script')
-
-        var w = i.length
-
-        var v = i[w - 1]
-        return {
-          l: w,
-          z: o(v, 'zIndex', -1),
-          o: o(v, 'opacity', 0.5),
-          c: o(v, 'color', '36,41,46'),
-          n: o(v, 'count', 99)
+    if ($(window).width() > 768) {
+      !(function () {
+        function o (w, v, i) {
+          return w.getAttribute(v) || i
         }
-      }
 
-      function k () {
-        r = u.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth, n = u.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-      }
+        function j (i) {
+          return document.getElementsByTagName(i)
+        }
 
-      function b () {
-        e.clearRect(0, 0, r, n)
-        var w = [f].concat(t)
-        var x, v, A, B, z, y
-        t.forEach(function (i) {
-          i.x += i.xa, i.y += i.ya, i.xa *= i.x > r || i.x < 0 ? -1 : 1, i.ya *= i.y > n || i.y < 0 ? -1 : 1, e.fillRect(i.x - 0.5, i.y - 0.5, 1, 1)
-          for (v = 0; v < w.length; v++) {
-            x = w[v]
-            if (i !== x && x.x !== null && x.y !== null) {
-              B = i.x - x.x, z = i.y - x.y, y = B * B + z * z
-              y < x.max && (x === f && y >= x.max / 2 && (i.x -= 0.03 * B, i.y -= 0.03 * z), A = (x.max - y) / x.max, e.beginPath(), e.lineWidth = A / 2, e.strokeStyle = 'rgba(0,0,0,1)', e.moveTo(i.x, i.y), e.lineTo(x.x, x.y), e.stroke())
-            }
+        function l () {
+          var i = j('script')
+
+          var w = i.length
+
+          var v = i[w - 1]
+          return {
+            l: w,
+            z: o(v, 'zIndex', -1),
+            o: o(v, 'opacity', 0.5),
+            c: o(v, 'color', '36,41,46'),
+            n: o(v, 'count', 99)
           }
-          w.splice(w.indexOf(i), 1)
-        }), m(b)
-      }
-      var u = document.createElement('canvas')
+        }
 
-      var s = l()
+        function k () {
+          r = u.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth, n = u.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+        }
 
-      var c = 'c_n' + s.l
+        function b () {
+          e.clearRect(0, 0, r, n)
+          var w = [f].concat(t)
+          var x, v, A, B, z, y
+          t.forEach(function (i) {
+            i.x += i.xa, i.y += i.ya, i.xa *= i.x > r || i.x < 0 ? -1 : 1, i.ya *= i.y > n || i.y < 0 ? -1 : 1, e.fillRect(i.x - 0.5, i.y - 0.5, 1, 1)
+            for (v = 0; v < w.length; v++) {
+              x = w[v]
+              if (i !== x && x.x !== null && x.y !== null) {
+                B = i.x - x.x, z = i.y - x.y, y = B * B + z * z
+                y < x.max && (x === f && y >= x.max / 2 && (i.x -= 0.03 * B, i.y -= 0.03 * z), A = (x.max - y) / x.max, e.beginPath(), e.lineWidth = A / 2, e.strokeStyle = 'rgba(0,0,0,1)', e.moveTo(i.x, i.y), e.lineTo(x.x, x.y), e.stroke())
+              }
+            }
+            w.splice(w.indexOf(i), 1)
+          }), m(b)
+        }
+        var u = document.createElement('canvas')
 
-      var e = u.getContext('2d')
+        var s = l()
 
-      var r; var n; var m = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {
-        window.setTimeout(i, 1000 / 45)
-      }
+        var c = 'c_n' + s.l
 
-      var a = Math.random
+        var e = u.getContext('2d')
 
-      var f = {
-        x: null,
-        y: null,
-        max: 20000
-      }
-      u.id = c
-      u.style.cssText = 'position:fixed;top:0;left:0;z-index:' + s.z + ';opacity:' + s.o
-      j('body')[0].appendChild(u)
-      k(), window.onresize = k
-      // window.onmousemove = function (i) {
-      //   i = i || window.event, f.x = i.clientX, f.y = i.clientY
-      // }, window.onmouseout = function () {
-      //   f.x = null, f.y = null
-      // };
-      for (var t = [], p = 0; s.n > p; p++) {
-        var h = a() * r
+        var r; var n; var m = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {
+          window.setTimeout(i, 1000 / 45)
+        }
 
-        var g = a() * n
+        var a = Math.random
 
-        var q = 2 * a() - 1
+        var f = {
+          x: null,
+          y: null,
+          max: 20000
+        }
+        u.id = c
+        u.style.cssText = 'position:fixed;top:0;left:0;z-index:' + s.z + ';opacity:' + s.o
+        j('body')[0].appendChild(u)
+        k(), window.onresize = k
+        // window.onmousemove = function (i) {
+        //   i = i || window.event, f.x = i.clientX, f.y = i.clientY
+        // }, window.onmouseout = function () {
+        //   f.x = null, f.y = null
+        // };
+        for (var t = [], p = 0; s.n > p; p++) {
+          var h = a() * r
 
-        var d = 2 * a() - 1
-        t.push({
-          x: h,
-          y: g,
-          xa: q,
-          ya: d,
-          max: 6000
-        })
-      }
-      setTimeout(function () {
-        b()
-      }, 100)
-    }())
+          var g = a() * n
+
+          var q = 2 * a() - 1
+
+          var d = 2 * a() - 1
+          t.push({
+            x: h,
+            y: g,
+            xa: q,
+            ya: d,
+            max: 6000
+          })
+        }
+        setTimeout(function () {
+          b()
+        }, 100)
+      }())
+    }
   }
 }
 </script>
@@ -199,13 +210,17 @@ input:focus {
 .img-rounded {
   display: inline-block;
 }
+@media (min-width: 768px) {
+  .panel-default {
+    margin-left: 55%;
+  }
+}
 .panel-default {
   background-color: rgba(255, 255, 255, 0);
   border-color: rgba(255, 255, 255, 0);
   position: fixed;
   bottom: 0px;
   height: 70px;
-  margin-left: 60%;
   box-shadow: none;
 }
 .input-group-btn:last-child > .btn,

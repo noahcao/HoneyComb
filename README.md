@@ -14,9 +14,12 @@ A web (and optionally mobile application) project to build a reliable visualized
 
 #### 任务：
 
-1. 前端 —— Vue.js
-2. 后端 —— Java
+1. 前端 —— Vue.js 2.x
+2. 后端 —— Java 1.8
 3. 数据来源
-4. 数据库 —— Mysql
+4. 数据库 —— Mysql 5.7
 5. 注册、登录、第三方登录api
 
+目前， 我们的网站已经部署在了网络上，使用的域名是combsite.site。
+
+#### yeah！
