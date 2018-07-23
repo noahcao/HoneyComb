@@ -98,13 +98,13 @@ public class GraphDataAction extends ActionSupport {
         for (int i = itPapaer; i < tempSize; i++) {
             JsonObject obj = new JsonObject();
             Paper paper = appService.getPaperById(papers.get(i));
-            obj.addProperty("id", paper.getId());
+            obj.addProperty("`id`", paper.getId());
 
             JsonArray a = new JsonArray();
             JsonArray r = new JsonArray();
             for (Author author : paper.getAuthors()) {
                 JsonObject temp = new JsonObject();
-                temp.addProperty("id", author.getId());
+                temp.addProperty("`id`", author.getId());
                 a.add(temp);
                 if (!authors.contains(author.getId())) {
                     authors.add(author.getId());
@@ -118,15 +118,15 @@ public class GraphDataAction extends ActionSupport {
 
             for (Long reference : paper.getReference()) {
                 JsonObject temp = new JsonObject();
-                temp.addProperty("id", reference);
+                temp.addProperty("`id`", reference);
                 r.add(temp);
                 if (!papers.contains(reference)) {
                     papers.add(reference);
                 }
             }
 
-            obj.add("authors", a);
-            obj.add("reference", r);
+            obj.add("`authors`", a);
+            obj.add("`reference`", r);
 
             paperArray.add(obj);
         }
@@ -146,12 +146,13 @@ public class GraphDataAction extends ActionSupport {
         getData(0, paperArray, papers, 0, authors);
         for (Long i : authors) {
             JsonObject temp = new JsonObject();
-            temp.addProperty("id", i);
+            temp.addProperty("`id`", i);
             authorArray.add(temp);
         }
-        JsonObject obj = new JsonObject();
-        obj.add("papers", paperArray);
-        obj.add("authors", authorArray);
-        return GraphData.run(obj);
+        JsonObject obj1 = new JsonObject();
+        JsonObject obj2 = new JsonObject();
+        obj1.add("`papers`", paperArray);
+        obj2.add("`authors`", authorArray);
+        return GraphData.run(obj1, obj2);
     }
 }

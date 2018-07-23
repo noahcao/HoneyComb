@@ -10,10 +10,10 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 
 public class GraphData {
 
-    public static String run(JsonObject obj) {
+    public static String run(JsonObject obj1, JsonObject obj2) {
         try {
-            System.out.println("start;" + obj);
-            String[] args1 = new String[]{"python", ".\\test.py", obj.toString()};
+            System.out.println(obj1.toString() + "\n" +  obj2.toString());
+            String[] args1 = new String[]{"python", ".\\NetProduce.py", obj1.toString(), obj2.toString()};
             Process pr = Runtime.getRuntime().exec(args1);
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     pr.getInputStream()));
@@ -31,6 +31,6 @@ public class GraphData {
         }
     }
     public static void main(String[] args) {
-        run(new JsonObject());
+        run(new JsonObject(), new JsonObject());
     }
 }
