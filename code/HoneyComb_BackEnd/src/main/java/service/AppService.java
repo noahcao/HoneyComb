@@ -1,5 +1,6 @@
 package service;
 
+import model.Author;
 import model.Paper;
 import model.User;
 
@@ -36,5 +37,7 @@ public interface AppService {
     List<String> queryTitles(String name);
 
     List<Paper> getPaperByTitle(String title);
+
+    Author getAuthorById(Long id);
 
 }

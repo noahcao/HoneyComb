@@ -8,7 +8,7 @@ import service.AppService;
 import java.time.Year;
 import java.util.Set;
 
-public class UpdatePaperAction extends ActionSupport {
+public class GetPaperAction extends ActionSupport {
     private java.lang.Long id;
     private String title;
     private String url;
@@ -88,7 +88,8 @@ public class UpdatePaperAction extends ActionSupport {
         this.appService = appService;
     }
 
-    public String query() throws Exception {
+    @Override
+    public String execute() throws Exception {
         if (this.id == null) return ERROR;
         Paper result = appService.getPaperById(id);
         if (result != null) {

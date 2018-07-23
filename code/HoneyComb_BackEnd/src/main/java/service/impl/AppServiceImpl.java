@@ -2,6 +2,7 @@ package service.impl;
 
 import dao.PaperDao;
 import dao.UserDao;
+import model.Author;
 import model.Paper;
 import model.User;
 import service.AppService;
@@ -77,5 +78,10 @@ public class AppServiceImpl implements AppService {
     @Override
     public List<Paper> getPaperByTitle(String title) {
         return paperDao.getPaperByTitle(title);
+    }
+
+    @Override
+    public Author getAuthorById(Long id) {
+        return paperDao.getAuthorById(id);
     }
 }

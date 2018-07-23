@@ -18,7 +18,7 @@ public class GraphDataAction extends ActionSupport {
         private Long paperid;
         private Double pagerank;
         private Integer level;
-        private Set<Author> authors;
+        private Set<Long> authors;
 
         public Integer getLevel() {
             return level;
@@ -28,11 +28,11 @@ public class GraphDataAction extends ActionSupport {
             this.level = level;
         }
 
-        public Set<Author> getAuthors() {
+        public Set<Long> getAuthors() {
             return authors;
         }
 
-        public void setAuthors(Set<Author> authors) {
+        public void setAuthors(Set<Long> authors) {
             this.authors = authors;
         }
 
@@ -178,7 +178,10 @@ public class GraphDataAction extends ActionSupport {
             PaperRank e = new PaperRank();
             e.paperid = paper.getId();
             e.level = hierarchy;
-            e.authors = paper.getAuthors();
+            e.authors = new HashSet<>();
+            for (Author tempAuthor : paper.getAuthors()) {
+                e.authors.add(tempAuthor.getId());
+            }
             this.paper.add(e);
 
             JsonArray a = new JsonArray();

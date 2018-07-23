@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.PaperDao;
 import javafx.util.Pair;
+import model.Author;
 import model.Paper;
 import org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -34,5 +35,13 @@ public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
         List<Paper> papers = (List<Paper>) getHibernateTemplate().find(
                 "from Paper as p where lower(p.title)=?", title);
         return papers;
+    }
+
+    @Override
+    public Author getAuthorById(Long id) {
+        @SuppressWarnings("unchecked")
+        List<Author> authors = (List<Author>) getHibernateTemplate().find(
+                "from Author as a where a.id=?", id);
+        return authors.size() > 0 ? authors.get(0) : null;
     }
 }
