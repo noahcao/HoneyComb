@@ -93,12 +93,12 @@ if __name__ == '__main__':
 
     dg = digraph()
 
-    # paper_json = sys.argv[1]
-    # author_json = sys.argv[2]
+    paper_json = sys.argv[1]
+    author_json = sys.argv[2]
 
     # 下列数据测试可行
-    paper_json= '{"papers": [{"id": "1", "authors": ["1","3"], "reference": ["2"] },{"id": "2", "authors": ["2"],"reference": []}]}'
-    author_json= '{"authors":["1","2","3"]}'
+    # paper_json= '{"papers": [{"id": "1", "authors": ["1","3"], "reference": ["2"] },{"id": "2", "authors": ["2"],"reference": []}]}'
+    # author_json= '{"authors":["1","2","3"]}'
 
     papers = json.loads(paper_json)
     authors = json.loads(author_json)
