@@ -41,16 +41,16 @@
 import * as d3 from 'd3'
 var data = {
   nodes: [
-    { id: 'mk', group: 1, type: 'paper', title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels', year: '2007', abstract: 'Studies the performance advantage offered by the wideband multipath RAKE structure receiver in a cellular radio direct sequence code division multiple access system (CDMA). The base to mobile link is modeled as a Nakagami fading frequency selective channel. The performance of a RAKE structure receiver employing coherent reception with maximal ratio combining in a frequency selective channel is analyzed and compared with the flat fading case. The degradation in the performance of the receiver as a result of imperfect channel estimation is also studied.', pagerank: 0.1 },
-    { id: 'mk1', group: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.2 },
-    { id: 'mk2', group: 1, type: 'paper', title: 'sth', year: '1917', abstract: 'this is abstract', pagerank: 0.12 },
-    { id: 'mk3', group: 1, type: 'paper', title: 'sth', year: '2003', abstract: 'this is abstract', pagerank: 0.02 },
-    { id: 'zjh', group: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.05 },
-    { id: 'zjh1', group: 2, type: 'paper', title: 'sth', year: '1983', abstract: 'this is abstract', pagerank: 0.11 },
-    { id: 'zjh2', group: 2, type: 'paper', title: 'sth', year: '2007', abstract: 'this is abstract', pagerank: 0.01 },
-    { id: 'zjh3', group: 2, type: 'paper', title: 'sth', year: '2001', abstract: 'this is abstract', pagerank: 0.22 },
-    { id: 'cjk', group: 3, type: 'author', name: 'I. M. Salama', publication: [{title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'}, {title:'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'}], co_author: [{name:'author1'}, {name:'author2'}], pagerank: 0.01 },
-    { id: 'cjk1', group: 3, type: 'author', name: 'author!', publication: [{title: 'publication1'}, {title: 'publication2'}], co_author: [{name: 'author1'}, {name: 'author2'}], pagerank: 0.16 }
+    { id: 'mk', level: 1, type: 'paper', title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels', year: '2007', abstract: 'Studies the performance advantage offered by the wideband multipath RAKE structure receiver in a cellular radio direct sequence code division multiple access system (CDMA). The base to mobile link is modeled as a Nakagami fading frequency selective channel. The performance of a RAKE structure receiver employing coherent reception with maximal ratio combining in a frequency selective channel is analyzed and compared with the flat fading case. The degradation in the performance of the receiver as a result of imperfect channel estimation is also studied.', pagerank: 0.1 },
+    { id: 'mk1', level: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.2 },
+    { id: 'mk2', level: 1, type: 'paper', title: 'sth', year: '1917', abstract: 'this is abstract', pagerank: 0.12 },
+    { id: 'mk3', level: 1, type: 'paper', title: 'sth', year: '2003', abstract: 'this is abstract', pagerank: 0.02 },
+    { id: 'zjh', level: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.05 },
+    { id: 'zjh1', level: 2, type: 'paper', title: 'sth', year: '1983', abstract: 'this is abstract', pagerank: 0.11 },
+    { id: 'zjh2', level: 2, type: 'paper', title: 'sth', year: '2007', abstract: 'this is abstract', pagerank: 0.01 },
+    { id: 'zjh3', level: 2, type: 'paper', title: 'sth', year: '2001', abstract: 'this is abstract', pagerank: 0.22 },
+    { id: 'cjk', level: 3, type: 'author', name: 'I. M. Salama', publication: [{ title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels' }, { title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels' }], co_author: [{ name: 'author1' }, { name: 'author2' }], pagerank: 0.01 },
+    { id: 'cjk1', level: 3, type: 'author', name: 'author!', publication: [{ title: 'publication1' }, { title: 'publication2' }], co_author: [{ name: 'author1' }, { name: 'author2' }], pagerank: 0.16 }
   ],
   links: [
     { source: 'mk', target: 'mk1', value: 1, sourcetype: 'paper', targettype: 'paper' },
@@ -111,11 +111,11 @@ export default {
       svg.selectAll('g').attr('transform', d3.event.transform)
     }
 
-    var attractForce = d3
-      .forceManyBody()
-      .strength(200)
-      .distanceMax(400)
-      .distanceMin(60)
+    // var attractForce = d3
+    //   .forceManyBody()
+    //   .strength(200)
+    //   .distanceMax(400)
+    //   .distanceMin(60)
     // 自定义引力
     var repelForce = d3
       .forceManyBody()
@@ -139,7 +139,7 @@ export default {
 
     simulation.force('link').links(data.links)
 
-    var svg_link = svg
+    var svgLink = svg
       .append('g')
       .attr('class', 'links')
       .selectAll('line')
@@ -150,7 +150,7 @@ export default {
         return Math.sqrt(d.value)
       })
 
-    var svg_node = svg
+    var svgNode = svg
       .append('g')
       .attr('class', 'nodes')
       .selectAll('circle')
@@ -213,7 +213,7 @@ export default {
       .attr('fill-opacity', '0.0') */
 
     function ticked () {
-      svg_link
+      svgLink
         .attr('x1', function (d) {
           return d.source.x
         })
@@ -227,7 +227,7 @@ export default {
           return d.target.y
         })
 
-      svg_node
+      svgNode
         .attr('cx', function (d) {
           return d.x
         })
@@ -292,26 +292,26 @@ export default {
         }
       }
 
-      svg_node = svg_node.data(newnodes)
-      svg_link = svg_link.data(newlinks)
-      svg_node.exit().remove()
-      svg_link.exit().remove()
+      svgNode = svgNode.data(newnodes)
+      svgLink = svgLink.data(newlinks)
+      svgNode.exit().remove()
+      svgLink.exit().remove()
     })
 
     this.bus.$on('SelectAll', function (message) {
-      svg_link = svg_link.data(data.links, d => {
+      svgLink = svgLink.data(data.links, d => {
         return d.source.id + '-' + d.target.id
       })
 
-      svg_link = svg_link
+      svgLink = svgLink
         .enter()
         .append('line')
         .attr('stroke-width', function (d) {
           return Math.sqrt(d.value)
         })
-        .merge(svg_link)
+        .merge(svgLink)
 
-      svg_node = svg_node
+      svgNode = svgNode
         .data(data.nodes, d => {
           return d.id
         })
@@ -321,9 +321,14 @@ export default {
           return Math.sqrt(d.pagerank / that.totalPR * 2000)
         })
         .attr('fill', function (d, i) {
-          return color(d.group)
+          if (d.type === 'author') {
+            return '#2c3e50'
+          }
+          else {
+            return color((d.year / 5) % 10)
+          }
         })
-        .merge(svg_node)
+        .merge(svgNode)
         .call(
           d3
             .drag()
@@ -359,12 +364,23 @@ export default {
       simulation.force('link').links(data.links)
       simulation.alpha(1).restart()
     })
+
+    this.bus.$on('SelectTwoLevel', function (message){
+    })
+
+    this.bus.$on('SelectThreeLevel', function (message){
+
+    })
+
+    this.bus.$on('SelectFourLevel', function (message){
+
+    })
   }
 }
 </script>
 
 <style>
-.links line{
+.links line {
   stroke: #999;
   stroke-opacity: 0.6;
 }
@@ -394,7 +410,7 @@ export default {
   padding-top: 50px;
   padding-bottom: 20px;
   width: 300px;
-  height: 600px;
+  height: 630px;
   font-size: 15px;
   z-index: 120;
 }
@@ -424,18 +440,18 @@ hr.tooltip-hr {
   overflow: hidden;
 }
 
-.tooltip .tip{
+.tooltip .tip {
   text-align: center;
   margin-top: 50px;
 }
 
-.tooltip .tip p{
+.tooltip .tip p {
   font-size: 20px;
 }
 
-.tooltip .tip span{
+.tooltip .tip span {
   margin-top: 20px;
-  font-size:40px;
+  font-size: 40px;
 }
 .tooltip .year {
   text-align: left;
@@ -458,7 +474,7 @@ hr.tooltip-hr {
 
 .tooltip .authorinfo {
   text-align: left;
-  padding-left:15px;
+  padding-left: 15px;
 }
 
 .tooltip .abstract::after {
