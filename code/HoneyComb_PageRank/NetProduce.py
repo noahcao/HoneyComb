@@ -93,12 +93,12 @@ if __name__ == '__main__':
 
     dg = digraph()
 
-    paper_json = sys.argv[1]
-    author_json = sys.argv[2]
+    # paper_json = sys.argv[1]
+    # author_json = sys.argv[2]
 
     # 下列数据测试可行
-    # paper_json= '{"papers": [{"id": "1", "authors": ["1","3"], "reference": ["2"] },{"id": "2", "authors": ["2"],"reference": []}]}'
-    # author_json= '{"authors":["1","2","3"]}'
+    paper_json= '{"papers": [{"id": "1", "authors": ["1","3"], "reference": ["2"] },{"id": "2", "authors": ["2"],"reference": []}]}'
+    author_json= '{"authors":["1","2","3"]}'
 
     papers = json.loads(paper_json)
     authors = json.loads(author_json)
@@ -129,13 +129,13 @@ if __name__ == '__main__':
     for net_node in honey_comb_net:
         if(net_node[0] == 'p'):
             newpaper = {}
-            newpaper['paperid'] = net_node[1:len(net_node)]
+            newpaper['paperid'] = int(net_node[1:len(net_node)])
             newpaper['pagerank'] = honey_comb_net[net_node]
             # newpaper[net_node[1:len(net_node)]] = honey_comb_net[net_node]
             paper_pr['paper'].append(newpaper)
         else:
             newauthor = {}
-            newauthor['authorid'] = net_node[1:len(net_node)]
+            newauthor['authorid'] = int(net_node[1:len(net_node)])
             newauthor['pagerank'] = honey_comb_net[net_node]
             # newauthor[net_node[1:len(net_node)]] = honey_comb_net[net_node]
             author_pr['author'].append(newauthor)
