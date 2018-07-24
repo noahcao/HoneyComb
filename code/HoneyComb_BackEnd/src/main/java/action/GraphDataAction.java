@@ -19,6 +19,15 @@ public class GraphDataAction extends ActionSupport {
         private Double pagerank;
         private Integer level;
         private Set<Long> authors;
+        private Set<Long> reference;
+
+        public Set<Long> getReference() {
+            return reference;
+        }
+
+        public void setReference(Set<Long> reference) {
+            this.reference = reference;
+        }
 
         public Integer getLevel() {
             return level;
@@ -179,6 +188,7 @@ public class GraphDataAction extends ActionSupport {
             e.paperid = paper.getId();
             e.level = hierarchy;
             e.authors = new HashSet<>();
+            e.reference = paper.getReference();
             for (Author tempAuthor : paper.getAuthors()) {
                 e.authors.add(tempAuthor.getId());
             }

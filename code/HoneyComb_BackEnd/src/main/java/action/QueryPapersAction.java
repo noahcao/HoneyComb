@@ -153,6 +153,7 @@ public class QueryPapersAction extends ActionSupport {
             this.total = results.size();
             return SUCCESS;
         }
+
         String[] temp = this.key.split(" ");
         if (temp.length == 0) return SUCCESS;
         ArrayList<String> allKeys = new ArrayList<>();
@@ -164,7 +165,6 @@ public class QueryPapersAction extends ActionSupport {
         ArrayList<TfPair> candidates = new ArrayList<>();
         for (String key : allKeys) {
             if (key == null) continue;
-            if (key.length() < 4) continue;
             List<String> titles = appService.queryTitles(key);
             HashMap<String, HashMap<String, Float>> tf = Tfidf.tfOfAll(titles, 100);
             for (String i : tf.keySet()) {
@@ -189,15 +189,19 @@ public class QueryPapersAction extends ActionSupport {
         }
         ComparePair com = new ComparePair();
         candidates.sort(com);
-        int listend = limit <= candidates.size() ? limit : candidates.size();
+
+        long startTime = System.currentTimeMillis();
+        int listEnd = limit <= candidates.size() ? limit : candidates.size();
         ArrayList<Paper> searchList = new ArrayList<>();
-        for (int i = 0; i < listend; i++) {
+        for (int i = 0; i < listEnd; i++) {
             results = appService.getPaperByTitle(candidates.get(i).getKey().toLowerCase());
             if (results == null) continue;
             for (Paper result : results) {
                 if (!searchList.contains(result)) searchList.add(result);
             }
         }
+        long endTime=System.currentTimeMillis();
+        System.out.println("hibernate time: " + (endTime - startTime));
         usersession.put(SEARCHRESULT, searchList);
 
         this.total = searchList.size();

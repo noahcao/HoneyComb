@@ -33,7 +33,7 @@ public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
     public List<Paper> getPaperByTitle(String title) {
         @SuppressWarnings("unchecked")
         List<Paper> papers = (List<Paper>) getHibernateTemplate().find(
-                "from Paper as p where lower(p.title)=?", title);
+                "select p.title, p.from Paper as p where lower(p.title)=?", title);
         return papers;
     }
 
