@@ -3,14 +3,30 @@
     <form class="form-horizontal">
       <div class="form-group">
         <div class="col-xs-1 col-md-1"></div>
+        <div class="col-md-10 col-xs-10">
+          <div class="md-form">
+            <input type="text" id="inputMDEx" class="form-control">
+            <label for="inputMDEx">Medium input</label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-1 col-md-1"></div>
         <label class="col-xs-6 control-label col-md-6">User Name</label>
       </div>
       <div class="form-group">
         <div class="col-xs-1 col-md-1"></div>
         <div class="col-md-10 col-xs-10">
           <input type="text" class="form-control" placeholder="User" v-model="username">
+
         </div>
       </div>
+      <!-- <div class="md-form">
+        <input type="text" id="form1" class="form-control">
+        <label for="form1">Example label</label>
+      </div> -->
       <div class="form-group">
         <div class="col-xs-1 col-md-2"></div>
         <label class="col-xs-2 control-label col-md-2">Password</label>
@@ -45,6 +61,7 @@
 </template>
 
 <script>
+import '../../../static/js/mdb'
 import $ from 'jquery'
 export default {
   name: 'login',
@@ -85,6 +102,7 @@ export default {
 </script>
 
 <style scoped>
+@import "../../../static/css/mdb";
 .form-horizontal {
   width: 100vw;
 }
