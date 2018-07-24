@@ -39,42 +39,52 @@
 </template>
 <script>
 import * as d3 from 'd3'
+// var data = {
+//   nodes: [
+//     { id: 'mk', level: 1, type: 'paper', title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels', year: '2007', abstract: 'Studies the performance advantage offered by the wideband multipath RAKE structure receiver in a cellular radio direct sequence code division multiple access system (CDMA). The base to mobile link is modeled as a Nakagami fading frequency selective channel. The performance of a RAKE structure receiver employing coherent reception with maximal ratio combining in a frequency selective channel is analyzed and compared with the flat fading case. The degradation in the performance of the receiver as a result of imperfect channel estimation is also studied.', pagerank: 0.1 },
+//     { id: 'mk1', level: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.2 },
+//     { id: 'mk2', level: 3, type: 'paper', title: 'sth', year: '1917', abstract: 'this is abstract', pagerank: 0.12 },
+//     { id: 'mk3', level: 3, type: 'paper', title: 'sth', year: '2003', abstract: 'this is abstract', pagerank: 0.02 },
+//     { id: 'zjh', level: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.05 },
+//     { id: 'zjh1', level: 3, type: 'paper', title: 'sth', year: '1983', abstract: 'this is abstract', pagerank: 0.11 },
+//     { id: 'zjh2', level: 3, type: 'paper', title: 'sth', year: '2007', abstract: 'this is abstract', pagerank: 0.01 },
+//     { id: 'zjh3', level: 2, type: 'paper', title: 'sth', year: '2001', abstract: 'this is abstract', pagerank: 0.22 },
+//     { id: 'cjk', level: 3, type: 'author', name: 'I. M. Salama', publication: [{ title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels' }, { title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels' }], co_author: [{ name: 'author1' }, { name: 'author2' }], pagerank: 0.01 },
+//     { id: 'cjk1', level: 4, type: 'author', name: 'author!', publication: [{ title: 'publication1' }, { title: 'publication2' }], co_author: [{ name: 'author1' }, { name: 'author2' }], pagerank: 0.16 }
+//   ],
+//   links: [
+//     { source: 'mk', target: 'mk1', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
+//     { source: 'mk1', target: 'mk2', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
+//     { source: 'mk3', target: 'mk1', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
+//     { source: 'zjh', target: 'mk', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
+//     { source: 'zjh', target: 'zjh1', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
+//     { source: 'zjh', target: 'zjh2', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
+//     { source: 'zjh3', target: 'mk', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
+//     { source: 'zjh3', target: 'cjk', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'author' },
+//     { source: 'cjk1', target: 'cjk', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'author', targettype: 'author' }
+//   ]
+// }
+
 var data = {
-  nodes: [
-    { id: 'mk', level: 1, type: 'paper', title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels', year: '2007', abstract: 'Studies the performance advantage offered by the wideband multipath RAKE structure receiver in a cellular radio direct sequence code division multiple access system (CDMA). The base to mobile link is modeled as a Nakagami fading frequency selective channel. The performance of a RAKE structure receiver employing coherent reception with maximal ratio combining in a frequency selective channel is analyzed and compared with the flat fading case. The degradation in the performance of the receiver as a result of imperfect channel estimation is also studied.', pagerank: 0.1 },
-    { id: 'mk1', level: 1, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.2 },
-    { id: 'mk2', level: 1, type: 'paper', title: 'sth', year: '1917', abstract: 'this is abstract', pagerank: 0.12 },
-    { id: 'mk3', level: 1, type: 'paper', title: 'sth', year: '2003', abstract: 'this is abstract', pagerank: 0.02 },
-    { id: 'zjh', level: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.05 },
-    { id: 'zjh1', level: 2, type: 'paper', title: 'sth', year: '1983', abstract: 'this is abstract', pagerank: 0.11 },
-    { id: 'zjh2', level: 2, type: 'paper', title: 'sth', year: '2007', abstract: 'this is abstract', pagerank: 0.01 },
-    { id: 'zjh3', level: 2, type: 'paper', title: 'sth', year: '2001', abstract: 'this is abstract', pagerank: 0.22 },
-    { id: 'cjk', level: 3, type: 'author', name: 'I. M. Salama', publication: [{ title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels' }, { title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels' }], co_author: [{ name: 'author1' }, { name: 'author2' }], pagerank: 0.01 },
-    { id: 'cjk1', level: 3, type: 'author', name: 'author!', publication: [{ title: 'publication1' }, { title: 'publication2' }], co_author: [{ name: 'author1' }, { name: 'author2' }], pagerank: 0.16 }
-  ],
-  links: [
-    { source: 'mk', target: 'mk1', value: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'mk1', target: 'mk2', value: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'mk3', target: 'mk1', value: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'zjh', target: 'mk', value: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'zjh', target: 'zjh1', value: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'mk3', target: 'zjh2', value: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'zjh3', target: 'zjh1', value: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'zjh3', target: 'cjk', value: 1, sourcetype: 'paper', targettype: 'author' },
-    { source: 'cjk1', target: 'cjk', value: 1, sourcetype: 'author', targettype: 'author' }
-  ]
+  nodes: [],
+  links: []
 }
 
 export default {
   name: 'd3-force',
   data () {
     return {
-      nodes: data.nodes,
-      links: data.links,
+      // nodes: data.nodes,
+      // links: data.links,
+      modeldata: {},
+      nodes: [],
+      links: [],
       unselected: true,
       selected: false,
       ispaper: true,
       totalPR: 1,
+      selectLevel: 4,
+      chooseall: true,
       paper: {
         title: 'title',
         year: '2018',
@@ -90,6 +100,62 @@ export default {
   methods: {
     print_id: function (id) {
       console.log(id)
+    }
+  },
+  created () {
+    this.$http.post('/graphdata', { id: 37819, hierarchyLimit: 4 })
+      .then((res) => {
+        if (res.data.paper !== null) {
+          this.modeldata = res.data
+        } else {
+          alert('error!')
+        }
+      })
+
+    var papersList = this.modeldata.paper
+    var authorList = this.modeldata.author
+
+    for (var i = 0; i < papersList.length; i++) {
+      var temppaper = papersList[i]
+      var papernode = {}
+      papernode.id = 'p' + temppaper.paperid
+      papernode.level = temppaper.level
+      papernode.type = 'paper'
+      papernode.pagerank = temppaper.pagerank
+      papernode.abstract = ''
+      papernode.year = ''
+      data.nodes.push(papernode)
+
+      var tempPapertoAuthor = temppaper.authors
+      var tempPaperRefer = temppaper.reference
+
+      for (var j = 0; j < tempPapertoAuthor.length; j++) {
+        var paperlink = {}
+        paperlink.source = 'p' + temppaper.paperid
+        paperlink.target = 'a' + tempPapertoAuthor[j]
+        paperlink.sourcetype = 'paper'
+        paperlink.targettype = 'author'
+        data.links.push(paperlink)
+      }
+
+      for (var j = 0; j < tempPaperRefer.length; j++) {
+        var paperlink = {}
+        paperlink.source = 'p' + temppaper.paperid
+        paperlink.target = 'a' + tempPaperRefer[j]
+        paperlink.sourcetype = 'paper'
+        paperlink.targettype = 'author'
+        data.links.push(paperlink)
+      }
+    }
+
+    for (var i = 0; i < authorList.length; i++) {
+      var tempauthor = authorList[i]
+      var authornode = {}
+      authornode.id = 'a' + tempauthor.authorid
+      authornode.type = 'author'
+      authornode.level = tempauthor.level
+      authornode.pagerank = tempauthor.pagerank
+      data.nodes.push(authornode)
     }
   },
   mounted () {
@@ -110,12 +176,6 @@ export default {
     function zoomed () {
       svg.selectAll('g').attr('transform', d3.event.transform)
     }
-
-    // var attractForce = d3
-    //   .forceManyBody()
-    //   .strength(200)
-    //   .distanceMax(400)
-    //   .distanceMin(60)
     // 自定义引力
     var repelForce = d3
       .forceManyBody()
@@ -269,6 +329,7 @@ export default {
     }
 
     this.bus.$on('SelectPaper', function (message) {
+      that.chooseall = false
       var newnodes = []
       var newlinks = []
 
@@ -280,8 +341,6 @@ export default {
 
       for (var i = 0; i < data.links.length; i++) {
         if (
-          data.links[i].source.type !== 'paper' ||
-          data.links[i].target.type !== 'paper' ||
           data.links[i].source.type !== 'paper' ||
           data.links[i].target.type !== 'paper'
         ) {
@@ -299,6 +358,7 @@ export default {
     })
 
     this.bus.$on('SelectAll', function (message) {
+      that.chooseall = true
       svgLink = svgLink.data(data.links, d => {
         return d.source.id + '-' + d.target.id
       })
@@ -365,15 +425,256 @@ export default {
       simulation.alpha(1).restart()
     })
 
-    this.bus.$on('SelectTwoLevel', function (message){
+    this.bus.$on('SelectTwoLevel', function (message) {
+      if (that.selectLevel > 2) {
+        that.selectLevel = 2
+        var newnodes = []
+        var newlinks = []
+        if (this.chooseall === true) {
+          for (var i = 0; i < data.nodes.length; i++) {
+            if (data.nodes[i].level <= 2) {
+              newnodes.push(data.nodes[i])
+            }
+          }
+          for (var i = 0; i < data.links.length; i++) {
+            if (data.links[i].source.level <= 2 && data.links[i].target.level <= 2) {
+              newlinks.push(data.links[i])
+            }
+          }
+        }
+        else {
+          for (var i = 0; i < data.nodes.length; i++) {
+            if (data.nodes[i].level <= 2 && data.nodes[i].type === 'paper') {
+              newnodes.push(data.nodes[i])
+            }
+          }
+          for (var i = 0; i < data.links.length; i++) {
+            if (
+              data.links[i].source.type === 'paper' &&
+              data.links[i].target.type === 'paper' &&
+              data.links[i].source.level <= 2 &&
+              data.links[i].target.level <= 2
+            ) {
+              newlinks.push(data.links[i])
+            }
+          }
+        }
+        svgNode = svgNode.data(newnodes)
+        svgLink = svgLink.data(newlinks)
+        svgNode.exit().remove()
+        svgLink.exit().remove()
+      }
     })
 
-    this.bus.$on('SelectThreeLevel', function (message){
+    this.bus.$on('SelectThreeLevel', function (message) {
+      if (that.selectLevel === 3) {
+        return
+      }
+      var newnodes = []
+      var newlinks = []
+      if (this.chooseall === true) {
+        for (var i = 0; i < data.nodes.length; i++) {
+          if (data.nodes[i].level <= 3) {
+            newnodes.push(data.nodes[i])
+          }
+        }
+        for (var i = 0; i < data.links.length; i++) {
+          if (data.links[i].source.level <= 3 && data.links[i].target.level <= 3) {
+            newlinks.push(data.links[i])
+          }
+        }
+      }
+      else {
+        for (var i = 0; i < data.nodes.length; i++) {
+          if (data.nodes[i].level <= 3 && data.nodes[i].type === 'paper') {
+            newnodes.push(data.nodes[i])
+          }
+        }
+        for (var i = 0; i < data.links.length; i++) {
+          if (
+            data.links[i].source.type === 'paper' &&
+            data.links[i].target.type === 'paper' &&
+            data.links[i].source.level <= 3 &&
+            data.links[i].target.level <= 3
+          ) {
+            newlinks.push(data.links[i])
+          }
+        }
+      }
+      if (that.selectLevel > 3) {
+        svgNode = svgNode.data(newnodes)
+        svgLink = svgLink.data(newlinks)
+        svgNode.exit().remove()
+        svgLink.exit().remove()
+      }
+      else {
+        svgLink = svgLink.data(newlinks, d => {
+          return d.source.id + '-' + d.target.id
+        })
 
+        svgLink = svgLink
+          .enter()
+          .append('line')
+          .attr('stroke-width', function (d) {
+            return Math.sqrt(d.value)
+          })
+          .merge(svgLink)
+
+        svgNode = svgNode
+          .data(newnodes, d => {
+            return d.id
+          })
+          .enter()
+          .append('circle')
+          .attr('r', function (d, i) {
+            return Math.sqrt(d.pagerank / that.totalPR * 2000)
+          })
+          .attr('fill', function (d, i) {
+            if (d.type === 'author') {
+              return '#2c3e50'
+            }
+            else {
+              return color((d.year / 5) % 10)
+            }
+          })
+          .merge(svgNode)
+          .call(
+            d3
+              .drag()
+              .on('start', dragstarted)
+              .on('drag', dragged)
+              .on('end', dragended)
+          )
+          .on('click', function (d) {
+            that.print_id(d.id)
+          })
+          .on('mouseover', function (d, i) {
+            if (d.type === 'paper') {
+              that.paper.title = d.title
+              that.paper.year = d.year
+              that.paper.abstract = d.abstract
+              that.unselected = false
+              that.selected = true
+              that.ispaper = true
+            }
+            else {
+              that.author.name = d.name
+              that.author.publication = d.publication
+              that.author.co_author = d.co_author
+              that.unselected = false
+              that.selected = true
+              that.ispaper = false
+            }
+          })
+          .on('mouseout', function (d) {
+            // tooltip.style('display', 'none')
+          })
+        simulation.nodes(newnodes)
+        simulation.force('link').links(newlinks)
+        simulation.alpha(1).restart()
+      }
+      that.selectLevel = 3
     })
 
-    this.bus.$on('SelectFourLevel', function (message){
+    this.bus.$on('SelectFourLevel', function (message) {
+      if (that.selectLevel < 4) {
+        that.selectLevel = 4
+        var newnodes = []
+        var newlinks = []
+        if (this.chooseall === true) {
+          for (var i = 0; i < data.nodes.length; i++) {
+            if (data.nodes[i].level <= 4) {
+              newnodes.push(data.nodes[i])
+            }
+          }
+          for (var i = 0; i < data.links.length; i++) {
+            if (data.links[i].source.level <= 4 && data.links[i].target.level <= 4) {
+              newlinks.push(data.links[i])
+            }
+          }
+        }
+        else {
+          for (var i = 0; i < data.nodes.length; i++) {
+            if (data.nodes[i].level <= 4 && data.nodes[i].type === 'paper') {
+              newnodes.push(data.nodes[i])
+            }
+          }
+          for (var i = 0; i < data.links.length; i++) {
+            if (
+              data.links[i].source.type === 'paper' &&
+              data.links[i].target.type === 'paper' &&
+              data.links[i].source.level <= 4 &&
+              data.links[i].target.level <= 4
+            ) {
+              newlinks.push(data.links[i])
+            }
+          }
+        }
+        svgLink = svgLink.data(newlinks, d => {
+          return d.source.id + '-' + d.target.id
+        })
 
+        svgLink = svgLink
+          .enter()
+          .append('line')
+          .attr('stroke-width', function (d) {
+            return Math.sqrt(d.value)
+          })
+          .merge(svgLink)
+
+        svgNode = svgNode
+          .data(newnodes, d => {
+            return d.id
+          })
+          .enter()
+          .append('circle')
+          .attr('r', function (d, i) {
+            return Math.sqrt(d.pagerank / that.totalPR * 2000)
+          })
+          .attr('fill', function (d, i) {
+            if (d.type === 'author') {
+              return '#2c3e50'
+            }
+            else {
+              return color((d.year / 5) % 10)
+            }
+          })
+          .merge(svgNode)
+          .call(
+            d3
+              .drag()
+              .on('start', dragstarted)
+              .on('drag', dragged)
+              .on('end', dragended)
+          )
+          .on('click', function (d) {
+            that.print_id(d.id)
+          })
+          .on('mouseover', function (d, i) {
+            if (d.type === 'paper') {
+              that.paper.title = d.title
+              that.paper.year = d.year
+              that.paper.abstract = d.abstract
+              that.unselected = false
+              that.selected = true
+              that.ispaper = true
+            }
+            else {
+              that.author.name = d.name
+              that.author.publication = d.publication
+              that.author.co_author = d.co_author
+              that.unselected = false
+              that.selected = true
+              that.ispaper = false
+            }
+          })
+          .on('mouseout', function (d) {
+            // tooltip.style('display', 'none')
+          })
+        simulation.nodes(newnodes)
+        simulation.force('link').links(newlinks)
+        simulation.alpha(1).restart()
+      }
     })
   }
 }
