@@ -5,14 +5,24 @@
         <div class="col-xs-1 col-md-1"></div>
         <div class="col-md-10 col-xs-10">
           <div class="md-form">
-            <input type="text" id="inputMDEx" class="form-control">
-            <label for="inputMDEx">Medium input</label>
+            <input type="text" id="inputMDEx" class="form-control" v-model="username" autocomplete="off">
+            <label for="inputMDEx">User Name</label>
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-1 col-md-1"></div>
+        <div class="col-md-10 col-xs-10">
+          <div class="md-form">
+            <input id="inputMDEx" class="form-control" type="password" v-model="userpwd" autocomplete="off">
+            <label for="inputMDEx">Password</label>
           </div>
 
         </div>
       </div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <div class="col-xs-1 col-md-1"></div>
         <label class="col-xs-6 control-label col-md-6">User Name</label>
       </div>
@@ -22,21 +32,21 @@
           <input type="text" class="form-control" placeholder="User" v-model="username">
 
         </div>
-      </div>
+      </div> -->
       <!-- <div class="md-form">
         <input type="text" id="form1" class="form-control">
         <label for="form1">Example label</label>
       </div> -->
-      <div class="form-group">
+      <!-- <div class="form-group">
         <div class="col-xs-1 col-md-2"></div>
         <label class="col-xs-2 control-label col-md-2">Password</label>
-      </div>
-      <div class="form-group">
+      </div> -->
+      <!-- <div class="form-group">
         <div class="col-xs-1 col-md-1"></div>
         <div class="col-md-10 col-xs-10">
           <input type="password" class="form-control" placeholder="Password" v-model="userpwd">
         </div>
-      </div>
+      </div> -->
       <div class="form-group">
         <div class="col-xs-1 col-md-1"></div>
         <div class=" col-xs-10 col-md-10">
@@ -50,7 +60,7 @@
       </div>
       <div class="form-group">
         <div class="col-xs-offset-1 col-xs-10">
-          <button type="button" @click="login" class="btn btn-default pull-left" id="login-button">Login</button>
+          <button type="button" @click="login" class="btn btn-elegant pull-left" id="login-button">Login</button>
           <!-- <router-link :to="{ name: 'Register' }">
           <button type="button" class="btn btn-default">注册</button>
         </router-link> -->
@@ -103,6 +113,30 @@ export default {
 
 <style scoped>
 @import "../../../static/css/mdb";
+
+.md-form .form-control {
+  margin: 0 0 0.5rem 0;
+  border-radius: 0;
+  padding: 0.9rem 0 0 0;
+  background-image: none;
+  background-color: transparent;
+}
+.md-form label {
+  position: absolute;
+  top: 1.8rem;
+  left: 0.8rem;
+  font-size: 18px;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+  cursor: text;
+  color: rgba(18, 21, 23, 0.5);
+  padding-bottom: 1px;
+  font-weight: 400;
+}
+.inputMDEx {
+  height: 38px;
+  border-bottom: 1px solid #000;
+}
 .form-horizontal {
   width: 100vw;
 }
@@ -141,10 +175,10 @@ export default {
 .form-control {
   border: none;
   border-radius: 4px;
-  color: rgba(255, 255, 255, 0.8);
-  height: 46px;
+  height: 38px;
   margin-left: auto;
   margin-right: auto;
+  color: #000;
 }
 input::-webkit-input-placeholder {
   /* WebKit browsers */
@@ -200,5 +234,10 @@ input:focus {
     margin-bottom: 0;
     text-align: left;
   }
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  -webkit-text-fill-color: #333;
 }
 </style>
