@@ -1,7 +1,7 @@
 <template>
     <div id="posterpage">
         <nav-bar style='margin-bottom:1px'></nav-bar>
-        <div class="col-xs-8 col-sm-8" id="panelboard">
+        <div id="panelboard">
             <div class="jumbotron" id="panel">
                 <div class="row jumbotron" id="buttonbar">
                     <div class="col-xs-8 col-sm-8">
@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-xs-4 col-sm-4" style="padding:0">
                         <button type="button" class="btn btn-outline-warning waves-effect self-btn"><i class="fa fa-star pr-2" aria-hidden="true"> Star</i></button>
-                        <button type="button" class="btn btn-outline-info waves-effect px-3 self-btn"><i class="fa fa-pencil-square-o" aria-hidden="true"> Post</i></button>
+                        <button type="button" class="btn btn-outline-info waves-effect px-3 self-btn" @click="showeditor=!showeditor"><i class="fa fa-pencil-square-o" aria-hidden="true"> Post</i></button>
                         <button type="button" class="btn btn-outline-secondary waves-effect px-3 self-btn"><i class="fa fa-share-alt" aria-hidden="true"> Share</i></button>
                     </div>
                 </div>
@@ -42,9 +42,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-4 col-sm-4" id="rightwrapper">
-            <div id="rightboard">
-            </div>
+        <div id="editorboard" v-if="showeditor">
+            <editor></editor>
         </div>
     </div>
 </template>
@@ -52,15 +51,18 @@
 <script>
 /* eslint-disable */
 import NavBar from '../main/NavBar'
+import editor from './editor'
 export default {
     name: 'poster',
     components: {
-        NavBar
+        NavBar,
+        editor
     },
     methods:{
     },
     data(){
         return {
+            showeditor: false,
             posters:
             [
                 {   
@@ -139,11 +141,13 @@ export default {
     min-height: 90%
 }
 #posterpage{
-    height: 800px
+    min-height: 1000px
 }
 #panelboard{
     height: 90%;
     padding-top: 2%;
+    width: 90%;
+    margin-left: 5%
 }
 #panel{
     padding: 5px 5px 5px 5px;
@@ -210,6 +214,11 @@ export default {
 #newcomment{
     margin: 0px 3% 0px 3%;
     width: 94%
+}
+#editorboard{
+    height:500px;
+    padding-bottom:40px;
+    margin-bottom: 50px 
 }
 </style>
 
