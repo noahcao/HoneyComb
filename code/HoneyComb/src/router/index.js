@@ -5,6 +5,7 @@ import userInfo from '../components/user/userInfo'
 import outcomb from '../components/Combs/outComb'
 import search from '../components/Search/search'
 import community from '../components/Community/community'
+import poster from '../components/Community/poster'
 // import navTest from '../components/main/navTest'
 
 Vue.use(Router)
@@ -38,6 +39,11 @@ export default new Router({
       path: '/community',
       name: 'community',
       component: community
+    },
+    {
+      path: '/poster',
+      name: 'poster',
+      component: poster
     }
   ]
 })

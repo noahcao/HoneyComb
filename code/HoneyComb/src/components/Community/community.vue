@@ -41,9 +41,10 @@ export default {
 #sidebar {
   background-color: aqua;
   height: 100%;
+  padding: 0
 }
 #posterboard {
-  background-color: bisque;
+  background-color:whitesmoke;
   height: 100%;
   padding-left: 0;
   padding-right: 0;

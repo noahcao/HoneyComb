@@ -55,15 +55,15 @@ h2 {
   position: absolute;
   box-shadow: 0 0 25px 0 rgba(27, 27, 27, 0.5);
   overflow: hidden;
-  width:95%;
+  width:100%;
   height:100%;
   background: #373535;
+  padding-left: 10%
 }
 #selectsection{
-    margin-left: 5%;
     margin-top: 10%;
     height: 80%;
-    width: 90%;
+    width: 100%;
 }
 li{
     list-style-type: none;
