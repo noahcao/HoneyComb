@@ -25,6 +25,7 @@
                 <value>model/UserEntity.hbm.xml</value>
                 <value>model/PaperEntity.hbm.xml</value>
                 <value>model/AuthorEntity.hbm.xml</value>
+                <value>model/PaperSmall.hbm.xml</value>
             </list>
         </property>
         <!-- Hibernate SessionFactory -->

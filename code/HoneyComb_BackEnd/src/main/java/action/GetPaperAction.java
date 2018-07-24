@@ -3,6 +3,8 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import model.Author;
 import model.Paper;
+import org.hibernate.Hibernate;
+import org.springframework.transaction.annotation.Transactional;
 import service.AppService;
 
 import java.time.Year;
@@ -87,18 +89,20 @@ public class GetPaperAction extends ActionSupport {
     public void setAppService(AppService appService) {
         this.appService = appService;
     }
-
+    
     @Override
     public String execute() throws Exception {
         if (this.id == null) return ERROR;
         Paper result = appService.getPaperById(id);
         if (result != null) {
+            Hibernate.initialize(result.getAuthors());
             setAuthors(result.getAuthors());
             setTitle(result.getTitle());
             setUrl(result.getUrl());
             setCited(result.getCited());
             setYear(result.getYear());
             set_abstract(result.get_abstract());
+            Hibernate.initialize(result.getReference());
             setReference(result.getReference());
             return SUCCESS;
         }

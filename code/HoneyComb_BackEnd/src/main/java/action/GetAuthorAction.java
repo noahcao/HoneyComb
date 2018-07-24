@@ -2,6 +2,7 @@ package action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import model.Author;
+import org.hibernate.Hibernate;
 import service.AppService;
 
 import java.util.Set;
@@ -57,6 +58,7 @@ public class GetAuthorAction extends ActionSupport {
         if (result != null) {
             setUrl(result.getUrl());
             setName(result.getName());
+            Hibernate.initialize(result.getPapers());
             setPapers(result.getPapers());
             return SUCCESS;
         }
