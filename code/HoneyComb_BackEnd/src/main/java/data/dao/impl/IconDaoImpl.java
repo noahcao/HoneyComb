@@ -23,31 +23,6 @@ public class IconDaoImpl implements IconDao {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public void _test() {
-        Set<String> colls = this.mongoTemplate.getCollectionNames();
-        for (String coll : colls) {
-            System.out.println("CollectionName=" + coll);
-        }
-        DB db = this.mongoTemplate.getDb();
-        System.out.println("db=" + db.toString());
-    }
-
-    @Override
-    public void createCollection() {
-        if (!this.mongoTemplate.collectionExists(IconEntity.class)) {
-            this.mongoTemplate.createCollection(IconEntity.class);
-        }
-    }
-
-    @Override
-    public List<IconEntity> findList(int skip, int limit) {
-        Query query = new Query();
-        query.with(new Sort(new Order(Direction.ASC, "_id")));
-        query.skip(skip).limit(limit);
-        return this.mongoTemplate.find(query, IconEntity.class);
-    }
-
-    @Override
     public IconEntity findOne(String id) {
         Query query = new Query();
         query.addCriteria(new Criteria("_id").is(id));

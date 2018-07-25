@@ -9,7 +9,7 @@ import service.AppService;
 
 import javax.annotation.Resource;
 
-@ContextConfiguration(locations = { "classpath:bean.xml", "classpath:mongo.xml" })
+@ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:mongo.xml" })
 public class UpdateUserAction extends ActionSupport {
     private Integer id;
 
@@ -80,6 +80,10 @@ public class UpdateUserAction extends ActionSupport {
 
     public void setAppService(AppService appService) {
         this.appService = appService;
+    }
+
+    public void setIconDao(IconDaoImpl iconDao) {
+        this.iconDao = iconDao;
     }
 
     public String query() throws Exception {

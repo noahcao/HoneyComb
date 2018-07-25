@@ -291,12 +291,16 @@ public class QueryPapersAction extends ActionSupport {
         ArrayList<TfPair> candidates = new ArrayList<>();
         int limit = 100;
         List<PaperSmall> results = appService.getPaperSmallLikeTitle(key);
-        if (results.size() > 0 && results.size() < 10) {
+        if (results.size() > 0 && results.size() <= 5) {
             for (PaperSmall result : results) {
-//                SimplePaper e = simplifyPaper(appService.getPaperById(result.getId()));
-                candidates.add(new TfPair(result, 10.0F));
+                SimplePaper e = simplifyPaper(appService.getPaperById(result.getId()));
+                this.papers.add(e);
             }
-            limit -= results.size();
+            this.total = results.size();
+            this.start = 0;
+            this.end = results.size();
+            usersession.put(SEARCHRESULT, results);
+            return SUCCESS;
         }
 
         String[] temp = this.key.split(" ");
