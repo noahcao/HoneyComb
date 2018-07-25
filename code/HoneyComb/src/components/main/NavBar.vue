@@ -22,7 +22,8 @@
             <router-link :to="{name:'outcomb'}" class="tag1">Explore</router-link>
           </li>
           <li>
-            <a href="#" class="tag">About us</a>
+            <router-link :to="{name:'poster'}"
+            class="tag">About us</router-link>
           </li>
           <li>
             <router-link :to="{name:'community'}" class="tag">Community</router-link>
