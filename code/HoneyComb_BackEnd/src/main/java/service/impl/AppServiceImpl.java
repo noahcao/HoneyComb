@@ -4,6 +4,7 @@ import dao.PaperDao;
 import dao.UserDao;
 import model.Author;
 import model.Paper;
+import model.PaperSmall;
 import model.User;
 import service.AppService;
 
@@ -71,13 +72,18 @@ public class AppServiceImpl implements AppService {
     }
 
     @Override
-    public List<String> queryTitles(String name) {
-        return paperDao.queryTitles(name);
+    public List<PaperSmall> getPaperSmallByTitle(String name) {
+        return paperDao.getPaperSmallByTitle(name);
     }
 
     @Override
     public List<Paper> getPaperByTitle(String title) {
         return paperDao.getPaperByTitle(title);
+    }
+
+    @Override
+    public List<PaperSmall> getPaperSmallLikeTitle(String title) {
+        return paperDao.getPaperSmallLikeTitle(title);
     }
 
     @Override

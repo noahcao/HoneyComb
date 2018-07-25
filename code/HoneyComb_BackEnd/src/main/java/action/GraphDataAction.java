@@ -176,10 +176,11 @@ public class GraphDataAction extends ActionSupport {
         this.appService = appService;
     }
 
-    private void getData(int hierarchy, int hierarchyLimit, JsonArray paperArray, ArrayList<Long> papers, int itPapaer, ArrayList<Long> authors) {
+    private void getData(int hierarchy, int hierarchyLimit, JsonArray paperArray, ArrayList<Long> papers, int itPapaer, ArrayList<Long> authors, int itAuthor) {
         if (hierarchy > hierarchyLimit) return;
-        int tempSize = papers.size();
-        for (int i = itPapaer; i < tempSize; i++) {
+        int tempPaperSize = papers.size();
+        int tempAuthorSize = authors.size();
+        for (int i = itPapaer; i < tempPaperSize; i++) {
             JsonObject obj = new JsonObject();
             Paper paper = appService.getPaperById(papers.get(i));
             obj.addProperty("`id`", paper.getId());
@@ -209,14 +210,6 @@ public class GraphDataAction extends ActionSupport {
                         e1.level = hierarchy + 1;
                         e1.papers = author.getPapers();
                         this.author.add(e1);
-
-                        if (hierarchy + 2 <= hierarchyLimit) {
-                            for (Long paper1 : author.getPapers()) {
-                                if (!papers.contains(paper1)) {
-                                    papers.add(paper1);
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -237,7 +230,18 @@ public class GraphDataAction extends ActionSupport {
 
             paperArray.add(obj);
         }
-        getData(hierarchy + 1, hierarchyLimit, paperArray, papers, tempSize, authors);
+        for (int i = itAuthor; i < tempAuthorSize; i++) {
+
+            if (hierarchy + 1 <= hierarchyLimit) {
+                Author author = appService.getAuthorById(authors.get(i));
+                for (Long paper : author.getPapers()) {
+                    if (!papers.contains(paper)) {
+                        papers.add(paper);
+                    }
+                }
+            }
+        }
+        getData(hierarchy + 1, hierarchyLimit, paperArray, papers, tempPaperSize, authors, tempAuthorSize);
     }
 
     @Override
@@ -251,8 +255,8 @@ public class GraphDataAction extends ActionSupport {
         ArrayList<Long> authors = new ArrayList<>();
         ArrayList<Long> papers = new ArrayList<>();
         papers.add(this.id);
+        getData(1, hierarchyLimit, paperArray, papers, 0, authors, 0);
 
-        getData(1, hierarchyLimit, paperArray, papers, 0, authors);
         for (Long i : authors) {
             JsonObject temp = new JsonObject();
             temp.addProperty("`id`", i);

@@ -2,6 +2,7 @@ package service;
 
 import model.Author;
 import model.Paper;
+import model.PaperSmall;
 import model.User;
 
 import java.util.List;
@@ -34,9 +35,11 @@ public interface AppService {
      */
     Paper getPaperById(java.lang.Long id);
 
-    List<String> queryTitles(String name);
+    List<PaperSmall> getPaperSmallByTitle(String name);
 
     List<Paper> getPaperByTitle(String title);
+
+    List<PaperSmall> getPaperSmallLikeTitle(String title);
 
     Author getAuthorById(Long id);
 

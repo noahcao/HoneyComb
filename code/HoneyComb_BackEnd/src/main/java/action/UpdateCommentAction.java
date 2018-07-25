@@ -75,6 +75,10 @@ public class UpdateCommentAction extends ActionSupport {
     @Resource
     private CommentDaoImpl commentDao;
 
+    public void setCommentDao(CommentDaoImpl commentDao) {
+        this.commentDao = commentDao;
+    }
+
     public String add() throws Exception {
         if (this.userId == null || this.panelId == null || this.postId == null) return ERROR;
         CommentEntity e = new CommentEntity();
