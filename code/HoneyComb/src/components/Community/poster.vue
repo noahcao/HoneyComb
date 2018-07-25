@@ -4,10 +4,10 @@
         <div id="panelboard">
             <div class="jumbotron" id="panel">
                 <div class="row jumbotron" id="buttonbar">
-                    <div class="col-xs-8 col-sm-8">
+                    <div class="col-xs-9 col-sm-9">
                         <h2 class="h2-reponsive mb-3 blue-text" id="paneltitle"><strong>Panel Topic</strong></h2>
                     </div>
-                    <div class="col-xs-4 col-sm-4" style="padding:0">
+                    <div class="col-xs-3 col-sm-3" style="padding:0">
                         <button type="button" class="btn btn-outline-warning waves-effect self-btn"><i class="fa fa-star pr-2" aria-hidden="true"> Star</i></button>
                         <button type="button" class="btn btn-outline-info waves-effect px-3 self-btn" @click="showeditor=!showeditor"><i class="fa fa-pencil-square-o" aria-hidden="true"> Post</i></button>
                         <button type="button" class="btn btn-outline-secondary waves-effect px-3 self-btn"><i class="fa fa-share-alt" aria-hidden="true"> Share</i></button>
