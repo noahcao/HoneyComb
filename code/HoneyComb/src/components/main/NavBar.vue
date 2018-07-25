@@ -19,10 +19,11 @@
             <a href="#" class="title">Honeycomb</a>
           </li> -->
           <li>
-            <router-link :to="{name:'outcomb'}" class="tag">Explore</router-link>
+            <router-link :to="{name:'outcomb'}" class="tag1">Explore</router-link>
           </li>
           <li>
-            <a href="#" class="tag">About us</a>
+            <router-link :to="{name:'poster'}"
+            class="tag">About us</router-link>
           </li>
           <li>
             <router-link :to="{name:'community'}" class="tag">Community</router-link>
@@ -52,11 +53,9 @@
             </ul>
           </li> -->
         </ul>
-        <!-- <form class="navbar-form navbar-left">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
+        <!-- <form class="md-form">
+          <fa icon="search" />
+          <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
         </form> -->
         <ul class="nav navbar-nav navbar-right">
           <li v-if="this.id === null">
@@ -210,6 +209,7 @@ export default {
 }
 </script>
 <style scoped>
+
 .glyphicon-menu-right {
   cursor: pointer;
 }
@@ -253,6 +253,9 @@ export default {
   margin-left: 15px;
 }
 
+.tag1 {
+  margin-left: 30px;
+}
 @media (min-width: 768px) {
   .tag {
     margin-left: 20px;
@@ -270,7 +273,7 @@ export default {
 
 @media (min-width: 900px) {
   .tag {
-    margin-left: 25px;
+    margin-left: 5px;
   }
   .navbar-inverse .navbar-brand {
     font-family: "Century Gothic", sans-serif;
@@ -350,8 +353,6 @@ export default {
   text-align: center;
   line-height: 50px;
 }
-
-
 
 .modal.left .modal-dialog,
 .modal.right .modal-dialog {
@@ -471,3 +472,5 @@ export default {
   }
 } */
 </style>
+
+
