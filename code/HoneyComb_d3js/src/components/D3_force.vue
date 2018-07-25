@@ -1,62 +1,43 @@
 <template>
   <div>
-    <nav-bar></nav-bar>
-    <div class="comb-container">
-      <div class="col-xs-12 col-md-2 tool-bar">
-        <select-box></select-box>
+    <svg width='1000' height='600'></svg>
+    <div class='tooltip'>
+      <div v-if='unselected' class='tip'>
+        <p>Detailed Information</p>
+        <p>Here!</p>
+        <span class='glyphicon glyphicon-list-alt'></span>
       </div>
-
-      <div class="col-xs-12 col-md-8 comb">
-        <svg width='1000' height='600'></svg>
+      <div v-else-if='ispaper'>
+        <p class='title'>{{paper.title}}</p>
+        <p class='year'>year: {{paper.year}}</p>
       </div>
-
-      <div class="col-xs-12 col-md-2 abstract-bar">
-        <div class='tooltip'>
-          <div v-if='unselected' class='tip'>
-            <p>Detailed Information</p>
-            <p>Here!</p>
-            <span class='glyphicon glyphicon-list-alt'></span>
-          </div>
-          <div v-else-if='ispaper'>
-            <p class='title'>{{paper.title}}</p>
-            <p class='year'>year: {{paper.year}}</p>
-          </div>
-          <div v-else>
-            <p class='title'>{{author.name}}</p>
-          </div>
-          <div v-if='selected'>
-            <hr class='tooltip-hr'></hr>
-            <div v-if='ispaper'>
-              <p class='abstract'>{{paper.abstract}}</p>
-            </div>
-            <div v-else>
-              <p class='authorinfo'>Publications:</p>
-              <ul>
-                <li v-for='item in author.publication'>
-                  {{item.title}}
-                </li>
-              </ul>
-              <p class='authorinfo'>Co-workers:</p>
-              <ul>
-                <li v-for='item in author.co_author'>
-                  {{item.name}}
-                </li>
-              </ul>
-            </div>
-          </div>
+      <div v-else>
+        <p class='title'>{{author.name}}</p>
+      </div>
+      <div v-if='selected'>
+        <hr class='tooltip-hr'></hr>
+        <div v-if='ispaper'>
+          <p class='abstract'>{{paper.abstract}}</p>
+        </div>
+        <div v-else>
+          <p class='authorinfo'>Publications:</p>
+          <ul>
+            <li v-for='item in author.publication'>
+              {{item.title}}
+            </li>
+          </ul>
+          <p class='authorinfo'>Co-workers:</p>
+          <ul>
+            <li v-for='item in author.co_author'>
+              {{item.name}}
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-
-import NavBar from '../main/NavBar'
-import Footer from '../main/Footer'
-import d3Force from './D3_force'
-import SelectBox from './SelectBox.vue'
-import $ from 'jquery'
 import * as d3 from 'd3'
 var data = {
   nodes: [
@@ -83,14 +64,9 @@ var data = {
     { source: 'cjk1', target: 'cjk', value: 1, sourcetype: 'author', targettype: 'author' }
   ]
 }
+
 export default {
-  name: 'outcomb',
-  components: {
-    NavBar,
-    Footer,
-    d3Force,
-    SelectBox
-  },
+  name: 'D3Force',
   data () {
     return {
       nodes: data.nodes,
@@ -117,7 +93,6 @@ export default {
     }
   },
   mounted () {
-    $('canvas').remove()
     let that = this
     console.log('mounted!')
     var img_w = 10
@@ -392,43 +367,7 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.tool-bar,
-.abstract-bar,
-.comb {
-  height: 100%;
-}
-
-.tool-bar {
-  background-color: black;
-}
-.abstract-bar {
-  background-color: white;
-}
-
-.abs-title {
-  word-break: break-all;
-  white-space: normal;
-  font-size: 24px;
-}
-.abs-author {
-  margin-top: 10px;
-  font-size: 20px;
-}
-.abs-abs {
-  margin-top: 10px;
-}
-.comb {
-  background-color: white;
-}
-.comb-container {
-  width: 100%;
-  position: absolute;
-  top: 70px;
-  bottom: 0px;
-  left: 0px;
-}
+<style>
 .links line {
   stroke: #999;
   stroke-opacity: 0.6;
