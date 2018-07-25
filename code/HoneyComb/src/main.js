@@ -7,6 +7,8 @@ import axios from 'axios'
 import data from './data'
 
 Vue.config.productionTip = false
+let bus = new Vue()
+Vue.prototype.bus = bus
 
 let axiosIns = axios.create({
   baseURL: '/',
