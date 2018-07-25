@@ -79,8 +79,10 @@ public class UpdatePostAction extends ActionSupport{
 
     @Resource
     private PostDaoImpl postDao;
-    @Resource
-    private PanelDaoImpl panelDao;
+
+    public void setPostDao(PostDaoImpl postDao) {
+        this.postDao = postDao;
+    }
 
     public String add() throws Exception {
         if (this.panelId == null || this.userId == null) return ERROR;

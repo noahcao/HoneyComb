@@ -59,6 +59,10 @@ public class UpdatePanelAction extends ActionSupport {
     @Resource
     private PanelDaoImpl panelDao;
 
+    public void setPanelDao(PanelDaoImpl panelDao) {
+        this.panelDao = panelDao;
+    }
+
     public String add() throws Exception {
         if (this.owner == null || this.title == null) return ERROR;
         PanelEntity e = new PanelEntity();
@@ -72,16 +76,16 @@ public class UpdatePanelAction extends ActionSupport {
     }
 
     public String delete() throws Exception {
-       if (this.id == null) return ERROR;
-       panelDao.deleteById(this.id);
-       return SUCCESS;
+        if (this.id == null) return ERROR;
+        panelDao.deleteById(this.id);
+        return SUCCESS;
     }
 
     public String update() throws Exception {
         if (this.id == null || (this.title == null && this.owner == null)) return ERROR;
         PanelEntity e = new PanelEntity();
-        e.setOwner(this.owner);
-        e.setTitle(this.title);
+        if (this.owner != null) e.setOwner(this.owner);
+        if (this.title != null) e.setTitle(this.title);
         panelDao.update(e);
         query();
         return SUCCESS;

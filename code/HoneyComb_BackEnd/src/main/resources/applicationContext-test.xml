@@ -13,8 +13,8 @@
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close" p:driverClass="com.mysql.cj.jdbc.Driver"
-          p:jdbcUrl="jdbc:mysql://localhost:3306/honeycomb?serverTimezone=UTC&amp;useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" p:user="root"
-          p:password="5121039" p:maxPoolSize="40" p:minPoolSize="1"
+          p:jdbcUrl="jdbc:mysql://localhost:3306/honeycombtest?serverTimezone=UTC&amp;useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" p:user="root"
+          p:password="root" p:maxPoolSize="40" p:minPoolSize="1"
           p:initialPoolSize="5" p:maxIdleTime="20"/>
 
     <bean id="sessionFactory"
@@ -25,13 +25,14 @@
                 <value>model/UserEntity.hbm.xml</value>
                 <value>model/PaperEntity.hbm.xml</value>
                 <value>model/AuthorEntity.hbm.xml</value>
+                <value>model/PaperSmall.hbm.xml</value>
             </list>
         </property>
         <!-- Hibernate SessionFactory -->
         <property name="hibernateProperties">
             <value>
                 hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
-                hibernate.hbm2ddl.auto=update
+                hibernate.hbm2ddl.auto=create-drop
                 hibernate.show_sql=false
                 hibernate.format_sql=true
             </value>
@@ -73,7 +74,7 @@
     <context:component-scan base-package="data"/>
 
     <!-- 导入mongodb的配置文件 -->
-    <import resource="mongo.xml" />
+    <import resource="mongo-test.xml" />
 
     <context:annotation-config />
 </beans>

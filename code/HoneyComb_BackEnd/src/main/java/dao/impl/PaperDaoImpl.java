@@ -1,12 +1,10 @@
 package dao.impl;
 
 import dao.PaperDao;
-import javafx.util.Pair;
 import model.Author;
 import model.Paper;
-import org.springframework.data.web.HateoasPageableHandlerMethodArgumentResolver;
+import model.PaperSmall;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
-import tfidf.Tfidf;
 
 import java.util.*;
 
@@ -21,20 +19,28 @@ public class PaperDaoImpl extends HibernateDaoSupport implements PaperDao {
     }
 
     @Override
-    public List<String> queryTitles(String name) {
+    public List<PaperSmall> getPaperSmallByTitle(String name) {
         @SuppressWarnings("unchecked")
-        List<String> titles = (List<String>) getHibernateTemplate().find(
-                "select p.title from Paper as p where lower(p.title) like ?",
-                "%" + name + "%");
-        return titles;
+        List<PaperSmall> paperSmalls = (List<PaperSmall>) getHibernateTemplate().find(
+                "from PaperSmall as p where lower(p.title)=?",
+                name);
+        return paperSmalls;
     }
 
     @Override
     public List<Paper> getPaperByTitle(String title) {
         @SuppressWarnings("unchecked")
         List<Paper> papers = (List<Paper>) getHibernateTemplate().find(
-                "select p.title, p.from Paper as p where lower(p.title)=?", title);
+                "from Paper as p where lower(p.title)=?", title);
         return papers;
+    }
+
+    @Override
+    public List<PaperSmall> getPaperSmallLikeTitle(String title) {
+        @SuppressWarnings("unchecked")
+        List<PaperSmall> paperSmalls = (List<PaperSmall>) getHibernateTemplate().find(
+                "from PaperSmall as p where lower(p.title) like ?", "%" + title + "%");
+        return paperSmalls;
     }
 
     @Override

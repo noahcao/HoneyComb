@@ -48,6 +48,10 @@ public class QueryPanelsAction extends ActionSupport {
     @Resource
     private PanelDaoImpl panelDao;
 
+    public void setPanelDao(PanelDaoImpl panelDao) {
+        this.panelDao = panelDao;
+    }
+
     public String search() throws Exception {
         this.panels = new ArrayList<>();
         this.panels.addAll(panelDao.findList(0,0));

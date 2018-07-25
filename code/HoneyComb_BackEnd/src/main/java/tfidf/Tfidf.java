@@ -1,5 +1,7 @@
 package tfidf;
 
+import model.PaperSmall;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -30,15 +32,15 @@ public class Tfidf {
         return tf;
     }
 
-    public static HashMap<String, HashMap<String, Float>> tfOfAll(List<String> objects, int limit) {
+    public static HashMap<PaperSmall, HashMap<String, Float>> tfOfAll(List<PaperSmall> objects, int limit) {
         int top = limit * 100 >= 10000 ? 10000 : limit * 100;
-        HashMap<String, HashMap<String, Float>> allTheTf = new HashMap<>();
+        HashMap<PaperSmall, HashMap<String, Float>> allTheTf = new HashMap<>();
         int i = 0;
-        for (String object : objects) {
+        for (PaperSmall object : objects) {
             if (++i > top) {
                 return allTheTf;
             }
-            HashMap<String, Float> dict = tf(object.split(" "));
+            HashMap<String, Float> dict = tf(object.getTitle().split(" "));
             allTheTf.put(object, dict);
         }
         return allTheTf;

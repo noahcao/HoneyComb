@@ -51,7 +51,6 @@ public class RegisterAction extends ActionSupport {
     @Override
     public String execute() throws Exception {
         if (this.email == null || this.name == null || this.pwd == null) return ERROR;
-        System.out.println(this.email + "\n" + this.name);
         User resultEmail = appService.getUserByEmail(email);
         User resultName = appService.getUserByName(name);
         if (resultEmail == null && resultName == null) {
