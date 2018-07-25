@@ -21,5 +21,5 @@
     <!--<mongo:mapping-converter base-package="data.model" />-->
 
     <!-- mongodb bean的仓库目录，会自动扫描扩展了MongoRepository接口的接口进行注入 -->
-    <mongo:repositories base-package="data.impl" />
+    <mongo:repositories base-package="data.dao.impl" />
 </beans>

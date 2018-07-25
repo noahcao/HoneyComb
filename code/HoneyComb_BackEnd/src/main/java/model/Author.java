@@ -9,13 +9,13 @@ public class Author {
     private Long id;
     private String name;
     private String url;
-    private Set<Paper> papers;
+    private Set<Long> papers;
 
-    public Set<Paper> getPapers() {
+    public Set<Long> getPapers() {
         return papers;
     }
 
-    public void setPapers(Set<Paper> papers) {
+    public void setPapers(Set<Long> papers) {
         this.papers = papers;
     }
 

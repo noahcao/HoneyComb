@@ -1,7 +1,7 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import data.impl.IconDaoImpl;
+import data.dao.impl.IconDaoImpl;
 import data.model.IconEntity;
 import model.User;
 import org.springframework.test.context.ContextConfiguration;
@@ -128,17 +128,6 @@ public class UpdateUserAction extends ActionSupport {
         setPwd(null);
         return NONE;
     }
-
-//    public String updateIcon() throws Exception {
-//        if (this.id == null) return ERROR;
-//        User result = appService.getUserById(id);
-//        if (result != null) {
-//            result.setIcon(this.icon);
-//            appService.updateUser(result);
-//            return SUCCESS;
-//        }
-//        return NONE;
-//    }
 
     public String updateIcon() throws  Exception {
         if (this.id == null) return ERROR;

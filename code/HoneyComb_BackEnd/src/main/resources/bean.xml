@@ -13,8 +13,8 @@
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close" p:driverClass="com.mysql.cj.jdbc.Driver"
-          p:jdbcUrl="jdbc:mysql://localhost:3306/honeycomb?serverTimezone=UTC&amp;useSSL=true" p:user="root"
-          p:password="root" p:maxPoolSize="40" p:minPoolSize="1"
+          p:jdbcUrl="jdbc:mysql://localhost:3306/honeycomb?serverTimezone=UTC&amp;useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" p:user="root"
+          p:password="5121039" p:maxPoolSize="40" p:minPoolSize="1"
           p:initialPoolSize="5" p:maxIdleTime="20"/>
 
     <bean id="sessionFactory"
@@ -32,7 +32,7 @@
             <value>
                 hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
                 hibernate.hbm2ddl.auto=update
-                hibernate.show_sql=true
+                hibernate.show_sql=false
                 hibernate.format_sql=true
             </value>
         </property>

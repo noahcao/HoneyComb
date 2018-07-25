@@ -1,5 +1,6 @@
 package service;
 
+import model.Author;
 import model.Paper;
 import model.User;
 
@@ -33,6 +34,10 @@ public interface AppService {
      */
     Paper getPaperById(java.lang.Long id);
 
-    List<Paper> queryPaper(String name);
+    List<String> queryTitles(String name);
+
+    List<Paper> getPaperByTitle(String title);
+
+    Author getAuthorById(Long id);
 
 }

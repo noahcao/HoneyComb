@@ -11,14 +11,15 @@
         <property name="title" column="title"/>
         <property name="cited" column="cited"/>
         <property name="url" column="url"/>
+        <property name="_abstract" column="abstract"/>
         <set name="authors" table="author_paper" cascade="save-update, persist" lazy="false">
             <key column="paper_id"/>
             <many-to-many class="model.Author" column="author_id"/>
         </set>
         <property name="year" column="year"/>
         <set name="reference" table="paper_paper_reference" cascade="save-update, persist" lazy="false">
-            <key column="paper_id"/>
-            <element column="citation_id" type="java.lang.Long"/>
+            <key column="citation_id"/>
+            <element column="paper_id" type="java.lang.Long"/>
         </set>
     </class>
 </hibernate-mapping>
