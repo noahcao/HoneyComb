@@ -85,8 +85,11 @@ export default {
 </script>
 
 <style scoped>
+.form-horizontal {
+  width: 100vw;
+}
 .container {
-  width: 375px;
+  width: 100vw;
   padding-left: 0px;
   padding-right: 0px;
 }
@@ -94,8 +97,29 @@ export default {
   margin-top: 5%;
 }
 .form-group {
-  width: 375px;
+  width: 100vw;
 }
+.form-horizontal .form-group {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+@media (min-width: 768px) {
+  .form-horizontal {
+    width: 375px;
+  }
+  .container {
+    width: 375px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .form-horizontal {
+    margin-top: 5%;
+  }
+  .form-group {
+    width: 375px;
+  }
+}
+
 .form-control {
   border: none;
   border-radius: 4px;
@@ -158,8 +182,5 @@ input:focus {
     margin-bottom: 0;
     text-align: left;
   }
-}
-.form-horizontal {
-  width: 375px;
 }
 </style>
