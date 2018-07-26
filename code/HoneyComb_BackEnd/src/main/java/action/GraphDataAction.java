@@ -230,17 +230,17 @@ public class GraphDataAction extends ActionSupport {
 
             paperArray.add(obj);
         }
-        for (int i = itAuthor; i < tempAuthorSize; i++) {
-
-            if (hierarchy + 1 <= hierarchyLimit) {
-                Author author = appService.getAuthorById(authors.get(i));
-                for (Long paper : author.getPapers()) {
-                    if (!papers.contains(paper)) {
-                        papers.add(paper);
-                    }
-                }
-            }
-        }
+//        for (int i = itAuthor; i < tempAuthorSize; i++) {
+//
+//            if (hierarchy + 1 <= hierarchyLimit) {
+//                Author author = appService.getAuthorById(authors.get(i));
+//                for (Long paper : author.getPapers()) {
+//                    if (!papers.contains(paper)) {
+//                        papers.add(paper);
+//                    }
+//                }
+//            }
+//        }
         getData(hierarchy + 1, hierarchyLimit, paperArray, papers, tempPaperSize, authors, tempAuthorSize);
     }
 
