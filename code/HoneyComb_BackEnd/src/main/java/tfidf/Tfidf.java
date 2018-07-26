@@ -40,7 +40,8 @@ public class Tfidf {
             if (++i > top) {
                 return allTheTf;
             }
-            HashMap<String, Float> dict = tf(object.getTitle().split(" "));
+            HashMap<String, Float> dict = tf(object.getTitle().split("[ ,-]"));
+
             allTheTf.put(object, dict);
         }
         return allTheTf;

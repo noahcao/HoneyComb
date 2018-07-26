@@ -302,8 +302,7 @@ public class QueryPapersAction extends ActionSupport {
             usersession.put(SEARCHRESULT, results);
             return SUCCESS;
         }
-
-        String[] temp = this.key.split(" ");
+        String[] temp = this.key.split("[ ,-]");
         if (temp.length == 0) return SUCCESS;
         ArrayList<String> allKeys = new ArrayList<>();
         for (String key : temp) {
