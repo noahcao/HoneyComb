@@ -1,0 +1,93 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AppService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AppService (service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">AppService</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import model.Author;
+<i>4</i>&nbsp;import model.Paper;
+<i>5</i>&nbsp;import model.PaperSmall;
+<i>6</i>&nbsp;import model.User;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;public interface AppService {
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    /**
+<i>13</i>&nbsp;     * user
+<i>14</i>&nbsp;     */
+<i>15</i>&nbsp;    Integer addUser(User user);
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    void deleteUser(User user);
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    void updateUser(User user);
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    User getUserById(Integer id);
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    User getUserByEmail(String email);
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    User getUserByName(String name);
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    List&lt;User&gt; getAllUsers();
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    User UserAuthorize(String name, String pwd);
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    List&lt;User&gt; queryUser(String name);
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    /**
+<i>34</i>&nbsp;     * paper
+<i>35</i>&nbsp;     */
+<i>36</i>&nbsp;    Paper getPaperById(java.lang.Long id);
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    List&lt;PaperSmall&gt; getPaperSmallByTitle(String name);
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    List&lt;Paper&gt; getPaperByTitle(String title);
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    List&lt;PaperSmall&gt; getPaperSmallLikeTitle(String title);
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    Author getAuthorById(Long id);
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-07-25 18:58</div>
+</div>
+</body>
+</html>

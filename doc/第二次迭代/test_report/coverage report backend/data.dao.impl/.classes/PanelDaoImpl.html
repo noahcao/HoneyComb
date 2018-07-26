@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PanelDaoImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">data.dao.impl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PanelDaoImpl (data.dao.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PanelDaoImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.2%
+  </span>
+  <span class="absValue">
+    (25/ 26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package data.dao.impl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import data.dao.PanelDao;
+<i>4</i>&nbsp;import data.model.PanelEntity;
+<i>5</i>&nbsp;import org.springframework.data.domain.Sort;
+<i>6</i>&nbsp;import org.springframework.data.domain.Sort.Direction;
+<i>7</i>&nbsp;import org.springframework.data.domain.Sort.Order;
+<i>8</i>&nbsp;import org.springframework.data.mongodb.core.MongoTemplate;
+<i>9</i>&nbsp;import org.springframework.data.mongodb.core.query.Criteria;
+<i>10</i>&nbsp;import org.springframework.data.mongodb.core.query.Query;
+<i>11</i>&nbsp;import org.springframework.data.mongodb.core.query.Update;
+<i>12</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;import javax.annotation.Resource;
+<i>15</i>&nbsp;import java.util.Date;
+<i>16</i>&nbsp;import java.util.List;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;@Repository(&quot;PanelDaoImpl&quot;)
+<b class="fc"><i>19</i>&nbsp;public class PanelDaoImpl implements PanelDao {</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    @Resource
+<i>22</i>&nbsp;    private MongoTemplate mongoTemplate;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    @Override
+<i>25</i>&nbsp;    public List&lt;PanelEntity&gt; findList(int skip, int limit) {
+<b class="fc"><i>26</i>&nbsp;        Query query = new Query();</b>
+<b class="fc"><i>27</i>&nbsp;        query.with(new Sort(new Order(Direction.DESC, &quot;time&quot;)));</b>
+<b class="fc"><i>28</i>&nbsp;        if (limit == 0) query.skip(skip);</b>
+<b class="nc"><i>29</i>&nbsp;        else query.skip(skip).limit(limit);</b>
+<b class="fc"><i>30</i>&nbsp;        return this.mongoTemplate.find(query, PanelEntity.class);</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Override
+<i>34</i>&nbsp;    public PanelEntity findOne(String id) {
+<b class="fc"><i>35</i>&nbsp;        Query query = new Query();</b>
+<b class="fc"><i>36</i>&nbsp;        query.addCriteria(new Criteria(&quot;_id&quot;).is(id));</b>
+<b class="fc"><i>37</i>&nbsp;        return this.mongoTemplate.findOne(query, PanelEntity.class);</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    @Override
+<i>41</i>&nbsp;    public void insert(PanelEntity entity) {
+<b class="fc"><i>42</i>&nbsp;        entity.setTime(new Date());</b>
+<b class="fc"><i>43</i>&nbsp;        entity.setPostId(0);</b>
+<b class="fc"><i>44</i>&nbsp;        this.mongoTemplate.insert(entity);</b>
+<b class="fc"><i>45</i>&nbsp;    }</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    @Override
+<i>48</i>&nbsp;    public void update(PanelEntity entity) {
+<b class="fc"><i>49</i>&nbsp;        Query query = new Query();</b>
+<b class="fc"><i>50</i>&nbsp;        query.addCriteria(new Criteria(&quot;_id&quot;).is(entity.getId()));</b>
+<b class="fc"><i>51</i>&nbsp;        entity.setTime(new Date());</b>
+<b class="fc"><i>52</i>&nbsp;        Update update = new Update();</b>
+<b class="fc"><i>53</i>&nbsp;        if (entity.getOwner() != null) update.set(&quot;owner&quot;, entity.getOwner());</b>
+<b class="fc"><i>54</i>&nbsp;        if (entity.getTitle() != null) update.set(&quot;title&quot;, entity.getTitle());</b>
+<b class="fc"><i>55</i>&nbsp;        update.set(&quot;time&quot;, entity.getTime());</b>
+<b class="fc"><i>56</i>&nbsp;        this.mongoTemplate.updateFirst(query, update, PanelEntity.class);</b>
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    @Override
+<i>60</i>&nbsp;    public void deleteById(String id) {
+<b class="fc"><i>61</i>&nbsp;        Query query = new Query();</b>
+<b class="fc"><i>62</i>&nbsp;        query.addCriteria(new Criteria(&quot;_id&quot;).is(id));</b>
+<b class="fc"><i>63</i>&nbsp;        this.mongoTemplate.remove(query, PanelEntity.class);</b>
+<b class="fc"><i>64</i>&nbsp;    }</b>
+<i>65</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-07-25 18:58</div>
+</div>
+</body>
+</html>

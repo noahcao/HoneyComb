@@ -1,0 +1,68 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PaperDao</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">dao</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PaperDao (dao)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PaperDao</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package dao;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import model.Author;
+<i>4</i>&nbsp;import model.Paper;
+<i>5</i>&nbsp;import model.PaperSmall;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;public interface PaperDao {
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    Paper getPaperById(long id);
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    List&lt;PaperSmall&gt; getPaperSmallByTitle(String name);
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    List&lt;Paper&gt; getPaperByTitle(String title);
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    List&lt;PaperSmall&gt; getPaperSmallLikeTitle(String title);
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    Author getAuthorById(Long id);
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-07-25 18:58</div>
+</div>
+</body>
+</html>
