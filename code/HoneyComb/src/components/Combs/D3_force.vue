@@ -155,7 +155,7 @@ export default {
       .attr('class', 'nodes')
       .selectAll('circle')
 
-    this.$http.post('/graphdata', { id: 37834, hierarchyLimit: 4 })
+    this.$http.post('/graphdata', { id: 37821, hierarchyLimit: 4 })
       .then((res) => {
         console.log(res)
         if (res.data.paper !== null) {
@@ -232,7 +232,7 @@ export default {
             .enter()
             .append('circle')
             .attr('r', function (d, i) {
-              return Math.sqrt(d.pagerank / that.totalPR * 2000)
+              return Math.sqrt(d.pagerank / that.totalPR * 2500)
             })
             .attr('fill', function (d, i) {
               if (d.type === 'author') {
@@ -278,10 +278,10 @@ export default {
                   .then((res) => {
                     if (res.data.id !== null) {
                       console.log(res.data)
-                      that.author.name = d.name
+                      that.author.name = res.data.name
                       that.unselected = false
                       that.selected = true
-                      that.ispaper = true
+                      that.ispaper = false
                     } else {
                       alert('authorid error')
                     }
@@ -437,7 +437,7 @@ export default {
                   that.author.name = d.name
                   that.unselected = false
                   that.selected = true
-                  that.ispaper = true
+                  that.ispaper = false
                 } else {
                   alert('authorid error')
                 }
@@ -594,7 +594,7 @@ export default {
                     that.paper.abstract = res.data._abstract
                     that.unselected = false
                     that.selected = true
-                    that.ispaper = true
+                    that.ispaper = false
                   } else {
                     alert('paperid error')
                   }
@@ -628,11 +628,12 @@ export default {
     })
 
     this.bus.$on('SelectFourLevel', function (message) {
-      if (that.selectLevel < 4) {
+      if (that.selectLevel <= 4) {
         that.selectLevel = 4
         var newnodes = []
         var newlinks = []
         if (that.chooseall === true) {
+          // console.log(chooseall)
           for (var i = 0; i < initnode.length; i++) {
             if (initnode[i].level <= 4) {
               newnodes.push(initnode[i])
@@ -730,7 +731,7 @@ export default {
                     that.author.name = d.name
                     that.unselected = false
                     that.selected = true
-                    that.ispaper = true
+                    that.ispaper = false
                   } else {
                     alert('authorid error')
                   }
@@ -750,7 +751,6 @@ export default {
 </script>
 
 <style>
-
 .links line {
   stroke: #999;
   stroke-opacity: 0.6;
