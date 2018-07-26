@@ -157,6 +157,7 @@ export default {
 
     this.$http.post('/graphdata', { id: 37834, hierarchyLimit: 4 })
       .then((res) => {
+        console.log(res)
         if (res.data.paper !== null) {
           this.modeldata = res.data
           var papersList = this.modeldata.paper
@@ -577,7 +578,7 @@ export default {
         that.selectLevel = 4
         var newnodes = []
         var newlinks = []
-        if (this.chooseall === true) {
+        if (that.chooseall === true) {
           for (var i = 0; i < initnode.length; i++) {
             if (initnode[i].level <= 4) {
               newnodes.push(initnode[i])

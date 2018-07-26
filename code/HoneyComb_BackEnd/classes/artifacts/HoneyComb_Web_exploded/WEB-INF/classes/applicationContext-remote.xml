@@ -13,8 +13,8 @@
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close" p:driverClass="com.mysql.cj.jdbc.Driver"
-          p:jdbcUrl="jdbc:mysql://localhost:3306/honeycomb?serverTimezone=UTC&amp;useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" p:user="root"
-          p:password="5121039" p:maxPoolSize="40" p:minPoolSize="1"
+          p:jdbcUrl="jdbc:mysql://178.128.185.93:3306/honeycomb?serverTimezone=UTC&amp;useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" p:user="remote"
+          p:password="honeycomb" p:maxPoolSize="40" p:minPoolSize="1"
           p:initialPoolSize="5" p:maxIdleTime="20"/>
 
     <bean id="sessionFactory"
@@ -25,6 +25,7 @@
                 <value>model/UserEntity.hbm.xml</value>
                 <value>model/PaperEntity.hbm.xml</value>
                 <value>model/AuthorEntity.hbm.xml</value>
+                <value>model/PaperSmall.hbm.xml</value>
             </list>
         </property>
         <!-- Hibernate SessionFactory -->
