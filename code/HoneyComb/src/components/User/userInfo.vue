@@ -1,195 +1,361 @@
 <template>
-  <section class="container">
-    <!-- <figure class="logo animated fadeInDown delay-07s">
-<a href="#">
-<img src="img/logo_noBG_green.png" alt="">
-</a>
-</figure>
-<h1 class="animated fadeInDown delay-07s">Honeycomb</h1>
-<ul class="we-create animated fadeInUp delay-1s">
-<li>A React prototyping tool.</li>
-<br>
-<li>Generate your React project component hierarchy.</li>
-</ul>
-<a class="link animated fadeInUp delay-1s servicelink" href="https://github.com/ReactPrimer/ReactPrimer">Check Us Out on GitHub</a> -->
-    <img src="../../../static/pic/蜜蜂数据.png" alt="80x80" class="img-rounded">
-    <h3>An Academic Document Management Project.</h3>
-    <div class="input-group input-group-lg">
-      <input type="text" class="form-control" placeholder="Search for..." v-model="content">
-      <router-link :to="{name:'search',  params: {content: content} }" class="input-group-btn">
-        <button class="btn btn-default" type="button" id="search233">
-          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        </button>
-      </router-link>
-    </div>
-
-    <div class="panel panel-default">
-      <div class="panel-body pull-right">
-        Copyright © 2018 Honeycomb. All Rights Reserved. Build 1.0.1
+  <section>
+    <nav-bar></nav-bar>
+    <div class="row">
+      <div class="col-sm-0 col-md-1"></div>
+      <div class="col-xs-12 col-sm-4 col-md-3">
+        <div class="thumbnail">
+          <img class="img-rounded avatar" :src="defaulti" alt="70x70" @click="upload_img" v-if="icon === null">
+          <img class="img-rounded avatar" :src="icon" alt="70x70" @click="upload_img" v-else>
+          <input type="file" accept="image/*" id="icon" class="hidden" v-on:change="change_img" />
+          <div class="caption">
+            <h3>{{name}}</h3>
+            <p v-if="editBio">{{bio}}</p>
+            <p>
+              <button class="btn btn-default" type="button" @click="edit_bio" v-if="editBio">
+                Edit Bio
+              </button>
+              <textarea rows="5" v-else v-model="bios"></textarea>
+              <button class="btn btn-default" v-if="!editBio" type="button" @click="save_bio">save</button>
+              <button class="btn btn-default" v-if="!editBio" type="button" @click="edit_bio">cancel</button>
+              <br/>
+              <button class="btn btn-default" data-toggle="modal" data-target="#profile_modal" type="button">
+                Edit Profile
+              </button>
+            </p>
+          </div>
+        </div>
       </div>
+      <div class="modal fade" id="profile_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="exampleModalLabel">Edit Profile</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">New Email:</label>
+                  <input type="text" class="form-control" id="email1" placeholder="Empty to not changed">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="control-label">New Password:</label>
+                  <input class="form-control" type="password" id="pwd1" placeholder="Empty to not changed" v-on:change="passsChange" v-model="message">
+                </div>
+                <div class="form-group" v-show="passs">
+                  <label for="message-text" class="control-label">Confirm Password:</label>
+                  <input class="form-control" type="password" id="pwd2">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="close" class="btn btn-primary" data-dismiss="modal" @click="closeProfile">Close</button>
+              <button type="button" class="btn btn-primary" @click="submitProfile">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8 col-md-7">
+        <div class="r">
+          <ul class="nav nav-tabs">
+            <li role="presentation" class="active">
+              <a class="tabb" href="#net" data-toggle="tab">Nets</a>
+            </li>
+            <li role="presentation">
+              <a class="tabb" href="#jmeter" data-toggle="tab">Collects</a>
+            </li>
+            <li role="presentation">
+              <a class="tabb" href="#ejb" data-toggle="tab">Trends</a>
+            </li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="net">
+              <Net></Net>
+            </div>
+            <div class="tab-pane fade" id="ios">
+              <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
+            </div>
+            <div class="tab-pane fade" id="jmeter">
+              <p>jMeter 是一款开源的测试软件。它是 100% 纯 Java 应用程序，用于负载和性能测试。</p>
+            </div>
+            <div class="tab-pane fade" id="ejb">
+              <p>Enterprise Java Beans（EJB）是一个创建高度可扩展性和强大企业级应用程序的开发架构，部署在兼容应用程序服务器（比如 JBOSS、Web Logic 等）的 J2EE 上。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-0 col-md-1"></div>
     </div>
-    <!-- /input-group -->
-    <!-- /.col-lg-6 -->
-
   </section>
 </template>
+
 <script>
 import $ from 'jquery'
-// import Login from '../User/Login'
-// import Register from '../User/Register'
-/* eslint-disable */
-//import a from "../../assets/js/canvas-nest";
+import navBar from '../main/NavBar'
+import Net from './infoContent/Net'
 export default {
-  name: 'main-body',
+  name: 'userInfo',
+  components: {
+    navBar,
+    Net
+  },
   data () {
     return {
-      status,
-      content: ''
-    }
-  },
-  methods: {
-    keyListener (e) {
-      if (e.keyCode === 13) {
-        $('#search233').click()
-      }
+      editBio: true,
+      bio:
+        'Oops, empty here!',
+      id: this.data.id,
+      name: null,
+      icon: null,
+      bios: 'Oops, empty here!',
+      iconInput: null,
+      defaulti: null,
+      passs: false,
+      message: ''
     }
   },
   mounted () {
-    document.onkeydown = this.keyListener
     $('canvas').remove()
-    if ($(window).width() > 768) {
-      !(function () {
-        function o (w, v, i) {
-          return w.getAttribute(v) || i
-        }
-
-        function j (i) {
-          return document.getElementsByTagName(i)
-        }
-
-        function l () {
-          var i = j('script')
-
-          var w = i.length
-
-          var v = i[w - 1]
-          return {
-            l: w,
-            z: o(v, 'zIndex', -1),
-            o: o(v, 'opacity', 0.5),
-            c: o(v, 'color', '36,41,46'),
-            n: o(v, 'count', 99)
-          }
-        }
-
-        function k () {
-          r = u.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth, n = u.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-        }
-
-        function b () {
-          e.clearRect(0, 0, r, n)
-          var w = [f].concat(t)
-          var x, v, A, B, z, y
-          t.forEach(function (i) {
-            i.x += i.xa, i.y += i.ya, i.xa *= i.x > r || i.x < 0 ? -1 : 1, i.ya *= i.y > n || i.y < 0 ? -1 : 1, e.fillRect(i.x - 0.5, i.y - 0.5, 1, 1)
-            for (v = 0; v < w.length; v++) {
-              x = w[v]
-              if (i !== x && x.x !== null && x.y !== null) {
-                B = i.x - x.x, z = i.y - x.y, y = B * B + z * z
-                y < x.max && (x === f && y >= x.max / 2 && (i.x -= 0.03 * B, i.y -= 0.03 * z), A = (x.max - y) / x.max, e.beginPath(), e.lineWidth = A / 2, e.strokeStyle = 'rgba(0,0,0,1)', e.moveTo(i.x, i.y), e.lineTo(x.x, x.y), e.stroke())
-              }
-            }
-            w.splice(w.indexOf(i), 1)
-          }), m(b)
-        }
-        var u = document.createElement('canvas')
-
-        var s = l()
-
-        var c = 'c_n' + s.l
-
-        var e = u.getContext('2d')
-
-        var r; var n; var m = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {
-          window.setTimeout(i, 1000 / 45)
-        }
-
-        var a = Math.random
-
-        var f = {
-          x: null,
-          y: null,
-          max: 20000
-        }
-        u.id = c
-        u.style.cssText = 'position:fixed;top:0;left:0;z-index:' + s.z + ';opacity:' + s.o
-        j('body')[0].appendChild(u)
-        k(), window.onresize = k
-        // window.onmousemove = function (i) {
-        //   i = i || window.event, f.x = i.clientX, f.y = i.clientY
-        // }, window.onmouseout = function () {
-        //   f.x = null, f.y = null
-        // };
-        for (var t = [], p = 0; s.n > p; p++) {
-          var h = a() * r
-
-          var g = a() * n
-
-          var q = 2 * a() - 1
-
-          var d = 2 * a() - 1
-          t.push({
-            x: h,
-            y: g,
-            xa: q,
-            ya: d,
-            max: 6000
+    this.loginJudge()
+  },
+  methods: {
+    closeProfile () {
+      console.log($('#email1').val())
+      $('#email1').val('')
+      console.log($('#email1').val())
+      console.log($('#pwd1').val())
+      $('#pwd1').val('')
+      this.message = ''
+      console.log($('#pwd1').val())
+      $('#pwd2').val('')
+      this.passs = false
+      $('#email1').parent().removeClass('has-error')
+      $('#pwd1').parent().removeClass('has-error')
+      $('#pwd2').parent().removeClass('has-error')
+    },
+    submitProfile () {
+      var email = $('#email1').val()
+      var pwd1 = $('#pwd1').val()
+      var pwd2 = $('#pwd2').val()
+      var alphabet = /[a-z]/i
+      var number = /[0-9]/
+      var flag = true
+      console.log(email)
+      console.log(pwd1)
+      console.log(pwd2)
+      if (pwd1 !== '' && pwd1 !== pwd2) {
+        console.log('pwd error')
+        $('#pwd1').parent().addClass('has-error')
+        $('#pwd2').parent().addClass('has-error')
+        $('#password-help').remove()
+        $('#pwd2').after('<span id="password-help" class="help-block">Password Inconsistency</span>')
+        flag = false
+        $('#pwd1').val('')
+        this.message = ''
+        $('#pwd2').val('')
+      }
+      // eslint-disable-next-line
+      var re = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/
+      if (email !== '' && !re.test(email)) {
+        console.log('email error')
+        $('#email1').parent().addClass('has-error')
+        $('#email-help').remove()
+        $('#email1').after('<span id="email-help" class="help-block">Email format error</span>')
+        flag = false
+        return
+      }
+      if (pwd1 !== '' && (!alphabet.test(pwd1) || !number.test(pwd1))) {
+        console.log('pwd error')
+        $('#pwd1').parent().addClass('has-error')
+        $('#pwd2').parent().addClass('has-error')
+        $('#password-help').remove()
+        $('#pwd2').after('<span id="password-help" class="help-block">Password Inconsistency</span>')
+        flag = false
+        $('#pwd1').val('')
+        this.message = ''
+        $('#pwd2').val('')
+      }
+      if (!flag) return
+      console.log('hi there')
+      if (email !== '' && pwd1 !== '') {
+        this.$http.get('/updateemail', { params: { id: this.id, email: email } })
+          .then((res) => {
+            this.$http.get('/updatepwd', { params: { id: this.id, pwd: pwd1 } })
+              .then((res) => {
+                alert('success')
+                $("#close").click()
+                return
+              })
           })
+      } else if (email === '' && pwd1 !== '') {
+        this.$http.get('/updatepwd', { params: { id: this.id, pwd: pwd1 } })
+          .then((res) => {
+            alert('success')
+            $("#close").click()
+            return
+          })
+      } else if (email !== '' && pwd1 === '') {
+        this.$http.get('/updateemail', { params: { id: this.id, email: email } })
+          .then((res) => {
+            alert('success')
+            $("#close").click()
+            return
+          })
+      }
+      $("#close").click()
+      return
+    },
+    passsChange () {
+      if (this.message === '') {
+        console.log('disable')
+        this.passs = false
+      } else {
+        console.log('enable')
+        this.passs = true
+      }
+    },
+    save_bio () {
+      this.$http.get('/updatebio', { params: { id: this.id, bio: this.bios } })
+        .then((res) => {
+          this.bio = this.bios
+          this.editBio = !this.editBio
+        })
+    },
+    loginJudge () {
+      this.$http.get('/loginstatus')
+        .then((res) => {
+          if (res.data.id !== null) {
+            this.data.id = res.data.id
+            this.id = res.data.id
+            this.getUserInfo()
+          }
+        })
+    },
+    edit_bio () {
+      this.editBio = !this.editBio
+      this.bios = this.bio
+      console.log(this.iconInput)
+    },
+    upload_img () {
+      $('#icon').click()
+    },
+    change_img () {
+      var icon = document.getElementById('icon').files[0]
+      var imgSize = icon.size
+      if (imgSize > 300 * 1024) {
+        alert('file is too big!!!')
+        $('#icon').val('')
+        return
+      }
+      if (icon) {
+        var r = new FileReader() // 本地预览
+        r.readAsDataURL(icon) // Base64
+        r.onload = () => {
+          this.$http.post('/updateicon', { icon: r.result, id: this.id })
+            .then((res) => {
+              this.icon = res.data.icon
+            })
         }
-        setTimeout(function () {
-          b()
-        }, 100)
-      }())
+      }
+    },
+    getUserInfo () {
+      this.$http.get('/getuser', { params: { id: this.id } })
+        .then((res) => {
+          this.name = res.data.name
+          if (res.data.bio != null) {
+            this.bio = res.data.bio
+            this.bios = res.data.bio
+          }
+          this.icon = res.data.icon
+          this.defaulti = '../../../static/pic/dft-header.png'
+          console.log('getuser', res.data)
+        })
     }
   }
 }
 </script>
+
 <style scoped>
-.form-control {
+textarea,
+p {
+  width: 235px;
+  resize: none;
+}
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 4.5%;
+}
+.r {
+  margin-left: 5%;
+}
+.tabb {
+  color: rgba(36, 41, 46, 0.8);
+  font-size: 20px;
+  border-bottom-color: rgba(36, 41, 46, 0);
+}
+.nav-tabs {
+  border-bottom-color: rgba(36, 41, 46, 0.5);
+}
+.nav-tabs > li > a {
+  transition: 0.8s ease;
+  transition-property: color;
+  margin-right: 0px;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover {
+  color: #000;
+  cursor: default;
+  background-color: rgba(36, 41, 46, 0);
+  border-right: 1px solid rgba(36, 41, 46, 0);
+  border-left: 1px solid rgba(36, 41, 46, 0);
+  border-top: 1px solid rgba(36, 41, 46, 0);
+  border-bottom: 2px solid rgba(36, 41, 46, 1);
+}
+.tabb {
+  transition: all 0.3s ease;
+  color: rgba(36, 41, 46, 0.5);
+  font-size: 20px;
+}
+.tabb:hover {
+  color: #24292e;
+  font-size: 20px;
+  border-bottom-color: rgba(36, 41, 46, 0);
+}
+.thumbnail {
+  display: block;
+  padding: 4px;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: rgba(255, 255, 255, 0);
   border: none;
-  border-radius: 4px;
-  color: rgba(255, 255, 255, 0.8);
-}
-input::-webkit-input-placeholder {
-  /* WebKit browsers */
-  color: rgba(255, 255, 255, 0.8);
-}
-input {
-  transition: all 1s ease;
-  background-color: rgba(36, 41, 46, 0.3);
-  outline: none;
+  border-right: 2px solid rgba(36, 41, 46, 0.5);
+  border-radius: 0px;
+  border-right-style: inset;
+  -webkit-transition: border 0.2s ease-in-out;
+  -o-transition: border 0.2s ease-in-out;
+  transition: border 0.2s ease-in-out;
   box-shadow: none;
 }
-input:hover,
-input:focus {
-  background-color: rgba(36, 41, 46, 0.5);
-  border: 1px solid grey;
-  box-shadow: none;
+.thumbnail > img {
+  display: block;
+  /* max-width: 100%; */
+  height: 240px;
+  margin-top: 20px;
+  margin-left: 0px;
 }
-.container {
-  margin-top: 80px;
-  text-align: center;
+.avatar {
+  border: 1px solid rgba(200, 200, 200, 0.6);
 }
 .btn-default {
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.5);
   border-color: rgba(36, 41, 46, 0);
-}
-.input-group-btn > .btn:active,
-.input-group-btn > .btn:focus {
-  z-index: 2;
-  box-shadow: none;
-  outline: none;
+  margin-top: 5px;
 }
 .btn-default:active:focus {
   color: #333;
@@ -201,31 +367,37 @@ input:focus {
   background-color: rgba(255, 255, 255, 0.9);
   border-color: rgba(36, 41, 46, 0);
 }
-
-.input-group {
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 50px;
+.btn-primary {
+  transition: all 0.3s ease;
+  background: rgba(36, 41, 46, 0.9);
+  border-color: rgba(36, 41, 46, 0);
+  margin-top: 5px;
+  color: white;
 }
-.img-rounded {
-  display: inline-block;
+.btn-primary:active:focus {
+  color: #333;
+  background-color: #ffffff;
+  border-color: rgba(36, 41, 46, 0);
+}
+.btn-primary:hover {
+  color: #333;
+  background-color: rgba(36, 41, 46, 0.2);
+  border-color: rgba(36, 41, 46, 0);
+}
+.btn:active,
+.btn:focus {
+  z-index: 2;
+  box-shadow: none;
+  outline: none;
 }
 @media (min-width: 768px) {
-  .panel-default {
-    margin-left: 55%;
+  .modal-dialog {
+    width: 600px;
+    margin: 50px auto;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-bottom: 50px;
+    margin-left: auto;
   }
-}
-.panel-default {
-  background-color: rgba(255, 255, 255, 0);
-  border-color: rgba(255, 255, 255, 0);
-  position: fixed;
-  bottom: 0px;
-  height: 70px;
-  box-shadow: none;
-}
-.input-group-btn:last-child > .btn,
-.input-group-btn:last-child > .btn-group {
-  z-index: 2;
-  margin-left: 0px;
 }
 </style>

@@ -3,47 +3,48 @@
     <form class="form-horizontal">
       <div class="form-group">
         <div class="col-xs-1 col-md-1"></div>
-        <label class="col-xs-6 control-label col-md-6">User Name</label>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-1 col-md-1"></div>
-        <div class="col-xs-10 col-md-10">
-          <input type="text" class="form-control" id="name" aria-describedby="name-help" placeholder="User">
+        <div class="col-md-10 col-xs-10">
+          <div class="md-form">
+            <input id="inputMDEx1" class="form-control" type="text" autocomplete="off">
+            <label for="inputMDEx1">User Name</label>
+          </div>
+
         </div>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-1 col-md-1"></div>
-        <label class="col-md-6 control-label col-xs-6">Email</label>
       </div>
       <div class="form-group">
         <div class="col-xs-1 col-md-1"></div>
         <div class="col-md-10 col-xs-10">
-          <input type="email" class="form-control" id="email" aria-describedby="email-help" placeholder="Email">
+          <div class="md-form">
+            <input id="inputMDEx2" class="form-control" type="email" autocomplete="off">
+            <label for="inputMDEx2">Email</label>
+          </div>
+
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-1 col-md-1"></div>
-        <label class="col-xs-6 control-label col-md-6">Password</label>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-1 col-md-1"></div>
-        <div class="col-xs-10 col-md-10">
-          <input type="password" class="form-control" id="password" aria-describedby="password-help" placeholder="Password">
+        <div class="col-md-10 col-xs-10">
+          <div class="md-form">
+            <input id="inputMDEx3" class="form-control" type="password" aria-describedby="password-help" autocomplete="off">
+            <label for="inputMDEx3">Password</label>
+          </div>
+
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-1 col-md-1"></div>
-        <label class="col-xs-6 control-label col-md-6">Confirm Your Password</label>
-      </div>
-      <div class="form-group">
-        <div class="col-xs-1 col-md-1"></div>
-        <div class="col-xs-10 col-md-10">
-          <input type="password" class="form-control" id="repeat" placeholder="Password Again">
+        <div class="col-md-10 col-xs-10">
+          <div class="md-form">
+            <input id="inputMDEx4" class="form-control" type="password" aria-describedby="password-help" autocomplete="off">
+            <label for="inputMDEx4">Confirm Your Password</label>
+          </div>
+
         </div>
       </div>
+      
       <div class="form-group">
         <div class="col-xs-offset-1 col-xs-6 col-md-4">
-          <button type="button" @click="register" class="btn btn-default pull-left">
+          <button type="button" @click="register" class="btn btn-elegant pull-left">
             <strong>Submit</strong>
           </button>
         </div>
@@ -53,6 +54,7 @@
 </template>
 
 <script>
+import '../../../static/js/mdb'
 import $ from 'jquery'
 export default {
   name: 'register',
@@ -60,10 +62,10 @@ export default {
     register () {
       $('.has-error').removeClass('has-error')
       $('.help-block').remove()
-      var pwd = document.getElementById('password').value
-      var repeat = document.getElementById('repeat').value
-      var name = document.getElementById('name').value
-      var email = document.getElementById('email').value
+      var pwd = document.getElementById('inputMDEx3').value
+      var repeat = document.getElementById('inputMDEx4').value
+      var name = document.getElementById('inputMDEx1').value
+      var email = document.getElementById('inputMDEx2').value
       var flag = true
       if (repeat !== pwd) alert('Password Inconsistency')
       else {
@@ -119,6 +121,31 @@ export default {
 </script>
 
 <style scoped>
+@import "../../../static/css/mdb";
+
+.md-form .form-control {
+  margin: 0 0 0.5rem 0;
+  border-radius: 0;
+  padding: 0.9rem 0 0 0;
+  background-image: none;
+  background-color: transparent;
+}
+.md-form label {
+  position: absolute;
+  top: 1.8rem;
+  left: 0.8rem;
+  font-size: 18px;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+  cursor: text;
+  color: rgba(18, 21, 23, 0.5);
+  padding-bottom: 1px;
+  font-weight: 400;
+}
+.inputMDEx1, .inputMDEx2, .inputMDEx3, .inputMDEx4 {
+  height: 38px;
+  border-bottom: 1px solid #000;
+}
 .form-horizontal .form-group {
   margin-right: 0px;
   margin-left: 0px;
@@ -199,5 +226,13 @@ input:focus {
 }
 .form-horizontal {
   width: 375px;
+}
+.form-control {
+  border: none;
+  border-radius: 4px;
+  height: 38px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #000;
 }
 </style>
