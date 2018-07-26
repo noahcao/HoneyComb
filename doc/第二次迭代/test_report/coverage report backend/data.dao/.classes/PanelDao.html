@@ -1,0 +1,64 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PanelDao</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">data.dao</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PanelDao (data.dao)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">PanelDao</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package data.dao;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import data.model.PanelEntity;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public interface PanelDao {
+<i>8</i>&nbsp;    List&lt;PanelEntity&gt; findList(int skip, int limit);
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    PanelEntity findOne(String id);
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    void insert(PanelEntity entity);
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    void update(PanelEntity entity);
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    void deleteById(String id);
+<i>17</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-07-25 18:58</div>
+</div>
+</body>
+</html>

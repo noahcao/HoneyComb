@@ -1,0 +1,494 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: QueryPapersAction</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">action</a> ]
+</div>
+
+<h1>Coverage Summary for Class: QueryPapersAction (action)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">QueryPapersAction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 115)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">QueryPapersAction$ComparePair</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">QueryPapersAction$SimplePaper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 22)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">QueryPapersAction$TfPair</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 41)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 157)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package action;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.google.gson.JsonObject;
+<i>4</i>&nbsp;import com.google.gson.JsonParser;
+<i>5</i>&nbsp;import com.opensymphony.xwork2.ActionContext;
+<i>6</i>&nbsp;import com.opensymphony.xwork2.ActionSupport;
+<i>7</i>&nbsp;import model.Author;
+<i>8</i>&nbsp;import model.Paper;
+<i>9</i>&nbsp;import model.PaperSmall;
+<i>10</i>&nbsp;import org.hibernate.Hibernate;
+<i>11</i>&nbsp;import service.AppService;
+<i>12</i>&nbsp;import tfidf.Tfidf;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;import java.util.*;
+<i>15</i>&nbsp;
+<b class="nc"><i>16</i>&nbsp;public class QueryPapersAction extends ActionSupport {</b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    private class TfPair {
+<i>19</i>&nbsp;        private PaperSmall key;
+<i>20</i>&nbsp;        private Float value;
+<i>21</i>&nbsp;
+<b class="nc"><i>22</i>&nbsp;        public TfPair(PaperSmall key, Float value) {</b>
+<b class="nc"><i>23</i>&nbsp;            this.key = key;</b>
+<b class="nc"><i>24</i>&nbsp;            this.value = value;</b>
+<i>25</i>&nbsp;        }
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;        public PaperSmall getKey() {
+<b class="nc"><i>29</i>&nbsp;            return key;</b>
+<i>30</i>&nbsp;        }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;        public Float getValue() {
+<b class="nc"><i>33</i>&nbsp;            return value;</b>
+<i>34</i>&nbsp;        }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;        public void setKey(PaperSmall key) {
+<b class="nc"><i>37</i>&nbsp;            this.key = key;</b>
+<i>38</i>&nbsp;        }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;        public void setValue(Float value) {
+<b class="nc"><i>41</i>&nbsp;            this.value = value;</b>
+<i>42</i>&nbsp;        }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;        @Override
+<i>45</i>&nbsp;        public boolean equals(Object obj) {
+<b class="nc"><i>46</i>&nbsp;            if (obj == null) return false;</b>
+<b class="nc"><i>47</i>&nbsp;            if (this == obj) return true;</b>
+<b class="nc"><i>48</i>&nbsp;            if (obj instanceof TfPair) {</b>
+<b class="nc"><i>49</i>&nbsp;                TfPair tfPair = (TfPair) obj;</b>
+<b class="nc"><i>50</i>&nbsp;                return tfPair.getKey().equals(key);</b>
+<i>51</i>&nbsp;            }
+<b class="nc"><i>52</i>&nbsp;            return false;</b>
+<i>53</i>&nbsp;        }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;        @Override
+<i>56</i>&nbsp;        public int hashCode() {
+<b class="nc"><i>57</i>&nbsp;            return key.hashCode();</b>
+<i>58</i>&nbsp;        }
+<i>59</i>&nbsp;    }
+<i>60</i>&nbsp;
+<b class="nc"><i>61</i>&nbsp;    public class SimplePaper {</b>
+<i>62</i>&nbsp;        private Long id;
+<i>63</i>&nbsp;        private String url;
+<i>64</i>&nbsp;        private Set&lt;String&gt; authors;
+<i>65</i>&nbsp;        private Integer year;
+<i>66</i>&nbsp;        private String title;
+<i>67</i>&nbsp;        private String _abstract;
+<i>68</i>&nbsp;        private Integer cited;
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;        public Long getId() {
+<b class="nc"><i>71</i>&nbsp;            return id;</b>
+<i>72</i>&nbsp;        }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;        public void setId(Long id) {
+<b class="nc"><i>75</i>&nbsp;            this.id = id;</b>
+<i>76</i>&nbsp;        }
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;        public void setUrl(String url) {
+<b class="nc"><i>79</i>&nbsp;            this.url = url;</b>
+<i>80</i>&nbsp;        }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;        public String getUrl() {
+<b class="nc"><i>83</i>&nbsp;            return url;</b>
+<i>84</i>&nbsp;        }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;        public void setAuthors(Set&lt;String&gt; authors) {
+<b class="nc"><i>87</i>&nbsp;            this.authors = authors;</b>
+<i>88</i>&nbsp;        }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;        public Integer getYear() {
+<b class="nc"><i>91</i>&nbsp;            return year;</b>
+<i>92</i>&nbsp;        }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;        public void setYear(Integer year) {
+<b class="nc"><i>95</i>&nbsp;            this.year = year;</b>
+<i>96</i>&nbsp;        }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;        public void set_abstract(String _abstract) {
+<b class="nc"><i>99</i>&nbsp;            this._abstract = _abstract;</b>
+<i>100</i>&nbsp;        }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;        public String get_abstract() {
+<b class="nc"><i>103</i>&nbsp;            return _abstract;</b>
+<i>104</i>&nbsp;        }
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;        public void setTitle(String title) {
+<b class="nc"><i>107</i>&nbsp;            this.title = title;</b>
+<i>108</i>&nbsp;        }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;        public String getTitle() {
+<b class="nc"><i>111</i>&nbsp;            return title;</b>
+<i>112</i>&nbsp;        }
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;        public void setCited(Integer cited) {
+<b class="nc"><i>115</i>&nbsp;            this.cited = cited;</b>
+<i>116</i>&nbsp;        }
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;        public Integer getCited() {
+<b class="nc"><i>119</i>&nbsp;            return cited;</b>
+<i>120</i>&nbsp;        }
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;        public Set&lt;String&gt; getAuthors() {
+<b class="nc"><i>123</i>&nbsp;            return authors;</b>
+<i>124</i>&nbsp;        }
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;        @Override
+<i>127</i>&nbsp;        public boolean equals(Object obj) {
+<b class="nc"><i>128</i>&nbsp;            if (obj == null) return false;</b>
+<b class="nc"><i>129</i>&nbsp;            if (this == obj) return true;</b>
+<b class="nc"><i>130</i>&nbsp;            if (obj instanceof SimplePaper) {</b>
+<b class="nc"><i>131</i>&nbsp;                SimplePaper paper = (SimplePaper) obj;</b>
+<b class="nc"><i>132</i>&nbsp;                return paper.getId().equals(this.id);</b>
+<i>133</i>&nbsp;            }
+<b class="nc"><i>134</i>&nbsp;            return false;</b>
+<i>135</i>&nbsp;        }
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;        @Override
+<i>138</i>&nbsp;        public int hashCode() {
+<b class="nc"><i>139</i>&nbsp;            return id.hashCode();</b>
+<i>140</i>&nbsp;        }
+<i>141</i>&nbsp;    }
+<i>142</i>&nbsp;
+<b class="nc"><i>143</i>&nbsp;    private class ComparePair implements Comparator {</b>
+<i>144</i>&nbsp;        public int compare(Object arg0, Object arg1) {
+<i>145</i>&nbsp;            @SuppressWarnings(&quot;unchecked&quot;)
+<b class="nc"><i>146</i>&nbsp;            TfPair p0 = (TfPair) arg0;</b>
+<i>147</i>&nbsp;            @SuppressWarnings(&quot;unchecked&quot;)
+<b class="nc"><i>148</i>&nbsp;            TfPair p1 = (TfPair) arg1;</b>
+<b class="nc"><i>149</i>&nbsp;            if (p0.getValue() &gt; p1.getValue()) return -1;</b>
+<b class="nc"><i>150</i>&nbsp;            else if (p0.getValue().equals(p1.getValue())) return 0;</b>
+<b class="nc"><i>151</i>&nbsp;            else return 1;</b>
+<i>152</i>&nbsp;        }
+<i>153</i>&nbsp;    }
+<i>154</i>&nbsp;
+<i>155</i>&nbsp;    private String key;
+<i>156</i>&nbsp;    private ArrayList&lt;SimplePaper&gt; papers;
+<i>157</i>&nbsp;    private Integer start;
+<i>158</i>&nbsp;    private Integer end;
+<i>159</i>&nbsp;    private Integer total;
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;    public Integer getTotal() {
+<b class="nc"><i>162</i>&nbsp;        return total;</b>
+<i>163</i>&nbsp;    }
+<i>164</i>&nbsp;
+<i>165</i>&nbsp;    public void setTotal(Integer total) {
+<b class="nc"><i>166</i>&nbsp;        this.total = total;</b>
+<i>167</i>&nbsp;    }
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;    public void setEnd(Integer end) {
+<b class="nc"><i>170</i>&nbsp;        this.end = end;</b>
+<i>171</i>&nbsp;    }
+<i>172</i>&nbsp;
+<i>173</i>&nbsp;    public Integer getEnd() {
+<b class="nc"><i>174</i>&nbsp;        return end;</b>
+<i>175</i>&nbsp;    }
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;    public void setStart(Integer start) {
+<b class="nc"><i>178</i>&nbsp;        this.start = start;</b>
+<i>179</i>&nbsp;    }
+<i>180</i>&nbsp;
+<i>181</i>&nbsp;    public Integer getStart() {
+<b class="nc"><i>182</i>&nbsp;        return start;</b>
+<i>183</i>&nbsp;    }
+<i>184</i>&nbsp;
+<i>185</i>&nbsp;    public void setPapers(ArrayList&lt;SimplePaper&gt; papers) {
+<b class="nc"><i>186</i>&nbsp;        this.papers = papers;</b>
+<i>187</i>&nbsp;    }
+<i>188</i>&nbsp;
+<i>189</i>&nbsp;    public ArrayList&lt;SimplePaper&gt; getPapers() {
+<b class="nc"><i>190</i>&nbsp;        return papers;</b>
+<i>191</i>&nbsp;    }
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;    public String getKey() {
+<b class="nc"><i>194</i>&nbsp;        return key;</b>
+<i>195</i>&nbsp;    }
+<i>196</i>&nbsp;
+<i>197</i>&nbsp;    public void setKey(String key) {
+<b class="nc"><i>198</i>&nbsp;        this.key = key;</b>
+<i>199</i>&nbsp;    }
+<i>200</i>&nbsp;
+<i>201</i>&nbsp;    private AppService appService;
+<i>202</i>&nbsp;
+<i>203</i>&nbsp;    public void setAppService(AppService appService) {
+<b class="nc"><i>204</i>&nbsp;        this.appService = appService;</b>
+<i>205</i>&nbsp;    }
+<i>206</i>&nbsp;
+<i>207</i>&nbsp;    private SimplePaper simplifyPaper(Paper paper) {
+<b class="nc"><i>208</i>&nbsp;        SimplePaper result = new SimplePaper();</b>
+<b class="nc"><i>209</i>&nbsp;        result._abstract = paper.get_abstract();</b>
+<b class="nc"><i>210</i>&nbsp;        result.cited = paper.getCited();</b>
+<b class="nc"><i>211</i>&nbsp;        result.id = paper.getId();</b>
+<b class="nc"><i>212</i>&nbsp;        result.title = paper.getTitle();</b>
+<b class="nc"><i>213</i>&nbsp;        result.url = paper.getUrl();</b>
+<b class="nc"><i>214</i>&nbsp;        result.year = paper.getYear();</b>
+<b class="nc"><i>215</i>&nbsp;        Hibernate.initialize(paper.getAuthors());</b>
+<b class="nc"><i>216</i>&nbsp;        result.authors = new HashSet&lt;&gt;();</b>
+<b class="nc"><i>217</i>&nbsp;        for (Author author : paper.getAuthors()) {</b>
+<b class="nc"><i>218</i>&nbsp;            result.authors.add(author.getName());</b>
+<b class="nc"><i>219</i>&nbsp;        }</b>
+<b class="nc"><i>220</i>&nbsp;        return result;</b>
+<i>221</i>&nbsp;    }
+<i>222</i>&nbsp;
+<i>223</i>&nbsp;    private void tfidfAlgorithm(ArrayList&lt;String&gt; allKeys, ArrayList&lt;TfPair&gt; candidates, boolean flag, ArrayList&lt;String&gt; restKeys) {
+<b class="nc"><i>224</i>&nbsp;        restKeys.clear();</b>
+<b class="nc"><i>225</i>&nbsp;        for (String key : allKeys) {</b>
+<b class="nc"><i>226</i>&nbsp;            long startTime = System.currentTimeMillis();</b>
+<b class="nc"><i>227</i>&nbsp;            if (key == null) continue;</b>
+<b class="nc"><i>228</i>&nbsp;            List&lt;PaperSmall&gt; paperSmalls = appService.getPaperSmallLikeTitle(key);</b>
+<b class="nc"><i>229</i>&nbsp;            if (flag &amp;&amp; paperSmalls.size() &gt; 20000) {</b>
+<b class="nc"><i>230</i>&nbsp;                restKeys.add(key);</b>
+<b class="nc"><i>231</i>&nbsp;                continue;</b>
+<i>232</i>&nbsp;            }
+<b class="nc"><i>233</i>&nbsp;            HashMap&lt;PaperSmall, HashMap&lt;String, Float&gt;&gt; tf = Tfidf.tfOfAll(paperSmalls, 100);</b>
+<b class="nc"><i>234</i>&nbsp;            for (PaperSmall i : tf.keySet()) {</b>
+<b class="nc"><i>235</i>&nbsp;                HashMap&lt;String, Float&gt; dict = tf.get(i);</b>
+<b class="nc"><i>236</i>&nbsp;                Float tot = new Float(0);</b>
+<b class="nc"><i>237</i>&nbsp;                for (String keys : dict.keySet()) {</b>
+<b class="nc"><i>238</i>&nbsp;                    if (keys.contains(key)) {</b>
+<b class="nc"><i>239</i>&nbsp;                        tot += dict.get(keys);</b>
+<i>240</i>&nbsp;                    }
+<b class="nc"><i>241</i>&nbsp;                }</b>
+<b class="nc"><i>242</i>&nbsp;                TfPair tfPair = new TfPair(i, tot);</b>
+<b class="nc"><i>243</i>&nbsp;                int index = candidates.indexOf(tfPair);</b>
+<b class="nc"><i>244</i>&nbsp;                if (index &gt;= 0) {</b>
+<b class="nc"><i>245</i>&nbsp;                    TfPair tempPair = candidates.get(index);</b>
+<b class="nc"><i>246</i>&nbsp;                    candidates.get(index).setValue(tempPair.getValue() + tfPair.getValue());</b>
+<b class="nc"><i>247</i>&nbsp;                } else {</b>
+<b class="nc"><i>248</i>&nbsp;                    candidates.add(tfPair);</b>
+<i>249</i>&nbsp;                }
+<b class="nc"><i>250</i>&nbsp;            }</b>
+<b class="nc"><i>251</i>&nbsp;            long endTime = System.currentTimeMillis();</b>
+<b class="nc"><i>252</i>&nbsp;            System.out.println(key + &quot; &quot; + paperSmalls.size() + &quot; algorithm time: &quot; + (endTime - startTime));</b>
+<i>253</i>&nbsp;//        System.out.println(&quot;-------------end: &quot; + end + &quot;----------------&quot;);
+<i>254</i>&nbsp;//            System.out.println(&quot;-----------------&quot; + title + &quot;: &quot; + result.size() + &quot;--------------------&quot;);
+<b class="nc"><i>255</i>&nbsp;        }</b>
+<i>256</i>&nbsp;    }
+<i>257</i>&nbsp;
+<i>258</i>&nbsp;    public String search() throws Exception {
+<b class="nc"><i>259</i>&nbsp;        this.papers = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>260</i>&nbsp;        if (this.key == null || this.start == null || this.end == null) return ERROR;</b>
+<b class="nc"><i>261</i>&nbsp;        if (this.start &gt; this.end) return ERROR;</b>
+<b class="nc"><i>262</i>&nbsp;        this.key = this.key.toLowerCase();</b>
+<b class="nc"><i>263</i>&nbsp;        String SEARCH = &quot;search&quot;;</b>
+<b class="nc"><i>264</i>&nbsp;        String SEARCHRESULT = &quot;searchresult&quot;;</b>
+<i>265</i>&nbsp;
+<b class="nc"><i>266</i>&nbsp;        Map&lt;String, Object&gt; usersession = ActionContext.getContext().getSession();</b>
+<b class="nc"><i>267</i>&nbsp;        if (usersession.get(SEARCH) != null) {</b>
+<b class="nc"><i>268</i>&nbsp;            if ((usersession.get(SEARCH)).equals(key)) {</b>
+<b class="nc"><i>269</i>&nbsp;                if (usersession.get(SEARCHRESULT) != null) {</b>
+<b class="nc"><i>270</i>&nbsp;                    ArrayList&lt;PaperSmall&gt; searchList = (ArrayList&lt;PaperSmall&gt;) usersession.get(SEARCHRESULT);</b>
+<i>271</i>&nbsp;
+<b class="nc"><i>272</i>&nbsp;                    this.total = searchList.size();</b>
+<b class="nc"><i>273</i>&nbsp;                    if (start + 1 &gt; searchList.size()) return SUCCESS;</b>
+<b class="nc"><i>274</i>&nbsp;                    if (end &gt; searchList.size()) {</b>
+<b class="nc"><i>275</i>&nbsp;                        end = searchList.size();</b>
+<i>276</i>&nbsp;                    }
+<b class="nc"><i>277</i>&nbsp;                    if (start &gt; end) return SUCCESS;</b>
+<b class="nc"><i>278</i>&nbsp;                    for (int i = start; i &lt; end; i++) {</b>
+<b class="nc"><i>279</i>&nbsp;                        this.papers.add(simplifyPaper(appService.getPaperById(searchList.get(i).getId())));</b>
+<i>280</i>&nbsp;                    }
+<i>281</i>&nbsp;//                    this.papers.addAll(searchList.subList(start, end));
+<b class="nc"><i>282</i>&nbsp;                    return SUCCESS;</b>
+<i>283</i>&nbsp;                }
+<i>284</i>&nbsp;            } else {
+<b class="nc"><i>285</i>&nbsp;                usersession.replace(SEARCH, key);</b>
+<i>286</i>&nbsp;            }
+<i>287</i>&nbsp;        } else {
+<b class="nc"><i>288</i>&nbsp;            usersession.put(SEARCH, key);</b>
+<i>289</i>&nbsp;        }
+<i>290</i>&nbsp;
+<b class="nc"><i>291</i>&nbsp;        ArrayList&lt;TfPair&gt; candidates = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>292</i>&nbsp;        int limit = 100;</b>
+<b class="nc"><i>293</i>&nbsp;        List&lt;PaperSmall&gt; results = appService.getPaperSmallLikeTitle(key);</b>
+<b class="nc"><i>294</i>&nbsp;        if (results.size() &gt; 0 &amp;&amp; results.size() &lt;= 5) {</b>
+<b class="nc"><i>295</i>&nbsp;            for (PaperSmall result : results) {</b>
+<b class="nc"><i>296</i>&nbsp;                SimplePaper e = simplifyPaper(appService.getPaperById(result.getId()));</b>
+<b class="nc"><i>297</i>&nbsp;                this.papers.add(e);</b>
+<b class="nc"><i>298</i>&nbsp;            }</b>
+<b class="nc"><i>299</i>&nbsp;            this.total = results.size();</b>
+<b class="nc"><i>300</i>&nbsp;            this.start = 0;</b>
+<b class="nc"><i>301</i>&nbsp;            this.end = results.size();</b>
+<b class="nc"><i>302</i>&nbsp;            usersession.put(SEARCHRESULT, results);</b>
+<b class="nc"><i>303</i>&nbsp;            return SUCCESS;</b>
+<i>304</i>&nbsp;        }
+<i>305</i>&nbsp;
+<b class="nc"><i>306</i>&nbsp;        String[] temp = this.key.split(&quot; &quot;);</b>
+<b class="nc"><i>307</i>&nbsp;        if (temp.length == 0) return SUCCESS;</b>
+<b class="nc"><i>308</i>&nbsp;        ArrayList&lt;String&gt; allKeys = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>309</i>&nbsp;        for (String key : temp) {</b>
+<b class="nc"><i>310</i>&nbsp;            if (!allKeys.contains(key)) {</b>
+<b class="nc"><i>311</i>&nbsp;                allKeys.add(key);</b>
+<i>312</i>&nbsp;            }
+<i>313</i>&nbsp;        }
+<i>314</i>&nbsp;        long endTime;
+<i>315</i>&nbsp;        long startTime;
+<i>316</i>&nbsp;
+<b class="nc"><i>317</i>&nbsp;        ArrayList&lt;String&gt; restKeys = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>318</i>&nbsp;        tfidfAlgorithm(allKeys, candidates, true, restKeys);</b>
+<b class="nc"><i>319</i>&nbsp;        if (restKeys.size() &gt; allKeys.size() / 2) tfidfAlgorithm(restKeys, candidates, false, new ArrayList&lt;&gt;());</b>
+<b class="nc"><i>320</i>&nbsp;        ComparePair com = new ComparePair();</b>
+<b class="nc"><i>321</i>&nbsp;        candidates.sort(com);</b>
+<i>322</i>&nbsp;
+<b class="nc"><i>323</i>&nbsp;        int listEnd = limit &lt;= candidates.size() ? limit : candidates.size();</b>
+<b class="nc"><i>324</i>&nbsp;        ArrayList&lt;PaperSmall&gt; searchList = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>325</i>&nbsp;        for (int i = 0; i &lt; listEnd; i++) {</b>
+<b class="nc"><i>326</i>&nbsp;            PaperSmall paperSmall = candidates.get(i).getKey();</b>
+<b class="nc"><i>327</i>&nbsp;            if (!searchList.contains(paperSmall)) searchList.add(paperSmall);</b>
+<i>328</i>&nbsp;        }
+<i>329</i>&nbsp;
+<b class="nc"><i>330</i>&nbsp;        usersession.put(SEARCHRESULT, searchList);</b>
+<b class="nc"><i>331</i>&nbsp;        this.total = searchList.size();</b>
+<b class="nc"><i>332</i>&nbsp;        if (start + 1 &gt; searchList.size()) return SUCCESS;</b>
+<b class="nc"><i>333</i>&nbsp;        if (end &gt; searchList.size()) {</b>
+<b class="nc"><i>334</i>&nbsp;            end = searchList.size();</b>
+<i>335</i>&nbsp;        }
+<b class="nc"><i>336</i>&nbsp;        if (start &gt; end) return SUCCESS;</b>
+<i>337</i>&nbsp;
+<b class="nc"><i>338</i>&nbsp;        startTime = System.currentTimeMillis();</b>
+<b class="nc"><i>339</i>&nbsp;        for (int i = start; i &lt; end; i++) {</b>
+<b class="nc"><i>340</i>&nbsp;            SimplePaper e = simplifyPaper(appService.getPaperById(searchList.get(i).getId()));</b>
+<b class="nc"><i>341</i>&nbsp;            this.papers.add(e);</b>
+<i>342</i>&nbsp;        }
+<b class="nc"><i>343</i>&nbsp;        endTime = System.currentTimeMillis();</b>
+<b class="nc"><i>344</i>&nbsp;        System.out.println(&quot;cast time: &quot; + (endTime - startTime));</b>
+<b class="nc"><i>345</i>&nbsp;        return SUCCESS;</b>
+<i>346</i>&nbsp;    }
+<i>347</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-07-25 18:58</div>
+</div>
+</body>
+</html>

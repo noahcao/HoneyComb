@@ -1,0 +1,73 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UserDao</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">dao</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UserDao (dao)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">UserDao</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package dao;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import model.User;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.List;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public interface UserDao {
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;	Integer save(User user);
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;	void delete(User user);
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;	void update(User user);
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;	User getUserById(int id);
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;	User UserAuthorize(String name, String pwd);
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;	List&lt;User&gt; getAllUsers();
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;	User getUserByName(String name);
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;	User getUserByEmail(String email);
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;	List&lt;User&gt; queryUser(String name);
+<i>26</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-07-25 18:58</div>
+</div>
+</body>
+</html>

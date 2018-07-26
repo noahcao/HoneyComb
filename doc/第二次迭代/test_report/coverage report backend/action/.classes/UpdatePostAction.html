@@ -1,0 +1,203 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UpdatePostAction</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">action</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UpdatePostAction (action)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UpdatePostAction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.9%
+  </span>
+  <span class="absValue">
+    (11/ 19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.6%
+  </span>
+  <span class="absValue">
+    (36/ 47)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package action;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.opensymphony.xwork2.ActionSupport;
+<i>4</i>&nbsp;import data.dao.impl.PanelDaoImpl;
+<i>5</i>&nbsp;import data.dao.impl.PostDaoImpl;
+<i>6</i>&nbsp;import data.model.CommentEntity;
+<i>7</i>&nbsp;import data.model.PostEntity;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import javax.annotation.Resource;
+<i>10</i>&nbsp;import java.sql.Timestamp;
+<i>11</i>&nbsp;import java.util.ArrayList;
+<i>12</i>&nbsp;import java.util.Date;
+<i>13</i>&nbsp;
+<b class="fc"><i>14</i>&nbsp;public class UpdatePostAction extends ActionSupport{</b>
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    private String panelId;
+<i>17</i>&nbsp;    private Integer id;
+<i>18</i>&nbsp;    private String content;
+<i>19</i>&nbsp;    private Integer userId;
+<i>20</i>&nbsp;    private Date time;
+<i>21</i>&nbsp;    private String type;
+<i>22</i>&nbsp;    private ArrayList&lt;CommentEntity&gt; comments;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    public ArrayList&lt;CommentEntity&gt; getComments() {
+<b class="nc"><i>25</i>&nbsp;        return comments;</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public void setComments(ArrayList&lt;CommentEntity&gt; comments) {
+<b class="nc"><i>29</i>&nbsp;        this.comments = comments;</b>
+<b class="nc"><i>30</i>&nbsp;    }</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    public void setType(String type) {
+<b class="nc"><i>33</i>&nbsp;        this.type = type;</b>
+<b class="nc"><i>34</i>&nbsp;    }</b>
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    public String getType() {
+<b class="nc"><i>37</i>&nbsp;        return type;</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    public String getPanelId() {
+<b class="nc"><i>41</i>&nbsp;        return panelId;</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    public void setPanelId(String panelId) {
+<b class="fc"><i>45</i>&nbsp;        this.panelId = panelId;</b>
+<b class="fc"><i>46</i>&nbsp;    }</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    public Date getTime() {
+<b class="nc"><i>49</i>&nbsp;        return time;</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public void setTime(Date time) {
+<b class="nc"><i>53</i>&nbsp;        this.time = time;</b>
+<b class="nc"><i>54</i>&nbsp;    }</b>
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    public void setId(Integer id) {
+<b class="fc"><i>57</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>58</i>&nbsp;    }</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public Integer getId() {
+<b class="fc"><i>61</i>&nbsp;        return id;</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    public void setContent(String content) {
+<b class="fc"><i>65</i>&nbsp;        this.content = content;</b>
+<b class="fc"><i>66</i>&nbsp;    }</b>
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public String getContent() {
+<b class="fc"><i>69</i>&nbsp;        return content;</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    public void setUserId(Integer userId) {
+<b class="fc"><i>73</i>&nbsp;        this.userId = userId;</b>
+<b class="fc"><i>74</i>&nbsp;    }</b>
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    public Integer getUserId() {
+<b class="nc"><i>77</i>&nbsp;        return userId;</b>
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    @Resource
+<i>81</i>&nbsp;    private PostDaoImpl postDao;
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    public void setPostDao(PostDaoImpl postDao) {
+<b class="fc"><i>84</i>&nbsp;        this.postDao = postDao;</b>
+<b class="fc"><i>85</i>&nbsp;    }</b>
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    public String add() throws Exception {
+<b class="fc"><i>88</i>&nbsp;        if (this.panelId == null || this.userId == null) return ERROR;</b>
+<b class="fc"><i>89</i>&nbsp;        PostEntity post = new PostEntity();</b>
+<b class="fc"><i>90</i>&nbsp;        post.setContent(this.content);</b>
+<b class="fc"><i>91</i>&nbsp;        post.setUserId(this.userId);</b>
+<b class="fc"><i>92</i>&nbsp;        post.setType(this.type);</b>
+<b class="fc"><i>93</i>&nbsp;        post.setComments(new ArrayList&lt;&gt;());</b>
+<i>94</i>&nbsp;
+<b class="fc"><i>95</i>&nbsp;        postDao.insert(panelId, post);</b>
+<b class="fc"><i>96</i>&nbsp;        this.id = post.getId();</b>
+<b class="fc"><i>97</i>&nbsp;        this.time = post.getTime();</b>
+<b class="fc"><i>98</i>&nbsp;        return SUCCESS;</b>
+<i>99</i>&nbsp;    }
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    public String update() throws Exception {
+<b class="fc"><i>102</i>&nbsp;        if (this.panelId == null || this.userId == null || this.id == null) return ERROR;</b>
+<b class="fc"><i>103</i>&nbsp;        PostEntity post = new PostEntity();</b>
+<b class="fc"><i>104</i>&nbsp;        post.setId(this.id);</b>
+<b class="fc"><i>105</i>&nbsp;        post.setContent(this.content);</b>
+<b class="fc"><i>106</i>&nbsp;        post.setUserId(this.userId);</b>
+<b class="fc"><i>107</i>&nbsp;        post.setType(this.type);</b>
+<i>108</i>&nbsp;
+<b class="fc"><i>109</i>&nbsp;        postDao.update(panelId, post);</b>
+<b class="fc"><i>110</i>&nbsp;        this.time = post.getTime();</b>
+<b class="fc"><i>111</i>&nbsp;        this.comments = post.getComments();</b>
+<b class="fc"><i>112</i>&nbsp;        return SUCCESS;</b>
+<i>113</i>&nbsp;    }
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;    public String delete() throws Exception {
+<b class="fc"><i>116</i>&nbsp;        if (this.panelId == null || this.id == null) return ERROR;</b>
+<b class="fc"><i>117</i>&nbsp;        postDao.deleteById(this.panelId, this.id);</b>
+<b class="fc"><i>118</i>&nbsp;        return SUCCESS;</b>
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-07-25 18:58</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Author</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Author (model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Author</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.springframework.data.annotation.Id;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.Set;
+<i>6</i>&nbsp;
+<b class="nc"><i>7</i>&nbsp;public class Author {</b>
+<i>8</i>&nbsp;    @Id
+<i>9</i>&nbsp;    private Long id;
+<i>10</i>&nbsp;    private String name;
+<i>11</i>&nbsp;    private String url;
+<i>12</i>&nbsp;    private Set&lt;Long&gt; papers;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    public Set&lt;Long&gt; getPapers() {
+<b class="nc"><i>15</i>&nbsp;        return papers;</b>
+<i>16</i>&nbsp;    }
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    public void setPapers(Set&lt;Long&gt; papers) {
+<b class="nc"><i>19</i>&nbsp;        this.papers = papers;</b>
+<i>20</i>&nbsp;    }
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    public String getUrl() {
+<b class="nc"><i>23</i>&nbsp;        return url;</b>
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public void setUrl(String url) {
+<b class="nc"><i>27</i>&nbsp;        this.url = url;</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    public String getName() {
+<b class="nc"><i>31</i>&nbsp;        return name;</b>
+<i>32</i>&nbsp;    }
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    public void setName(String name) {
+<b class="nc"><i>35</i>&nbsp;        this.name = name;</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    public Long getId() {
+<b class="nc"><i>39</i>&nbsp;        return id;</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    public void setId(Long id) {
+<b class="nc"><i>43</i>&nbsp;        this.id = id;</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-07-25 18:58</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: QueryUsersAction</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">action</a> ]
+</div>
+
+<h1>Coverage Summary for Class: QueryUsersAction (action)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">QueryUsersAction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.7%
+  </span>
+  <span class="absValue">
+    (13/ 15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package action;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.opensymphony.xwork2.ActionSupport;
+<i>4</i>&nbsp;import model.User;
+<i>5</i>&nbsp;import service.AppService;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;
+<b class="fc"><i>9</i>&nbsp;public class QueryUsersAction extends ActionSupport {</b>
+<i>10</i>&nbsp;    private String name;
+<i>11</i>&nbsp;    private List&lt;User&gt; users;
+<i>12</i>&nbsp;    private AppService appService;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    public void setName(String name) {
+<b class="fc"><i>15</i>&nbsp;        this.name = name;</b>
+<b class="fc"><i>16</i>&nbsp;    }</b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    public String getName() {
+<b class="nc"><i>19</i>&nbsp;        return name;</b>
+<i>20</i>&nbsp;    }
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    public void setAppService(AppService appService) {
+<b class="fc"><i>23</i>&nbsp;        this.appService = appService;</b>
+<b class="fc"><i>24</i>&nbsp;    }</b>
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public List&lt;User&gt; getUsers() {
+<b class="nc"><i>27</i>&nbsp;        return users;</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    public void setUsers(List&lt;User&gt; users) {
+<b class="fc"><i>31</i>&nbsp;        this.users = users;</b>
+<b class="fc"><i>32</i>&nbsp;    }</b>
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    public String allUsers() throws Exception {
+<b class="fc"><i>35</i>&nbsp;        List&lt;User&gt; users = appService.getAllUsers();</b>
+<b class="fc"><i>36</i>&nbsp;        setUsers(users);</b>
+<b class="fc"><i>37</i>&nbsp;        return SUCCESS;</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    public String search() throws Exception {
+<b class="fc"><i>41</i>&nbsp;        if (this.name == null) return ERROR;</b>
+<b class="fc"><i>42</i>&nbsp;        setUsers(appService.queryUser(name));</b>
+<b class="fc"><i>43</i>&nbsp;        return SUCCESS;</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-07-25 18:58</div>
+</div>
+</body>
+</html>
