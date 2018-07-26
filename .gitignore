@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 **/*.csv
 **/__pycache__/
 **/.vscode/
@@ -9,10 +7,7 @@
 out/
 target/
 *.iml
-./code/
-**/HoneyComb/
 **/ghostdriver.log
-=======
 **/node_modules
 code/HoneyComb_BackEnd/classes/artifacts/HoneyComb_Web_exploded/WEB-INF/classes/action/GetAuthorAction.class
 *.class
@@ -22,5 +17,3 @@ code/HoneyComb_BackEnd/classes/artifacts/HoneyComb_Web_exploded/WEB-INF/classes/
 code/HoneyComb_BackEnd/classes/artifacts/HoneyComb_Web_exploded/WEB-INF/classes/action/GetPaperAction.class
 code/HoneyComb_BackEnd/classes/artifacts/HoneyComb_Web_exploded/WEB-INF/classes/action/GetAuthorAction.class
 *.class
-*.class
->>>>>>> 9f2420bebdd91bfd5b9ba075ded89cf8a9b8f20a
