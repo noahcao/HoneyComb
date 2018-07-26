@@ -20,7 +20,7 @@
           <p class='abstract'>{{paper.abstract}}</p>
         </div>
         <div v-else>
-          <p class='authorinfo'>Publications:</p>
+          <!-- <p class='authorinfo'>Publications:</p>
           <ul>
             <li v-for='item in author.publication'>
               {{item.title}}
@@ -31,7 +31,7 @@
             <li v-for='item in author.co_author'>
               {{item.name}}
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>
@@ -157,6 +157,7 @@ export default {
 
     this.$http.post('/graphdata', { id: 37834, hierarchyLimit: 4 })
       .then((res) => {
+        console.log(res)
         if (res.data.paper !== null) {
           this.modeldata = res.data
           var papersList = this.modeldata.paper
@@ -253,20 +254,38 @@ export default {
             })
             .on('mouseover', function (d, i) {
               if (d.type === 'paper') {
-                that.paper.title = d.title
-                that.paper.year = d.year
-                that.paper.abstract = d.abstract
-                that.unselected = false
-                that.selected = true
-                that.ispaper = true
+                var paperid = d.id
+                paperid = paperid.slice(1)
+                that.$http.post('/getpaper', { id: paperid })
+                  .then((res) => {
+                    if (res.data.id !== null) {
+                      console.log(res.data)
+                      that.paper.title = res.data.title
+                      that.paper.year = res.data.year
+                      that.paper.abstract = res.data._abstract
+                      that.unselected = false
+                      that.selected = true
+                      that.ispaper = true
+                    } else {
+                      alert('paperid error')
+                    }
+                  })
               }
               else {
-                that.author.name = d.name
-                that.author.publication = d.publication
-                that.author.co_author = d.co_author
-                that.unselected = false
-                that.selected = true
-                that.ispaper = false
+                var authorid = d.id
+                authorid = authorid.slice(1)
+                that.$http.post('/getauthor', { id: authorid })
+                  .then((res) => {
+                    if (res.data.id !== null) {
+                      console.log(res.data)
+                      that.author.name = d.name
+                      that.unselected = false
+                      that.selected = true
+                      that.ispaper = true
+                    } else {
+                      alert('authorid error')
+                    }
+                  })
               }
             })
             .on('mouseout', function (d) {
@@ -391,20 +410,38 @@ export default {
         })
         .on('mouseover', function (d, i) {
           if (d.type === 'paper') {
-            that.paper.title = d.title
-            that.paper.year = d.year
-            that.paper.abstract = d.abstract
-            that.unselected = false
-            that.selected = true
-            that.ispaper = true
+            var paperid = d.id
+            paperid = paperid.slice(1)
+            that.$http.post('/getpaper', { id: paperid })
+              .then((res) => {
+                if (res.data.id !== null) {
+                  console.log(res.data)
+                  that.paper.title = res.data.title
+                  that.paper.year = res.data.year
+                  that.paper.abstract = res.data._abstract
+                  that.unselected = false
+                  that.selected = true
+                  that.ispaper = true
+                } else {
+                  alert('paperid error')
+                }
+              })
           }
           else {
-            that.author.name = d.name
-            that.author.publication = d.publication
-            that.author.co_author = d.co_author
-            that.unselected = false
-            that.selected = true
-            that.ispaper = false
+            var authorid = d.id
+            authorid = authorid.slice(1)
+            that.$http.post('/getauthor', { id: authorid })
+              .then((res) => {
+                if (res.data.id !== null) {
+                  console.log(res.data)
+                  that.author.name = d.name
+                  that.unselected = false
+                  that.selected = true
+                  that.ispaper = true
+                } else {
+                  alert('authorid error')
+                }
+              })
           }
         })
         .on('mouseout', function (d) {
@@ -463,7 +500,7 @@ export default {
       }
       var newnodes = []
       var newlinks = []
-      
+
       if (that.chooseall === true) {
         for (var i = 0; i < initnode.length; i++) {
           if (initnode[i].level <= 3) {
@@ -546,20 +583,38 @@ export default {
           })
           .on('mouseover', function (d, i) {
             if (d.type === 'paper') {
-              that.paper.title = d.title
-              that.paper.year = d.year
-              that.paper.abstract = d.abstract
-              that.unselected = false
-              that.selected = true
-              that.ispaper = true
+              var paperid = d.id
+              paperid = paperid.slice(1)
+              that.$http.post('/getpaper', { id: paperid })
+                .then((res) => {
+                  if (res.data.id !== null) {
+                    console.log(res.data)
+                    that.paper.title = res.data.title
+                    that.paper.year = res.data.year
+                    that.paper.abstract = res.data._abstract
+                    that.unselected = false
+                    that.selected = true
+                    that.ispaper = true
+                  } else {
+                    alert('paperid error')
+                  }
+                })
             }
             else {
-              that.author.name = d.name
-              that.author.publication = d.publication
-              that.author.co_author = d.co_author
-              that.unselected = false
-              that.selected = true
-              that.ispaper = false
+              var authorid = d.id
+              authorid = authorid.slice(1)
+              that.$http.post('/getauthor', { id: authorid })
+                .then((res) => {
+                  if (res.data.id !== null) {
+                    console.log(res.data)
+                    that.author.name = d.name
+                    that.unselected = false
+                    that.selected = true
+                    that.ispaper = true
+                  } else {
+                    alert('authorid error')
+                  }
+                })
             }
           })
           .on('mouseout', function (d) {
@@ -577,7 +632,7 @@ export default {
         that.selectLevel = 4
         var newnodes = []
         var newlinks = []
-        if (this.chooseall === true) {
+        if (that.chooseall === true) {
           for (var i = 0; i < initnode.length; i++) {
             if (initnode[i].level <= 4) {
               newnodes.push(initnode[i])
@@ -648,20 +703,38 @@ export default {
           })
           .on('mouseover', function (d, i) {
             if (d.type === 'paper') {
-              that.paper.title = d.title
-              that.paper.year = d.year
-              that.paper.abstract = d.abstract
-              that.unselected = false
-              that.selected = true
-              that.ispaper = true
+              var paperid = d.id
+              paperid = paperid.slice(1)
+              that.$http.post('/getpaper', { id: paperid })
+                .then((res) => {
+                  if (res.data.id !== null) {
+                    console.log(res.data)
+                    that.paper.title = res.data.title
+                    that.paper.year = res.data.year
+                    that.paper.abstract = res.data._abstract
+                    that.unselected = false
+                    that.selected = true
+                    that.ispaper = true
+                  } else {
+                    alert('paperid error')
+                  }
+                })
             }
             else {
-              that.author.name = d.name
-              that.author.publication = d.publication
-              that.author.co_author = d.co_author
-              that.unselected = false
-              that.selected = true
-              that.ispaper = false
+              var authorid = d.id
+              authorid = authorid.slice(1)
+              that.$http.post('/getauthor', { id: authorid })
+                .then((res) => {
+                  if (res.data.id !== null) {
+                    console.log(res.data)
+                    that.author.name = d.name
+                    that.unselected = false
+                    that.selected = true
+                    that.ispaper = true
+                  } else {
+                    alert('authorid error')
+                  }
+                })
             }
           })
           .on('mouseout', function (d) {
@@ -677,6 +750,7 @@ export default {
 </script>
 
 <style>
+
 .links line {
   stroke: #999;
   stroke-opacity: 0.6;
@@ -765,7 +839,7 @@ hr.tooltip-hr {
   text-align: left;
   position: relative;
   line-height: 20px;
-  max-height: 400px;
+  max-height: 450px;
   overflow: hidden;
 }
 
