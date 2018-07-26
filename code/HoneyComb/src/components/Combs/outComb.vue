@@ -39,7 +39,7 @@ export default {
 }
 
 .tool-bar {
-  background-color: black;
+  background-color: #24292e;
 }
 .abstract-bar {
   background-color: white;
@@ -58,7 +58,7 @@ export default {
   margin-top: 10px;
 }
 .comb {
-  background-color: white;
+  background-color: #eee;
 }
 .comb-container {
   width: 100%;
