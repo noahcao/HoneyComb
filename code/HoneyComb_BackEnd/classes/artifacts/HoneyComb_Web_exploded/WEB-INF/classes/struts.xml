@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="entity" extends="struts-default, json-default">
+        <result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+        </result-types>
+        <interceptors>
+            <interceptor-stack name="demostack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="json"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <action name="loginstatus" class="action.LoginAction" method="loginStatus">
+            <result type="json"/>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="loginhandle" class="action.LoginAction" method="login">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="registerhandle" class="action.RegisterAction">
+            <result type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="logout" class="action.LogoutAction">
+            <result name="success" type="json"/>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="allusers" class="action.QueryUsersAction" method="allUsers">
+            <result type="json"/>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="getuser" class="action.UpdateUserAction" method="query">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="getusername" class="action.UpdateUserAction" method="queryUserName">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="searchuser" class="action.QueryUsersAction" method="search">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="updateemail" class="action.UpdateUserAction" method="updateEmail">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="updatepwd" class="action.UpdateUserAction" method="updatePassword">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="updateicon" class="action.UpdateUserAction" method="updateIcon">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="updatebio" class="action.UpdateUserAction" method="updateBio">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="getpaper" class="action.GetPaperAction">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="getauthor" class="action.GetAuthorAction">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="searchpaper" class="action.QueryPapersAction" method="search">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="getpanel" class="action.UpdatePanelAction" method="query">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="addpanel" class="action.UpdatePanelAction" method="add">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="updatepanel" class="action.UpdatePanelAction" method="update">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="deletepanel" class="action.UpdatePanelAction" method="delete">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="searchpanels" class="action.QueryPanelsAction" method="search">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="addpost" class="action.UpdatePostAction" method="add">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="updatepost" class="action.UpdatePostAction" method="update">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="deletepost" class="action.UpdatePostAction" method="delete">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="addcomment" class="action.UpdateCommentAction" method="add">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="deletecomment" class="action.UpdateCommentAction" method="delete">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="graphdata" class="action.GraphDataAction">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+    </package>
+</struts>
