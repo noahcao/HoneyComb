@@ -9,4 +9,5 @@ out/
 target/
 *.iml
 ./code/
+**/HoneyComb/
 **/ghostdriver.log
