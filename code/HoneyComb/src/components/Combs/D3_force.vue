@@ -157,13 +157,13 @@ export default {
 
     this.$http.post('/graphdata', { id: 37821, hierarchyLimit: 4 })
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         if (res.data.paper !== null) {
           this.modeldata = res.data
           var papersList = this.modeldata.paper
           var authorList = this.modeldata.author
-          console.log(papersList)
-          console.log(authorList)
+          // console.log(papersList)
+          // console.log(authorList)
 
           for (var i = 0; i < papersList.length; i++) {
             var temppaper = papersList[i]
@@ -211,12 +211,10 @@ export default {
             initnode.push(Object.assign({}, authornode))
           }
 
-          console.log(initlink)
-          console.log(initnode)
           // console.log(initlink)
+          // console.log(initnode)
 
           simulation.nodes(initnode).on('tick', ticked)
-
           simulation.force('link').links(initlink)
 
           svgLink = svgLink
@@ -259,7 +257,6 @@ export default {
                 that.$http.post('/getpaper', { id: paperid })
                   .then((res) => {
                     if (res.data.id !== null) {
-                      console.log(res.data)
                       that.paper.title = res.data.title
                       that.paper.year = res.data.year
                       that.paper.abstract = res.data._abstract
@@ -277,7 +274,6 @@ export default {
                 that.$http.post('/getauthor', { id: authorid })
                   .then((res) => {
                     if (res.data.id !== null) {
-                      console.log(res.data)
                       that.author.name = res.data.name
                       that.unselected = false
                       that.selected = true
@@ -433,8 +429,9 @@ export default {
             that.$http.post('/getauthor', { id: authorid })
               .then((res) => {
                 if (res.data.id !== null) {
+                  console.log("new author!")
                   console.log(res.data)
-                  that.author.name = d.name
+                  that.author.name = res.data.name
                   that.unselected = false
                   that.selected = true
                   that.ispaper = false
@@ -607,7 +604,7 @@ export default {
                 .then((res) => {
                   if (res.data.id !== null) {
                     console.log(res.data)
-                    that.author.name = d.name
+                    that.author.name = res.data.name
                     that.unselected = false
                     that.selected = true
                     that.ispaper = true
@@ -728,7 +725,7 @@ export default {
                 .then((res) => {
                   if (res.data.id !== null) {
                     console.log(res.data)
-                    that.author.name = d.name
+                    that.author.name = res.data.name
                     that.unselected = false
                     that.selected = true
                     that.ispaper = false
