@@ -39,35 +39,9 @@
 </template>
 <script>
 import * as d3 from 'd3'
-var data1 = {
-  nodes: [
-    { id: 'mk', level: 1, type: 'paper', title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels', year: '2007', abstract: 'Studies the performance advantage offered by the wideband multipath RAKE structure receiver in a cellular radio direct sequence code division multiple access system (CDMA). The base to mobile link is modeled as a Nakagami fading frequency selective channel. The performance of a RAKE structure receiver employing coherent reception with maximal ratio combining in a frequency selective channel is analyzed and compared with the flat fading case. The degradation in the performance of the receiver as a result of imperfect channel estimation is also studied.', pagerank: 0.1 },
-    { id: 'mk1', level: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.2 },
-    { id: 'mk2', level: 3, type: 'paper', title: 'sth', year: '1917', abstract: 'this is abstract', pagerank: 0.12 },
-    { id: 'mk3', level: 3, type: 'paper', title: 'sth', year: '2003', abstract: 'this is abstract', pagerank: 0.02 },
-    { id: 'zjh', level: 2, type: 'paper', title: 'sth', year: '2017', abstract: 'this is abstract', pagerank: 0.05 },
-    { id: 'zjh1', level: 3, type: 'paper', title: 'sth', year: '1983', abstract: 'this is abstract', pagerank: 0.11 },
-    { id: 'zjh2', level: 3, type: 'paper', title: 'sth', year: '2007', abstract: 'this is abstract', pagerank: 0.01 },
-    { id: 'zjh3', level: 2, type: 'paper', title: 'sth', year: '2001', abstract: 'this is abstract', pagerank: 0.22 },
-    { id: 'cjk', level: 3, type: 'author', name: 'I. M. Salama', publication: [{ title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels' }, { title: 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels' }], co_author: [{ name: 'author1' }, { name: 'author2' }], pagerank: 0.01 },
-    { id: 'cjk1', level: 4, type: 'author', name: 'author!', publication: [{ title: 'publication1' }, { title: 'publication2' }], co_author: [{ name: 'author1' }, { name: 'author2' }], pagerank: 0.16 }
-  ],
-  links: [
-    { source: 'mk', target: 'mk1', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'mk1', target: 'mk2', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'mk3', target: 'mk1', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'zjh', target: 'mk', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'zjh', target: 'zjh1', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'zjh', target: 'zjh2', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'zjh3', target: 'mk', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'paper' },
-    { source: 'zjh3', target: 'cjk', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'paper', targettype: 'author' },
-    { source: 'cjk1', target: 'cjk', value: 1, sourcelevel: 1, targetlevel: 1, sourcetype: 'author', targettype: 'author' }
-  ]
-}
 var initnode = []
 var initlink = []
 
-var data = {}
 export default {
   name: 'd3-force',
   data () {
@@ -429,7 +403,6 @@ export default {
             that.$http.post('/getauthor', { id: authorid })
               .then((res) => {
                 if (res.data.id !== null) {
-                  console.log("new author!")
                   console.log(res.data)
                   that.author.name = res.data.name
                   that.unselected = false
