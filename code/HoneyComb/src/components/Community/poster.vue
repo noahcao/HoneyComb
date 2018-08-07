@@ -5,7 +5,7 @@
             <div class="jumbotron" id="panel">
                 <div class="row jumbotron" id="buttonbar">
                     <div class="col-xs-9 col-sm-9">
-                        <h2 class="h2-reponsive mb-3 blue-text" id="paneltitle"><strong>Panel Topic</strong></h2>
+                        <h2 class="h2-reponsive mb-3 blue-text" id="paneltitle"><strong>{{paneltitle}}</strong></h2>
                     </div>
                     <div class="col-xs-3 col-sm-3" style="padding:0">
                         <button type="button" class="btn btn-outline-warning waves-effect self-btn"><i class="fa fa-star pr-2" aria-hidden="true"> Star</i></button>
@@ -15,8 +15,7 @@
                 </div>
                 <div v-for="poster in posters" :key="poster.id">
                     <div class="jumbotron poster">
-                        <h2 class="h2-reponsive mb-3 blue-text">{{poster.title}}</h2>
-                        <a href="#">{{poster.username}}</a>posted at {{poster.posttime}}
+                        <a href="#">{{poster.userName}}</a>posted at {{poster.time}}
                         <hr class="my-4">
                         <div v-html="poster.content" class='contentboard'>
                         </div>
@@ -59,73 +58,33 @@ export default {
         editor
     },
     methods:{
+        getusername(userid){
+            this.$http.post('/getuser', {id: userid})
+            .then((res) => {
+                console.log(res.data);
+                console.log(res.data.name);
+                return res.data.name;
+            })
+        }
+    },
+    created(){
+        this.$http.post('/getpanel', { id: this.panelid })
+          .then((res) => {
+            console.log(this.panelid);
+            console.log(res.data);
+            console.log(res.data.title);
+            this.panelinfo = res.data;
+            this.posters = res.data.posts;
+            this.paneltitle = res.data.title;
+        })
     },
     data(){
         return {
             showeditor: false,
-            posters:
-            [
-                {   
-                    id: 1,
-                    userid: 1,
-                    username: 'cjk',
-                    posttime:"2018/7/22 15:03",
-                    vote: 10,
-                    veto: 2,
-                    title: "Poster Title",
-                    content:'<span>test content</span><p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>',
-                    comments:[
-                        {   
-                            id: 22,
-                            userid: 2,
-                            username: 'zjh',
-                            posttime: "2018/7/23 16:10",
-                            vote: 20,
-                            veto: 21,
-                            content: "Good Luck"
-                        },
-                        {   
-                            id: 23,
-                            userid: 4,
-                            username: 'xty',
-                            posttime: "2018/7/23 18:10",
-                            vote: 11,
-                            veto: 0,
-                            content: "Best Wishes"
-                        }
-                    ]
-                },
-                {   
-                    id: 2,
-                    userid: 1,
-                    username: 'cjk',
-                    posttime:"2018/7/22 15:03",
-                    vote: 10,
-                    veto: 2,
-                    title: "Test on the page of panel",
-                    content:"test content",
-                    comments:[
-                        {   
-                            id:11,
-                            userid: 2,
-                            username: 'zjh',
-                            posttime: "2018/7/23 16:10",
-                            vote: 20,
-                            veto: 21,
-                            content: "Good Luck"
-                        },
-                        {   
-                            id:12,
-                            userid: 4,
-                            username: 'xty',
-                            posttime: "2018/7/23 18:10",
-                            vote: 11,
-                            veto: 0,
-                            content: "Best Wishes"
-                        }
-                    ]
-                }
-            ]
+            panelid: this.$route.params["panelid"],
+            panelinfo: null,
+            posters: null,
+            paneltitle: null
         }
     }
 }

@@ -4,27 +4,11 @@
             <div class="col-xs-3 col-sm-3 posterwrapper">
                 <div class="poster">
                     <div class="card card-body postercard">
-                        <h3 class="card-title blue-text">{{poster.title}}</h3>
+                        <router-link :to="{ name: 'poster', params: { panelid: '5b5a827c3324a3e6507d4621' }}"><h3 class="card-title blue-text">{{poster.title}}</h3></router-link>
                         <a href="#">{{poster.username}}</a>posted at: {{poster.posttime}}
                         <hr class="my-4">
                         <p class="card-text">{{poster.abstract}}</p>
                     </div>
-                        
-                        <!-- Card -->
-                   <!-- <div @click="toPoster" class="title">
-                        <h3>Poster Title</h3>
-                    </div>
-                    <p></p>
-                    <a href="#">cjk</a>
-                    <a>16分钟前</a>
-                    <p></p>
-                    <span class="badge badge-primary">Default</span>
-                    <span class="badge badge-pill teal">
-                        <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
-                    </span>
-                    <p class="postercontent">
-                        Lorem ipsum dolor sit amet, consecteturfsdafsdsdadipisicing elit.dhsfjksdhfkjsdhfajkhdssssssss
-                    </p>-->
                 </div>
             </div>
         </div>
@@ -32,6 +16,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
     data () {
         return {

@@ -94,6 +94,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import $ from 'jquery'
 import navBar from '../main/NavBar'
 import Net from './infoContent/Net'

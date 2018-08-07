@@ -5,6 +5,8 @@ import data.dao.impl.PanelDaoImpl;
 import data.dao.impl.PostDaoImpl;
 import data.model.CommentEntity;
 import data.model.PostEntity;
+import model.User;
+import service.AppService;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
@@ -17,6 +19,7 @@ public class UpdatePostAction extends ActionSupport{
     private Integer id;
     private String content;
     private Integer userId;
+    private String userName;
     private Date time;
     private String type;
     private ArrayList<CommentEntity> comments;
@@ -27,6 +30,14 @@ public class UpdatePostAction extends ActionSupport{
 
     public void setComments(ArrayList<CommentEntity> comments) {
         this.comments = comments;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public void setType(String type) {
@@ -75,6 +86,12 @@ public class UpdatePostAction extends ActionSupport{
 
     public Integer getUserId() {
         return userId;
+    }
+
+    private AppService appService;
+
+    public void setAppService(AppService appService) {
+        this.appService = appService;
     }
 
     @Resource

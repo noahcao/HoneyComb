@@ -37,7 +37,9 @@
     </div>
   </div>
 </template>
+
 <script>
+/* eslint-disable */
 import * as d3 from 'd3'
 var data1 = {
   nodes: [

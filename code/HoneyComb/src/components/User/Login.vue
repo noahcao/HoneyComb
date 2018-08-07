@@ -71,6 +71,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import '../../../static/js/mdb'
 import $ from 'jquery'
 export default {
