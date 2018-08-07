@@ -22,8 +22,7 @@
             <router-link :to="{name:'outcomb'}" class="tag1">Explore</router-link>
           </li>
           <li>
-            <router-link :to="{name:'poster'}"
-            class="tag">About us</router-link>
+            <router-link :to="{name:'poster'}" class="tag">About us</router-link>
           </li>
           <li>
             <router-link :to="{name:'community'}" class="tag">Community</router-link>
@@ -209,7 +208,6 @@ export default {
 }
 </script>
 <style scoped>
-
 .glyphicon-menu-right {
   cursor: pointer;
 }
@@ -253,12 +251,10 @@ export default {
   margin-left: 15px;
 }
 
-.tag1 {
-  margin-left: 30px;
-}
 @media (min-width: 768px) {
-  .tag {
-    margin-left: 20px;
+  
+  .tag, tag1 {
+    margin-left: 5px;
   }
   .navbar-inverse .navbar-brand {
     font-family: "Century Gothic", sans-serif;
@@ -272,6 +268,9 @@ export default {
 }
 
 @media (min-width: 900px) {
+  .tag1 {
+    margin-left: 30px;
+  }
   .tag {
     margin-left: 5px;
   }

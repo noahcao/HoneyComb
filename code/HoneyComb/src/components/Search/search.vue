@@ -8,29 +8,21 @@
 
     <!-- after result get  -->
     <div v-show="show">
-      <div class="col-xs-1 col-md-2">
-        <form class="navbar-form">
-          <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: #24292e"></span>
-          <div class="form-group" style="margin-left: 10px">
-            <input type="text" class="form-control2" placeholder="Search">
-          </div>  
-        </form>
-        <div class="bar">
-          <div>
-            <a href="" class="bar-c">Since 2018</a>
-          </div>
-          <div>
-            <a href="" class="bar-c">Since 2017</a>
-          </div>
-          <div>
-            <a href="" class="bar-c">Since 2016</a>
-          </div>
-          <div>
-            <a href="" class="bar-c">...</a>
+      <div class="col-xs-1 col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <form class="navbar-form">
+              <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: #24292e"></span>
+              <div class="form-group" style="margin-left: 10px">
+                <input type="text" class="form-control2" placeholder="Search">
+              </div>
+            </form>
+            <h6 class="card-subtitle mb-2 text-muted">Panel subtitle</h6>
+            <p class="card-text">Since</p>
           </div>
         </div>
       </div>
-      <div class="col-xs-1 col-md-10">
+      <div class="col-xs-1 col-md-9">
         <div v-for="paper in papers">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -91,11 +83,48 @@
         </ul>
       </div>
     </div>
+    <nav>
+      <ul class="pagination pg-dark">
+        <!--Arrow left-->
+        <li class="page-item">
+          <a class="page-link" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+
+        <!--Numbers-->
+        <li class="page-item active">
+          <a class="page-link">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link">4</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link">5</a>
+        </li>
+        
+
+        <!--Arrow right-->
+        <li class="page-item">
+          <a class="page-link" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
 <script>
-
+import '../../../static/js/mdb'
 import $ from 'jquery'
 import NavBar from '../main/NavBar'
 /* eslint-disable */
@@ -149,26 +178,37 @@ export default {
 </script>
 
 <style scoped>
+@import "../../../static/css/mdb";
+.card .card-body h6{
+    font-weight: 400;
+    font-size: 2rem
+}
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.8rem;
+}
 .form-control2 {
-    display: block;
-    width: 100%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #24292e;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: none;
-    border-top: 1px solid rgba(0, 0, 0, 0);
-    border-right: 1px solid rgba(0, 0, 0, 0);
-    border-left: 1px solid rgba(0, 0, 0, 0);
-    border-bottom: 1px solid #24292e;
-    border-radius: 0px;
-    box-shadow:none;
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    outline: none;
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #24292e;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: none;
+  border-top: 1px solid rgba(0, 0, 0, 0);
+  border-right: 1px solid rgba(0, 0, 0, 0);
+  border-left: 1px solid rgba(0, 0, 0, 0);
+  border-bottom: 1px solid #24292e;
+  border-radius: 0px;
+  box-shadow: none;
+  -webkit-transition: border-color ease-in-out 0.15s,
+    -webkit-box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  outline: none;
 }
 .pagination > .active > a,
 .pagination > .active > a:focus,
@@ -182,11 +222,10 @@ export default {
   background-color: rgba(0, 0, 0, 0.1);
   font-weight: bold;
   border-color: rgba(0, 0, 0, 0.15);
-  
 }
 
 .pagination > li > a:hover,
-.pagination > li > span:hover{
+.pagination > li > span:hover {
   position: relative;
   float: left;
   padding: 6px 12px;
@@ -197,7 +236,6 @@ export default {
   background-color: rgba(0, 0, 0, 0.2);
   border: 2px solid rgba(0, 0, 0, 0);
 }
-
 
 .pagination > li > a,
 .pagination > li > span {
@@ -221,7 +259,7 @@ export default {
   color: rgba(0, 0, 0, 0.2);
   cursor: not-allowed;
   background-color: rgba(0, 0, 0, 0.02);
-  border-color: rgba(0, 0, 0, 0.02);;
+  border-color: rgba(0, 0, 0, 0.02);
 }
 
 .bottom-nav {
