@@ -41,6 +41,9 @@
 import * as d3 from 'd3'
 var initnode = []
 var initlink = []
+var svgNode
+var svgLink
+var simulation
 
 export default {
   name: 'd3-force',
@@ -71,13 +74,190 @@ export default {
     print_id: function (id) {
       console.log(id)
     },
-    deepFunc: function (argc) {
-      var newObj = {}
-      for (var property in argc) {
-        if (typeof argc[property] == 'object') newObj[property] = this.deepFunc(argc[property])
-        else newObj[property] = argc[property]
-      }
-      return newObj
+    getNewNode: function (cliNode) {
+      let that = this
+      var color = d3.scaleOrdinal(d3.schemeCategory10)
+      initnode.splice(0, initnode.length)
+      initlink.splice(0, initlink.length)
+
+      var paperid = cliNode.id
+      paperid = paperid.slice(1)
+      this.$http.post('/graphdata', { id: paperid, hierarchyLimit: 4 })
+        .then((res) => {
+          if (res.data.paper !== null) {
+            console.log(res.data.paper)
+            this.modeldata = res.data
+            var papersList = this.modeldata.paper
+            var authorList = this.modeldata.author
+
+            for (var i = 0; i < papersList.length; i++) {
+              var temppaper = papersList[i]
+              var papernode = {}
+              papernode.id = 'p' + temppaper.paperid
+              papernode.type = 'paper'
+              papernode.level = temppaper.level
+              papernode.pagerank = temppaper.pagerank
+              papernode.title = 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'
+              papernode.abstract = 'Studies the performance advantage offered by the wideband multipath RAKE structure receiver in a cellular radio direct sequence code division multiple access system (CDMA). The base to mobile link is modeled as a Nakagami fading frequency selective channel. The performance of a RAKE structure receiver employing coherent reception with maximal ratio combining in a frequency selective channel is analyzed and compared with the flat fading case. The degradation in the performance of the receiver as a result of imperfect channel estimation is also studied.'
+              papernode.year = '2007'
+              initnode.push(Object.assign({}, papernode))
+
+              var tempPapertoAuthor = temppaper.authors
+              var tempPaperRefer = temppaper.reference
+              if (papernode.level < 4) {
+                for (var j = 0; j < tempPapertoAuthor.length; j++) {
+                  var paperlink = {}
+                  paperlink.source = 'p' + temppaper.paperid
+                  paperlink.target = 'a' + tempPapertoAuthor[j]
+                  paperlink.sourcetype = 'paper'
+                  paperlink.targettype = 'author'
+                  initlink.push(Object.assign({}, paperlink))
+                }
+
+                for (var j = 0; j < tempPaperRefer.length; j++) {
+                  var paperlink = {}
+                  paperlink.source = 'p' + temppaper.paperid
+                  paperlink.target = 'p' + tempPaperRefer[j]
+                  paperlink.sourcetype = 'paper'
+                  paperlink.targettype = 'paper'
+                  initlink.push(Object.assign({}, paperlink))
+                }
+              }
+            }
+
+            for (var i = 0; i < authorList.length; i++) {
+              var tempauthor = authorList[i]
+              var authornode = {}
+              authornode.id = 'a' + tempauthor.authorid
+              authornode.type = 'author'
+              authornode.level = tempauthor.level
+              authornode.pagerank = tempauthor.pagerank
+              initnode.push(Object.assign({}, authornode))
+            }
+
+            simulation.nodes(initnode).on('tick', this.ticked)
+            simulation.force('link').links(initlink)
+
+            svgLink = svgLink.data([])
+            svgNode = svgNode.data([])
+
+            svgNode.exit().remove()
+            svgLink.exit().remove()
+
+            svgLink = svgLink.data(initlink)
+            svgNode = svgNode.data(initnode)
+
+            svgLink = svgLink
+              .enter()
+              .append('line')
+              .attr('stroke-width', function (d) {
+                return Math.sqrt(d.value)
+              })
+
+            svgNode = svgNode
+              .enter()
+              .append('circle')
+              .attr('r', function (d, i) {
+                return Math.sqrt(d.pagerank / that.totalPR * 2500)
+              })
+              .attr('fill', function (d, i) {
+                if (d.type === 'author') {
+                  return '#2c3e50'
+                }
+                else {
+                  return color((d.year / 5) % 10)
+                }
+              })
+              .call(
+                d3
+                  .drag()
+                  .on('start', this.dragstarted)
+                  .on('drag', this.dragged)
+                  .on('end', this.dragended)
+              )
+              .on('click', function (d) {
+                if (d.type === 'paper') {
+                  that.getNewNode(d)
+                }
+              })
+              .on('mouseover', function (d, i) {
+                console.log(d.id + ' ' + d.level)
+                if (d.type === 'paper') {
+                  var paperid = d.id
+                  paperid = paperid.slice(1)
+                  that.$http.post('/getpaper', { id: paperid })
+                    .then((res) => {
+                      if (res.data.id !== null) {
+                        that.paper.title = res.data.title
+                        that.paper.year = res.data.year
+                        that.paper.abstract = res.data._abstract
+                        that.unselected = false
+                        that.selected = true
+                        that.ispaper = true
+                      } else {
+                        alert('paperid error')
+                      }
+                    })
+                }
+                else {
+                  var authorid = d.id
+                  authorid = authorid.slice(1)
+                  that.$http.post('/getauthor', { id: authorid })
+                    .then((res) => {
+                      if (res.data.id !== null) {
+                        that.author.name = res.data.name
+                        that.unselected = false
+                        that.selected = true
+                        that.ispaper = false
+                      } else {
+                        alert('authorid error')
+                      }
+                    })
+                }
+              })
+          } else {
+            alert('error!')
+          }
+        })
+    },
+    ticked: function () {
+      svgLink
+        .attr('x1', function (d) {
+          return d.source.x
+        })
+        .attr('y1', function (d) {
+          return d.source.y
+        })
+        .attr('x2', function (d) {
+          return d.target.x
+        })
+        .attr('y2', function (d) {
+          return d.target.y
+        })
+
+      svgNode
+        .attr('cx', function (d) {
+          return d.x
+        })
+        .attr('cy', function (d) {
+          return d.y
+        })
+    },
+    dragstarted: function (d) {
+      if (!d3.event.active) simulation.alphaTarget(0.3).restart()
+      d.fx = d.x
+      d.fy = d.y
+    },
+
+    dragged: function (d) {
+      d.fx = d3.event.x
+      d.fy = d3.event.y
+    },
+
+    dragended: function (d) {
+      if (!d3.event.active) simulation.alphaTarget(0)
+      d.fx = null
+      d.fy = null
     }
   },
   mounted () {
@@ -103,11 +283,11 @@ export default {
     // 自定义引力
     var repelForce = d3
       .forceManyBody()
-      .strength(-500)
-      .distanceMax(250)
+      .strength(-800)
+      .distanceMax(200)
     // 自定义斥力
 
-    var simulation = d3
+    simulation = d3
       .forceSimulation()
       .force(
         'link',
@@ -119,25 +299,22 @@ export default {
       // .force('attractForce',attractForce)
       .force('repelForce', repelForce)
 
-    var svgLink = svg
+    svgLink = svg
       .append('g')
       .attr('class', 'links')
       .selectAll('line')
 
-    var svgNode = svg
+    svgNode = svg
       .append('g')
       .attr('class', 'nodes')
       .selectAll('circle')
 
     this.$http.post('/graphdata', { id: 37821, hierarchyLimit: 4 })
       .then((res) => {
-        // console.log(res)
         if (res.data.paper !== null) {
           this.modeldata = res.data
           var papersList = this.modeldata.paper
           var authorList = this.modeldata.author
-          // console.log(papersList)
-          // console.log(authorList)
 
           for (var i = 0; i < papersList.length; i++) {
             var temppaper = papersList[i]
@@ -185,10 +362,7 @@ export default {
             initnode.push(Object.assign({}, authornode))
           }
 
-          // console.log(initlink)
-          // console.log(initnode)
-
-          simulation.nodes(initnode).on('tick', ticked)
+          simulation.nodes(initnode).on('tick', this.ticked)
           simulation.force('link').links(initlink)
 
           svgLink = svgLink
@@ -217,14 +391,17 @@ export default {
             .call(
               d3
                 .drag()
-                .on('start', dragstarted)
-                .on('drag', dragged)
-                .on('end', dragended)
+                .on('start', this.dragstarted)
+                .on('drag', this.dragged)
+                .on('end', this.dragended)
             )
             .on('click', function (d) {
-              that.print_id(d.id)
+              if (d.type === 'paper') {
+                that.getNewNode(d)
+              }
             })
             .on('mouseover', function (d, i) {
+              console.log(d.id + ' ' + d.level)
               if (d.type === 'paper') {
                 var paperid = d.id
                 paperid = paperid.slice(1)
@@ -258,53 +435,10 @@ export default {
                   })
               }
             })
-            .on('mouseout', function (d) {
-              // tooltip.style('display', 'none')
-            })
         } else {
           alert('error!')
         }
       })
-
-    function ticked () {
-      svgLink
-        .attr('x1', function (d) {
-          return d.source.x
-        })
-        .attr('y1', function (d) {
-          return d.source.y
-        })
-        .attr('x2', function (d) {
-          return d.target.x
-        })
-        .attr('y2', function (d) {
-          return d.target.y
-        })
-
-      svgNode
-        .attr('cx', function (d) {
-          return d.x
-        })
-        .attr('cy', function (d) {
-          return d.y
-        })
-    }
-    function dragstarted (d) {
-      if (!d3.event.active) simulation.alphaTarget(0.3).restart()
-      d.fx = d.x
-      d.fy = d.y
-    }
-
-    function dragged (d) {
-      d.fx = d3.event.x
-      d.fy = d3.event.y
-    }
-
-    function dragended (d) {
-      if (!d3.event.active) simulation.alphaTarget(0)
-      d.fx = null
-      d.fy = null
-    }
 
     this.bus.$on('SelectPaper', function (message) {
       that.chooseall = false
@@ -338,6 +472,7 @@ export default {
 
     this.bus.$on('SelectAll', function (message) {
       that.chooseall = true
+      that.selectLevel = 4
       svgLink = svgLink.data(initlink, d => {
         return d.source.id + '-' + d.target.id
       })
@@ -371,21 +506,23 @@ export default {
         .call(
           d3
             .drag()
-            .on('start', dragstarted)
-            .on('drag', dragged)
-            .on('end', dragended)
+            .on('start', that.dragstarted)
+            .on('drag', that.dragged)
+            .on('end', that.dragended)
         )
         .on('click', function (d) {
-          that.print_id(d.id)
+          if (d.type === 'paper') {
+            that.getNewNode(d)
+          }
         })
         .on('mouseover', function (d, i) {
+          console.log(d.id + ' ' + d.level)
           if (d.type === 'paper') {
             var paperid = d.id
             paperid = paperid.slice(1)
             that.$http.post('/getpaper', { id: paperid })
               .then((res) => {
                 if (res.data.id !== null) {
-                  console.log(res.data)
                   that.paper.title = res.data.title
                   that.paper.year = res.data.year
                   that.paper.abstract = res.data._abstract
@@ -403,7 +540,6 @@ export default {
             that.$http.post('/getauthor', { id: authorid })
               .then((res) => {
                 if (res.data.id !== null) {
-                  console.log(res.data)
                   that.author.name = res.data.name
                   that.unselected = false
                   that.selected = true
@@ -413,9 +549,6 @@ export default {
                 }
               })
           }
-        })
-        .on('mouseout', function (d) {
-          // tooltip.style('display', 'none')
         })
       simulation.nodes(initnode)
       simulation.force('link').links(initlink)
@@ -464,7 +597,6 @@ export default {
     })
 
     this.bus.$on('SelectThreeLevel', function (message) {
-      console.log('select three!')
       if (that.selectLevel === 3) {
         return
       }
@@ -477,8 +609,6 @@ export default {
             newnodes.push(initnode[i])
           }
         }
-        console.log(initnode)
-        console.log(newnodes)
         for (var i = 0; i < initlink.length; i++) {
           if (initlink[i].source.level <= 3 && initlink[i].target.level <= 3) {
             newlinks.push(initlink[i])
@@ -509,8 +639,6 @@ export default {
         svgLink.exit().remove()
       }
       else {
-        // console.log(newnodes)
-        // console.log(newlinks)
         svgLink = svgLink.data(newlinks, d => {
           return d.source.id + '-' + d.target.id
         })
@@ -544,14 +672,17 @@ export default {
           .call(
             d3
               .drag()
-              .on('start', dragstarted)
-              .on('drag', dragged)
-              .on('end', dragended)
+              .on('start', that.dragstarted)
+              .on('drag', that.dragged)
+              .on('end', that.dragended)
           )
           .on('click', function (d) {
-            that.print_id(d.id)
+            if (d.type === 'paper') {
+              that.getNewNode(d)
+            }
           })
           .on('mouseover', function (d, i) {
+            console.log(d.id + ' ' + d.level)
             if (d.type === 'paper') {
               var paperid = d.id
               paperid = paperid.slice(1)
@@ -587,9 +718,6 @@ export default {
                 })
             }
           })
-          .on('mouseout', function (d) {
-            // tooltip.style('display', 'none')
-          })
         simulation.nodes(newnodes)
         simulation.force('link').links(newlinks)
         simulation.alpha(1).restart()
@@ -603,7 +731,6 @@ export default {
         var newnodes = []
         var newlinks = []
         if (that.chooseall === true) {
-          // console.log(chooseall)
           for (var i = 0; i < initnode.length; i++) {
             if (initnode[i].level <= 4) {
               newnodes.push(initnode[i])
@@ -665,14 +792,17 @@ export default {
           .call(
             d3
               .drag()
-              .on('start', dragstarted)
-              .on('drag', dragged)
-              .on('end', dragended)
+              .on('start', that.dragstarted)
+              .on('drag', that.dragged)
+              .on('end', that.dragended)
           )
           .on('click', function (d) {
-            that.print_id(d.id)
+            if (d.type === 'paper') {
+              that.getNewNode(d)
+            }
           })
           .on('mouseover', function (d, i) {
+            console.log(d.id + ' ' + d.level)
             if (d.type === 'paper') {
               var paperid = d.id
               paperid = paperid.slice(1)
@@ -707,9 +837,6 @@ export default {
                   }
                 })
             }
-          })
-          .on('mouseout', function (d) {
-            // tooltip.style('display', 'none')
           })
         simulation.nodes(newnodes)
         simulation.force('link').links(newlinks)
