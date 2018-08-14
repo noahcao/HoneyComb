@@ -65,25 +65,21 @@
               <a class="tabb" href="#net" data-toggle="tab">Nets</a>
             </li>
             <li role="presentation">
-              <a class="tabb" href="#jmeter" data-toggle="tab">Collects</a>
+              <a class="tabb" href="#collects" data-toggle="tab">Collects</a>
             </li>
             <li role="presentation">
-              <a class="tabb" href="#ejb" data-toggle="tab">Trends</a>
+              <a class="tabb" href="#trends" data-toggle="tab">Trends</a>
             </li>
           </ul>
           <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="net">
               <Net></Net>
             </div>
-            <div class="tab-pane fade" id="ios">
-              <p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
+            <div class="tab-pane fade" id="collects">
+              <collects></collects>
             </div>
-            <div class="tab-pane fade" id="jmeter">
-              <p>jMeter 是一款开源的测试软件。它是 100% 纯 Java 应用程序，用于负载和性能测试。</p>
-            </div>
-            <div class="tab-pane fade" id="ejb">
-              <p>Enterprise Java Beans（EJB）是一个创建高度可扩展性和强大企业级应用程序的开发架构，部署在兼容应用程序服务器（比如 JBOSS、Web Logic 等）的 J2EE 上。
-              </p>
+            <div class="tab-pane fade" id="trends">
+              <trends></trends>
             </div>
           </div>
         </div>
@@ -97,11 +93,16 @@
 import $ from 'jquery'
 import navBar from '../main/NavBar'
 import Net from './infoContent/Net'
+import Collects from './infoContent/Collects'
+import Trends from './infoContent/Trends'
+
 export default {
   name: 'userInfo',
   components: {
     navBar,
-    Net
+    Net,
+    Collects,
+    Trends
   },
   data () {
     return {
