@@ -7,10 +7,13 @@ var LRList = [
 
 var EditorContent = ""
 var inMarkdown = false
+var showPosters = true
+
 
 export default {
   id,
   LRList,
   EditorContent,
-  inMarkdown
+  inMarkdown,
+  showPosters
 }

@@ -21,7 +21,7 @@
                     Material Design
                 </li>
                 <li>
-                    <button style="color:black">Create Panel</button>
+                    <button @click="data.showPosters=!data.showPosters" style="color:black">Create Panel</button>
                 </li>
             </ul>
         </form>
