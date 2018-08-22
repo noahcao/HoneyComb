@@ -21,8 +21,7 @@
                     Material Design
                 </li>
                 <li>
-                    <input type="checkbox" class="form-check-input">
-                    Material Design
+                    <button style="color:black">Create Panel</button>
                 </li>
             </ul>
         </form>
