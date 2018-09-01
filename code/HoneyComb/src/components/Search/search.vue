@@ -83,9 +83,8 @@
         </ul>
       </div>
     </div>
-    <nav>
+    <!-- <nav>
       <ul class="pagination pg-dark">
-        <!--Arrow left-->
         <li class="page-item">
           <a class="page-link" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
@@ -93,7 +92,6 @@
           </a>
         </li>
 
-        <!--Numbers-->
         <li class="page-item active">
           <a class="page-link">1</a>
         </li>
@@ -110,8 +108,6 @@
           <a class="page-link">5</a>
         </li>
         
-
-        <!--Arrow right-->
         <li class="page-item">
           <a class="page-link" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
@@ -119,7 +115,7 @@
           </a>
         </li>
       </ul>
-    </nav>
+    </nav> -->
   </div>
 </template>
 
@@ -159,7 +155,7 @@ export default {
       papers: null,
       show: false,
       page: [1, 2, 3, 4, 5],
-      numPerPage: 4,
+      numPerPage: 10,
       activate: 0,
     }
   },
@@ -179,14 +175,14 @@ export default {
 
 <style scoped>
 @import "../../../static/css/mdb";
-.card .card-body h6{
-    font-weight: 400;
-    font-size: 2rem
+.card .card-body h6 {
+  font-weight: 400;
+  font-size: 2rem;
 }
 .card-body {
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    padding: 1.8rem;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.8rem;
 }
 .form-control2 {
   display: block;
@@ -290,6 +286,7 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-left: 0px;
 }
 .panel {
   margin-left: 5%;
@@ -297,21 +294,35 @@ export default {
   margin-bottom: 20px;
   background-color: #fff;
   border: 0px solid transparent;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-radius: 0px;
+  /* -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); */
+  box-shadow: darkgrey -3px 3px 6px 1px
 }
 
 .panel-default > .panel-heading {
-  background-image: linear-gradient(to bottom, #dedede 0, #dedede 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0, #ffffff 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#ffe8e8e8', GradientType=0);
   background-repeat: repeat-x;
+  /* color: #333; */
+  
 }
+
 .panel-title {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 18px;
   color: inherit;
+}
+
+.panel-heading{
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 0px solid rgba(0, 0, 0, 0);
+  border-left: 0px solid rgba(0, 0, 0, 0);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+
 }
 
 /* loading component */
