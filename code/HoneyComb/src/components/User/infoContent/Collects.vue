@@ -7,11 +7,22 @@
         </a>
       </div> -->
       <div class="media-body">
-        <h4 class="media-heading">
-          <strong>{{paper.title}}</strong>
-        </h4>
-        <p> year: {{paper.year}}</p>
-        <p>{{paper.abstract}}</p>
+        <div class="d-inline-block">
+          <h4 class="media-heading">
+            <strong>{{paper.title}}</strong>
+          </h4>
+        </div>
+        <div class="float-right">
+          <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <strong>Uncollect</strong>
+          </button>
+        </div>
+
+        <div>
+          <p> year: {{paper.year}}</p>
+          <p>{{paper.abstract}}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -60,5 +71,13 @@ export default {
   padding-right: 20px;
   padding-top: 5px;
   padding-bottom: 10px;
+}
+
+.d-inline-block {
+  display: inline;
+}
+
+.float-right {
+  float: right;
 }
 </style>
