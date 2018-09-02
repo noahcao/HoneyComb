@@ -12,14 +12,14 @@
             <h3>{{name}}</h3>
             <p v-if="editBio">{{bio}}</p>
             <p>
-              <button class="btn btn-default" type="button" @click="edit_bio" v-if="editBio">
+              <button class="btn btn-default btn-full-width" type="button" @click="edit_bio" v-if="editBio">
                 Edit Bio
               </button>
               <textarea rows="5" v-else v-model="bios"></textarea>
               <button class="btn btn-default" v-if="!editBio" type="button" @click="save_bio">save</button>
               <button class="btn btn-default" v-if="!editBio" type="button" @click="edit_bio">cancel</button>
               <br/>
-              <button class="btn btn-default" data-toggle="modal" data-target="#profile_modal" type="button">
+              <button class="btn btn-default btn-full-width" data-toggle="modal" data-target="#profile_modal" type="button">
                 Edit Profile
               </button>
             </p>
@@ -73,13 +73,13 @@
           </ul>
           <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="net">
-              <Net></Net>
+              <Net :userid="id"></Net>
             </div>
             <div class="tab-pane fade" id="collects">
-              <collects></collects>
+              <collects :userid="id"></collects>
             </div>
             <div class="tab-pane fade" id="trends">
-              <trends></trends>
+              <trends :userid="id"></trends>
             </div>
           </div>
         </div>
@@ -346,6 +346,7 @@ p {
   display: block;
   /* max-width: 100%; */
   height: 240px;
+  width: 90%;
   margin-top: 20px;
   margin-left: 0px;
 }
@@ -400,5 +401,10 @@ p {
     margin-bottom: 50px;
     margin-left: auto;
   }
+}
+
+.btn-full-width {
+  width: 100%;
+  margin-left: 5px;
 }
 </style>

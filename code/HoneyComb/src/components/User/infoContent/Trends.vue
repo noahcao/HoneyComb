@@ -10,7 +10,7 @@
       <div class="trend-item" v-for="trend in collects">
         <span>{{trend.time}}</span>
         <span class="trend-title">
-          <a @click="">{{trend.title}}</a>
+          <a>{{trend.title}}</a>
         </span>
         <a @click="toClearTrend">
           <span class="glyphicon glyphicon-remove float-right" aria-hidden="true"></span>
@@ -23,6 +23,7 @@
 <script>
 export default {
   name: 'Trends',
+  props: { 'userid': 0 },
   data () {
     return {
       id: this.data.id,
@@ -32,6 +33,17 @@ export default {
         { time: '2018-9-2-9:29', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '' },
         { time: '2018-9-2-9:29', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '' }
       ]
+    }
+  },
+  watch: {
+    'userid': {
+      handler: function (val, oldVal) {
+        // this.$http.post('/getTrends', { id: this.id })
+        //   .then((res) => {
+
+        //   })
+      },
+      deep: true
     }
   },
   mounted () {
@@ -78,7 +90,7 @@ export default {
 }
 
 .trends {
-  border-left: 1px #ddd;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .trends a {

@@ -1,11 +1,6 @@
 <template>
   <div>
     <div class="media" v-for="paper in collects">
-      <!-- <div class="media-left">
-        <a href="#">
-          <img class="media-object img-rounded" src="../../../assets/logo.png" alt="...">
-        </a>
-      </div> -->
       <div class="media-body">
         <div class="d-inline-block">
           <h4 class="media-heading">
@@ -15,10 +10,9 @@
         <div class="float-right">
           <button type="button" class="btn btn-default btn-sm">
             <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-            <strong>Uncollect</strong>
+            <strong>Remove</strong>
           </button>
         </div>
-
         <div>
           <p> year: {{paper.year}}</p>
           <p>{{paper.abstract}}</p>
@@ -31,15 +25,26 @@
 <script>
 export default {
   name: 'Collects',
+  props: ['userid'],
   data () {
     return {
       id: this.data.id,
       collects: [
-        { title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
-        { title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
-        { title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
-        { title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' }
+        { paperid: '', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
+        { paperid: '', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
+        { paperid: '', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
+        { paperid: '', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' }
       ]
+    }
+  },
+  watch: {
+    'userid': {
+      handler: function (val, oldVal) {
+        //   .then((res) => {
+
+        //   })
+      },
+      deep: true
     }
   },
   mounted () {

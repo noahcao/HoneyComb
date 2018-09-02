@@ -1,6 +1,7 @@
 <template>
   <div>
-    <svg width='800' height='600'></svg>
+    <svg width='700' height='500'></svg>
+
   </div>
 </template>
 
@@ -14,9 +15,21 @@ var simulation
 
 export default {
   name: 'Net',
+  props: ['userid'],
   data () {
     return {
       id: this.data.id
+    }
+  },
+  watch: {
+    'userid': {
+      handler: function (val, oldVal) {
+        // this.$http.post('/getTrends', { id: this.id })
+        //   .then((res) => {
+
+        //   })
+      },
+      deep: true
     }
   },
   methods: {
