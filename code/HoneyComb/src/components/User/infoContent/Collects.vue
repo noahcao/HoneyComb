@@ -40,6 +40,7 @@ export default {
   watch: {
     'userid': {
       handler: function (val, oldVal) {
+        // this.$http.post('/getTrends', { id: this.id })
         //   .then((res) => {
 
         //   })

@@ -1,11 +1,145 @@
 <template>
   <div>
-    <svg width='700' height='500'></svg>
-
+    <div class="op-area">
+      <strong>Node:</strong>
+      <a>
+        <span id="add-icon" class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addNode_modal" type="button"></span>
+      </a>
+      <a>
+        <span id="minus-icon" class="glyphicon glyphicon-minus-sign" data-toggle="modal" data-target="#deleteNode_modal" type="button"></span>
+      </a>
+      <strong>Link:</strong>
+      <a>
+        <span id="add-icon" class="glyphicon glyphicon-plus-sign" data-toggle="modal" data-target="#addLink_modal" type="button"></span>
+      </a>
+      <a>
+        <span id="minus-icon" class="glyphicon glyphicon-minus-sign" data-toggle="modal" data-target="#deleteLink_modal" type="button"></span>
+      </a>
+    </div>
+    <div class="modal fade" id="addNode_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="exampleModalLabel">Add Net-node</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <!-- <div class="form-group">
+                <label for="recipient-name" class="control-label">Node Type:</label>
+                <label class="radio-inline">
+                  <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked> paper
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2"> author
+                </label>
+              </div> -->
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">Node name:</label>
+                <input type="text" class="form-control" id="name1" placeholder="Paper title/Author name">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">Node radius:</label>
+                <input type="text" class="form-control" id="radius1" placeholder="Node radius here">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="close" class="btn btn-primary" data-dismiss="modal" @click="closeNode">Close</button>
+            <button type="button" class="btn btn-primary" @click="addNode">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="deleteNode_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="exampleModalLabel">Delete Net-node</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">Node name:</label>
+                <input type="text" class="form-control" id="name2" placeholder="Paper title/Author name">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="close" class="btn btn-primary" data-dismiss="modal" @click="closeNode">Close</button>
+            <button type="button" class="btn btn-primary" @click="deleteNode">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="addLink_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="exampleModalLabel">Add Net-link</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">Start Node Name:</label>
+                <input type="text" class="form-control" id="startNode1" placeholder="Paper title/Author name">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">End Node name:</label>
+                <input type="text" class="form-control" id="endNode1" placeholder="Paper title/Author name">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="close" class="btn btn-primary" data-dismiss="modal" @click="closeLink">Close</button>
+            <button type="button" class="btn btn-primary" @click="addLink">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="deleteLink_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="exampleModalLabel">Delete Net-link</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">Start Node Name:</label>
+                <input type="text" class="form-control" id="startNode2" placeholder="Paper title/Author name">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">End Node name:</label>
+                <input type="text" class="form-control" id="endNode2" placeholder="Paper title/Author name">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="close" class="btn btn-primary" data-dismiss="modal" @click="closeLink">Close</button>
+            <button type="button" class="btn btn-primary" @click="deleteLink">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <svg class="net-background">
+    </svg>
   </div>
 </template>
 
 <script>
+import $ from 'jquery'
 import * as d3 from 'd3'
 var initnode = []
 var initlink = []
@@ -71,6 +205,58 @@ export default {
       if (!d3.event.active) simulation.alphaTarget(0)
       d.fx = null
       d.fy = null
+    },
+
+    closeNode: function () {
+      $('#name1').val('')
+      $('#name2').val('')
+      $('radius1').val('')
+      $('#name1').parent().removeClass('has-error')
+      $('#name2').parent().removeClass('has-error')
+      $('radius1').parent().removeClass('has-error')
+    },
+
+    addNode: function () {
+      var Nodename = $('#name1').val()
+      var radius = $('#radius1').val()
+      var errorFlag = false
+
+      if (Nodename === '') {
+        $('#name1').parent().addClass('has-error')
+        $('#name1-help').remove()
+        $('#name11').after('<span id="name-help" class="help-block">Node name can not be empty</span>')
+        errorFlag = true
+      }
+
+      if (radius === '') {
+        $('#radius1').parent().addClass('has-error')
+        $('#radius-help').remove()
+        $('#radius').after('<span id="radius-help" class="help-block">Node radius can not be empty</span>')
+        errorFlag = true
+      }
+
+      if (errorFlag) {
+        return
+      }
+
+      
+
+
+    },
+
+    deleteNode: function () {
+
+    },
+
+    closeLink: function () {
+      $('#startNode1').val('')
+      $('#endNode1').val('')
+      $('#startNode2').val('')
+      $('#endNode2').val('')
+      $('#startNode1').parent().removeClass('has-error')
+      $('#endNode1').parent().removeClass('has-error')
+      $('#startNode2').parent().removeClass('has-error')
+      $('#endNode2').parent().removeClass('has-error')
     }
   },
   mounted () {
@@ -205,3 +391,56 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+a {
+  color: #333;
+}
+.net-background {
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 100%;
+  height: 400px;
+}
+#add-icon {
+  margin-left: 5px;
+  margin-top: 10px;
+  margin-right: 8px;
+  font-size: 20px;
+}
+#minus-icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+.btn-primary {
+  transition: all 0.3s ease;
+  background: rgba(36, 41, 46, 0.9);
+  border-color: rgba(36, 41, 46, 0);
+  margin-top: 5px;
+  color: white;
+}
+.btn-primary:active:focus {
+  color: #333;
+  background-color: #ffffff;
+  border-color: rgba(36, 41, 46, 0);
+}
+.btn-primary:hover {
+  color: #333;
+  background-color: rgba(36, 41, 46, 0.2);
+  border-color: rgba(36, 41, 46, 0);
+}
+.btn:active,
+.btn:focus {
+  z-index: 2;
+  box-shadow: none;
+  outline: none;
+}
+
+.control-label {
+  margin-right: 5px;
+}
+.op-area {
+  padding-left: 10px;
+}
+</style>
+
