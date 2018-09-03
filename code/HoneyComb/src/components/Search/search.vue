@@ -8,28 +8,32 @@
 
     <!-- after result get  -->
     <div v-show="show">
-      <div class="col-xs-1 col-md-3">
+      <div class="col-xs-12 col-md-3">
         <div class="card">
           <div class="card-body">
             <form class="navbar-form">
-              <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: #24292e"></span>
-              <div class="form-group" style="margin-left: 10px">
+              <div class="form-group" >
                 <input type="text" class="form-control2" placeholder="Search">
+                <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: #24292e"></span>
               </div>
+              
             </form>
-            <h6 class="card-subtitle mb-2 text-muted">Panel subtitle</h6>
-            <p class="card-text">Since</p>
+            <h6 class="time-scale">Any time</h6>
+            <h6 class="time-scale">Since 2018</h6>
+            <h6 class="time-scale">Since 2017</h6>
+            <h6 class="time-scale">Since 2014</h6>
+            <h6 class="time-scale">Custom range...</h6>
           </div>
         </div>
       </div>
-      <div class="col-xs-1 col-md-9">
+      <div class="col-xs-12 col-md-9">
         <div v-for="paper in papers">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">{{paper.title}}</h3>
             </div>
             <div class="panel-body">
-              <div class="col-xs-1 col-md-6 author-group">
+              <div class="col-xs-12 col-md-6 author-group">
                 <div class="body-author">Authors: </div>
                 <div class="body-author" v-for="author in paper.authors">
                   <strong>
@@ -37,15 +41,15 @@
                   </strong>
                 </div>
               </div>
-              <div class="col-xs-1 col-md-2 body-cited">
+              <div class="col-xs-12 col-md-2 body-cited">
                 cited:
                 <strong>{{paper.cited}}</strong>
               </div>
-              <div class="col-xs-1 col-md-2 body-cited">
+              <div class="col-xs-12 col-md-2 body-cited">
                 Year:
                 <strong>{{paper.year}}</strong>
               </div>
-              <a class="col-xs-1 col-md-2" :href="paper.url" target="_blank">more..</a>
+              <a class="col-xs-12 col-md-2 body-cited" :href="paper.url" target="_blank">more..</a>
             </div>
             <div class="panel-body">
               <div class="body-abstract">
@@ -55,9 +59,9 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-1 col-md-2">
+      <div class="col-xs-0 col-md-2">
       </div>
-      <div class="col-xs-1 col-md-10 bottom-nav">
+      <div class="col-xs-12 col-md-10 bottom-nav">
         <ul class="pagination">
           <li class="disabled">
             <a>&lt;</a>
@@ -175,9 +179,31 @@ export default {
 
 <style scoped>
 @import "../../../static/css/mdb";
+
+.time-scale{
+  font-size: 10px;
+}
+.panel-body {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+@media (min-width: 768px) {
+  .panel-body {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+.card {
+  margin-bottom: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.body-cited {
+  padding-left: 0;
+}
 .card .card-body h6 {
   font-weight: 400;
-  font-size: 2rem;
+  font-size: 1.4rem;
 }
 .card-body {
   -ms-flex: 1 1 auto;
@@ -186,7 +212,7 @@ export default {
 }
 .form-control2 {
   display: block;
-  width: 100%;
+  width: 80%;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
@@ -297,7 +323,7 @@ export default {
   border-radius: 0px;
   /* -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); */
-  box-shadow: darkgrey -3px 3px 6px 1px
+  box-shadow: darkgrey -3px 3px 6px 1px;
 }
 
 .panel-default > .panel-heading {
@@ -305,7 +331,6 @@ export default {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#ffe8e8e8', GradientType=0);
   background-repeat: repeat-x;
   /* color: #333; */
-  
 }
 
 .panel-title {
@@ -315,14 +340,13 @@ export default {
   color: inherit;
 }
 
-.panel-heading{
-  border-top: 1px solid rgba(0, 0, 0, 0.5);
-  border-right: 1px solid rgba(0, 0, 0, 0.5);
+.panel-heading {
+  border-top: 0px solid rgba(0, 0, 0, 0.5);
+  border-right: 20px solid rgba(0, 0, 0, 0.5);
   border-bottom: 0px solid rgba(0, 0, 0, 0);
   border-left: 0px solid rgba(0, 0, 0, 0);
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-
 }
 
 /* loading component */

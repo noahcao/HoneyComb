@@ -24,7 +24,7 @@ a:hover {
   cursor: pointer;
 }
 body {
-  background-color: #ffffff;
+  background-color: #f9f9f9;
   /*ededed*/
 }
 /* * {

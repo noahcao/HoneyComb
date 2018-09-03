@@ -217,6 +217,7 @@ export default {
   border-radius: 0;
   background: linear-gradient(#24292e, #24292e);
   height: 70px;
+  z-index:999;
 }
 .container-fluid {
   margin-top: 10px;
