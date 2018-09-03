@@ -140,7 +140,14 @@ export default {
           else{
             this.$http.post('/addpanel', {owner: this.data.id, title: this.newPanelTitle})
               .then((res) => {
-                console.log(res.data)
+                this.$http.post('/addpost', {panelId: res.data.id, userId: this.data.id, content: this.panelContent})
+                  .then((res) => {
+                    alert("add a post at " + res.data.time);
+                    this.panelContent = "";
+                    this.newPanelTitle = "";
+                    this.showPoster = true;
+                    this.showsidebar = true;
+                  })
               })
           }
         }
@@ -219,7 +226,6 @@ ul{
   margin-left: 10%;
   margin-right: 10%;
   width: 80%;
-  border: solid;
   height: 100px
 }
 </style>
