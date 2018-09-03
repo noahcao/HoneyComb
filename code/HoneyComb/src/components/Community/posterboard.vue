@@ -30,6 +30,9 @@ export default {
             }
         }
     },
+    mounted(){
+        
+    },
     methods:{
         toPoster(){
             alert("jump to a poster page");

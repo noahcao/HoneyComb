@@ -5,7 +5,7 @@
     <div class="comBody">
 
       <!-- the side bar part-->
-      <div class="col-md-2" id='sidebar'>
+      <div class="col-md-2" id='sidebar' v-if="showsidebar">
          <div class='mobile'>
             <!-- Checkbox to toggle the menu -->
             <div id='selectsection'>
@@ -19,7 +19,7 @@
                           Material Design
                       </li>
                       <li>
-                          <button @click="showPoster=!showPoster" style="color:black">Create Panel</button>
+                          <button @click="createNewPanel" style="color:black">Create Panel</button>
                       </li>
                     </ul>
                 </form>
@@ -35,8 +35,14 @@
       <!-- the new panel part -->
       <div class="col-md-10" id="newpanel" v-if="!showPoster">
         <div id="panelboard" style="padding-top:20px">
-          <input style="margin:40px">
-          <editor style="height:400px"></editor>
+          <div id="functional">
+            Title: <input style="margin:40px" v-model="newPanelTitle">
+            <button @click="createPanel"> Post </button>
+          </div>
+          <div id="panelEditor">
+            <quill-editor class="quill" v-model="panelContent"
+        v-if="!showMarkdown"></quill-editor>
+          </div>
         </div>
       </div>
 
@@ -72,18 +78,73 @@
 import NavBar from '../main/NavBar'
 import editor from './editor'
 import posterboard from './posterboard'
+import '../../../static/css/quill.core.css'
+import '../../../static/css/quill.snow.css'  
+import '../../../static/css/quill.bubble.css'
+import markdown from './markdown'
+import { quillEditor } from 'vue-quill-editor'
 export default {
   name: 'outcomb',
   components: {
     NavBar,
-    editor,
+    markdown,
+    quillEditor,
     posterboard
   },
   data (){
     return {
-      showPoster: true
+      showPoster: true,
+      showsidebar: true,
+      newPanelTitle: "",
+      showMarkdown: false,
+      anotherEditor: 'Markdown Mode',
+      panelContent: ""
     }
-  }
+  },
+   methods:{
+        alterEditor(){
+            if(this.showMarkdown){
+                this.showMarkdown = false;
+                this.anotherEditor = 'MarkDown Mode';
+                this.data.EditorContent = "";
+                this.data.inMarkdown = true
+            }
+            else{
+                this.showMarkdown = true;
+                this.anotherEditor = 'RichText Mode';
+                this.data.EditorContent = "";
+                this.data.inMarkdown = true
+            }
+        },
+        createNewPanel(){
+          if(this.data.id > 0){
+            this.showsidebar = !this.showsidebar;
+            this.showPoster = !this.showPoster;
+          }
+          else{
+            alert("You must log in for creating a panel!");
+          }
+        },
+        saveContent(){
+            alert("存储内容进入数据库:" + this.data.EditorContent)
+        },
+        createPanel(){
+          if(this.newPanelTitle==""){
+            alert("title can't be empty!");
+            return;
+          }
+          else if(this.panelContent==""){
+            alert("content of panel can't be empty!");
+            return;
+          }
+          else{
+            this.$http.post('/addpanel', {owner: this.data.id, title: this.newPanelTitle})
+              .then((res) => {
+                console.log(res.data)
+              })
+          }
+        }
+    }
 }
 </script>
 
@@ -144,5 +205,21 @@ li{
 }
 ul{
     list-style-type:none;
+}
+#newpanel{
+  width: 100%;
+  height: 100%;
+  padding: 20px
+}
+#panelEditor{
+  padding: 0;
+  height: 400px
+}
+#functional{
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+  border: solid;
+  height: 100px
 }
 </style>
