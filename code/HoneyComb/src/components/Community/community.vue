@@ -98,8 +98,15 @@ export default {
       newPanelTitle: "",
       showMarkdown: false,
       anotherEditor: 'Markdown Mode',
-      panelContent: ""
+      panelContent: "",
+      panels: []
     }
+  },
+  created(){
+    this.$http.post('/searchpanels')
+      .then((res) => {
+        this.panels = res.data.panels;
+      })
   },
    methods:{
         alterEditor(){

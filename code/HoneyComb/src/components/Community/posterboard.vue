@@ -1,13 +1,13 @@
 <template>
     <div id="posterboard">
-        <div v-for="item in items" :key="item.id">
+        <div v-for="panel in panels" :key="panel.id">
             <div class="col-xs-3 col-sm-3 posterwrapper">
                 <div class="poster">
                     <div class="card card-body postercard">
-                        <router-link :to="{ name: 'poster', params: { panelid: '5b5a827c3324a3e6507d4621' }}"><h3 class="card-title blue-text">{{poster.title}}</h3></router-link>
-                        <a href="#">{{poster.username}}</a>posted at: {{poster.posttime}}
+                        <router-link :to="{ name: 'poster', params: { panelid: panel.id }}"><h3 class="card-title blue-text">{{panel.title}}</h3></router-link>
+                        <a href="#">{{panel.owner}}</a>posted at: {{panel.time}}
                         <hr class="my-4">
-                        <p class="card-text">{{poster.abstract}}</p>
+                        <p v-html="panel.posts[0].content" class="card-text"></p>
                     </div>
                 </div>
             </div>
@@ -27,8 +27,16 @@ export default {
                 username: "cjk",
                 posttime: "2018/7/23 16:03",
                 abstract: "This is a poster self-defined for the test on the front-end project. The default display effect is designed to hide overflow text content and adopt the design style defined in Google's Material Design language."
-            }
+            },
+            panels: []
         }
+    },
+    created(){
+    this.$http.post('/searchpanels')
+      .then((res) => {
+        this.panels = res.data.panels;
+        console.log(this.panels);
+      })
     },
     mounted(){
         
