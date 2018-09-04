@@ -268,18 +268,26 @@ export default {
       var radius = $('#radius1').val()
       var colorName = document.getElementsByName('radioColor')
       var errorFlag = false
+      var isNum = /^[0-9]*$/
+
+      $('#name1-help').remove()
+      $('#radius1-help').remove()
+      $('#name1').parent().removeClass('has-error')
+      $('#radius1').parent().removeClass('has-error')
+
+      if (!isNum.test(radius)) {
+        radius = ''
+      }
 
       if (Nodename === '') {
         $('#name1').parent().addClass('has-error')
-        $('#name1-help').remove()
         $('#name1').after('<span id="name1-help" class="help-block">Node name can not be empty</span>')
         errorFlag = true
       }
 
       if (radius === '') {
         $('#radius1').parent().addClass('has-error')
-        $('#radius1-help').remove()
-        $('#radius1').after('<span id="radius1-help" class="help-block">Node radius can not be empty</span>')
+        $('#radius1').after('<span id="radius1-help" class="help-block">Node radius format error</span>')
         errorFlag = true
       }
 
@@ -314,6 +322,9 @@ export default {
       var everApear = false
       var index = null
 
+      $('#name2-help').remove()
+      $('#name2').parent().removeClass('has-error')
+
       for (var i = 0; i < initnode.length; i++) {
         if (Nodename === initnode[i].id) {
           everApear = true
@@ -327,7 +338,6 @@ export default {
       }
       if (Nodename === '') {
         $('#name2').parent().addClass('has-error')
-        $('#name2-help').remove()
         $('#name2').after('<span id="name2-help" class="help-block">Node name can not be found in net</span>')
         errorFlag = true
       }
@@ -368,6 +378,11 @@ export default {
       var errorStartNode = true
       var errorEndNode = true
 
+      $('#startNode1-help').remove()
+      $('#endNode1-help').remove()
+      $('#startNode1').parent().removeClass('has-error')
+      $('#endNode1').parent().removeClass('has-error')
+
       for (var i = 0; i < initnode.length; i++) {
         if (startNode === initnode[i].id) {
           errorStartNode = false
@@ -387,14 +402,12 @@ export default {
 
       if (startNode === '') {
         $('#startNode1').parent().addClass('has-error')
-        $('#startNode1-help').remove()
         $('#startNode1').after('<span id="startNode1-help" class="help-block">Node name can not be found</span>')
         errorFlag = true
       }
 
       if (endNode === '') {
         $('#endNode1').parent().addClass('has-error')
-        $('#endNode1-help').remove()
         $('#endNode1').after('<span id="endNode1-help" class="help-block">Node name can not be found</span>')
         errorFlag = true
       }
@@ -424,6 +437,10 @@ export default {
       var errorFlag = false
       var everApear = false
       var index = null
+      $('#startNode2-help').remove()
+      $('#endNode2-help').remove()
+      $('#startNode2').parent().removeClass('has-error')
+      $('#endNode2').parent().removeClass('has-error')
 
       for (var i = 0; i < initlink.length; i++) {
         if (startNode === initlink[i].source.id && endNode === initlink[i].target.id) {
@@ -446,14 +463,12 @@ export default {
 
       if (startNode === '') {
         $('#startNode2').parent().addClass('has-error')
-        $('#startNode2-help').remove()
         $('#startNode2').after('<span id="startNode2-help" class="help-block">Link can not be found</span>')
         errorFlag = true
       }
 
       if (endNode === '') {
         $('#endNode2').parent().addClass('has-error')
-        $('#endNode2-help').remove()
         $('#endNode2').after('<span id="endNode2-help" class="help-block">Link can not be found</span>')
         errorFlag = true
       }

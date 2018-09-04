@@ -7,7 +7,7 @@
           <span class="glyphicon glyphicon-trash clear-icon"></span>
         </a>
       </div>
-      <div class="history-item" v-for="history in collects">
+      <div class="history-item" v-for="history in historys">
         <span>{{history.time}}</span>
         <span class="history-title">
           <a>{{history.title}}</a>
@@ -26,7 +26,7 @@ export default {
   data () {
     return {
       id: this.data.id,
-      collects: [
+      historys: [
         { historyid: 1, time: '2018-9-2-9:29', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '' },
         { historyid: 2, time: '2018-9-2-9:29', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '' },
         { historyid: 3, time: '2018-9-2-9:29', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '' },
@@ -61,7 +61,7 @@ export default {
 
     // this.$http.post('/gethistorys', { id: this.id })
     //   .then((res) => {
-    //     this.collects = res.data
+    //     this.historys = res.data
     //   })
   }
 }
