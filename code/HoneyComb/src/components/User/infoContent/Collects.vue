@@ -8,9 +8,9 @@
           </h4>
         </div>
         <div class="float-right">
-          <button type="button" class="btn btn-default btn-sm">
+          <button type="button" class="btn btn-default btn-sm" @click="opCollect(paper.paperid)">
             <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-            <strong>Remove</strong>
+            <strong>{{paper.text}}</strong>
           </button>
         </div>
         <div>
@@ -25,30 +25,51 @@
 <script>
 export default {
   name: 'Collects',
-  props: ['userid'],
   data () {
     return {
       id: this.data.id,
       collects: [
-        { paperid: '', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
-        { paperid: '', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
-        { paperid: '', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
-        { paperid: '', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' }
+        { paperid: '1', text: 'Remove', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
+        { paperid: '2', text: 'Remove', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
+        { paperid: '3', text: 'Remove', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
+        { paperid: '4', text: 'Remove', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' }
       ]
     }
   },
-  watch: {
-    'userid': {
-      handler: function (val, oldVal) {
-        // this.$http.post('/getTrends', { id: this.id })
-        //   .then((res) => {
+  methods: {
+    opCollect: function (d) {
+      var isRemove = false
+      var index = null
+      console.log(this.collects)
+      for (var i = 0; i < this.collects.length; i++) {
+        console.log(1)
+        if (d === this.collects[i].paperid) {
+          index = i
+          if (this.collects[i].text === 'Remove') {
+            isRemove = true
+          }
+          break
+        }
+      }
+      console.log(index)
 
+      if (isRemove) {
+        this.collects[index].text = 'Collect'
+        // this.$http.post('/deleteCollection', { userid: this.id, paperid:d })
+        //   .then((res) => {
+        //     // to check
         //   })
-      },
-      deep: true
+      } else {
+        this.collects[index].text = 'Remove'
+        // this.$http.post('/addCollection', { userid: this.id, paperid:d })
+        //   .then((res) => {
+        //     // to check
+        //   })
+      }
     }
   },
   mounted () {
+
     // this.$http.post('/getcollects', { id: this.id })
     //   .then((res) => {
 

@@ -271,9 +271,12 @@ export default {
 
     var color = d3.scaleOrdinal(d3.schemeCategory10)
 
-    var svg = d3.select('svg'),
-      width = +svg.attr('width'),
-      height = +svg.attr('height')
+    var svg = d3.select('svg')
+    var width = svg.attr('width')
+    var height = svg.attr('height')
+
+    console.log(width)
+    console.log(height)
 
     svg.call(zoom)
 

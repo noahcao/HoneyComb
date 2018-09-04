@@ -68,18 +68,18 @@
               <a class="tabb" href="#collects" data-toggle="tab">Collects</a>
             </li>
             <li role="presentation">
-              <a class="tabb" href="#trends" data-toggle="tab">Trends</a>
+              <a class="tabb" href="#history" data-toggle="tab">History</a>
             </li>
           </ul>
           <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="net">
-              <Net :userid="id"></Net>
+              <Net></Net>
             </div>
             <div class="tab-pane fade" id="collects">
-              <collects :userid="id"></collects>
+              <collects></collects>
             </div>
-            <div class="tab-pane fade" id="trends">
-              <trends :userid="id"></trends>
+            <div class="tab-pane fade" id="history">
+              <history ></history>
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@ import $ from 'jquery'
 import navBar from '../main/NavBar'
 import Net from './infoContent/Net'
 import Collects from './infoContent/Collects'
-import Trends from './infoContent/Trends'
+import History from './infoContent/History'
 
 export default {
   name: 'userInfo',
@@ -102,7 +102,7 @@ export default {
     navBar,
     Net,
     Collects,
-    Trends
+    History
   },
   data () {
     return {
@@ -121,7 +121,7 @@ export default {
   },
   mounted () {
     $('canvas').remove()
-    this.loginJudge()
+    // this.loginJudge()
   },
   methods: {
     closeProfile () {
@@ -137,6 +137,8 @@ export default {
       $('#email1').parent().removeClass('has-error')
       $('#pwd1').parent().removeClass('has-error')
       $('#pwd2').parent().removeClass('has-error')
+      $('#password-help').remove()
+      $('#email-help').remove()
     },
     submitProfile () {
       var email = $('#email1').val()
