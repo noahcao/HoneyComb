@@ -1,30 +1,18 @@
 <template>
     <div id="posterboard">
-        <div v-for="item in items" :key="item.id">
-            <div class="col-xs-3 col-sm-3 posterwrapper">
+        <div class="col-xs-12 col-sm-6 col-md-3" v-for="panel in panels" :key="panel.id">
+            <div class="posterwrapper">
                 <div class="poster">
                     <div class="card card-body postercard">
-                        <h3 class="card-title blue-text">{{poster.title}}</h3>
-                        <a href="#">{{poster.username}}</a>posted at: {{poster.posttime}}
+                        <router-link :to="{ name: 'poster', params: { panelid: panel.id }}">
+                            <h3 class="card-title dark-text">{{panel.title}}</h3>
+                        </router-link>
+                        <!-- <a href="#">{{panel.ownerName}}</a> -->
+                        <a href="#">Unknown</a>
+                        <p>posted at: {{panel.time}}</p>
                         <hr class="my-4">
-                        <p class="card-text">{{poster.abstract}}</p>
+                        <p v-html="panel.posts[0].content" class="card-text"></p>
                     </div>
-                        
-                        <!-- Card -->
-                   <!-- <div @click="toPoster" class="title">
-                        <h3>Poster Title</h3>
-                    </div>
-                    <p></p>
-                    <a href="#">cjk</a>
-                    <a>16分钟前</a>
-                    <p></p>
-                    <span class="badge badge-primary">Default</span>
-                    <span class="badge badge-pill teal">
-                        <i class="fa fa-heart fa-2x" aria-hidden="true"></i>
-                    </span>
-                    <p class="postercontent">
-                        Lorem ipsum dolor sit amet, consecteturfsdafsdsdadipisicing elit.dhsfjksdhfkjsdhfajkhdssssssss
-                    </p>-->
                 </div>
             </div>
         </div>
@@ -32,21 +20,33 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
     data () {
         return {
-            items: [1,2,3,4,5,6,7,8],
-            poster:{
+            items: [1, 2, 3, 4, 5, 6, 7, 8],
+            poster: {
                 id: 1,
                 title: "poster title",
                 username: "cjk",
                 posttime: "2018/7/23 16:03",
                 abstract: "This is a poster self-defined for the test on the front-end project. The default display effect is designed to hide overflow text content and adopt the design style defined in Google's Material Design language."
-            }
+            },
+            panels: []
         }
     },
-    methods:{
-        toPoster(){
+    created () {
+        this.$http.post('/searchpanels')
+            .then((res) => {
+                console.log(res.data.panels)
+                this.panels = res.data.panels;
+            })
+    },
+    mounted () {
+
+    },
+    methods: {
+        toPoster () {
             alert("jump to a poster page");
         }
     }
@@ -58,20 +58,22 @@ export default {
 * {
   margin: 0px;
 }
+.card-title {
+  color: black;
+}
 .poster {
   margin: 20px 5px 0 5px;
   padding: 2px 5px 2px 5px;
   height: 95%;
 }
-.postercard{
-    height:100%;
-    background-color: white;
-    padding: 10px
+.postercard {
+  height: 100%;
+  background-color: white;
+  padding: 10px;
 }
 .posterwrapper {
   margin: 0;
   height: 45vh;
-  width: 25%;
 }
 .postercontent {
   word-wrap: break-word;
@@ -82,14 +84,14 @@ export default {
   -webkit-line-break: auto;
   -webkit-box-orient: vertical;
 }
-.poster h3{
-    padding:10px
+.poster h3 {
+  padding: 10px;
 }
-.poster a{
-    padding: 0 20px 0 20px;
+.poster a {
+    padding-left: 10px;
 }
-.poster p{
-    padding: 20px
+.poster p {
+  padding: 10px;
 }
 </style>
 

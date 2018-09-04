@@ -217,7 +217,6 @@ export default {
   border-radius: 0;
   background: linear-gradient(#24292e, #24292e);
   height: 70px;
-  z-index:200;
 }
 
 .modal-backdrop {

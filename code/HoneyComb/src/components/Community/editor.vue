@@ -27,7 +27,7 @@ export default {
     data() {
         return{
             showMarkdown: false,
-            anotherEditor: 'RichText Mode',
+            anotherEditor: 'Markdown Mode',
         }
     },
     methods:{

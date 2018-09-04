@@ -118,7 +118,7 @@
       },
       tabFn: function(evt) {
         insertContent("    ", this);
-        // 屏蔽屌tab切换事件
+        // 屏蔽tab切换事件
         if (evt.preventDefault) {
           evt.preventDefault();
         } else {
