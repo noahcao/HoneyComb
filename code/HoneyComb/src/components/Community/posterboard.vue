@@ -5,7 +5,7 @@
                 <div class="poster">
                     <div class="card card-body postercard">
                         <router-link :to="{ name: 'poster', params: { panelid: panel.id }}"><h3 class="card-title blue-text">{{panel.title}}</h3></router-link>
-                        <a href="#">{{panel.owner}}</a>posted at: {{panel.time}}
+                        <a href="#">{{panel.ownerName}}</a>posted at: {{panel.time}}
                         <hr class="my-4">
                         <p v-html="panel.posts[0].content" class="card-text"></p>
                     </div>
@@ -35,7 +35,6 @@ export default {
     this.$http.post('/searchpanels')
       .then((res) => {
         this.panels = res.data.panels;
-        console.log(this.panels);
       })
     },
     mounted(){

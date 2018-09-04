@@ -1,6 +1,7 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import data.dao.impl.PanelDaoImpl;
 import data.model.CommentEntity;
 import data.model.PanelEntity;
@@ -102,7 +103,9 @@ public class UpdatePanelAction extends ActionSupport {
     public String update() throws Exception {
         if (this.id == null || (this.title == null && this.owner == null)) return ERROR;
         PanelEntity e = new PanelEntity();
-        if (this.owner != null) e.setOwner(this.owner);
+        if (this.owner != null){
+            e.setOwner(this.owner);
+        }
         if (this.title != null) e.setTitle(this.title);
         panelDao.update(e);
         query();
