@@ -217,8 +217,19 @@ export default {
   border-radius: 0;
   background: linear-gradient(#24292e, #24292e);
   height: 70px;
-  z-index:999;
+  z-index:200;
 }
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    background-color: #000;
+}
+
 .container-fluid {
   margin-top: 10px;
 }
