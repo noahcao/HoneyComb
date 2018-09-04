@@ -143,6 +143,7 @@
       </div>
     </div>
     <svg class="net-background" width="740" height="400">
+      <text x="20" y="390" fill="black" font-size="20">{{this.title}}</text>
     </svg>
   </div>
 </template>
@@ -155,17 +156,18 @@ var initlink = []
 var svgNode
 var svgLink
 var simulation
-var tooltip
 
 export default {
   name: 'Net',
   data () {
     return {
-      id: this.data.id
+      id: this.data.id,
+      title: null
     }
   },
   methods: {
     reconstruct: function () {
+      let that = this
       simulation.nodes(initnode).on('tick', this.ticked)
       simulation.force('link').links(initlink)
 
@@ -205,7 +207,9 @@ export default {
             .on('end', this.dragended)
         )
         .on('mouseover', function (d, i) {
-
+          console.log(d.id)
+          that.title = d.id
+          console.log(this)
         })
 
       simulation.alpha(1).restart()
@@ -485,13 +489,12 @@ export default {
     }
   },
   mounted () {
-    let that = this
     initnode.splice(0, initnode.length)
     initlink.splice(0, initlink.length)
-    var zoom = d3
-      .zoom()
-      .scaleExtent([-2, 2])
-      .on('zoom', zoomed)
+    // var zoom = d3
+    //   .zoom()
+    //   .scaleExtent([-2, 2])
+    //   .on('zoom', zoomed)
 
     // var color = d3.scaleOrdinal(d3.schemeCategory10)
 
@@ -499,11 +502,11 @@ export default {
     var width = svg.attr('width')
     var height = svg.attr('height')
 
-    svg.call(zoom)
+    // svg.call(zoom)
 
-    function zoomed () {
-      svg.selectAll('g').attr('transform', d3.event.transform)
-    }
+    // function zoomed () {
+    //   svg.selectAll('g').attr('transform', d3.event.transform)
+    // }
     // 自定义引力
     var repelForce = d3
       .forceManyBody()
@@ -562,6 +565,7 @@ export default {
           .on('end', this.dragended)
       )
       .on('mouseover', function (d, i) {
+        this.title = d.id
       })
 
     // 获取个人网络图
@@ -602,7 +606,7 @@ export default {
     //           .on('end', this.dragended)
     //       )
     //       .on('mouseover', function (d, i) {
-
+    //            this.title = d.id
     //       })
     //   })
   }
@@ -662,4 +666,3 @@ a {
   margin-right: 5px;
 }
 </style>
-

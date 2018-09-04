@@ -40,9 +40,8 @@ export default {
     opCollect: function (d) {
       var isRemove = false
       var index = null
-      console.log(this.collects)
+
       for (var i = 0; i < this.collects.length; i++) {
-        console.log(1)
         if (d === this.collects[i].paperid) {
           index = i
           if (this.collects[i].text === 'Remove') {
@@ -51,7 +50,6 @@ export default {
           break
         }
       }
-      console.log(index)
 
       if (isRemove) {
         this.collects[index].text = 'Collect'
@@ -69,7 +67,6 @@ export default {
     }
   },
   mounted () {
-
     // this.$http.post('/getcollects', { id: this.id })
     //   .then((res) => {
 
