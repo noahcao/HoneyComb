@@ -94,7 +94,10 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 /* eslint-disable */
+=======
+>>>>>>> Front-end-3
 import $ from 'jquery'
 import navBar from '../main/NavBar'
 import Net from './infoContent/Net'
@@ -198,6 +201,7 @@ export default {
             alert('success')
             $("#close").click()
             return
+<<<<<<< HEAD
           })
       } else if (email !== '' && pwd1 === '') {
         this.$http.get('/updateemail', { params: { id: this.id, email: email } })
@@ -206,6 +210,16 @@ export default {
             $("#close").click()
             return
           })
+=======
+          })
+      } else if (email !== '' && pwd1 === '') {
+        this.$http.get('/updateemail', { params: { id: this.id, email: email } })
+          .then((res) => {
+            alert('success')
+            $("#close").click()
+            return
+          })
+>>>>>>> Front-end-3
       }
       $("#close").click()
       return
@@ -293,12 +307,21 @@ p {
 }
 .r {
   margin-left: 5%;
+<<<<<<< HEAD
 }
 .tabb {
   color: rgba(36, 41, 46, 0.8);
   font-size: 20px;
   border-bottom-color: rgba(36, 41, 46, 0);
 }
+=======
+}
+.tabb {
+  color: rgba(36, 41, 46, 0.8);
+  font-size: 20px;
+  border-bottom-color: rgba(36, 41, 46, 0);
+}
+>>>>>>> Front-end-3
 .nav-tabs {
   border-bottom-color: rgba(36, 41, 46, 0.5);
 }

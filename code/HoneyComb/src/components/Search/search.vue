@@ -8,36 +8,32 @@
 
     <!-- after result get  -->
     <div v-show="show">
-      <div class="col-xs-1 col-md-2">
-        <form class="navbar-form">
-          <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: #24292e"></span>
-          <div class="form-group" style="margin-left: 10px">
-            <input type="text" class="form-control2" placeholder="Search">
-          </div>  
-        </form>
-        <div class="bar">
-          <div>
-            <a href="" class="bar-c">Since 2018</a>
-          </div>
-          <div>
-            <a href="" class="bar-c">Since 2017</a>
-          </div>
-          <div>
-            <a href="" class="bar-c">Since 2016</a>
-          </div>
-          <div>
-            <a href="" class="bar-c">...</a>
+      <div class="col-xs-12 col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <form class="navbar-form">
+              <div class="form-group" >
+                <input type="text" class="form-control2" placeholder="Search">
+                <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: #24292e"></span>
+              </div>
+              
+            </form>
+            <h6 class="time-scale">Any time</h6>
+            <h6 class="time-scale">Since 2018</h6>
+            <h6 class="time-scale">Since 2017</h6>
+            <h6 class="time-scale">Since 2014</h6>
+            <h6 class="time-scale">Custom range...</h6>
           </div>
         </div>
       </div>
-      <div class="col-xs-1 col-md-10">
+      <div class="col-xs-12 col-md-9">
         <div v-for="paper in papers">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">{{paper.title}}</h3>
             </div>
             <div class="panel-body">
-              <div class="col-xs-1 col-md-6 author-group">
+              <div class="col-xs-12 col-md-6 author-group">
                 <div class="body-author">Authors: </div>
                 <div class="body-author" v-for="author in paper.authors">
                   <strong>
@@ -45,15 +41,15 @@
                   </strong>
                 </div>
               </div>
-              <div class="col-xs-1 col-md-2 body-cited">
+              <div class="col-xs-12 col-md-2 body-cited">
                 cited:
                 <strong>{{paper.cited}}</strong>
               </div>
-              <div class="col-xs-1 col-md-2 body-cited">
+              <div class="col-xs-12 col-md-2 body-cited">
                 Year:
                 <strong>{{paper.year}}</strong>
               </div>
-              <a class="col-xs-1 col-md-2" :href="paper.url" target="_blank">more..</a>
+              <a class="col-xs-12 col-md-2 body-cited" :href="paper.url" target="_blank">more..</a>
             </div>
             <div class="panel-body">
               <div class="body-abstract">
@@ -63,9 +59,9 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-1 col-md-2">
+      <div class="col-xs-0 col-md-2">
       </div>
-      <div class="col-xs-1 col-md-10 bottom-nav">
+      <div class="col-xs-12 col-md-10 bottom-nav">
         <ul class="pagination">
           <li class="disabled">
             <a>&lt;</a>
@@ -91,11 +87,44 @@
         </ul>
       </div>
     </div>
+    <!-- <nav>
+      <ul class="pagination pg-dark">
+        <li class="page-item">
+          <a class="page-link" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+
+        <li class="page-item active">
+          <a class="page-link">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link">4</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link">5</a>
+        </li>
+        
+        <li class="page-item">
+          <a class="page-link" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav> -->
   </div>
 </template>
 
 <script>
-
+import '../../../static/js/mdb'
 import $ from 'jquery'
 import NavBar from '../main/NavBar'
 /* eslint-disable */
@@ -130,7 +159,7 @@ export default {
       papers: null,
       show: false,
       page: [1, 2, 3, 4, 5],
-      numPerPage: 4,
+      numPerPage: 10,
       activate: 0,
     }
   },
@@ -149,26 +178,59 @@ export default {
 </script>
 
 <style scoped>
+@import "../../../static/css/mdb";
+
+.time-scale{
+  font-size: 10px;
+}
+.panel-body {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+@media (min-width: 768px) {
+  .panel-body {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+.card {
+  margin-bottom: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.body-cited {
+  padding-left: 0;
+}
+.card .card-body h6 {
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.8rem;
+}
 .form-control2 {
-    display: block;
-    width: 100%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #24292e;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: none;
-    border-top: 1px solid rgba(0, 0, 0, 0);
-    border-right: 1px solid rgba(0, 0, 0, 0);
-    border-left: 1px solid rgba(0, 0, 0, 0);
-    border-bottom: 1px solid #24292e;
-    border-radius: 0px;
-    box-shadow:none;
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    outline: none;
+  display: block;
+  width: 80%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #24292e;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: none;
+  border-top: 1px solid rgba(0, 0, 0, 0);
+  border-right: 1px solid rgba(0, 0, 0, 0);
+  border-left: 1px solid rgba(0, 0, 0, 0);
+  border-bottom: 1px solid #24292e;
+  border-radius: 0px;
+  box-shadow: none;
+  -webkit-transition: border-color ease-in-out 0.15s,
+    -webkit-box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  outline: none;
 }
 .pagination > .active > a,
 .pagination > .active > a:focus,
@@ -182,11 +244,10 @@ export default {
   background-color: rgba(0, 0, 0, 0.1);
   font-weight: bold;
   border-color: rgba(0, 0, 0, 0.15);
-  
 }
 
 .pagination > li > a:hover,
-.pagination > li > span:hover{
+.pagination > li > span:hover {
   position: relative;
   float: left;
   padding: 6px 12px;
@@ -197,7 +258,6 @@ export default {
   background-color: rgba(0, 0, 0, 0.2);
   border: 2px solid rgba(0, 0, 0, 0);
 }
-
 
 .pagination > li > a,
 .pagination > li > span {
@@ -221,7 +281,7 @@ export default {
   color: rgba(0, 0, 0, 0.2);
   cursor: not-allowed;
   background-color: rgba(0, 0, 0, 0.02);
-  border-color: rgba(0, 0, 0, 0.02);;
+  border-color: rgba(0, 0, 0, 0.02);
 }
 
 .bottom-nav {
@@ -252,6 +312,7 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-left: 0px;
 }
 .panel {
   margin-left: 5%;
@@ -259,21 +320,33 @@ export default {
   margin-bottom: 20px;
   background-color: #fff;
   border: 0px solid transparent;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-radius: 0px;
+  /* -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); */
+  box-shadow: darkgrey -3px 3px 6px 1px;
 }
 
 .panel-default > .panel-heading {
-  background-image: linear-gradient(to bottom, #dedede 0, #dedede 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0, #ffffff 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#ffe8e8e8', GradientType=0);
   background-repeat: repeat-x;
+  /* color: #333; */
 }
+
 .panel-title {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 18px;
   color: inherit;
+}
+
+.panel-heading {
+  border-top: 0px solid rgba(0, 0, 0, 0.5);
+  border-right: 20px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 0px solid rgba(0, 0, 0, 0);
+  border-left: 0px solid rgba(0, 0, 0, 0);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 /* loading component */

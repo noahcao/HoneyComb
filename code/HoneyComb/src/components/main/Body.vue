@@ -203,8 +203,8 @@ input:focus {
 }
 
 .input-group {
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 10%;
+  margin-right: 10%;
   margin-top: 50px;
 }
 .img-rounded {
@@ -213,6 +213,11 @@ input:focus {
 @media (min-width: 768px) {
   .panel-default {
     margin-left: 55%;
+  }
+  .input-group {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 50px;
   }
 }
 .panel-default {

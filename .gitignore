@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 ./code
+=======
+**/node_modules
+**/package-lock.json
+>>>>>>> Front-end-3

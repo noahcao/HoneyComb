@@ -24,7 +24,8 @@ a:hover {
   cursor: pointer;
 }
 body {
-  background-color: #ededed;
+  background-color: #f9f9f9;
+  /*ededed*/
 }
 /* * {
     -webkit-border-radius: 0 !important;
