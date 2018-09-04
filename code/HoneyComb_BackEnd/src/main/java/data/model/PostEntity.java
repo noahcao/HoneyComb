@@ -11,6 +11,7 @@ public class PostEntity {
     private Integer id;
     private String content;
     private Integer userId;
+    private String userName;
     private Date time;
     private Integer commentId = 0;
     private String type;
@@ -22,6 +23,14 @@ public class PostEntity {
 
     public void setComments(ArrayList<CommentEntity> comments) {
         this.comments = comments;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public String getType() {

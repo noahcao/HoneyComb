@@ -91,6 +91,41 @@
             </result>
             <interceptor-ref name="demostack"/>
         </action>
+        <action name="getstar" class="action.UpdateStarAction" method="query">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="addstar" class="action.UpdateStarAction" method="add">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="deletestar" class="action.UpdateStarAction" method="delete">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="gethistory" class="action.UpdateHistoryAction" method="query">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="addhistory" class="action.UpdateHistoryAction" method="add">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
         <action name="getpaper" class="action.GetPaperAction">
             <result name="success" type="json"/>
             <result name="error" type="httpheader">
@@ -140,7 +175,7 @@
             </result>
             <interceptor-ref name="demostack"/>
         </action>
-        <action name="searchpanels" class="action.QueryPanelsAction" method="search">
+        <action name="searchpanels" class="action.QueryPanelsAction" method="getLatest">
             <result name="success" type="json"/>
             <result name="error" type="httpheader">
                 <param name="status">400</param>
