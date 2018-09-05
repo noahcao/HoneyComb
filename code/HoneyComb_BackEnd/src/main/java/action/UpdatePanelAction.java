@@ -1,7 +1,6 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import dao.impl.UserDaoImpl;
 import data.dao.impl.PanelDaoImpl;
 import data.model.CommentEntity;
 import data.model.PanelEntity;
@@ -84,6 +83,7 @@ public class UpdatePanelAction extends ActionSupport {
 
     public String add() throws Exception {
         if (this.owner == null || this.title == null) return ERROR;
+        if (appService.getUserById(this.owner) == null) return ERROR;
         PanelEntity e = new PanelEntity();
         e.setOwner(this.owner);
         e.setTitle(this.title);
@@ -103,7 +103,10 @@ public class UpdatePanelAction extends ActionSupport {
     public String update() throws Exception {
         if (this.id == null || (this.title == null && this.owner == null)) return ERROR;
         PanelEntity e = new PanelEntity();
-        if (this.owner != null) e.setOwner(this.owner);
+        if (this.owner != null){
+            if (appService.getUserById(this.owner) == null) return ERROR;
+            e.setOwner(this.owner);
+        }
         if (this.title != null) e.setTitle(this.title);
         panelDao.update(e);
         query();
@@ -122,11 +125,11 @@ public class UpdatePanelAction extends ActionSupport {
         this.posts = e.getPosts();
         for (PostEntity post : this.posts) {
             User result2 = appService.getUserById(post.getUserId());
-            if (result2 == null) return ERROR;
+            if (result2 == null) continue;
             post.setUserName(result2.getName());
             for (CommentEntity comment : post.getComments()) {
                 User result3 = appService.getUserById(comment.getUserId());
-                if (result3 == null) return ERROR;
+                if (result3 == null) continue;
                 comment.setUserName(result3.getName());
             }
         }

@@ -14,4 +14,6 @@ public interface PanelDao {
     void update(PanelEntity entity);
 
     void deleteById(String id);
+
+    List<PanelEntity> findUserList(Integer owner);
 }

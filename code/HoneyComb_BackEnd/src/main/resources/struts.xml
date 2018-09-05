@@ -175,7 +175,7 @@
             </result>
             <interceptor-ref name="demostack"/>
         </action>
-        <action name="searchpanels" class="action.QueryPanelsAction" method="getLatest">
+        <action name="searchpanels" class="action.QueryPanelsAction" method="queryLatest">
             <result name="success" type="json"/>
             <result name="error" type="httpheader">
                 <param name="status">400</param>
@@ -211,6 +211,27 @@
             <interceptor-ref name="demostack"/>
         </action>
         <action name="deletecomment" class="action.UpdateCommentAction" method="delete">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="usercomment" class="action.QueryCommentsAction" method="userComment">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="userpost" class="action.QueryPostsAction" method="userPost">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="userpanel" class="action.QueryPanelsAction" method="userPanel">
             <result name="success" type="json"/>
             <result name="error" type="httpheader">
                 <param name="status">400</param>

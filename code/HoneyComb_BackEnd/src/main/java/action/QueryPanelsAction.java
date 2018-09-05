@@ -14,6 +14,15 @@ public class QueryPanelsAction extends ActionSupport {
     private ArrayList<PanelEntity> panels;
     private Integer start;
     private Integer end;
+    private Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getStart() {
         return start;
@@ -60,14 +69,21 @@ public class QueryPanelsAction extends ActionSupport {
         this.panelDao = panelDao;
     }
 
-    public String getLatest() throws Exception {
+    public String queryLatest() throws Exception {
         this.panels = new ArrayList<>();
         this.panels.addAll(panelDao.findList(0, 0));
         for (PanelEntity panel : this.panels) {
             User result = appService.getUserById(panel.getOwner());
-            if (result == null) return ERROR;
+            if (result == null) continue;
             panel.setOwnerName(result.getName());
         }
+        return SUCCESS;
+    }
+
+    public String userPanel() throws Exception {
+        if (this.userId == null) return ERROR;
+        panels = new ArrayList<>();
+        panels.addAll(panelDao.findUserList(this.userId));
         return SUCCESS;
     }
 }
