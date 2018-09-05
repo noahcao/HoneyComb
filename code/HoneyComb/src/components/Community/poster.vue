@@ -4,13 +4,21 @@
         <div id="panelboard">
             <div class="jumbotron" id="panel">
                 <div class="row jumbotron" id="buttonbar">
-                    <div class="col-xs-9 col-sm-9">
-                        <h2 class="h2-reponsive mb-3 blue-text" id="paneltitle"><strong>{{paneltitle}}</strong></h2>
+                    <div class="col-xs-12 col-sm-9">
+                        <h2 class="h2-reponsive mb-3" id="paneltitle">
+                            <strong>{{paneltitle}}</strong>
+                        </h2>
                     </div>
-                    <div class="col-xs-3 col-sm-3" style="padding:0">
-                        <button type="button" class="btn btn-outline-warning waves-effect self-btn"><i class="fa fa-star pr-2" aria-hidden="true"> Star</i></button>
-                        <button type="button" class="btn btn-outline-info waves-effect px-3 self-btn" @click="showeditor=!showeditor"><i class="fa fa-pencil-square-o" aria-hidden="true"> Post</i></button>
-                        <button type="button" class="btn btn-outline-secondary waves-effect px-3 self-btn"><i class="fa fa-share-alt" aria-hidden="true"> Share</i></button>
+                    <div class="col-xs-12 col-sm-3" style="padding:0">
+                        <button type="button" class="btn btn-outline-warning waves-effect self-btn">
+                            <i class="fa fa-star pr-2" aria-hidden="true"> Star</i>
+                        </button>
+                        <button type="button" class="btn btn-outline-info waves-effect px-3 self-btn" @click="showeditor=!showeditor">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"> Post</i>
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary waves-effect px-3 self-btn">
+                            <i class="fa fa-share-alt" aria-hidden="true"> Share</i>
+                        </button>
                     </div>
                 </div>
                 <div v-for="poster in posters" :key="poster.id">
@@ -23,17 +31,19 @@
                             <div class="jumbotron jumbotron-fluid comment">
                                 <a href="#">{{comment.userName}}</a> post at: {{comment.time}}
                                 <hr class="my-4" style="margin:0">
-                                <div v-html="comment.content" style="padding-left:10px;padding-right:10px">
+                                <div class="comment-content" v-html="comment.content" style="padding-left:10px;padding-right:10px">
                                 </div>
                             </div>
                         </div>
                         <div class="row" id="newcomment">
                             <div class="md-form input-group row" style="width:100%">
-                                <div class="col-xs-11 col-xm-11">
+                                <div class="col-xs-12 col-sm-11">
                                     <input type="text" class="form-control" placeholder="Add a comment" aria-label="Add a comment" aria-describedby="basic-addon2" v-model="newComments[poster.id]">
                                 </div>
-                                <div class="col-xs-1 col-xm-1" style="float:right">
-                                <button class="btn btn-outline-primary waves-effect" type="button" style="padding:8px 15px 8px 15px;margin-left:10%;float:right" @click="addComment(panelinfo.id, poster.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <div class="col-xs-12 col-sm-1" style="float:right">
+                                    <button class="btn btn-outline-elegant waves-effect" type="button" @click="addComment(panelinfo.id, poster.id)">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -57,50 +67,62 @@ export default {
         NavBar,
         editor
     },
-    methods:{ 
-        getusername(userid){
-            this.$http.post('/getuser', {id: userid})
-            .then((res) => {
-                console.log(res.data);
-                console.log(res.data.name);
-                return res.data.name;
-            })
+    methods: {
+        getusername (userid) {
+            this.$http.post('/getuser', { id: userid })
+                .then((res) => {
+                    console.log(res.data);
+                    console.log(res.data.name);
+                    return res.data.name;
+                })
         },
-        addComment(panelid, postid){
-            if(this.data.id === null){
+        addComment (panelid, postid) {
+            if (this.data.id === null) {
                 alert("Please login first")
                 return
             }
             console.log(this.data.id)
             console.log(panelid)
-            this.$http.post('/addcomment', {panelId: panelid, postId: postid, content: this.newComments[postid], 
-                userId: this.data.id})
+            this.$http.post('/addcomment', {                panelId: panelid, postId: postid, content: this.newComments[postid],
+                userId: this.data.id            })
                 .then((res) => {
                     alert("successfult add a comment!");
+                    this.$http.post('/getpanel', { id: this.panelid })
+                        .then((res) => {
+                            console.log(this.panelid);
+                            console.log(res.data);
+                            console.log(res.data.title);
+                            this.panelinfo = res.data;
+                            this.posters = res.data.posts;
+                            this.paneltitle = res.data.title;
+                            for (var i = 0; i < this.posters.length; i++) {
+                                this.newComments.push[""];
+                            }
+                        })
                 })
         },
-        getUserName(userId){
-            this.$http.post('/getusername', {id: this.data.id})
+        getUserName (userId) {
+            this.$http.post('/getusername', { id: this.data.id })
                 .then((res) => {
                     alert(res.data)
                 })
         }
     },
-    created(){
+    created () {
         this.$http.post('/getpanel', { id: this.panelid })
-          .then((res) => {
-            console.log(this.panelid);
-            console.log(res.data);
-            console.log(res.data.title);
-            this.panelinfo = res.data;
-            this.posters = res.data.posts;
-            this.paneltitle = res.data.title;
-            for(var i = 0; i < this.posters.length; i++){
-                this.newComments.push[""];
-            }
-        })
+            .then((res) => {
+                console.log(this.panelid);
+                console.log(res.data);
+                console.log(res.data.title);
+                this.panelinfo = res.data;
+                this.posters = res.data.posts;
+                this.paneltitle = res.data.title;
+                for (var i = 0; i < this.posters.length; i++) {
+                    this.newComments.push[""];
+                }
+            })
     },
-    data(){
+    data () {
         return {
             showeditor: false,
             panelid: this.$route.params["panelid"],
@@ -116,92 +138,102 @@ export default {
 
 <style scoped>
 @import "../../../static/css/mdb";
-.poster_layout{
-    border:solid;
-    background-color: whitesmoke;
-    margin: 0 2% 1% 2%;
-    width: 96%;
-    min-height: 90%
+.comment-content {
+  word-wrap: break-word;
 }
-#posterpage{
-    min-height: 1000px
+
+.poster_layout {
+  border: solid;
+  background-color: whitesmoke;
+  margin: 0 2% 1% 2%;
+  width: 96%;
+  min-height: 90%;
 }
-#panelboard{
-    height: 90%;
-    padding-top: 2%;
-    width: 90%;
-    margin-left: 5%
+#posterpage {
+  min-height: 1000px;
 }
-#panel{
-    padding: 5px 5px 5px 5px;
+#panelboard {
+  height: 90%;
+  padding-top: 2%;
+  width: 90%;
+  margin-left: 5%;
 }
-#buttonbar{
-    padding-top:10px;
-    padding-bottom: 10px;
-    width: 100%;
-    margin-left:0%;
-    margin-bottom: 1%;
+#panel {
+  padding: 5px 5px 5px 5px;
 }
-#paneltitle{
-    padding-top:0px;
-    font-size: 350%;
-    margin: 0
+#buttonbar {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  margin-left: 0%;
+  margin-bottom: 1%;
 }
-#rightwrapper{
-    margin: 2% 0 0 0;
-    padding: 0 2% 0 0 
+#paneltitle {
+  padding-top: 0px;
+  font-size: 250%;
+  margin: 0;
 }
-#rightboard{
-    background-color: aqua;
-    height: 90%;
-    padding-top: 5%;
+#rightwrapper {
+  margin: 2% 0 0 0;
+  padding: 0 2% 0 0;
 }
-.contentboard{
-    padding: 1% 2% 2% 2%;
-    margin-bottom: 2px
+#rightboard {
+  background-color: aqua;
+  height: 90%;
+  padding-top: 5%;
 }
-.comment{
-    width: 96%;
-    margin: 10px 2% 0 2%;
-    padding: 0
+.contentboard {
+  padding: 1% 2% 2% 2%;
+  margin-bottom: 2px;
 }
-.comment a{
-    padding: 10px !important;
+.comment {
+  width: 96%;
+  margin: 10px 2% 0 2%;
+  padding: 0;
 }
-.comment div{
-    padding-bottom: 10px
+.comment a {
+  padding: 10px !important;
 }
-.jumbotron p{
-    padding: 5px 10px 5px 10px
+.comment div {
+  padding-bottom: 10px;
 }
-.poster h2{
-    padding: 5px 10px 5px 20px
+.jumbotron p {
+  padding: 5px 10px 5px 10px;
 }
-.poster a{
-    padding: 5px 10px 0 25px
+.poster h2 {
+  padding: 5px 10px 5px 20px;
 }
-.poster{
-    padding-top:  5px;
-    padding-bottom: 10px;
-    margin-bottom: 10px
+.poster a {
+  padding: 5px 10px 0 25px;
 }
-.hr{
-    padding: 0px;
-    margin: 0px
+.poster {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
-.self-btn{
-    padding-left: 15px;
-    padding-right: 15px;
-    background-color: white !important;
+.hr {
+  padding: 0px;
+  margin: 0px;
 }
-#newcomment{
-    margin: 0px 3% 0px 3%;
-    width: 94%
+.self-btn {
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: white !important;
 }
-#editorboard{
-    height:500px;
-    padding-bottom:40px;
-    margin-bottom: 50px 
+#newcomment {
+  margin: 0px 3% 0px 3%;
+  width: 94%;
+}
+#editorboard {
+  height: 500px;
+  padding-bottom: 40px;
+  margin-bottom: 50px;
+}
+@media (min-width: 768px) {
+  .btn-outline-primary {
+    padding: 8px 15px 8px 15px;
+    margin-left: 10%;
+  }
 }
 </style>
 
