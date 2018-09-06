@@ -14,4 +14,6 @@ public interface PostDao {
     void update(String panelId, PostEntity entity);
 
     void deleteById(String panelId, Integer id);
+
+    List<PostEntity> findUserList(Integer userId);
 }

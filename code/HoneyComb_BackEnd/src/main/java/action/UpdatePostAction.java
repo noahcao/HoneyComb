@@ -5,6 +5,7 @@ import data.dao.impl.PanelDaoImpl;
 import data.dao.impl.PostDaoImpl;
 import data.model.CommentEntity;
 import data.model.PostEntity;
+import service.AppService;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
@@ -79,6 +80,11 @@ public class UpdatePostAction extends ActionSupport{
 
     @Resource
     private PostDaoImpl postDao;
+    private AppService appService;
+
+    public void setAppService(AppService appService) {
+        this.appService = appService;
+    }
 
     public void setPostDao(PostDaoImpl postDao) {
         this.postDao = postDao;
@@ -86,6 +92,7 @@ public class UpdatePostAction extends ActionSupport{
 
     public String add() throws Exception {
         if (this.panelId == null || this.userId == null) return ERROR;
+        if (appService.getUserById(this.userId) == null) return ERROR;
         PostEntity post = new PostEntity();
         post.setContent(this.content);
         post.setUserId(this.userId);
@@ -100,6 +107,7 @@ public class UpdatePostAction extends ActionSupport{
 
     public String update() throws Exception {
         if (this.panelId == null || this.userId == null || this.id == null) return ERROR;
+        if (appService.getUserById(this.userId) == null) return ERROR;
         PostEntity post = new PostEntity();
         post.setId(this.id);
         post.setContent(this.content);

@@ -39,7 +39,7 @@ export default {
 }
 
 .tool-bar {
-  background-color: #24292e;
+  background-color: #333;
 }
 .abstract-bar {
   background-color: white;

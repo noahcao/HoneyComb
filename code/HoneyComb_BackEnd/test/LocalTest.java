@@ -146,7 +146,7 @@ public class LocalTest extends AbstractJUnit4SpringContextTests {
                 System.out.println("fail query at" + i);
             }
         }
-        queryPanelsAction.search();
+        queryPanelsAction.queryLatest();
         System.out.println("finally " + queryPanelsAction.getPanels().size());
     }
 

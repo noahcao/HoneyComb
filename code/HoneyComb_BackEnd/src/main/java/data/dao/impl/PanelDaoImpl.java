@@ -1,11 +1,14 @@
 package data.dao.impl;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.QueryBuilder;
 import data.dao.PanelDao;
 import data.model.PanelEntity;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -61,5 +64,14 @@ public class PanelDaoImpl implements PanelDao {
         Query query = new Query();
         query.addCriteria(new Criteria("_id").is(id));
         this.mongoTemplate.remove(query, PanelEntity.class);
+    }
+
+    @Override
+    public List<PanelEntity> findUserList(Integer owner) {
+        BasicDBObject fieldsObject = new BasicDBObject();
+        fieldsObject.put("posts", false);
+        Query query = new BasicQuery(new BasicDBObject("owner", owner), fieldsObject);
+        query.with(new Sort(new Order(Direction.DESC, "time")));
+        return this.mongoTemplate.find(query, PanelEntity.class);
     }
 }

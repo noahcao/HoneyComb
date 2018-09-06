@@ -72,7 +72,7 @@
                 <router-link :to="{name:'userInfo'}">My Profile</router-link>
               </li>
               <li>
-                <a href="#">Combs</a>
+                <router-link :to="{name:'UserComb'}">My Comb</router-link>
               </li>
               <li role="separator" class="divider"></li>
               <li>

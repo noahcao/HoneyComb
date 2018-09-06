@@ -11,6 +11,7 @@ public class PanelEntity {
     private String id;
     private String title;
     private Integer owner;
+    private String ownerName;
     private Date time;
     private Integer postId = 0;
     private ArrayList<PostEntity> posts;
@@ -21,6 +22,14 @@ public class PanelEntity {
 
     public void setPosts(ArrayList<PostEntity> posts) {
         this.posts = posts;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     public Integer getPostId() {
