@@ -12,11 +12,11 @@
         <div class="card">
           <div class="card-body">
             <form class="navbar-form">
-              <div class="form-group" >
+              <div class="form-group">
                 <input type="text" class="form-control2" placeholder="Search">
-                <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: #24292e"></span>
+                <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: #24292e;float:left"></span>
               </div>
-              
+
             </form>
             <h6 class="time-scale">Any time</h6>
             <h6 class="time-scale">Since 2018</h6>
@@ -60,6 +60,11 @@
         </div>
       </div>
       <div class="col-xs-0 col-md-2">
+        <span class="glyphicon glyphicon-upload" aria-hidden="true" @click="up()"></span>
+        <!-- <div id="box" class="box"  >
+          <div class="box-in"></div>
+          
+        </div> -->
       </div>
       <div class="col-xs-12 col-md-10 bottom-nav">
         <ul class="pagination">
@@ -151,6 +156,18 @@ export default {
 
         })
 
+    },
+    up () {
+      cancelAnimationFrame(this.timer);
+      this.timer = requestAnimationFrame(function fn () {
+        var oTop = document.body.scrollTop || document.documentElement.scrollTop;
+        if (oTop > 0) {
+          document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
+          timer = requestAnimationFrame(fn);
+        } else {
+          cancelAnimationFrame(this.timer);
+        }
+      });
     }
   },
   data () {
@@ -161,6 +178,7 @@ export default {
       page: [1, 2, 3, 4, 5],
       numPerPage: 10,
       activate: 0,
+      timer: null
     }
   },
   mounted () {
@@ -180,7 +198,7 @@ export default {
 <style scoped>
 @import "../../../static/css/mdb";
 
-.time-scale{
+.time-scale {
   font-size: 10px;
 }
 .panel-body {
@@ -195,8 +213,11 @@ export default {
 }
 .card {
   margin-bottom: 5%;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 20%;
+  margin-right: 0%;
+  /* position: fixed;
+  left: 100px;
+  top: 90px; */
 }
 .body-cited {
   padding-left: 0;
@@ -204,15 +225,29 @@ export default {
 .card .card-body h6 {
   font-weight: 400;
   font-size: 1.4rem;
+  padding-left: 15px;
 }
 .card-body {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   padding: 1.8rem;
 }
+
+.glyphicon {
+  position: relative;
+  top: 12px;
+  display: inline-block;
+  font-family: "Glyphicons Halflings";
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .form-control2 {
-  display: block;
-  width: 80%;
+  display: inline-block;
+  width: 85%;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
@@ -225,6 +260,7 @@ export default {
   border-left: 1px solid rgba(0, 0, 0, 0);
   border-bottom: 1px solid #24292e;
   border-radius: 0px;
+  margin-left: 5px;
   box-shadow: none;
   -webkit-transition: border-color ease-in-out 0.15s,
     -webkit-box-shadow ease-in-out 0.15s;
@@ -417,5 +453,59 @@ export default {
     background-size: 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em, 0.5em 0.25em,
       0.5em 2em;
   }
+}
+
+.box {
+  /* position: fixed;
+  right: 10px;
+  bottom: 10px; */
+  height: 30px;
+  width: 50px;
+  text-align: center;
+  padding-top: 20px;
+  background-color: lightblue;
+  border-radius: 20%;
+  overflow: hidden;
+}
+.box:hover:before {
+  top: 50%;
+}
+.box:hover .box-in {
+  visibility: hidden;
+}
+.box:before {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: "回到顶部";
+  width: 40px;
+  color: peru;
+  font-weight: bold;
+}
+.box-in {
+  visibility: visible;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border: 3px solid black;
+  border-color: white transparent transparent white;
+  transform: rotate(45deg);
+}
+
+.glyphicon-upload {
+  position: relative;
+  top: 0px;
+  font-size: 36px;
+  margin-top: 20px;
+  margin-left: 20%;
+  display: inline-block;
+  font-family: "Glyphicons Halflings";
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 </style>
