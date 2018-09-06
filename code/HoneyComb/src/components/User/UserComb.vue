@@ -321,7 +321,7 @@ export default {
       newComb.combName = combName
       this.combNameArray.push(newComb)
       this.closeComb()
-      $('#close3').
+      $('#close3').click()
     },
     SaveComb: function () {
       // this.$http.post('/addPersonalNode', { userid: this.id, nodeid: Nodename, radius: radius, nodecolor: Nodecolor })
