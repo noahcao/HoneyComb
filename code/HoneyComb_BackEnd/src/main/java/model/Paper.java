@@ -15,6 +15,15 @@ public class Paper {
     private String title;
     private Integer cited;
     private String _abstract;
+    private Set<Long> citation;
+
+    public Set<Long> getCitation() {
+        return citation;
+    }
+
+    public void setCitation(Set<Long> citation) {
+        this.citation = citation;
+    }
 
     public String get_abstract() {
         return _abstract;

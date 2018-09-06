@@ -3,6 +3,7 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import data.dao.impl.CommentDaoImpl;
 import data.model.CommentEntity;
+import service.AppService;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -74,6 +75,11 @@ public class UpdateCommentAction extends ActionSupport {
 
     @Resource
     private CommentDaoImpl commentDao;
+    private AppService appService;
+
+    public void setAppService(AppService appService) {
+        this.appService = appService;
+    }
 
     public void setCommentDao(CommentDaoImpl commentDao) {
         this.commentDao = commentDao;
@@ -81,6 +87,7 @@ public class UpdateCommentAction extends ActionSupport {
 
     public String add() throws Exception {
         if (this.userId == null || this.panelId == null || this.postId == null) return ERROR;
+        if (appService.getUserById(this.userId) == null) return ERROR;
         CommentEntity e = new CommentEntity();
         e.setContent(this.content);
         e.setTarget(this.target);

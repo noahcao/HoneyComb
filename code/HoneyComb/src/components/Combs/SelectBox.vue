@@ -56,25 +56,31 @@
         <li>
           <p class='time1'>
             <i class='fa fa-circle'></i>
-            paper(xxxx-xxxx)
+            paper (2005-    )
           </p>
         </li>
         <li>
           <p class='time2'>
             <i class='fa fa-circle'></i>
-            paper(xxxx-xxxx)
+            paper (1990-2005)
           </p>
         </li>
         <li>
           <p class='time3'>
             <i class='fa fa-circle'></i>
-            paper(xxxx-xxxx)
+            paper (1970-1990)
           </p>
         </li>
         <li>
           <p class='time4'>
             <i class='fa fa-circle'></i>
-            paper(xxxx-xxxx)
+            paper (    -1970)
+          </p>
+        </li>
+        <li>
+          <p class='time5'>
+            <i class='fa fa-circle'></i>
+            paper (unknown)
           </p>
         </li>
       </ul>
@@ -142,19 +148,23 @@ p {
   color: #2c3e50;
 }
 
-.time1 i {
-  color: springgreen;
+.time3 i {
+  color: darkgreen
 }
 
-.time2 i {
+.time1 i {
   color: red;
 }
 
-.time3 i {
+.time2 i {
   color: coral;
 }
 
 .time4 i {
   color: blue;
+}
+
+.time5 i{
+  color: brown;
 }
 </style>

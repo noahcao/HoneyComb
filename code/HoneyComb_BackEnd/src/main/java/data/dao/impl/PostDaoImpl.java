@@ -6,6 +6,7 @@ import com.mongodb.QueryBuilder;
 import data.dao.PostDao;
 import data.model.PanelEntity;
 import data.model.PostEntity;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @Repository("PostDaoImpl")
@@ -92,5 +94,19 @@ public class PostDaoImpl implements PostDao {
         update.pull("posts", new BasicDBObject("_id", id));
         Query query = Query.query(Criteria.where("_id").is(panelId));
         this.mongoTemplate.updateFirst(query, update, PanelEntity.class);
+    }
+
+    @Override
+    public List<PostEntity> findUserList(Integer userId) {
+        BasicDBObject fieldsObject = new BasicDBObject();
+        fieldsObject.put("posts.comments", false);
+        fieldsObject.put("title", false);
+        Query query = new BasicQuery(new BasicDBObject("posts.userId", userId), fieldsObject);
+        query.with(new Sort(new Sort.Order(Sort.Direction.DESC, "posts.time")));
+        List<PostEntity> result = new LinkedList<>();
+        for (PanelEntity panel : this.mongoTemplate.find(query, PanelEntity.class)) {
+            result.addAll(panel.getPosts());
+        }
+        return result;
     }
 }

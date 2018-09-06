@@ -16,10 +16,28 @@ public class GraphDataAction extends ActionSupport {
 
     public class PaperRank {
         private Long paperid;
+        private Integer year;
         private Double pagerank;
         private Integer level;
         private Set<Long> authors;
         private Set<Long> reference;
+        private Set<Long> cite;
+
+        public Set<Long> getCite() {
+            return cite;
+        }
+
+        public void setCite(Set<Long> cite) {
+            this.cite = cite;
+        }
+
+        public void setYear(Integer year) {
+            this.year = year;
+        }
+
+        public Integer getYear() {
+            return year;
+        }
 
         public Set<Long> getReference() {
             return reference;
@@ -188,8 +206,10 @@ public class GraphDataAction extends ActionSupport {
             PaperRank e = new PaperRank();
             e.paperid = paper.getId();
             e.level = hierarchy;
+            e.year = paper.getYear();
             e.authors = new HashSet<>();
             e.reference = paper.getReference();
+            e.cite = paper.getCitation();
             for (Author tempAuthor : paper.getAuthors()) {
                 e.authors.add(tempAuthor.getId());
             }
@@ -221,6 +241,15 @@ public class GraphDataAction extends ActionSupport {
                     r.add(temp);
                     if (!papers.contains(reference)) {
                         papers.add(reference);
+                    }
+                }
+
+                for (Long citation : paper.getCitation()) {
+                    JsonObject temp = new JsonObject();
+                    temp.addProperty("`id`", citation);
+                    r.add(temp);
+                    if (!papers.contains(citation)) {
+                        papers.add(citation);
                     }
                 }
             }

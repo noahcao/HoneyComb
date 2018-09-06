@@ -5,7 +5,7 @@
       <div class="col-xs-12 col-md-2 tool-bar">
         <h4 id="select-title">Select comb:</h4>
         <div class='combList' v-for="comb in combNameArray">
-          <a class='comb-name' @click="getComb(comb.combName)">
+          <a class='comb-name' @click="getComb(comb.netId,comb.combName)">
             {{comb.combName}}
             <span class="glyphicon glyphicon-chevron-right select-icon" v-if="combSelectName===comb.combName"></span>
           </a>
@@ -199,13 +199,11 @@ export default {
   data () {
     return {
       id: this.data.id,
+      combSelectId: null,
       combSelectName: null,
       title: null,
       combSelect: false,
-      combNameArray: [
-        { combName: 'comb1' },
-        { combName: 'comb2' }
-      ]
+      combNameArray: []
     }
   },
   components: {
@@ -256,9 +254,7 @@ export default {
             .on('end', this.dragended)
         )
         .on('mouseover', function (d, i) {
-          console.log(d.id)
-          that.title = d.id
-          console.log(that)
+          that.title = d.nodeId
         })
 
       simulation.alpha(1).restart()
@@ -300,36 +296,99 @@ export default {
       d.fx = null
       d.fy = null
     },
-    getComb: function (combName) {
+    getComb: function (netId, combName) {
       if (this.combSelectName === combName) {
         return
       }
+
+      let that = this
       this.combSelect = true
       this.combSelectName = combName
+      this.combSelectId = netId
       this.title = null
       initnode.splice(0, initnode.length)
       initlink.splice(0, initlink.length)
-      this.reconstruct()
+
+      this.$http.post('/getnet', { netId: netId })
+        .then((res) => {
+          if (res.data.userId !== null) {
+            initnode = res.data.nodeArray
+            initlink = res.data.linkArray
+            that.reconstruct()
+          } else {
+            alert('getnet error!')
+          }
+        })
     },
     addComb: function () {
+      let that = this
       var combName = $('#combName1').val()
       if (combName === '') {
         return
       }
 
+      if (this.combNameArray.length > 5) {
+        alert('You can have 5 combs at most!')
+        return
+      }
+
+      var errorFlag = false
+
+      for (var i = 0; i < this.combNameArray.length; i++) {
+        if (combName === this.combNameArray[i].combName) {
+          errorFlag = true
+          break
+        }
+      }
+
+      if (errorFlag) {
+        alert('Same name comb already exists!')
+        return
+      }
       var newComb = {}
       newComb.combName = combName
-      this.combNameArray.push(newComb)
-      this.closeComb()
-      $('#close3').click()
+      console.log(combName)
+      this.$http.post('./addnet', { userId: this.id, name: combName, description: '', nodeArray: [], listArray: [] })
+        .then((res) => {
+          newComb.netId = res.data.netId
+          that.combNameArray.push(newComb)
+          console.log(that.combNameArray)
+          that.closeComb()
+          $('#close3').click()
+        })
     },
     SaveComb: function () {
-      // this.$http.post('/addPersonalNode', { userid: this.id, nodeid: Nodename, radius: radius, nodecolor: Nodecolor })
-      //   .then((res) => {
-      //     // to check
-      //   })
+      console.log(this.combSelectId)
+      var sendNodeArray = []
+      var sendLinkArray = []
+      for (var i = 0; i < initnode.length; i++) {
+        var newNode = {}
+        newNode.nodeId = initnode[i].nodeId
+        newNode.nodeColor = initnode[i].nodeColor
+        newNode.radius = initnode[i].radius
+        sendNodeArray.push(newNode)
+      }
+
+      for (var j = 0; j < initlink.length; j++) {
+        var newLink = {}
+        newLink.linkId = initlink[j].linkId
+        newLink.source = initlink[j].source
+        newLink.target = initlink[j].target
+        newLink.value = initlink[j].value
+        sendLinkArray.push(newLink)
+      }
+      console.log(sendNodeArray)
+      console.log(sendLinkArray)
+
+      this.$http.post('./updatenet', { netId: this.combSelectId, name: this.combSelectName, description: '', nodeArray: sendNodeArray, linkArray: sendLinkArray })
+        .then((res) => {
+          if (res.data.netId !== null) {
+            alert('Save successful!')
+          }
+        })
     },
     DeleteComb: function () {
+      let that = this
       var index = null
       for (var i = 0; i < this.combNameArray.length; i++) {
         if (this.combNameArray[i].combName === this.combSelectName) {
@@ -341,10 +400,11 @@ export default {
       this.combSelectName = false
       this.title = null
       this.combNameArray.splice(index, 1)
-      // this.$http.post('/updateUserComb', { userid: this.id, combName: this.combSelectName, nodearray: initnode, linkarray: initlink })
-      //   .then((res) => {
-      //     // to check
-      //   })
+
+      this.$http.post('/deletenet', { netId: this.combSelectId })
+        .then((res) => {
+          that.combSelectId = null
+        })
     },
     closeComb: function () {
       $('#combName1').val('')
@@ -401,9 +461,9 @@ export default {
       }
 
       var node = {}
-      node.id = Nodename
+      node.nodeId = Nodename
       node.radius = radius
-      node.Nodecolor = Nodecolor
+      node.nodeColor = Nodecolor
       initnode.push(node)
 
       this.reconstruct()
@@ -424,7 +484,7 @@ export default {
       $('#name2').parent().removeClass('has-error')
 
       for (var i = 0; i < initnode.length; i++) {
-        if (Nodename === initnode[i].id) {
+        if (Nodename === initnode[i].nodeId) {
           everApear = true
           index = i
           break
@@ -454,7 +514,7 @@ export default {
       var linkIndex = null
 
       for (var j = 0; j < initlink.length; j++) {
-        if (Nodename === initlink[j].startNode || Nodename === initlink[j].endNode) {
+        if (Nodename === initlink[j].source.nodeId || Nodename === initlink[j].target.nodeId) {
           count++
           if (!hasApear) {
             hasApear = true
@@ -466,11 +526,6 @@ export default {
       initlink.splice(linkIndex, count)
       this.reconstruct()
       $('#close2').click()
-
-      // this.$http.post('/deletePersonalNode', { userid: this.id, nodeid: Nodename })
-      //   .then((res) => {
-      //     // to check
-      //   })
     },
 
     addLink: function (d) {
@@ -486,10 +541,10 @@ export default {
       $('#endNode1').parent().removeClass('has-error')
 
       for (var i = 0; i < initnode.length; i++) {
-        if (startNode === initnode[i].id) {
+        if (startNode === initnode[i].nodeId) {
           errorStartNode = false
         }
-        if (endNode !== startNode && endNode === initnode[i].id) {
+        if (endNode !== startNode && endNode === initnode[i].nodeId) {
           errorEndNode = false
         }
       }
@@ -519,6 +574,11 @@ export default {
       }
 
       var link = {}
+      if (initlink.length === 0) {
+        link.linkId = 0
+      } else {
+        link.linkId = initlink[initlink.length - 1].linkId + 1
+      }
       link.source = startNode
       link.target = endNode
       link.value = 2
@@ -526,13 +586,7 @@ export default {
 
       this.reconstruct()
       $('#close3').click()
-
-      // this.$http.post('/addPersonalLink', { userid: this.id, source: startNode, target: endNode, value: 2 })
-      //   .then((res) => {
-      //     // do sth
-      //   })
     },
-
     deleteLink: function (d) {
       var startNode = $('#startNode2').val()
       var endNode = $('#endNode2').val()
@@ -545,13 +599,13 @@ export default {
       $('#endNode2').parent().removeClass('has-error')
 
       for (var i = 0; i < initlink.length; i++) {
-        if (startNode === initlink[i].source.id && endNode === initlink[i].target.id) {
+        if (startNode === initlink[i].source.nodeId && endNode === initlink[i].target.nodeId) {
           index = i
           everApear = true
           break
         }
 
-        if (endNode === initlink[i].source.id && startNode === initlink[i].target.id) {
+        if (endNode === initlink[i].source.nodeId && startNode === initlink[i].target.nodeId) {
           index = i
           everApear = true
           break
@@ -583,11 +637,6 @@ export default {
 
       this.reconstruct()
       $('close4').click()
-
-      // this.$http.post('/deletePersonalLink', { userid: this.id, source: startNode, target: endNode })
-      //   .then((res) => {
-      //     // to check
-      //   })
     },
 
     closeLink: function () {
@@ -603,67 +652,13 @@ export default {
       $('#endNode1-help').remove()
       $('#startNode2-help').remove()
       $('#endNode2-help').remove()
-    },
-    getSingleNet: function (combName) {
-      // 获取个人网络图
-      // this.$http.post('/personalgraphdata', { id: this.id })
-      //   .then((res) => {
-      //     initnode = res.data.nodearray
-      //     initlink = res.data.linkarray
-
-      //     simulation.nodes(initnode).on('tick', this.ticked)
-      //     simulation.force('link').links(initlink)
-
-      //     svgLink = svgLink
-      //       .data(initlink)
-      //       .enter()
-      //       .append('line')
-      //       .attr('stroke-width', function (d) {
-      //         return Math.sqrt(d.value)
-      //       })
-      //       .attr('stroke', function (d) {
-      //         return '#999'
-      //       })
-
-      //     svgNode = svgNode
-      //       .data(initnode)
-      //       .enter()
-      //       .append('circle')
-      //       .attr('r', function (d, i) {
-      //         return d.radius
-      //       })
-      //       .attr('fill', function (d, i) {
-      //         return d.nodecolor
-      //       })
-      //       .call(
-      //         d3
-      //           .drag()
-      //           .on('start', this.dragstarted)
-      //           .on('drag', this.dragged)
-      //           .on('end', this.dragended)
-      //       )
-      //       .on('mouseover', function (d, i) {
-      //            this.title = d.id
-      //       })
-      //   })
     }
   },
   mounted () {
     $('canvas').remove()
+    let that = this
     initnode.splice(0, initnode.length)
     initlink.splice(0, initlink.length)
-    // var zoom = d3
-    //   .zoom()
-    //   .scaleExtent([-2, 2])
-    //   .on('zoom', zoomed)
-
-    // var color = d3.scaleOrdinal(d3.schemeCategory10)
-
-    // svg.call(zoom)
-
-    // function zoomed () {
-    //   svg.selectAll('g').attr('transform', d3.event.transform)
-    // }
     // 自定义引力
 
     var svg = d3.select('svg')
@@ -726,7 +721,17 @@ export default {
           .on('end', this.dragended)
       )
       .on('mouseover', function (d, i) {
-        this.title = d.id
+        this.title = d.nodeId
+      })
+
+    this.$http.post('/usernet', { userId: 1 })
+      .then((res) => {
+        for (var i = 0; i < res.data.nets.length; i++) {
+          var singleComb = {}
+          singleComb.combName = res.data.nets[i].name
+          singleComb.netId = res.data.nets[i].netId
+          that.combNameArray.push(singleComb)
+        }
       })
   }
 }
@@ -828,4 +833,3 @@ export default {
   font-size: 15px;
 }
 </style>
-

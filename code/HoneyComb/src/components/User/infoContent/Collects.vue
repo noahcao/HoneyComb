@@ -67,8 +67,6 @@ export default {
     }
   },
   mounted () {
-    console.log(111)
-    console.log(this.id)
     // this.$http.post('/getcollects', { id: this.id })
     //   .then((res) => {
 

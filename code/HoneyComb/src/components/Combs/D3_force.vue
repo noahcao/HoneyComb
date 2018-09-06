@@ -79,6 +79,20 @@ export default {
     }
   },
   methods: {
+    getColor: function (year) {
+      if (year === null) {
+        return 'brown'
+      }
+      if (year > 2005) {
+        return 'red'
+      } else if (year > 1990) {
+        return 'coral'
+      } else if (year > 1975) {
+        return 'darkgreen'
+      } else {
+        return 'blue'
+      }
+    },
     print_id: function (id) {
       console.log(id)
     },
@@ -107,11 +121,12 @@ export default {
               papernode.pagerank = temppaper.pagerank
               papernode.title = 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'
               papernode.abstract = 'Studies the performance advantage offered by the wideband multipath RAKE structure receiver in a cellular radio direct sequence code division multiple access system (CDMA). The base to mobile link is modeled as a Nakagami fading frequency selective channel. The performance of a RAKE structure receiver employing coherent reception with maximal ratio combining in a frequency selective channel is analyzed and compared with the flat fading case. The degradation in the performance of the receiver as a result of imperfect channel estimation is also studied.'
-              papernode.year = '2007'
+              papernode.year = temppaper.year
               initnode.push(Object.assign({}, papernode))
 
               var tempPapertoAuthor = temppaper.authors
               var tempPaperRefer = temppaper.reference
+              var tempPaperCite = temppaper.cite
               if (papernode.level < 4) {
                 for (var j = 0; j < tempPapertoAuthor.length; j++) {
                   var paperlink = {}
@@ -126,6 +141,15 @@ export default {
                   var paperlink = {}
                   paperlink.source = 'p' + temppaper.paperid
                   paperlink.target = 'p' + tempPaperRefer[j]
+                  paperlink.sourcetype = 'paper'
+                  paperlink.targettype = 'paper'
+                  initlink.push(Object.assign({}, paperlink))
+                }
+
+                for (var j = 0; j < tempPaperCite.length; j++) {
+                  var paperlink = {}
+                  paperlink.source = 'p' + temppaper.paperid
+                  paperlink.target = 'p' + tempPaperCite[j]
                   paperlink.sourcetype = 'paper'
                   paperlink.targettype = 'paper'
                   initlink.push(Object.assign({}, paperlink))
@@ -173,7 +197,7 @@ export default {
                   return '#2c3e50'
                 }
                 else {
-                  return color((d.year / 5) % 10)
+                  return that.getColor(d.year)
                 }
               })
               .call(
@@ -283,9 +307,6 @@ export default {
     var width = svg.attr('width')
     var height = svg.attr('height')
 
-    console.log(width)
-    console.log(height)
-
     svg.call(zoom)
 
     function zoomed () {
@@ -322,6 +343,7 @@ export default {
 
     this.$http.post('/graphdata', { id: 37821, hierarchyLimit: 4 })
       .then((res) => {
+        console.log(res)
         if (res.data.paper !== null) {
           this.modeldata = res.data
           var papersList = this.modeldata.paper
@@ -336,11 +358,12 @@ export default {
             papernode.pagerank = temppaper.pagerank
             papernode.title = 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'
             papernode.abstract = 'Studies the performance advantage offered by the wideband multipath RAKE structure receiver in a cellular radio direct sequence code division multiple access system (CDMA). The base to mobile link is modeled as a Nakagami fading frequency selective channel. The performance of a RAKE structure receiver employing coherent reception with maximal ratio combining in a frequency selective channel is analyzed and compared with the flat fading case. The degradation in the performance of the receiver as a result of imperfect channel estimation is also studied.'
-            papernode.year = '2007'
+            papernode.year = temppaper.year
             initnode.push(Object.assign({}, papernode))
 
             var tempPapertoAuthor = temppaper.authors
             var tempPaperRefer = temppaper.reference
+            var tempPaperCite = temppaper.cite
             if (papernode.level < 4) {
               for (var j = 0; j < tempPapertoAuthor.length; j++) {
                 var paperlink = {}
@@ -359,8 +382,37 @@ export default {
                 paperlink.targettype = 'paper'
                 initlink.push(Object.assign({}, paperlink))
               }
-            }
 
+              for (var j = 0; j < tempPaperCite.length; j++) {
+                var paperlink = {}
+                paperlink.source = 'p' + temppaper.paperid
+                paperlink.target = 'p' + tempPaperCite[j]
+                paperlink.sourcetype = 'paper'
+                paperlink.targettype = 'paper'
+                initlink.push(Object.assign({}, paperlink))
+              }
+            }
+            // else if (papernode.level === 3) {
+            //   for (var i = 0; i < tempPaperRefer.length; i++) {
+            //     console.log(i)
+            //     var inFlag = false
+            //     for (var j = 0; j < initnode.length; j++) {
+            //       if (initnode[j].id === ('p' + tempPaperRefer[i])) {
+            //         inFlag = true
+            //         break
+            //       }
+            //     }
+
+            //     if (inFlag) {
+            //       var paperlink = {}
+            //       paperlink.source = 'p' + temppaper.paperid
+            //       paperlink.target = 'p' + tempPaperRefer[i]
+            //       paperlink.sourcetype = 'paper'
+            //       paperlink.targettype = 'paper'
+            //       initlink.push(Object.assign({}, paperlink))
+            //     }
+            //   }
+            // }
           }
 
           for (var i = 0; i < authorList.length; i++) {
@@ -396,7 +448,7 @@ export default {
                 return '#2c3e50'
               }
               else {
-                return color((d.year / 5) % 10)
+                return that.getColor(d.year)
               }
             })
             .call(
@@ -479,6 +531,8 @@ export default {
       svgLink = svgLink.data(newlinks)
       svgNode.exit().remove()
       svgLink.exit().remove()
+
+      simulation.alpha(1).restart()
     })
 
     this.bus.$on('SelectAll', function (message) {
@@ -503,14 +557,14 @@ export default {
         .enter()
         .append('circle')
         .attr('r', function (d, i) {
-          return Math.sqrt(d.pagerank / that.totalPR * 2000)
+          return Math.sqrt(d.pagerank / that.totalPR * 2000) * 2
         })
         .attr('fill', function (d, i) {
           if (d.type === 'author') {
             return '#2c3e50'
           }
           else {
-            return color((d.year / 5) % 10)
+            return that.getColor(d.year)
           }
         })
         .merge(svgNode)
@@ -604,6 +658,8 @@ export default {
         svgLink = svgLink.data(newlinks)
         svgNode.exit().remove()
         svgLink.exit().remove()
+
+        simulation.alpha(1).restart()
       }
     })
 
@@ -648,6 +704,8 @@ export default {
         svgLink = svgLink.data(newlinks)
         svgNode.exit().remove()
         svgLink.exit().remove()
+
+        simulation.alpha(1).restart()
       }
       else {
         svgLink = svgLink.data(newlinks, d => {
@@ -669,14 +727,14 @@ export default {
           .enter()
           .append('circle')
           .attr('r', function (d, i) {
-            return Math.sqrt(d.pagerank / that.totalPR * 2000)
+            return Math.sqrt(d.pagerank / that.totalPR * 2000) * 2
           })
           .attr('fill', function (d, i) {
             if (d.type === 'author') {
               return '#2c3e50'
             }
             else {
-              return color((d.year / 5) % 10)
+              return that.getColor(d.year)
             }
           })
           .merge(svgNode)
@@ -789,14 +847,14 @@ export default {
           .enter()
           .append('circle')
           .attr('r', function (d, i) {
-            return Math.sqrt(d.pagerank / that.totalPR * 2000)
+            return Math.sqrt(d.pagerank / that.totalPR * 2000) * 2
           })
           .attr('fill', function (d, i) {
             if (d.type === 'author') {
               return '#2c3e50'
             }
             else {
-              return color((d.year / 5) % 10)
+              return that.getColor(d.year)
             }
           })
           .merge(svgNode)

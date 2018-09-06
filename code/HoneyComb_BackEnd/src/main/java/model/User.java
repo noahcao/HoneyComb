@@ -14,6 +14,15 @@ public class User {
     private String icon;
     private Set<Paper> stars;
     private String bio;
+    private Set<History> history;
+
+    public Set<History> getHistory() {
+        return history;
+    }
+
+    public void setHistory(Set<History> history) {
+        this.history = history;
+    }
 
     public String getBio() {
         return bio;
