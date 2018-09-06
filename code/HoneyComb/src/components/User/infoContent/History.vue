@@ -2,9 +2,8 @@
   <div>
     <div class="historys">
       <div class="historys-clear">
-        <a @click="toClearAll">
-          Clear all historys
-          <span class="glyphicon glyphicon-trash clear-icon"></span>
+        <a >
+          Your history
         </a>
       </div>
       <div class="history-item" v-for="history in historys">
@@ -12,9 +11,6 @@
         <span class="history-title">
           <a>{{history.title}}</a>
         </span>
-        <a v-on:click="toClearhistory(history.historyid)">
-          <span class="glyphicon glyphicon-remove float-right" aria-hidden="true"></span>
-        </a>
       </div>
     </div>
   </div>

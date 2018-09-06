@@ -62,21 +62,21 @@
         <div class="r">
           <ul class="nav nav-tabs">
             <li role="presentation" class="active">
-              <a class="tabb" href="#net" data-toggle="tab">Nets</a>
+              <a class="tabb" href="#collects" data-toggle="tab">Collects</a>
             </li>
             <li role="presentation">
-              <a class="tabb" href="#collects" data-toggle="tab">Collects</a>
+              <a class="tabb" href="#trends" data-toggle="tab">Trends</a>
             </li>
             <li role="presentation">
               <a class="tabb" href="#history" data-toggle="tab">History</a>
             </li>
           </ul>
           <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade in active" id="net">
-              <Net></Net>
-            </div>
-            <div class="tab-pane fade" id="collects">
+            <div class="tab-pane fade in active" id="collects">
               <collects></collects>
+            </div>
+            <div class="tab-pane fade" id="trends">
+              <trends></trends>
             </div>
             <div class="tab-pane fade" id="history">
               <history ></history>
@@ -95,6 +95,7 @@ import navBar from '../main/NavBar'
 import Net from './infoContent/Net'
 import Collects from './infoContent/Collects'
 import History from './infoContent/History'
+import Trends from './infoContent/Trends'
 
 export default {
   name: 'userInfo',
@@ -102,6 +103,7 @@ export default {
     navBar,
     Net,
     Collects,
+    Trends,
     History
   },
   data () {

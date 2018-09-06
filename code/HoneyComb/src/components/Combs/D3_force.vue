@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg width='1000' height='600'></svg>
+    <svg width='850' height='603'></svg>
     <div class='tooltip'>
       <div v-if='unselected' class='tip'>
         <p>Detailed Information</p>
@@ -18,6 +18,14 @@
         <hr class='tooltip-hr'></hr>
         <div v-if='ispaper'>
           <p class='abstract'>{{paper.abstract}}</p>
+          <div class="click-icons">
+            <a>
+              <span class="glyphicon glyphicon-star-empty paper-icons"></span>
+            </a>
+            <a>
+              <span class="glyphicon glyphicon-education paper-icons"></span>
+            </a>
+          </div>
         </div>
         <div v-else>
           <!-- <p class='authorinfo'>Publications:</p>
@@ -176,7 +184,7 @@ export default {
                   .on('end', this.dragended)
               )
               .on('click', function (d) {
-                if (d.type === 'paper') {
+                if (d.type === 'paper' && d.level !== 1) {
                   that.getNewNode(d)
                 }
               })
@@ -399,7 +407,7 @@ export default {
                 .on('end', this.dragended)
             )
             .on('click', function (d) {
-              if (d.type === 'paper') {
+              if (d.type === 'paper' && d.level !== 1) {
                 that.getNewNode(d)
               }
             })
@@ -514,7 +522,7 @@ export default {
             .on('end', that.dragended)
         )
         .on('click', function (d) {
-          if (d.type === 'paper') {
+          if (d.type === 'paper' && d.level !== 1) {
             that.getNewNode(d)
           }
         })
@@ -680,7 +688,7 @@ export default {
               .on('end', that.dragended)
           )
           .on('click', function (d) {
-            if (d.type === 'paper') {
+            if (d.type === 'paper' && d.level !== 1) {
               that.getNewNode(d)
             }
           })
@@ -800,7 +808,7 @@ export default {
               .on('end', that.dragended)
           )
           .on('click', function (d) {
-            if (d.type === 'paper') {
+            if (d.type === 'paper' && d.level !== 1) {
               that.getNewNode(d)
             }
           })
@@ -823,8 +831,7 @@ export default {
                     alert('paperid error')
                   }
                 })
-            }
-            else {
+            } else {
               var authorid = d.id
               authorid = authorid.slice(1)
               that.$http.post('/getauthor', { id: authorid })
@@ -881,7 +888,7 @@ export default {
   padding-top: 50px;
   padding-bottom: 20px;
   width: 300px;
-  height: 630px;
+  bottom: 0px;
   font-size: 15px;
   z-index: 120;
 }
@@ -939,7 +946,7 @@ hr.tooltip-hr {
   text-align: left;
   position: relative;
   line-height: 20px;
-  max-height: 450px;
+  max-height: 390px;
   overflow: hidden;
 }
 
@@ -957,5 +964,22 @@ hr.tooltip-hr {
   background: -o-linear-gradient(right, transparent, #eee 55%);
   background: -moz-linear-gradient(right, transparent, #eee 55%);
   background: linear-gradient(to right, transparent, #eee 55%);
+}
+
+.click-icons {
+  width: 95%;
+  position: absolute;
+  bottom: 25px;
+  text-align: center;
+}
+.paper-icons {
+  font-size: 25px;
+  margin-right: 30px;
+}
+.click-icons a {
+  color: #464644;
+}
+.click-icons a:hover {
+  color: #000;
 }
 </style>
