@@ -8,9 +8,18 @@ public class CommentEntity {
     @Id
     private Integer id;
     private Integer userId;
+    private String userName;
     private String content;
     private Date time;
     private Integer target;
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
 
     public Integer getUserId() {
         return userId;

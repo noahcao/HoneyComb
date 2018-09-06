@@ -1,12 +1,12 @@
 package data.dao.impl;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import com.mongodb.QueryBuilder;
 import data.dao.CommentDao;
 import data.model.CommentEntity;
 import data.model.PanelEntity;
 import data.model.PostEntity;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,6 +16,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Repository("CommentDaoImpl")
 public class CommentDaoImpl implements CommentDao{
@@ -51,5 +53,21 @@ public class CommentDaoImpl implements CommentDao{
         Query query = new Query();
         query.addCriteria(new Criteria().andOperator(Criteria.where("_id").is(panelId), Criteria.where("posts").elemMatch(Criteria.where("_id").is(postId))));
         this.mongoTemplate.updateFirst(query, update, PanelEntity.class);
+    }
+
+    @Override
+    public List<CommentEntity> findUserList(Integer userId) {
+        BasicDBObject fieldsObject = new BasicDBObject();
+        fieldsObject.put("posts.content", false);
+        fieldsObject.put("title", false);
+        Query query = new BasicQuery(new BasicDBObject("posts.comments.userId", userId), fieldsObject);
+        query.with(new Sort(new Sort.Order(Sort.Direction.DESC, "posts.comments.time")));
+        List<CommentEntity> result = new LinkedList<>();
+        for (PanelEntity panel : this.mongoTemplate.find(query, PanelEntity.class)) {
+            for (PostEntity post : panel.getPosts()) {
+                result.addAll(post.getComments());
+            }
+        }
+        return result;
     }
 }
