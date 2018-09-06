@@ -17,10 +17,10 @@
         </div>
         <div v-else-if="trend.type==='post'">
           <div>
-            You posted in
-            <a class="trend-title">
+            You posted
+            <!-- <a class="trend-title">
               <strong>{{trend.title}}</strong>
-            </a>
+            </a> -->
             :
           </div>
           <div class="content">
@@ -33,7 +33,7 @@
         <div v-else>
           <div>
             You commented on
-            <strong>{{trend.poster}}</strong>
+            <strong>{{trend.target}}</strong>
             :
           </div>
           <div class="content">
@@ -55,13 +55,22 @@ export default {
     return {
       id: this.data.id,
       trends: [
-        { type: 'panel', title: 'A new panel', time: '2018-9-5-13:14' },
-        { type: 'post', title: 'A new panel', content: 'This is a post', poster: 'someone', time: '2018-9-4-12:13' },
-        { type: 'comment', content: 'This is a comment', commentator: '555', poster: 'someone', time: '2018-9-6-17:01' }
+        // { type: 'panel', title: 'A new panel', time: '2018-9-5-13:14' },
+        // { type: 'post', title: 'A new panel', content: 'This is a post', poster: 'someone', time: '2018-9-4-12:13' },
+        // { type: 'comment', content: 'This is a comment', commentator: '555', poster: 'someone', time: '2018-9-6-17:01' }
       ]
     }
   },
   methods: {
+    timeSort: function () {
+      this.trends.sort(function (a, b) {
+        if (a.time < b.time) {
+          return 1
+        } else {
+          return -1
+        }
+      })
+    }
 
   },
   mounted () {
@@ -71,7 +80,35 @@ export default {
     //   })
     this.$http.post('/userpanel', { userId: this.id })
       .then((res) => {
-        console.log(res)
+        var panelArray = res.data.panels
+        for (var i = 0; i < panelArray.length; i++) {
+          var panel = panelArray[i]
+          panel.type = 'panel'
+          this.trends.push(panel)
+        }
+        this.timeSort()
+      })
+
+    this.$http.post('/userpost', { userId: this.id })
+      .then((res) => {
+        var postArray = res.data.posts
+        for (var i = 0; i < postArray.length; i++) {
+          var post = postArray[i]
+          post.type = 'post'
+          this.trends.push(post)
+        }
+        this.timeSort()
+      })
+
+    this.$http.post('./usercomment', { userId: this.id })
+      .then((res) => {
+        var commentArray = res.data.comments
+        for (var i = 0; i < commentArray.length; i++) {
+          var comment = commentArray[i]
+          comment.type = 'post'
+          this.trends.push(comment)
+        }
+        this.timeSort()
       })
   }
 }

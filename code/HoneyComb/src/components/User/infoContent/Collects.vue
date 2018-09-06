@@ -46,23 +46,19 @@ export default {
         }
       }
 
-      console.log(this.collects)
-      console.log(index)
-
       if (isRemove) {
         var newCollect = this.collects[index]
         newCollect.text = 'Collect'
         this.collects.splice(index, 1, newCollect)
         // this.collects[index].text = 'Collect'
-        console.log(this.id)
         this.$http.post('/deletestar', { userId: this.id, paperId: d })
           .then((res) => {
 
           })
       } else {
-        var newCollect = this.collects[index]
-        newCollect.text = 'Remove'
-        this.collects.splice(index, 1, newCollect)
+        var newCollect2 = this.collects[index]
+        newCollect2.text = 'Remove'
+        this.collects.splice(index, 1, newCollect2)
         // this.collects[index].text = 'Remove'
         this.$http.post('/addstar', { userId: this.id, paperId: d })
           .then((res) => {
