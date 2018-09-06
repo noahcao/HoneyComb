@@ -2,14 +2,15 @@
   <div>
     <div class="historys">
       <div class="historys-clear">
-        <a >
+        <a>
           Your history
         </a>
       </div>
       <div class="history-item" v-for="history in historys">
         <span>{{history.time}}</span>
         <span class="history-title">
-          <a>{{history.title}}</a>
+          <a v-if="history.paper.url !== null" :href="history.paper.url" target="_blank">{{history.paper.title}}</a>
+          <a v-else>{{history.paper.title}}</a>
         </span>
       </div>
     </div>
@@ -22,43 +23,18 @@ export default {
   data () {
     return {
       id: this.data.id,
-      historys: [
-        { historyid: 1, time: '2018-9-2-9:29', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '' },
-        { historyid: 2, time: '2018-9-2-9:29', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '' },
-        { historyid: 3, time: '2018-9-2-9:29', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '' },
-        { historyid: 4, time: '2018-9-2-9:29', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '' }
-      ]
+      historys: []
     }
   },
   methods: {
-    toClearAll: function () {
-      this.collects.splice(0, this.collects.length)
-      // this.$http.post('/deleteAllhistory', { userid: this.id })
-      //   .then((res) => {
 
-      //   })
-    },
-    toClearhistory: function (d) {
-      var index = null
-      for (var i = 0; i < this.collects.lenths; i++) {
-        if (this.collects[i].historyid === d) {
-          index = i
-          break
-        }
-      }
-      this.collects.splice(index, 1)
-      // this.$http.post('/deleteAhistory', { userid: this.id, historyid: })
-      //   .then((res) => {
-
-      //   })
-    }
   },
   mounted () {
-
-    // this.$http.post('/gethistorys', { id: this.id })
-    //   .then((res) => {
-    //     this.historys = res.data
-    //   })
+    this.$http.post('/gethistory', { userId: this.id })
+      .then((res) => {
+        this.historys = res.data.history
+        console.log(this.historys)
+      })
   }
 }
 </script>

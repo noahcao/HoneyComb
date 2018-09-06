@@ -65,7 +65,14 @@ export default {
 
   },
   mounted () {
+    // this.$http.post('./addpanel', { owner: 1, title: 'Multi-Source calibration' })
+    //   .then((res) => {
 
+    //   })
+    this.$http.post('/userpanel', { userId: this.id })
+      .then((res) => {
+        console.log(res)
+      })
   }
 }
 </script>
@@ -87,7 +94,7 @@ export default {
   float: right;
 }
 
-.content{
+.content {
   margin-top: 5px;
   padding-left: 30px;
 }

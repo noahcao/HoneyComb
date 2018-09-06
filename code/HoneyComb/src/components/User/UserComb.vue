@@ -345,6 +345,7 @@ export default {
         alert('Same name comb already exists!')
         return
       }
+
       var newComb = {}
       newComb.combName = combName
       console.log(combName)

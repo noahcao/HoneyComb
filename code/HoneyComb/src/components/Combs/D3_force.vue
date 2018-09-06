@@ -247,6 +247,7 @@ export default {
                     })
                 }
               })
+            simulation.alpha(1).restart()
           } else {
             alert('error!')
           }

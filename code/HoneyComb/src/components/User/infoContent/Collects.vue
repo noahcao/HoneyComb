@@ -8,14 +8,14 @@
           </h4>
         </div>
         <div class="float-right">
-          <button type="button" class="btn btn-default btn-sm" @click="opCollect(paper.paperid)">
+          <button type="button" class="btn btn-default btn-sm" @click="opCollect(paper.id)">
             <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
             <strong>{{paper.text}}</strong>
           </button>
         </div>
         <div>
           <p> year: {{paper.year}}</p>
-          <p>{{paper.abstract}}</p>
+          <p>{{paper._abstract}}</p>
         </div>
       </div>
     </div>
@@ -28,12 +28,7 @@ export default {
   data () {
     return {
       id: this.data.id,
-      collects: [
-        { paperid: '1', text: 'Remove', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
-        { paperid: '2', text: 'Remove', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
-        { paperid: '3', text: 'Remove', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' },
-        { paperid: '4', text: 'Remove', title: 'A fast and elitist multiobjective genetic algorithm: NSGA-II', year: 2002, url: '', abstract: 'This Intel technology is for application developers who are seeking to protect select code and data from disclosure or modification. Intel® SGX makes such protections possible through the use of enclaves, which are protected areas of execution in memory.' }
-      ]
+      collects: []
     }
   },
   methods: {
@@ -42,7 +37,7 @@ export default {
       var index = null
 
       for (var i = 0; i < this.collects.length; i++) {
-        if (d === this.collects[i].paperid) {
+        if (d === this.collects[i].id) {
           index = i
           if (this.collects[i].text === 'Remove') {
             isRemove = true
@@ -51,26 +46,39 @@ export default {
         }
       }
 
+      console.log(this.collects)
+      console.log(index)
+
       if (isRemove) {
-        this.collects[index].text = 'Collect'
-        // this.$http.post('/deleteCollection', { userid: this.id, paperid:d })
-        //   .then((res) => {
-        //     // to check
-        //   })
+        var newCollect = this.collects[index]
+        newCollect.text = 'Collect'
+        this.collects.splice(index, 1, newCollect)
+        // this.collects[index].text = 'Collect'
+        console.log(this.id)
+        this.$http.post('/deletestar', { userId: this.id, paperId: d })
+          .then((res) => {
+
+          })
       } else {
-        this.collects[index].text = 'Remove'
-        // this.$http.post('/addCollection', { userid: this.id, paperid:d })
-        //   .then((res) => {
-        //     // to check
-        //   })
+        var newCollect = this.collects[index]
+        newCollect.text = 'Remove'
+        this.collects.splice(index, 1, newCollect)
+        // this.collects[index].text = 'Remove'
+        this.$http.post('/addstar', { userId: this.id, paperId: d })
+          .then((res) => {
+
+          })
       }
     }
   },
   mounted () {
-    // this.$http.post('/getcollects', { id: this.id })
-    //   .then((res) => {
-
-    //   })
+    this.$http.post('/getstar', { userId: 1 })
+      .then((res) => {
+        this.collects = res.data.stars
+        for (var i = 0; i < this.collects.length; i++) {
+          this.collects[i].text = 'Remove'
+        }
+      })
   }
 }
 </script>
