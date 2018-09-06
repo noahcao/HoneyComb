@@ -7,5 +7,6 @@
     <class name="model.PaperSmall" table="paper" schema="honeycomb">
         <id name="id" column="id"/>
         <property name="title" column="title"/>
+        <property name="url" column="url"/>
     </class>
 </hibernate-mapping>

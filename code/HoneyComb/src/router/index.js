@@ -7,6 +7,7 @@ import BackEndTest from '../components/BackEndTest/Sprint1'
 import search from '../components/Search/search'
 import community from '../components/Community/community'
 import poster from '../components/Community/poster'
+import UserComb from '../components/User/UserComb'
 // import navTest from '../components/main/navTest'
 
 Vue.use(Router)
@@ -50,6 +51,11 @@ export default new Router({
       path: '/poster',
       name: 'poster',
       component: poster
+    },
+    {
+      path: '/UserComb',
+      name: 'UserComb',
+      component: UserComb
     }
   ]
 })

@@ -16,6 +16,13 @@
             <key column="user_id"/>
             <many-to-many class="model.Paper" column="paper_id"/>
         </set>
+        <set name="history" table="history" cascade="save-update, persist" lazy="false">
+            <key column="user_id"/>
+            <composite-element class="model.History">
+                <property name="time" column="time"/>
+                <many-to-one name="paper" class="model.PaperSmall" cascade="save-update, persist" lazy="false" column="paper_id" />
+            </composite-element>
+        </set>
         <property name="bio" column="bio"/>
     </class>
 </hibernate-mapping>

@@ -3,11 +3,13 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import data.dao.impl.IconDaoImpl;
 import data.model.IconEntity;
+import model.Paper;
 import model.User;
 import org.springframework.test.context.ContextConfiguration;
 import service.AppService;
 
 import javax.annotation.Resource;
+import java.util.Set;
 
 @ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:mongo.xml" })
 public class UpdateUserAction extends ActionSupport {
