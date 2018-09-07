@@ -31,7 +31,7 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" id="close3" class="btn btn-primary" data-dismiss="modal" @click="closeComb">Close</button>
+                <button type="button" id="close4" class="btn btn-primary" data-dismiss="modal" @click="closeComb">Close</button>
                 <button type="button" class="btn btn-primary" @click="addComb">Submit</button>
               </div>
             </div>
@@ -214,6 +214,8 @@ export default {
 
     },
     reconstruct: function () {
+      console.log(initnode)
+      console.log(initlink)
       let that = this
       simulation.nodes(initnode).on('tick', this.ticked)
       simulation.force('link').links(initlink)
@@ -244,7 +246,7 @@ export default {
           return d.radius
         })
         .attr('fill', function (d, i) {
-          return d.Nodecolor
+          return d.nodeColor
         })
         .call(
           d3
@@ -254,7 +256,7 @@ export default {
             .on('end', this.dragended)
         )
         .on('mouseover', function (d, i) {
-          that.title = d.nodeId
+          that.title = d.id
         })
 
       simulation.alpha(1).restart()
@@ -312,8 +314,17 @@ export default {
       this.$http.post('/getnet', { netId: netId })
         .then((res) => {
           if (res.data.userId !== null) {
-            initnode = res.data.nodeArray
-            initlink = res.data.linkArray
+            var resNodeArray = res.data.nodeArray
+            var resLinkArray = res.data.linkArray
+            for (var i = 0; i < resNodeArray.length; i++) {
+              var node = {}
+              node.id = resNodeArray[i].nodeId
+              node.nodeColor = resNodeArray[i].nodeColor
+              node.radius = resNodeArray[i].radius
+              initnode.push(node)
+            }
+
+            initlink = resLinkArray
             that.reconstruct()
           } else {
             alert('getnet error!')
@@ -328,7 +339,7 @@ export default {
       }
 
       if (this.combNameArray.length > 5) {
-        alert('You can have 5 combs at most!')
+        alert('You can have 6 combs at most!')
         return
       }
 
@@ -355,16 +366,15 @@ export default {
           that.combNameArray.push(newComb)
           console.log(that.combNameArray)
           that.closeComb()
-          $('#close3').click()
+          $('#close4').click()
         })
     },
     SaveComb: function () {
-      console.log(this.combSelectId)
       var sendNodeArray = []
       var sendLinkArray = []
       for (var i = 0; i < initnode.length; i++) {
         var newNode = {}
-        newNode.nodeId = initnode[i].nodeId
+        newNode.nodeId = initnode[i].id
         newNode.nodeColor = initnode[i].nodeColor
         newNode.radius = initnode[i].radius
         sendNodeArray.push(newNode)
@@ -373,8 +383,8 @@ export default {
       for (var j = 0; j < initlink.length; j++) {
         var newLink = {}
         newLink.linkId = initlink[j].linkId
-        newLink.source = initlink[j].source
-        newLink.target = initlink[j].target
+        newLink.source = initlink[j].source.id
+        newLink.target = initlink[j].target.id
         newLink.value = initlink[j].value
         sendLinkArray.push(newLink)
       }
@@ -455,6 +465,7 @@ export default {
       }
 
       var Nodecolor = 'black'
+
       for (var i = 0; i < colorName.length; i++) {
         if (colorName[i].checked) {
           Nodecolor = colorName[i].value
@@ -462,18 +473,13 @@ export default {
       }
 
       var node = {}
-      node.nodeId = Nodename
+      node.id = Nodename
       node.radius = radius
       node.nodeColor = Nodecolor
       initnode.push(node)
 
       this.reconstruct()
       $('#close1').click()
-
-      // this.$http.post('/addPersonalNode', { userid: this.id, nodeid: Nodename, radius: radius, nodecolor: Nodecolor })
-      //   .then((res) => {
-      //     // to check
-      //   })
     },
     deleteNode: function () {
       var Nodename = $('#name2').val()
@@ -485,7 +491,7 @@ export default {
       $('#name2').parent().removeClass('has-error')
 
       for (var i = 0; i < initnode.length; i++) {
-        if (Nodename === initnode[i].nodeId) {
+        if (Nodename === initnode[i].id) {
           everApear = true
           index = i
           break
@@ -515,7 +521,7 @@ export default {
       var linkIndex = null
 
       for (var j = 0; j < initlink.length; j++) {
-        if (Nodename === initlink[j].source.nodeId || Nodename === initlink[j].target.nodeId) {
+        if (Nodename === initlink[j].source.id || Nodename === initlink[j].target.id) {
           count++
           if (!hasApear) {
             hasApear = true
@@ -542,10 +548,10 @@ export default {
       $('#endNode1').parent().removeClass('has-error')
 
       for (var i = 0; i < initnode.length; i++) {
-        if (startNode === initnode[i].nodeId) {
+        if (startNode === initnode[i].id) {
           errorStartNode = false
         }
-        if (endNode !== startNode && endNode === initnode[i].nodeId) {
+        if (endNode !== startNode && endNode === initnode[i].id) {
           errorEndNode = false
         }
       }
@@ -574,15 +580,18 @@ export default {
         return
       }
 
+      console.log(startNode)
+      console.log(endNode)
+      console.log(initnode)
       var link = {}
+      link.source = startNode
+      link.target = endNode
+      link.value = 2
       if (initlink.length === 0) {
         link.linkId = 0
       } else {
         link.linkId = initlink[initlink.length - 1].linkId + 1
       }
-      link.source = startNode
-      link.target = endNode
-      link.value = 2
       initlink.push(link)
 
       this.reconstruct()
@@ -600,13 +609,13 @@ export default {
       $('#endNode2').parent().removeClass('has-error')
 
       for (var i = 0; i < initlink.length; i++) {
-        if (startNode === initlink[i].source.nodeId && endNode === initlink[i].target.nodeId) {
+        if (startNode === initlink[i].source.id && endNode === initlink[i].target.id) {
           index = i
           everApear = true
           break
         }
 
-        if (endNode === initlink[i].source.nodeId && startNode === initlink[i].target.nodeId) {
+        if (endNode === initlink[i].source.id && startNode === initlink[i].target.id) {
           index = i
           everApear = true
           break
@@ -722,7 +731,7 @@ export default {
           .on('end', this.dragended)
       )
       .on('mouseover', function (d, i) {
-        this.title = d.nodeId
+        this.title = d.id
       })
 
     this.$http.post('/usernet', { userId: 1 })

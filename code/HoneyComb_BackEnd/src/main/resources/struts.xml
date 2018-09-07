@@ -181,7 +181,14 @@
             </result>
             <interceptor-ref name="demostack"/>
         </action>
-        <action name="searchpanels" class="action.QueryPanelsAction" method="queryLatest">
+        <action name="getlatestpanels" class="action.QueryPanelsAction" method="queryLatest">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="searchpanels" class="action.QueryPanelsAction" method="search">
             <result name="success" type="json"/>
             <result name="error" type="httpheader">
                 <param name="status">400</param>
