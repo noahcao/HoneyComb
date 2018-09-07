@@ -74,10 +74,6 @@ export default {
 
   },
   mounted () {
-    // this.$http.post('./addpanel', { owner: 1, title: 'Multi-Source calibration' })
-    //   .then((res) => {
-
-    //   })
     this.$http.post('/userpanel', { userId: this.id })
       .then((res) => {
         var panelArray = res.data.panels

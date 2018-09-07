@@ -150,6 +150,7 @@ export default {
       initlink.splice(0, initlink.length)
 
       var paperid = cliNode.id
+      console.log(paperid)
       paperid = paperid.slice(1)
       this.$http.post('/graphdata', { id: paperid, hierarchyLimit: 4 })
         .then((res) => {
