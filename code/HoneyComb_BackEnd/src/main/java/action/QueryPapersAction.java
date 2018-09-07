@@ -224,12 +224,12 @@ public class QueryPapersAction extends ActionSupport {
 
     private SimplePaper simplifyPaper(Paper paper) {
         SimplePaper result = new SimplePaper();
-        result._abstract = paper.get_abstract();
-        result.cited = paper.getCited();
-        result.id = paper.getId();
-        result.title = paper.getTitle();
-        result.url = paper.getUrl();
-        result.year = paper.getYear();
+        result.set_abstract(paper.get_abstract());
+        result.setCited(paper.getCited());
+        result.setId(paper.getId());
+        result.setTitle(paper.getTitle());
+        result.setUrl(paper.getUrl());
+        result.setYear(paper.getYear());
         Hibernate.initialize(paper.getAuthors());
         result.authors = new HashSet<>();
         for (Author author : paper.getAuthors()) {
@@ -275,7 +275,8 @@ public class QueryPapersAction extends ActionSupport {
 
     public String search() throws Exception {
         this.papers = new ArrayList<>();
-        if (this.key == null || this.start == null || this.end == null || this.startYear == null || this.endYear == null) return ERROR;
+        if (this.key == null || this.start == null || this.end == null || this.startYear == null || this.endYear == null)
+            return ERROR;
         if (this.start > this.end) return ERROR;
         this.key = this.key.toLowerCase();
         String SEARCH = "search";
@@ -293,8 +294,12 @@ public class QueryPapersAction extends ActionSupport {
                     }
                     if (start > end) return SUCCESS;
                     for (int i = start; i < end; i++) {
-                        SimplePaper temp = simplifyPaper(appService.getPaperById(searchList.get(i).getId()));
-                        if (temp.getYear() < endYear && temp.getYear() >= startYear) this.papers.add(temp);
+                        SimplePaper e = simplifyPaper(appService.getPaperById(searchList.get(i).getId()));
+                        if (e.getYear() == null && startYear == 0 && endYear == 9999) {
+                            this.papers.add(e);
+                        }
+                        if (e.getYear() == null) continue;
+                        if (e.getYear() < endYear && e.getYear() >= startYear) this.papers.add(e);
                     }
                     this.total = this.papers.size();
 //                    this.papers.addAll(searchList.subList(start, end));
@@ -313,6 +318,10 @@ public class QueryPapersAction extends ActionSupport {
         if (results.size() > 0 && results.size() <= 5) {
             for (PaperSmall result : results) {
                 SimplePaper e = simplifyPaper(appService.getPaperById(result.getId()));
+                if (e.getYear() == null && startYear == 0 && endYear == 9999) {
+                    this.papers.add(e);
+                }
+                if (e.getYear() == null) continue;
                 if (e.getYear() >= startYear && e.getYear() < endYear) this.papers.add(e);
             }
             this.total = this.papers.size();
@@ -355,6 +364,10 @@ public class QueryPapersAction extends ActionSupport {
         startTime = System.currentTimeMillis();
         for (int i = start; i < end; i++) {
             SimplePaper e = simplifyPaper(appService.getPaperById(searchList.get(i).getId()));
+            if (e.getYear() == null && startYear == 0 && endYear == 9999) {
+                this.papers.add(e);
+            }
+            if (e.getYear() == null) continue;
             if (e.getYear() >= startYear && e.getYear() < endYear) this.papers.add(e);
         }
         this.total = this.papers.size();
