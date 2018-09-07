@@ -157,6 +157,24 @@ public class QueryPapersAction extends ActionSupport {
     private Integer start;
     private Integer end;
     private Integer total;
+    private Integer startYear;
+    private Integer endYear;
+
+    public Integer getEndYear() {
+        return endYear;
+    }
+
+    public Integer getStartYear() {
+        return startYear;
+    }
+
+    public void setStartYear(Integer startYear) {
+        this.startYear = startYear;
+    }
+
+    public void setEndYear(Integer endYear) {
+        this.endYear = endYear;
+    }
 
     public Integer getTotal() {
         return total;
@@ -257,7 +275,7 @@ public class QueryPapersAction extends ActionSupport {
 
     public String search() throws Exception {
         this.papers = new ArrayList<>();
-        if (this.key == null || this.start == null || this.end == null) return ERROR;
+        if (this.key == null || this.start == null || this.end == null || this.startYear == null || this.endYear == null) return ERROR;
         if (this.start > this.end) return ERROR;
         this.key = this.key.toLowerCase();
         String SEARCH = "search";
@@ -269,15 +287,16 @@ public class QueryPapersAction extends ActionSupport {
                 if (usersession.get(SEARCHRESULT) != null) {
                     ArrayList<PaperSmall> searchList = (ArrayList<PaperSmall>) usersession.get(SEARCHRESULT);
 
-                    this.total = searchList.size();
                     if (start + 1 > searchList.size()) return SUCCESS;
                     if (end > searchList.size()) {
                         end = searchList.size();
                     }
                     if (start > end) return SUCCESS;
                     for (int i = start; i < end; i++) {
-                        this.papers.add(simplifyPaper(appService.getPaperById(searchList.get(i).getId())));
+                        SimplePaper temp = simplifyPaper(appService.getPaperById(searchList.get(i).getId()));
+                        if (temp.getYear() < endYear && temp.getYear() >= startYear) this.papers.add(temp);
                     }
+                    this.total = this.papers.size();
 //                    this.papers.addAll(searchList.subList(start, end));
                     return SUCCESS;
                 }
@@ -294,9 +313,9 @@ public class QueryPapersAction extends ActionSupport {
         if (results.size() > 0 && results.size() <= 5) {
             for (PaperSmall result : results) {
                 SimplePaper e = simplifyPaper(appService.getPaperById(result.getId()));
-                this.papers.add(e);
+                if (e.getYear() >= startYear && e.getYear() < endYear) this.papers.add(e);
             }
-            this.total = results.size();
+            this.total = this.papers.size();
             this.start = 0;
             this.end = results.size();
             usersession.put(SEARCHRESULT, results);
@@ -327,7 +346,6 @@ public class QueryPapersAction extends ActionSupport {
         }
 
         usersession.put(SEARCHRESULT, searchList);
-        this.total = searchList.size();
         if (start + 1 > searchList.size()) return SUCCESS;
         if (end > searchList.size()) {
             end = searchList.size();
@@ -337,8 +355,9 @@ public class QueryPapersAction extends ActionSupport {
         startTime = System.currentTimeMillis();
         for (int i = start; i < end; i++) {
             SimplePaper e = simplifyPaper(appService.getPaperById(searchList.get(i).getId()));
-            this.papers.add(e);
+            if (e.getYear() >= startYear && e.getYear() < endYear) this.papers.add(e);
         }
+        this.total = this.papers.size();
         endTime = System.currentTimeMillis();
         System.out.println("cast time: " + (endTime - startTime));
         return SUCCESS;

@@ -62,7 +62,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	public List<User> queryUser(String name) {
 		@SuppressWarnings("unchecked")
 		List<User> users = (List<User>) getHibernateTemplate().find(
-				"from User as u where u.name like ?",
+				"from User as u where lower(u.name) like ?",
 				"%" + name + "%");
 		return users;
 	}

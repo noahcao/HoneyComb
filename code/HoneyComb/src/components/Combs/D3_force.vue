@@ -19,8 +19,14 @@
         <div v-if='ispaper'>
           <p class='abstract'>{{paper.abstract}}</p>
           <div class="click-icons">
-            <a>
-              <span class="glyphicon glyphicon-star-empty paper-icons"></span>
+            <a v-if="this.data.id===null">
+              <span class="glyphicon glyphicon-star-empty paper-icons" @click="loginWarnning"></span>
+            </a>
+            <a v-else-if="checkStar(paper.id)">
+              <span class="glyphicon glyphicon-star paper-icons" @click="paperUnstar(paper.id)"></span>
+            </a>
+            <a v-else>
+              <span class="glyphicon glyphicon-star-empty paper-icons" @click="paperStar(paper.id)"></span>
             </a>
             <a>
               <span class="glyphicon glyphicon-education paper-icons"></span>
@@ -57,6 +63,7 @@ export default {
   name: 'd3-force',
   data () {
     return {
+      id: this.data.id,
       modeldata: {},
       nodes: [],
       links: [],
@@ -66,7 +73,9 @@ export default {
       totalPR: 1,
       selectLevel: 4,
       chooseall: true,
+      starList: [],
       paper: {
+        id: 0,
         title: 'title',
         year: '2018',
         abstract: 'paper abstract'
@@ -93,6 +102,44 @@ export default {
         return 'blue'
       }
     },
+    loginWarnning: function () {
+      alert('You need to login first')
+    },
+    paperStar: function (d) {
+      var newStar = {}
+      newStar.id = d
+      this.starList.push(newStar)
+      this.$http.post('/addstar', { userId: this.id, paperId: d })
+        .then((res) => {
+
+        })
+    },
+    paperUnstar: function (d) {
+      var index = null
+      for (var i = 0; i < this.starList.length; i++) {
+        if (d === this.starList[i].id) {
+          index = i
+          break
+        }
+      }
+
+      this.starList.splice(index, 1)
+      this.$http.post('/deletestar', { userId: this.id, paperId: d })
+        .then((res) => {
+
+        })
+    },
+    checkStar: function (d) {
+      console.log(d)
+      console.log(this.starList)
+      var paperid = d
+      for (var i = 0; i < this.starList.length; i++) {
+        if (paperid === this.starList[i].id) {
+          return true
+        }
+      }
+      return false
+    },
     print_id: function (id) {
       console.log(id)
     },
@@ -103,6 +150,7 @@ export default {
       initlink.splice(0, initlink.length)
 
       var paperid = cliNode.id
+      console.log(paperid)
       paperid = paperid.slice(1)
       this.$http.post('/graphdata', { id: paperid, hierarchyLimit: 4 })
         .then((res) => {
@@ -220,6 +268,7 @@ export default {
                   that.$http.post('/getpaper', { id: paperid })
                     .then((res) => {
                       if (res.data.id !== null) {
+                        that.paper.id = res.data.id
                         that.paper.title = res.data.title
                         that.paper.year = res.data.year
                         that.paper.abstract = res.data._abstract
@@ -341,6 +390,13 @@ export default {
       .append('g')
       .attr('class', 'nodes')
       .selectAll('circle')
+
+    if (this.id !== null) {
+      this.$http.post('/getstar', { userId: this.id })
+        .then((res) => {
+          this.starList = res.data.stars
+        })
+    }
 
     this.$http.post('/graphdata', { id: 37821, hierarchyLimit: 4 })
       .then((res) => {
@@ -471,6 +527,7 @@ export default {
                 that.$http.post('/getpaper', { id: paperid })
                   .then((res) => {
                     if (res.data.id !== null) {
+                      that.paper.id = res.data.id
                       that.paper.title = res.data.title
                       that.paper.year = res.data.year
                       that.paper.abstract = res.data._abstract
@@ -588,6 +645,7 @@ export default {
             that.$http.post('/getpaper', { id: paperid })
               .then((res) => {
                 if (res.data.id !== null) {
+                  that.paper.id = res.data.id
                   that.paper.title = res.data.title
                   that.paper.year = res.data.year
                   that.paper.abstract = res.data._abstract
@@ -759,6 +817,7 @@ export default {
                 .then((res) => {
                   if (res.data.id !== null) {
                     console.log(res.data)
+                    that.paper.id = res.data.id
                     that.paper.title = res.data.title
                     that.paper.year = res.data.year
                     that.paper.abstract = res.data._abstract
@@ -879,6 +938,7 @@ export default {
                 .then((res) => {
                   if (res.data.id !== null) {
                     console.log(res.data)
+                    that.paper.id = res.data.id
                     that.paper.title = res.data.title
                     that.paper.year = res.data.year
                     that.paper.abstract = res.data._abstract

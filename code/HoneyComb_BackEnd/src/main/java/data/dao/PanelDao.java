@@ -1,6 +1,7 @@
 package data.dao;
 
 import data.model.PanelEntity;
+import javafx.scene.layout.Pane;
 
 import java.util.List;
 
@@ -16,4 +17,8 @@ public interface PanelDao {
     void deleteById(String id);
 
     List<PanelEntity> findUserList(Integer owner);
+
+    List<PanelEntity> findListByTitle(String title);
+
+    List<PanelEntity> findListByContent(String content);
 }

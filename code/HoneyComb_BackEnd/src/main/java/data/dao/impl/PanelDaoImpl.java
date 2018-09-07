@@ -4,6 +4,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.QueryBuilder;
 import data.dao.PanelDao;
 import data.model.PanelEntity;
+import data.model.PostEntity;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
@@ -13,10 +14,13 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
+import service.AppService;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Repository("PanelDaoImpl")
 public class PanelDaoImpl implements PanelDao {
@@ -73,5 +77,29 @@ public class PanelDaoImpl implements PanelDao {
         Query query = new BasicQuery(new BasicDBObject("owner", owner), fieldsObject);
         query.with(new Sort(new Order(Direction.DESC, "time")));
         return this.mongoTemplate.find(query, PanelEntity.class);
+    }
+
+    @Override
+    public List<PanelEntity> findListByTitle(String title) {
+        Query query = new Query();
+        query.with(new Sort(new Order(Direction.DESC, "time")));
+        query.addCriteria(Criteria.where("title").regex(Pattern.compile("^.*" + title + ".*$", Pattern.CASE_INSENSITIVE)));
+        return this.mongoTemplate.find(query, PanelEntity.class);
+    }
+
+    @Override
+    public List<PanelEntity> findListByContent(String content) {
+        Query query = new Query();
+        List<PanelEntity> result = new LinkedList<>();
+        List<PanelEntity> total = this.mongoTemplate.find(query, PanelEntity.class);
+        for (PanelEntity panel : total) {
+            for (PostEntity post : panel.getPosts()) {
+                if (post.getContent().toLowerCase().contains(content)) {
+                    result.add(panel);
+                    break;
+                }
+            }
+        }
+        return result;
     }
 }
