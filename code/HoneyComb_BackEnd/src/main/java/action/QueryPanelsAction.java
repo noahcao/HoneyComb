@@ -8,13 +8,23 @@ import service.AppService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QueryPanelsAction extends ActionSupport {
     private String key;
+    private String type;
     private ArrayList<PanelEntity> panels;
     private Integer start;
     private Integer end;
     private Integer userId;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -77,6 +87,26 @@ public class QueryPanelsAction extends ActionSupport {
             if (result == null) continue;
             panel.setOwnerName(result.getName());
         }
+        return SUCCESS;
+    }
+
+    public String search() throws Exception {
+        if (this.key == null || this.type == null) return ERROR;
+        this.key = this.key.toLowerCase();
+        this.panels = new ArrayList<>();
+        if (this.type.equals("title")) {
+            this.panels.addAll(panelDao.findListByTitle(this.key));
+        }
+        else if (this.type.equals("content")) {
+            this.panels.addAll(panelDao.findListByContent(this.key));
+        }
+        else if (this.type.equals("user")) {
+            List<User> users = appService.queryUser(this.key);
+            for (User user : users) {
+                this.panels.addAll(panelDao.findUserList(user.getId()));
+            }
+        }
+        else return ERROR;
         return SUCCESS;
     }
 

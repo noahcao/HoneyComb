@@ -5,8 +5,8 @@ import org.springframework.data.annotation.Id;
 public class LinkEntity {
     @Id
     private Integer linkId;
-    private Integer source;
-    private Integer target;
+    private String source;
+    private String target;
     private Float value;
 
     public Integer getLinkId() {
@@ -17,11 +17,11 @@ public class LinkEntity {
         this.linkId = linkId;
     }
 
-    public void setTarget(Integer target) {
+    public void setTarget(String target) {
         this.target = target;
     }
 
-    public Integer getTarget() {
+    public String getTarget() {
         return target;
     }
 
@@ -33,11 +33,11 @@ public class LinkEntity {
         return value;
     }
 
-    public Integer getSource() {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(Integer source) {
+    public void setSource(String source) {
         this.source = source;
     }
 }

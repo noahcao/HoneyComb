@@ -339,7 +339,7 @@ export default {
       }
 
       if (this.combNameArray.length > 5) {
-        alert('You can have 5 combs at most!')
+        alert('You can have 6 combs at most!')
         return
       }
 

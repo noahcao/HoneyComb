@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 
 public class NodeEntity {
     @Id
-    private Integer nodeId;
+    private String nodeId;
     private Float radius;
     private String nodeColor;
 
@@ -24,11 +24,11 @@ public class NodeEntity {
         return nodeColor;
     }
 
-    public Integer getNodeId() {
+    public String getNodeId() {
         return nodeId;
     }
 
-    public void setNodeId(Integer nodeId) {
+    public void setNodeId(String nodeId) {
         this.nodeId = nodeId;
     }
 }
