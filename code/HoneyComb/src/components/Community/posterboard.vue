@@ -7,11 +7,10 @@
                         <router-link :to="{ name: 'poster', params: { panelid: panel.id }}">
                             <h3 class="card-title dark-text">{{panel.title}}</h3>
                         </router-link>
-                        <!-- <a href="#">{{panel.ownerName}}</a> -->
-                        <a href="#">Unknown</a>
+                        <a href="#">{{panel.ownerName}}</a>
                         <p>posted at: {{panel.time}}</p>
                         <hr class="my-4">
-                        <p v-html="panel.posts[0].content" class="card-text"></p>
+                        <p class="card-text">{{panel.posts[0].content}}</p>
                     </div>
                 </div>
             </div>
@@ -36,10 +35,22 @@ export default {
         }
     },
     created () {
-        this.$http.post('/searchpanels')
+        this.$http.post('/getlatestpanels')
             .then((res) => {
                 console.log(res.data.panels)
                 this.panels = res.data.panels;
+                var i = 0
+                for (i; i < this.panels.length; i++) {
+                    var content = null;
+                    console.log("hi")
+                    var j = 0;
+                    j = this.panels[i].posts[0].content
+                    j = j.replace(/<[/]p><p>/g, "\n")
+                    j = j.replace("</p>", "")
+                    j = j.replace("<p>", "")
+                    console.log(j)
+                    this.panels[i].posts[0].content = j
+                }
             })
     },
     mounted () {
@@ -60,6 +71,16 @@ export default {
 }
 .card-title {
   color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.card-text {
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .poster {
   margin: 20px 5px 0 5px;
@@ -85,10 +106,12 @@ export default {
   -webkit-box-orient: vertical;
 }
 .poster h3 {
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
 }
 .poster a {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 .poster p {
   padding: 10px;

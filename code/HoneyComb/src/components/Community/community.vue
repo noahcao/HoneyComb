@@ -120,8 +120,9 @@ export default {
     }
   },
   created () {
-    this.$http.post('/searchpanels')
+    this.$http.post('/getlatestpanels')
       .then((res) => {
+        console.log(res.data.panels)
         this.panels = res.data.panels;
       })
   },
