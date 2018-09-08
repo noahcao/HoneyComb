@@ -1,30 +1,29 @@
-/* eslint-disable */
-<template>
-  <div id="community">
-    <nav-bar style='margin-bottom:1px'></nav-bar>
-    <div class="comBody">
 
+<template>
+  <section>
+    <nav-bar></nav-bar>
+    <div class="comBody">
       <!-- the side bar part-->
-      <div class="col-md-2" id='sidebar' v-if="showsidebar">
+      <div class="col-md-2 col-sm-4" id='sidebar' v-if="showsidebar">
         <div class='mobile'>
           <!-- Checkbox to toggle the menu -->
           <div id='selectsection'>
-            <form role='form' style='padding:20px;color:white'>
+            <form role='form' style='padding:15%;color:white'>
               <ul>
                 <li>
                   <form class="form-inline md-form form-sm">
-                    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search" v-model="content">
+                    <i class="fa fa-search" @click="search()" aria-hidden="true"></i>
                   </form>
                 </li>
                 <li>
-                  <input type="checkbox" class="form-check-input"> Search in title
+                  <input type="checkbox" @click="check(1)" class="form-check-input" id="check1"> Search in title
                 </li>
                 <li>
-                  <input type="checkbox" class="form-check-input"> Search in content
+                  <input type="checkbox" @click="check(2)" class="form-check-input" id="check2"> Search in content
                 </li>
                 <li>
-                  <input type="checkbox" class="form-check-input"> Search in author
+                  <input type="checkbox" @click="check(3)" class="form-check-input" id="check3"> Search in author
                 </li>
                 <li>
                   <button class="btn btn-primary1" @click="createNewPanel">
@@ -37,7 +36,7 @@
       </div>
 
       <!-- the poster board part -->
-      <div class="col-md-10" id='posterboard' v-if="showPoster">
+      <div class="col-md-10 col-sm-8" id='posterboard' v-if="showPoster">
         <posterboard></posterboard>
       </div>
 
@@ -87,7 +86,7 @@
       </div>
 
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -116,7 +115,10 @@ export default {
       showMarkdown: false,
       anotherEditor: 'Markdown Mode',
       panelContent: "",
-      panels: []
+      panels: [],
+      choice: 1,
+      content: '',
+      choices: ['title', 'content', 'user']
     }
   },
   created () {
@@ -126,7 +128,41 @@ export default {
         this.panels = res.data.panels;
       })
   },
+  mounted () {
+    $('canvas').remove()
+    $("#check1").prop("checked", true);
+  },
   methods: {
+    search () {
+      if (this.content === '') {
+        return
+      }
+      this.$http.post('/getlatestpanels', { key: this.content, type: this.choices[this.choice - 1] })
+        .then((res) => {
+          console.log(res.data.panels)
+          this.panels = res.data.panels;
+        })
+    },
+    check (e) {
+      if (e === 1) {
+        $("#check1").prop("checked", true);
+        $("#check2").prop("checked", false);
+        $("#check3").prop("checked", false);
+        this.choice = 1
+      }
+      else if (e === 2) {
+        $("#check2").prop("checked", true);
+        $("#check1").prop("checked", false);
+        $("#check3").prop("checked", false);
+        this.choice = 2
+      }
+      else if (e === 3) {
+        $("#check3").prop("checked", true);
+        $("#check1").prop("checked", false);
+        $("#check2").prop("checked", false);
+        this.choice = 3
+      }
+    },
     alterEditor () {
       if (this.showMarkdown) {
         this.showMarkdown = false;
@@ -182,6 +218,10 @@ export default {
 
 <style scoped>
 @import "../../../static/css/mdb.css";
+
+.fa-search {
+  cursor: pointer;
+}
 
 .control2 {
   -webkit-box-shadow: 0 1px 0 0 rgba(18, 21, 23, 0.8);
@@ -253,26 +293,19 @@ export default {
   color: #f9f9f9;
 }
 
-#community {
-  height: 750px;
-}
 #sidebar {
   background-color: black;
   height: 50%;
+  z-index: -1;
 }
 
-#posterboard {
-  background-color: whitesmoke;
-  height: 100%;
-  padding-left: 0;
-  padding-right: 0;
-}
 .comBody {
   width: 100%;
   position: absolute;
   top: 70px;
   bottom: 0px;
   left: 0px;
+  z-index: -1;
 }
 * {
   padding: 0;
@@ -292,10 +325,10 @@ h2 {
   width: 100%;
   height: 100%;
   background: #373535;
-  padding-left: 10%;
+  padding: 5%;
+  z-index: inherit;
 }
 #selectsection {
-  margin-top: 10%;
   height: 80%;
   width: 100%;
 }
@@ -323,17 +356,30 @@ ul {
     margin-left: 15px;
   }
   #functional {
-  margin-left: 5%;
-  margin-right: 5%;
-  width: 90%;
-  height: 100px;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    height: 100px;
   }
   #sidebar {
-  background-color: aqua;
-  height: 100%;
-  padding: 0;
-
+    background-color: aqua;
+    height: 100%;
+    padding: 0;
+  }
+  #posterboard {
+    background-color: whitesmoke;
+    height: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    overflow: scroll;
+  }
 }
+
+#posterboard {
+  background-color: whitesmoke;
+  height: 100%;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 #functional {
@@ -342,8 +388,7 @@ ul {
   height: 120px;
 }
 
-.md-form label{
-    font-size: 1.6rem;
+.md-form label {
+  font-size: 1.6rem;
 }
-
 </style>

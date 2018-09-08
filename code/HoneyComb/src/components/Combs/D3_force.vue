@@ -87,6 +87,7 @@ var simulation
 
 export default {
   name: 'd3-force',
+  props: ['paperId'],
   data () {
     return {
       id: this.data.id,
@@ -492,8 +493,9 @@ export default {
           this.starList = res.data.stars
         })
     }
-
-    this.$http.post('/graphdata', { id: 37821, hierarchyLimit: 4 })
+    console.log("test")
+    console.log(this.paperId)
+    this.$http.post('/graphdata', { id: this.paperId, hierarchyLimit: 4 })
       .then((res) => {
         if (res.data.paper !== null) {
           this.modeldata = res.data

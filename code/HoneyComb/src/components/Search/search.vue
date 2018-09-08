@@ -13,16 +13,21 @@
           <div class="card-body">
             <form class="navbar-form">
               <div class="form-group">
-                <input type="text" class="form-control2" placeholder="Search">
-                <span class="glyphicon glyphicon-search" aria-hidden="true" style="color: #24292e;float:left"></span>
+                <input type="text" class="form-control2" placeholder="Search" v-model="content2">
+                <span class="glyphicon glyphicon-search" @click="search()" aria-hidden="true" style="color: #24292e;float:left"></span>
               </div>
 
             </form>
-            <h6 class="time-scale">Any time</h6>
-            <h6 class="time-scale">Since 2018</h6>
-            <h6 class="time-scale">Since 2017</h6>
-            <h6 class="time-scale">Since 2014</h6>
-            <h6 class="time-scale">Custom range...</h6>
+            <h6 class="time-scale" @click="searchY(0,9998)">Any time</h6>
+            <h6 class="time-scale" @click="searchY(2018,9998)">Since 2018</h6>
+            <h6 class="time-scale" @click="searchY(2017,9998)">Since 2017</h6>
+            <h6 class="time-scale" @click="searchY(2014,9998)">Since 2014</h6>
+            <h6 class="time-scale" @click="reverse()">Custom range...</h6>
+            <div class="gs_res_sb_yyr" v-show="showRange">
+              <div class="gs_in_txtw gs_in_txtm"><input type="text" class="gs_in_txt" name="as_ylo" value="" id="gs_as_ylo" size="4" maxlength="4" autocapitalize="off" pattern="[0-9]*"></div>
+              —
+              <div class="gs_in_txtw gs_in_txtm"><input type="text" class="gs_in_txt" name="as_yhi" value="" size="4" maxlength="4" autocapitalize="off" pattern="[0-9]*"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -30,8 +35,11 @@
         <div v-for="paper in papers">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">{{paper.title}}</h3>
+              <router-link :to="{ name: 'outcomb', params: { paperId: paper.id }}">
+                <h3 class="panel-title">{{paper.title}}</h3>
+              </router-link>
             </div>
+            <hr class="my-4">
             <div class="panel-body">
               <div class="col-xs-12 col-md-6 author-group">
                 <div class="body-author">Authors: </div>
@@ -59,37 +67,39 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-0 col-md-2">
-        <span class="glyphicon glyphicon-upload" aria-hidden="true" @click="up()"></span>
-        <!-- <div id="box" class="box"  >
+      <div v-show="pageShow">
+        <div class="col-xs-0 col-md-2">
+          <span class="glyphicon glyphicon-upload" aria-hidden="true" @click="up()"></span>
+          <!-- <div id="box" class="box"  >
           <div class="box-in"></div>
           
         </div> -->
-      </div>
-      <div class="col-xs-12 col-md-10 bottom-nav">
-        <ul class="pagination">
-          <li class="disabled">
-            <a>&lt;</a>
-          </li>
-          <li class="active">
-            <a id="page1" @click="paging('page1')">{{page[0]}}</a>
-          </li>
-          <li>
-            <a id="page2" @click="paging('page2')">{{page[1]}}</a>
-          </li>
-          <li>
-            <a id="page3" @click="paging('page3')">{{page[2]}}</a>
-          </li>
-          <li>
-            <a id="page4" @click="paging('page4')">{{page[3]}}</a>
-          </li>
-          <li>
-            <a id="page5" @click="paging('page5')">{{page[4]}}</a>
-          </li>
-          <li>
-            <a @click="">&gt;</a>
-          </li>
-        </ul>
+        </div>
+        <div class="col-xs-12 col-md-10 bottom-nav">
+          <ul class="pagination">
+            <li id="prev" class="disabled">
+              <a @click="prevPaging()">&lt;</a>
+            </li>
+            <li class="active">
+              <a id="page1" @click="paging('page1')">{{page[0]}}</a>
+            </li>
+            <li>
+              <a id="page2" @click="paging('page2')">{{page[1]}}</a>
+            </li>
+            <li>
+              <a id="page3" @click="paging('page3')">{{page[2]}}</a>
+            </li>
+            <li>
+              <a id="page4" @click="paging('page4')">{{page[3]}}</a>
+            </li>
+            <li>
+              <a id="page5" @click="paging('page5')">{{page[4]}}</a>
+            </li>
+            <li>
+              <a @click="nextPaging()">&gt;</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <!-- <nav>
@@ -139,12 +149,46 @@ export default {
     NavBar
   },
   methods: {
+    reverse () {
+      this.showRange = !this.showRange
+    },
+    searchY (start, end) {
+      this.defaultStart = start
+      this.defaultEnd = end + 1
+      this.page = [1, 2, 3, 4, 5]
+      $('#prev').addClass('disabled')
+      this.paging('page1')
+    },
+    search () {
+      this.content = this.content2
+      this.page = [1, 2, 3, 4, 5]
+      $('#prev').addClass('disabled')
+      this.paging('page1')
+    },
+    prevPaging () {
+      for (var i = 0; i < this.page.length; i++) {
+        this.page[i] = this.page[i] - 5
+      }
+      var index = this.page[0]
+      this.paging('page1')
+      if (this.page[0] === 1) {
+        $('#prev').addClass('disabled')
+      }
+    },
+    nextPaging () {
+      for (var i = 0; i < this.page.length; i++) {
+        this.page[i] = this.page[i] + 5
+      }
+      var index = this.page[0]
+      this.paging('page1')
+      $('#prev').removeClass('disabled')
+    },
     paging (e) {
       this.show = false
       var a = document.getElementById(e)
       var index = a.innerHTML
       console.log(index)
-      this.$http.get('/searchpaper', { params: { key: this.content, start: (index - 1) * this.numPerPage, end: this.numPerPage * index } })
+      this.$http.get('/searchpaper', { params: { key: this.content, start: (index - 1) * this.numPerPage, end: this.numPerPage * index, startYear: this.defaultStart, endYear: this.defaultEnd } })
         .then((res) => {
           this.papers = res.data.papers
           console.log(this.papers)
@@ -153,7 +197,12 @@ export default {
           console.log($('#' + e))
           $('#' + e).parent().siblings().removeClass('active')
           $('#' + e).parent().addClass('active')
-
+          console.log(res.data.papers.length)
+          if (index === '1') {
+            if (res.data.papers.length < 10) {
+              this.pageShow = false;
+            }
+          }
         })
 
     },
@@ -163,7 +212,7 @@ export default {
         var oTop = document.body.scrollTop || document.documentElement.scrollTop;
         if (oTop > 0) {
           document.body.scrollTop = document.documentElement.scrollTop = oTop - 50;
-          timer = requestAnimationFrame(fn);
+          this.timer = requestAnimationFrame(fn);
         } else {
           cancelAnimationFrame(this.timer);
         }
@@ -173,22 +222,29 @@ export default {
   data () {
     return {
       content: this.$route.params.content,
+      content2: '',
       papers: null,
       show: false,
       page: [1, 2, 3, 4, 5],
       numPerPage: 10,
       activate: 0,
-      timer: null
+      defaultStart: 0,
+      defaultEnd: 9999,
+      timer: null,
+      showRange: false,
+      pageShow: true
     }
   },
   mounted () {
     $('canvas').remove()
-    this.$http.get('/searchpaper', { params: { key: this.content, start: 0, end: this.numPerPage } })
+    this.$http.get('/searchpaper', { params: { key: this.content, start: 0, end: this.numPerPage, startYear: this.defaultStart, endYear: this.defaultEnd } })
       .then((res) => {
         this.papers = res.data.papers
         console.log(this.papers)
         this.show = true
-
+        if (res.data.papers.length < 10) {
+          this.pageShow = false;
+        }
       })
   }
 }
@@ -197,28 +253,56 @@ export default {
 
 <style scoped>
 @import "../../../static/css/mdb";
-
+.gs_in_txtw {
+  display: inline-block;
+  vertical-align: middle;
+}
+.gs_res_sb_yyr {
+  padding-left: 15px;
+}
+hr {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border: 0;
+  border-top: 1px solid #eee;
+}
 .time-scale {
   font-size: 10px;
 }
+
+.time-scale:hover {
+  font-weight: bold !important;
+  cursor: pointer;
+}
+
 .panel-body {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+.card {
+  margin-bottom: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  /* position: fixed;
+  left: 100px;
+  top: 90px; */
+}
+
 @media (min-width: 768px) {
   .panel-body {
     padding-top: 15px;
     padding-bottom: 15px;
   }
-}
-.card {
-  margin-bottom: 5%;
-  margin-left: 20%;
-  margin-right: 0%;
-  /* position: fixed;
+  .card {
+    margin-bottom: 5%;
+    margin-left: 20%;
+    margin-right: 0%;
+    /* position: fixed;
   left: 100px;
   top: 90px; */
+  }
 }
+
 .body-cited {
   padding-left: 0;
 }
@@ -239,7 +323,7 @@ export default {
   display: inline-block;
   font-family: "Glyphicons Halflings";
   font-style: normal;
-  font-weight: 600;
+  font-weight: 200;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -373,7 +457,7 @@ export default {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 18px;
-  color: inherit;
+  color: #24292e;
 }
 
 .panel-heading {
@@ -491,6 +575,11 @@ export default {
   border: 3px solid black;
   border-color: white transparent transparent white;
   transform: rotate(45deg);
+}
+
+.glyphicon-upload:hover,
+.glyphicon-search:hover {
+  cursor: pointer;
 }
 
 .glyphicon-upload {

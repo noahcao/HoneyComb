@@ -7,7 +7,7 @@
       </div>
 
       <div class="col-xs-12 col-md-10 comb">
-        <d3-force></d3-force>
+        <d3-force :paperId='paperId'></d3-force>
       </div>
     </div>
   </div>
@@ -27,6 +27,11 @@ export default {
     Footer,
     d3Force,
     SelectBox
+  },
+  data() {
+    return {
+      paperId: this.$route.params["paperId"],
+    }
   }
 }
 </script>

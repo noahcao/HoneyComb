@@ -1,5 +1,5 @@
 <template>
-    <div id="posterboard">
+    <div id="posterboard1">
         <div class="col-xs-12 col-sm-6 col-md-3" v-for="panel in panels" :key="panel.id">
             <div class="posterwrapper">
                 <div class="poster">
@@ -8,7 +8,7 @@
                             <h3 class="card-title dark-text">{{panel.title}}</h3>
                         </router-link>
                         <a href="#">{{panel.ownerName}}</a>
-                        <p>posted at: {{panel.time}}</p>
+                        <p class="card-time">posted at: {{panel.time}}</p>
                         <hr class="my-4">
                         <p class="card-text">{{panel.posts[0].content}}</p>
                     </div>
@@ -69,6 +69,7 @@ export default {
 * {
   margin: 0px;
 }
+
 .card-title {
   color: black;
   overflow: hidden;
@@ -79,7 +80,7 @@ export default {
   overflow : hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 8;
   -webkit-box-orient: vertical;
 }
 .poster {
@@ -114,7 +115,12 @@ export default {
   padding-left: 10px;
 }
 .poster p {
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+.card-time{
+    padding: 10px;
 }
 </style>
 
