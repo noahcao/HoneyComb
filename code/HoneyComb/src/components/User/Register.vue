@@ -41,7 +41,7 @@
 
         </div>
       </div>
-      
+
       <div class="form-group">
         <div class="col-xs-offset-1 col-xs-6 col-md-4">
           <button type="button" @click="register" class="btn btn-elegant pull-left">
@@ -67,7 +67,13 @@ export default {
       var name = document.getElementById('inputMDEx1').value
       var email = document.getElementById('inputMDEx2').value
       var flag = true
-      if (repeat !== pwd) alert('Password Inconsistency')
+      if (repeat !== pwd) {
+        $('#inputMDEx4').parent().parent().addClass('has-error')
+        $('#inputMDEx4').after('<span id="password-help" class="help-block">Password Inconsistency</span>')
+        flag = false
+        document.getElementById('inputMDEx3').value = ''
+        document.getElementById('inputMDEx4').value = ''
+      }
       else {
         if (pwd !== '' && name !== '') {
           var alphabet = /[a-z]/i
@@ -75,23 +81,23 @@ export default {
           // eslint-disable-next-line
           var re = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/
           if (!re.test(email)) {
-            $('#email').parent().parent().addClass('has-error')
-            $('#email').after('<span id="email-help" class="help-block">Email format error</span>')
+            $('#inputMDEx2').parent().addClass('has-error')
+            $('#inputMDEx2').after('<span id="email-help" class="help-block">Email format error</span>')
             flag = false
           }
           if (!alphabet.test(pwd) || !number.test(pwd)) {
-            $('#password').parent().parent().addClass('has-error')
-            $('#password').after('<span id="password-help" class="help-block">Password must contains alphabet and number</span>')
+            $('#inputMDEx4').parent().parent().addClass('has-error')
+            $('#inputMDEx4').after('<span id="password-help" class="help-block">Password must contains alphabet and number</span>')
             flag = false
-            document.getElementById('repeat').value = ''
-            document.getElementById('password').value = ''
+            document.getElementById('inputMDEx3').value = ''
+            document.getElementById('inputMDEx4').value = ''
           }
           if (!flag) return
           this.$http.post('/registerhandle', { name: name, email: email, pwd: pwd })
             .then((response) => {
               if (response.data.id === null) {
-                $('#name').parent().parent().addClass('has-error')
-                $('#name').after('<span id="name-help" class="help-block">User name existed</span>')
+                $('#inputMDEx1').parent().parent().addClass('has-error')
+                $('#inputMDEx1').after('<span id="name-help" class="help-block">User name existed</span>')
               } else {
                 alert('success')
                 this.data.id = response.data.id
@@ -142,7 +148,10 @@ export default {
   padding-bottom: 1px;
   font-weight: 400;
 }
-.inputMDEx1, .inputMDEx2, .inputMDEx3, .inputMDEx4 {
+.inputMDEx1,
+.inputMDEx2,
+.inputMDEx3,
+.inputMDEx4 {
   height: 38px;
   border-bottom: 1px solid #000;
 }

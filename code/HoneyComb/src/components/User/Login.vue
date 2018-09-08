@@ -5,8 +5,8 @@
         <div class="col-xs-1 col-md-1"></div>
         <div class="col-md-10 col-xs-10">
           <div class="md-form">
-            <input type="text" id="inputMDEx" class="form-control" v-model="username" autocomplete="off">
-            <label for="inputMDEx">User Name</label>
+            <input type="text" id="inputMDEx1" class="form-control" v-model="username" autocomplete="off">
+            <label for="inputMDEx1">User Name</label>
           </div>
 
         </div>
@@ -15,8 +15,8 @@
         <div class="col-xs-1 col-md-1"></div>
         <div class="col-md-10 col-xs-10">
           <div class="md-form">
-            <input id="inputMDEx" class="form-control" type="password" v-model="userpwd" autocomplete="off">
-            <label for="inputMDEx">Password</label>
+            <input id="inputMDEx2" class="form-control" type="password" v-model="userpwd" autocomplete="off">
+            <label for="inputMDEx2">Password</label>
           </div>
 
         </div>
@@ -133,7 +133,11 @@ export default {
   padding-bottom: 1px;
   font-weight: 400;
 }
-.inputMDEx {
+.inputMDEx1 {
+  height: 38px;
+  border-bottom: 1px solid #000;
+}
+.inputMDEx2 {
   height: 38px;
   border-bottom: 1px solid #000;
 }

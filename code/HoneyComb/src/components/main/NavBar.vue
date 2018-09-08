@@ -19,11 +19,11 @@
             <a href="#" class="title">Honeycomb</a>
           </li> -->
           <li>
-            <router-link :to="{name:'outcomb'}" class="tag1">Explore</router-link>
+            <a class="tag1">Explore</a>
           </li>
-          <li>
+          <!-- <li>
             <router-link :to="{name:'poster'}" class="tag">About us</router-link>
-          </li>
+          </li> -->
           <li>
             <router-link :to="{name:'community'}" class="tag">Community</router-link>
           </li>
@@ -448,10 +448,10 @@ export default {
   background-color: rgba(18, 21, 23, 1);
   padding: 20px;
   height: 72px;
-  border-bottom: 0.5px solid rgba(200, 200, 200, 1);
+  border-bottom: #f9f9f9;
 }
 .modal-content {
-  background-color: rgba(200, 200, 200, 1);
+  background-color: #f9f9f9;
 }
 .modal.right .modal-body {
   padding-top: 15px;
