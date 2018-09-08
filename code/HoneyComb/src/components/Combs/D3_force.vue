@@ -139,10 +139,10 @@ export default {
       alert('You need to login first')
     },
     getCommentArray: function (paperId) {
-      // this.$http.post('/getComments', { paperId: paperId })
-      //   .then((res) => {
-      //     this.paper.paperComments = res.data.paperComments
-      //   })
+      this.$http.post('/getComments', { paperId: paperId })
+        .then((res) => {
+          this.paper.paperComments = res.data.paperComments
+        })
     },
     closeComment: function () {
       $('#paperCommentBox').val('')

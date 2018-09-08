@@ -35,7 +35,7 @@
         <div v-for="paper in papers">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <a :href="paper.url" target="_blank">
+              <a :href="paper.url" target="_blank" @click="addhistory(paper.id)">
                 <h3 class="panel-title">{{paper.title}}</h3>
               </a>
             </div>
@@ -69,38 +69,38 @@
           </div>
         </div>
       </div>
-        <div v-show="pageShow" class="col-xs-12 col-md-2">
-          <span class="glyphicon glyphicon-upload" aria-hidden="true" @click="up()"></span>
-          <!-- <div id="box" class="box"  >
+      <div v-show="pageShow" class="col-xs-12 col-md-2">
+        <span class="glyphicon glyphicon-upload" aria-hidden="true" @click="up()"></span>
+        <!-- <div id="box" class="box"  >
           <div class="box-in"></div>
           
         </div> -->
-        </div>
-        <div v-show="pageShow" class="col-xs-12 col-md-10 bottom-nav">
-          <ul class="pagination">
-            <li id="prev" class="disabled">
-              <a @click="prevPaging()">&lt;</a>
-            </li>
-            <li class="active">
-              <a id="page1" @click="paging('page1')">{{page[0]}}</a>
-            </li>
-            <li>
-              <a id="page2" @click="paging('page2')">{{page[1]}}</a>
-            </li>
-            <li>
-              <a id="page3" @click="paging('page3')">{{page[2]}}</a>
-            </li>
-            <li>
-              <a id="page4" @click="paging('page4')">{{page[3]}}</a>
-            </li>
-            <li>
-              <a id="page5" @click="paging('page5')">{{page[4]}}</a>
-            </li>
-            <li>
-              <a @click="nextPaging()">&gt;</a>
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div v-show="pageShow" class="col-xs-12 col-md-10 bottom-nav">
+        <ul class="pagination">
+          <li id="prev" class="disabled">
+            <a @click="prevPaging()">&lt;</a>
+          </li>
+          <li class="active">
+            <a id="page1" @click="paging('page1')">{{page[0]}}</a>
+          </li>
+          <li>
+            <a id="page2" @click="paging('page2')">{{page[1]}}</a>
+          </li>
+          <li>
+            <a id="page3" @click="paging('page3')">{{page[2]}}</a>
+          </li>
+          <li>
+            <a id="page4" @click="paging('page4')">{{page[3]}}</a>
+          </li>
+          <li>
+            <a id="page5" @click="paging('page5')">{{page[4]}}</a>
+          </li>
+          <li>
+            <a @click="nextPaging()">&gt;</a>
+          </li>
+        </ul>
+      </div>
     </div>
     <!-- <nav>
       <ul class="pagination pg-dark">
@@ -149,6 +149,18 @@ export default {
     NavBar
   },
   methods: {
+    addhistory (paperId) {
+      if (this.id === null) {
+        return
+      }
+      console.log(this.id)
+      console.log(paperId)
+
+      this.$http.post('/addhistory', { userId: this.id, paperId: paperId })
+        .then((res) => {
+          //do nothing
+        })
+    },
     reverse () {
       this.showRange = !this.showRange
     },
@@ -221,6 +233,7 @@ export default {
   },
   data () {
     return {
+      id: this.data.id,
       content: this.$route.params.content,
       content2: '',
       papers: null,
@@ -305,7 +318,7 @@ hr {
 
 .body-cited {
   padding-left: 0;
-  color:#333;
+  color: #333;
 }
 .card .card-body h6 {
   font-weight: 400;

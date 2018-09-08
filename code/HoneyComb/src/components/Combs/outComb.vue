@@ -54,6 +54,10 @@ export default {
   display: none;
 }
 
+.tips{
+  text-align: center;
+}
+
 @media(min-width: 800px){
   .comb {
     display: block;

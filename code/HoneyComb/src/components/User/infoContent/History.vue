@@ -33,7 +33,13 @@ export default {
     this.$http.post('/gethistory', { userId: this.id })
       .then((res) => {
         this.historys = res.data.history
-        console.log(this.historys)
+        this.historys.sort(function (a, b) {
+          if (a.time < b.time) {
+            return 1
+          } else {
+            return -1
+          }
+        })
       })
   }
 }
