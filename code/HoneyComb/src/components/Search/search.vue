@@ -35,9 +35,9 @@
         <div v-for="paper in papers">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <router-link :to="{ name: 'outcomb', params: { paperId: paper.id }}">
+              <a :href="paper.url" target="_blank">
                 <h3 class="panel-title">{{paper.title}}</h3>
-              </router-link>
+              </a>
             </div>
             <hr class="my-4">
             <div class="panel-body">
@@ -57,7 +57,9 @@
                 Year:
                 <strong>{{paper.year}}</strong>
               </div>
-              <a class="col-xs-12 col-md-2 body-cited" :href="paper.url" target="_blank">more..</a>
+              <router-link class="col-xs-12 col-md-2 body-cited" :to="{ name: 'outcomb', params: { paperId: paper.id }}">
+                more...
+              </router-link>
             </div>
             <div class="panel-body">
               <div class="body-abstract">
@@ -67,15 +69,14 @@
           </div>
         </div>
       </div>
-      <div v-show="pageShow">
-        <div class="col-xs-0 col-md-2">
+        <div v-show="pageShow" class="col-xs-12 col-md-2">
           <span class="glyphicon glyphicon-upload" aria-hidden="true" @click="up()"></span>
           <!-- <div id="box" class="box"  >
           <div class="box-in"></div>
           
         </div> -->
         </div>
-        <div class="col-xs-12 col-md-10 bottom-nav">
+        <div v-show="pageShow" class="col-xs-12 col-md-10 bottom-nav">
           <ul class="pagination">
             <li id="prev" class="disabled">
               <a @click="prevPaging()">&lt;</a>
@@ -100,7 +101,6 @@
             </li>
           </ul>
         </div>
-      </div>
     </div>
     <!-- <nav>
       <ul class="pagination pg-dark">
@@ -305,6 +305,7 @@ hr {
 
 .body-cited {
   padding-left: 0;
+  color:#333;
 }
 .card .card-body h6 {
   font-weight: 400;

@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-8 col-md-7">
+      <div class="col-sm-8 col-md-7 col-xs-12">
         <div class="r">
           <ul class="nav nav-tabs">
             <li role="presentation" class="active">
@@ -79,7 +79,7 @@
               <trends></trends>
             </div>
             <div class="tab-pane fade" id="history">
-              <history ></history>
+              <history></history>
             </div>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default {
   },
   mounted () {
     $('canvas').remove()
-    // this.loginJudge()
+    this.loginJudge()
   },
   methods: {
     closeProfile () {
@@ -290,6 +290,11 @@ p {
   width: 235px;
   resize: none;
 }
+
+textarea{
+  margin-top: 5px;
+}
+
 .row {
   margin-left: 0px;
   margin-right: 0px;
@@ -297,6 +302,7 @@ p {
 }
 .r {
   margin-left: 5%;
+  margin-right: 5%;
 }
 .tabb {
   color: rgba(36, 41, 46, 0.8);
@@ -332,27 +338,43 @@ p {
   border-bottom-color: rgba(36, 41, 46, 0);
 }
 .thumbnail {
-  display: block;
-  padding: 4px;
-  margin-bottom: 20px;
-  line-height: 1.42857143;
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  border-right: 2px solid rgba(36, 41, 46, 0.5);
-  border-radius: 0px;
-  border-right-style: inset;
-  -webkit-transition: border 0.2s ease-in-out;
-  -o-transition: border 0.2s ease-in-out;
-  transition: border 0.2s ease-in-out;
-  box-shadow: none;
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+
+    -webkit-transition: border 0.2s ease-in-out;
+    -o-transition: border 0.2s ease-in-out;
+    transition: border 0.2s ease-in-out;
+    box-shadow: none;
+    padding-left: 12%
+  }
+@media (min-width: 768px) {
+  .thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    border-right: 2px solid rgba(36, 41, 46, 0.5);
+    border-radius: 0px;
+    border-right-style: inset;
+    -webkit-transition: border 0.2s ease-in-out;
+    -o-transition: border 0.2s ease-in-out;
+    transition: border 0.2s ease-in-out;
+    box-shadow: none;
+  }
 }
 .thumbnail > img {
   display: block;
   /* max-width: 100%; */
   height: 240px;
-  width: 90%;
+  width: 240px;
   margin-top: 20px;
-  margin-left: 0px;
+  margin-left: 9px;
 }
 .avatar {
   border: 1px solid rgba(200, 200, 200, 0.6);
@@ -409,6 +431,5 @@ p {
 
 .btn-full-width {
   width: 100%;
-  margin-left: 5px;
 }
 </style>

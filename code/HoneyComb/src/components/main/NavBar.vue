@@ -244,6 +244,11 @@ export default {
   background-color: #24292e;
 }
 
+.container-fluid > .navbar-collapse{
+    z-index: 999;
+    position: relative;
+}
+
 .container-fluid > .navbar-collapse,
 .container-fluid > .navbar-header,
 .container > .navbar-collapse,
@@ -264,7 +269,10 @@ export default {
 }
 
 @media (min-width: 768px) {
-  
+  .container-fluid > .navbar-collapse{
+    z-index: -1;
+    position: inherit;
+}
   .tag, tag1 {
     margin-left: 5px;
   }

@@ -159,7 +159,7 @@ p {
 }
 
 .time1 i {
-  color:indianred ;
+  color:dodgerblue ;
 }
 
 .time2 i {

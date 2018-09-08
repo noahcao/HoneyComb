@@ -1,12 +1,15 @@
 <template>
   <div>
     <nav-bar></nav-bar>
+    <div class="tips">
+      <h1>Please use this function in PC!</h1>
+    </div>
     <div class="comb-container">
-      <div class="col-xs-12 col-md-2 tool-bar">
+      <div class="col-md-0 col-lg-2 tool-bar">
         <select-box></select-box>
       </div>
 
-      <div class="col-xs-12 col-md-10 comb">
+      <div class="col-md-12 col-lg-10 comb">
         <d3-force :paperId='paperId'></d3-force>
       </div>
     </div>
@@ -28,7 +31,7 @@ export default {
     d3Force,
     SelectBox
   },
-  data() {
+  data () {
     return {
       paperId: this.$route.params["paperId"],
     }
@@ -41,6 +44,29 @@ export default {
 .abstract-bar,
 .comb {
   height: 100%;
+}
+
+.comb{
+  display: none;
+}
+
+.tool-bar {
+  display: none;
+}
+
+@media(min-width: 800px){
+  .comb {
+    display: block;
+  }
+  .tips{
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tool-bar{
+    display: block;
+  }
 }
 
 .tool-bar {
@@ -72,5 +98,4 @@ export default {
   bottom: 0px;
   left: 0px;
 }
-
 </style>

@@ -5,7 +5,7 @@
       <div class="top-image-container">
         <h1>Paper Journal</h1>
         <div class="journal-boxes">
-          <div  class="col-md-4 journal-box">
+          <div class="col-md-4 journal-box">
             <img src="../../../static/pic/ieee_xplore.png">
             <p>IEEE Xplore is a research database for discovery and access to journal articles</p>
           </div>
@@ -20,6 +20,7 @@
         </div>
       </div>
     </div>
+
     <div class="container-box">
       <div class="guide-wrap">
         <h2>
@@ -128,39 +129,39 @@ export default {
     return {
 
     }
+  },
+  mounted () {
+    $('canvas').remove()
   }
 }
 </script>
 
 <style scoped>
 .guide-top-wrap {
-  margin-top: -22px;
-  background-color: #2f363d;
-  background-image: url("https://assets-cdn.github.com/images/modules/marketplace/bg-hero.svg");
-  height: 400px;
+  display: none
 }
 
 .journal-boxes {
   margin-top: 30px;
 }
 
-.journal-box:hover{
+.journal-box:hover {
   cursor: pointer;
 }
 
-.journal-box:hover p{
+.journal-box:hover p {
   opacity: 1;
 }
 
 .container-box {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  margin-left: 100px;
-  margin-right: 100px;
-  padding-top: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-bottom: 30px;
+  margin-top: 2%;
+  margin-bottom: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-top: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
   background-color: rgba(255, 255, 255, 0.6);
   /* box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
 }
@@ -190,14 +191,17 @@ export default {
 }
 
 .container-inbox {
+  position: relative;
   padding-left: 0px;
   padding-right: 0px;
+  
 }
 
 .guide-step {
+  z-index: -1;
   background-color: #fff !important;
   border: 1px #e1e4e8 solid !important;
-  width: 60%;
+  width: 140%;
   height: auto;
   border-radius: 10px !important;
   margin-right: 10px;
@@ -205,6 +209,25 @@ export default {
   margin-left: 10px;
 }
 
+@media (min-width: 992px) {
+  .guide-top-wrap {
+    margin-top: -22px;
+    background-color: #2f363d;
+    background-image: url("https://assets-cdn.github.com/images/modules/marketplace/bg-hero.svg");
+    height: 400px;
+    display: block;
+  }
+  .guide-step {
+  background-color: #fff !important;
+  border: 1px #e1e4e8 solid !important;
+  width: 80%;
+  height: auto;
+  border-radius: 10px !important;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+}
 .guide-step img {
   display: block;
   width: 80%;

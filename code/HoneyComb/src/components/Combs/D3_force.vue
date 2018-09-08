@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg width='960' height='668'></svg>
+    <svg width='900' height='668'></svg>
     <div class='tooltip'>
       <div v-if='unselected' class='tip'>
         <p>Detailed Information</p>
@@ -126,7 +126,7 @@ export default {
         return 'brown'
       }
       if (year > 2005) {
-        return 'red'
+        return 'dodgerblue'
       } else if (year > 1990) {
         return 'coral'
       } else if (year > 1975) {
@@ -450,6 +450,7 @@ export default {
       .on('zoom', zoomed)
 
     var svg = d3.select('svg')
+    
     var width = svg.attr('width')
     var height = svg.attr('height')
 
@@ -493,7 +494,7 @@ export default {
           this.starList = res.data.stars
         })
     }
-    console.log("test")
+
     console.log(this.paperId)
     this.$http.post('/graphdata', { id: this.paperId, hierarchyLimit: 4 })
       .then((res) => {
@@ -961,6 +962,15 @@ export default {
 </script>
 
 <style>
+.tooltip{
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .tooltip{
+    display: block;
+  }
+}
 .links line {
   stroke: #999;
   stroke-opacity: 0.6;
@@ -990,7 +1000,7 @@ export default {
   padding-right: 10px;
   padding-top: 25px;
   padding-bottom: 20px;
-  width: 350px;
+  width: 28%;
   bottom: 0px;
   font-size: 15px;
   z-index: 120;

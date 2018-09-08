@@ -10,7 +10,7 @@
                         <a href="#">{{panel.ownerName}}</a>
                         <p class="card-time">posted at: {{panel.time}}</p>
                         <hr class="my-4">
-                        <p class="card-text">{{panel.posts[0].content}}</p>
+                        <p v-if="panel.posts.length > 0" class="card-text">{{panel.posts[0].content}}</p>
                     </div>
                 </div>
             </div>
@@ -41,20 +41,17 @@ export default {
                 this.panels = res.data.panels;
                 var i = 0
                 for (i; i < this.panels.length; i++) {
-                    var content = null;
-                    console.log("hi")
+                    if (this.panels[i].posts.length == 0) {
+                        continue
+                    }
                     var j = 0;
                     j = this.panels[i].posts[0].content
                     j = j.replace(/<[/]p><p>/g, "\n")
                     j = j.replace("</p>", "")
                     j = j.replace("<p>", "")
-                    console.log(j)
                     this.panels[i].posts[0].content = j
                 }
             })
-    },
-    mounted () {
-
     },
     methods: {
         toPoster () {
@@ -77,7 +74,7 @@ export default {
   white-space: nowrap;
 }
 .card-text {
-  overflow : hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 8;
@@ -119,8 +116,8 @@ export default {
   padding-right: 10px;
   padding-top: 10px;
 }
-.card-time{
-    padding: 10px;
+.card-time {
+  padding: 10px;
 }
 </style>
 
