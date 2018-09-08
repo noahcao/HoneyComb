@@ -1,6 +1,9 @@
 <template>
   <div>
     <nav-bar></nav-bar>
+    <div class="tips">
+      <h1>Please use this function on PC!</h1>
+    </div>
     <div class="comb-container">
       <div class="col-xs-12 col-md-2 tool-bar">
         <h4 id="select-title">Select comb:</h4>
@@ -771,6 +774,31 @@ export default {
   background-color: #333;
   height: 100%;
   padding-top: 20px;
+  display: none;
+}
+
+.comb {
+  display: none;
+}
+
+.tips {
+  text-align: center;
+}
+
+@media (min-width: 1000px) {
+  .comb {
+    display: block;
+  }
+
+  .tips {
+    display: none;
+  }
+}
+
+@media (min-width: 1250px) {
+  .tool-bar {
+    display: block;
+  }
 }
 .combList {
   padding-top: 6px;

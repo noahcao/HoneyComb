@@ -2,7 +2,7 @@
   <div>
     <nav-bar></nav-bar>
     <div class="tips">
-      <h1>Please use this function in PC!</h1>
+      <h1>Please use this function on PC!</h1>
     </div>
     <div class="comb-container">
       <div class="col-md-0 col-lg-2 tool-bar">

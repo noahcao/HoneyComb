@@ -108,10 +108,7 @@ export default {
         year: '2018',
         abstract: 'paper abstract',
         url: null,
-        paperComments: [
-          { commentId: '1', userId: '1', userName: 'XPandora', paperId: '1', 'content': 'Brilliant!balab alaba labalab alab alabal abalabala', time: '2018-9-7-20:02' },
-          { commentId: '1', userId: '2', userName: 'XPandora2', paperId: '1', 'content': 'Brilliant!b alaba labal abala balab alabala bala bala', time: '2018-9-7-20:02' }
-        ]
+        paperComments: []
       },
       author: {
         name: 'name',
@@ -139,7 +136,7 @@ export default {
       alert('You need to login first')
     },
     getCommentArray: function (paperId) {
-      this.$http.post('/getComments', { paperId: paperId })
+      this.$http.post('/getpapercomment', { paperId: paperId })
         .then((res) => {
           this.paper.paperComments = res.data.paperComments
         })
@@ -153,15 +150,17 @@ export default {
         return
       }
 
-      var content = $('paperCommentBox').val()
+      var content = $('#paperCommentBox').val()
 
       if (content === '') {
         return
       }
+      console.log(content)
 
       this.$http.post('/addpapercomment', { userId: this.id, paperId: this.paper.id, content: content })
         .then((res) => {
           var newComment = {}
+          console.log(res)
           newComment.commentId = res.data.commentId
           newComment.userId = res.data.userId
           newComment.paperId = res.data.paperId
@@ -450,7 +449,7 @@ export default {
       .on('zoom', zoomed)
 
     var svg = d3.select('svg')
-    
+
     var width = svg.attr('width')
     var height = svg.attr('height')
 
@@ -962,12 +961,12 @@ export default {
 </script>
 
 <style>
-.tooltip{
+.tooltip {
   display: none;
 }
 
 @media (min-width: 1000px) {
-  .tooltip{
+  .tooltip {
     display: block;
   }
 }

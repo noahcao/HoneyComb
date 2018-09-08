@@ -1,7 +1,6 @@
 package data.dao.impl;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.QueryBuilder;
 import data.dao.PanelDao;
 import data.model.PanelEntity;
 import data.model.PostEntity;
@@ -14,7 +13,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
-import service.AppService;
 
 import javax.annotation.Resource;
 import java.util.Date;
