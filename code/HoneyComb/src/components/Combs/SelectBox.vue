@@ -54,9 +54,15 @@
 
         </li>
         <li>
+          <p class='paper-center'>
+            <i class='fa fa-circle'></i>
+            paper-center
+          </p>
+        </li>
+        <li>
           <p class='time1'>
             <i class='fa fa-circle'></i>
-            paper (2005-    )
+            paper (2005- )
           </p>
         </li>
         <li>
@@ -74,7 +80,7 @@
         <li>
           <p class='time4'>
             <i class='fa fa-circle'></i>
-            paper (    -1970)
+            paper ( -1970)
           </p>
         </li>
         <li>
@@ -149,11 +155,11 @@ p {
 }
 
 .time3 i {
-  color: darkgreen
+  color: darkgreen;
 }
 
 .time1 i {
-  color: red;
+  color:indianred ;
 }
 
 .time2 i {
@@ -164,7 +170,10 @@ p {
   color: blue;
 }
 
-.time5 i{
+.time5 i {
   color: brown;
+}
+.paper-center i {
+  color: red
 }
 </style>

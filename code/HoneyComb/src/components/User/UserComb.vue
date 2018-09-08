@@ -176,8 +176,8 @@
             </div>
           </div>
         </div>
-        <svg id="net-background" width="1130" height="550">
-          <text x="20" y="540" fill="black" font-size="20">{{this.title}}</text>
+        <svg id="net-background" width="1250" height="600">
+          <text x="20" y="590" fill="black" font-size="20">{{this.title}}</text>
         </svg>
       </div>
     </div>
@@ -411,6 +411,11 @@ export default {
       this.combSelectName = false
       this.title = null
       this.combNameArray.splice(index, 1)
+      svgLink = svgLink.data([])
+      svgNode = svgNode.data([])
+
+      svgNode.exit().remove()
+      svgLink.exit().remove()
 
       this.$http.post('/deletenet', { netId: this.combSelectId })
         .then((res) => {

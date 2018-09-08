@@ -90,6 +90,10 @@ export default {
         var postArray = res.data.posts
         for (var i = 0; i < postArray.length; i++) {
           var post = postArray[i]
+          console.log(post)
+          post.content = post.content.replace(/<[/]p><p>/g, '\n')
+          post.content = post.content.replace('</p>', '')
+          post.content = post.content.replace('<p>', '')
           post.type = 'post'
           this.trends.push(post)
         }
