@@ -100,6 +100,7 @@ export default {
       selectLevel: 4,
       chooseall: true,
       starList: [],
+      nodeClick: false,
       paper: {
         id: 0,
         title: 'title',
@@ -137,10 +138,10 @@ export default {
       alert('You need to login first')
     },
     getCommentArray: function (paperId) {
-      this.$http.post('/getComments', { paperId: paperId })
-        .then((res) => {
-          this.paper.paperComments = res.data.paperComments
-        })
+      // this.$http.post('/getComments', { paperId: paperId })
+      //   .then((res) => {
+      //     this.paper.paperComments = res.data.paperComments
+      //   })
     },
     closeComment: function () {
       $('#paperCommentBox').val('')
@@ -154,7 +155,7 @@ export default {
       var content = $('paperCommentBox').val()
 
       if (content === '') {
-        return  
+        return
       }
 
       this.$http.post('/addpapercomment', { userId: this.id, paperId: this.paper.id, content: content })
@@ -234,8 +235,8 @@ export default {
             initlink.push(Object.assign({}, paperlink))
           }
 
-          for (var j = 0; j < tempPaperRefer.length; j++) {
-            var paperlink = {}
+          for (j = 0; j < tempPaperRefer.length; j++) {
+            paperlink = {}
             paperlink.source = 'p' + temppaper.paperid
             paperlink.target = 'p' + tempPaperRefer[j]
             paperlink.sourcetype = 'paper'
@@ -243,8 +244,8 @@ export default {
             initlink.push(Object.assign({}, paperlink))
           }
 
-          for (var j = 0; j < tempPaperCite.length; j++) {
-            var paperlink = {}
+          for (j = 0; j < tempPaperCite.length; j++) {
+            paperlink = {}
             paperlink.source = 'p' + temppaper.paperid
             paperlink.target = 'p' + tempPaperCite[j]
             paperlink.sourcetype = 'paper'
@@ -254,7 +255,7 @@ export default {
         }
       }
 
-      for (var i = 0; i < authorList.length; i++) {
+      for (i = 0; i < authorList.length; i++) {
         var tempauthor = authorList[i]
         var authornode = {}
         authornode.id = 'a' + tempauthor.authorid
@@ -354,10 +355,12 @@ export default {
           }
         })
       simulation.alpha(1).restart()
-
     },
     getNewNode: function (cliNode) {
-      let that = this
+      if (this.nodeClick) {
+        return
+      }
+      this.nodeClick = true
       initnode.splice(0, initnode.length)
       initlink.splice(0, initlink.length)
 
@@ -373,6 +376,7 @@ export default {
 
             this.dataAnalyse(papersList, authorList, 4)
             this.netConstruct()
+            this.nodeClick = false
           } else {
             alert('error!')
           }
@@ -388,6 +392,7 @@ export default {
 
                 this.dataAnalyse(papersList, authorList, 3)
                 this.netConstruct()
+                this.nodeClick = false
               } else {
                 alert('error!')
               }
@@ -442,8 +447,6 @@ export default {
       .zoom()
       .scaleExtent([-5, 2])
       .on('zoom', zoomed)
-
-    var color = d3.scaleOrdinal(d3.schemeCategory10)
 
     var svg = d3.select('svg')
     var width = svg.attr('width')
@@ -531,15 +534,14 @@ export default {
         }
       }
 
-      for (var i = 0; i < initlink.length; i++) {
+      for (i = 0; i < initlink.length; i++) {
         console.log(initlink[i].source)
         if (
           initlink[i].source.type !== 'paper' || initlink[i].source.level > that.selectLevel ||
           initlink[i].target.type !== 'paper' || initlink[i].target.level > that.selectLevel
         ) {
           continue
-        }
-        else {
+        } else {
           newlinks.push(initlink[i])
         }
       }
@@ -572,7 +574,6 @@ export default {
           return Math.sqrt(d.value)
         })
         .merge(svgLink)
-
 
       svgNode = svgNode
         .enter()
@@ -659,19 +660,18 @@ export default {
               newnodes.push(initnode[i])
             }
           }
-          for (var i = 0; i < initlink.length; i++) {
+          for (i = 0; i < initlink.length; i++) {
             if (initlink[i].source.level <= 2 && initlink[i].target.level <= 2) {
               newlinks.push(initlink[i])
             }
           }
-        }
-        else {
-          for (var i = 0; i < initnode.length; i++) {
+        } else {
+          for (i = 0; i < initnode.length; i++) {
             if (initnode[i].level <= 2 && initnode[i].type === 'paper') {
               newnodes.push(initnode[i])
             }
           }
-          for (var i = 0; i < initlink.length; i++) {
+          for (i = 0; i < initlink.length; i++) {
             if (
               initlink[i].source.type === 'paper' &&
               initlink[i].target.type === 'paper' &&
@@ -704,19 +704,18 @@ export default {
             newnodes.push(initnode[i])
           }
         }
-        for (var i = 0; i < initlink.length; i++) {
+        for (i = 0; i < initlink.length; i++) {
           if (initlink[i].source.level <= 3 && initlink[i].target.level <= 3) {
             newlinks.push(initlink[i])
           }
         }
-      }
-      else {
-        for (var i = 0; i < initnode.length; i++) {
+      } else {
+        for (i = 0; i < initnode.length; i++) {
           if (initnode[i].level <= 3 && initnode[i].type === 'paper') {
             newnodes.push(initnode[i])
           }
         }
-        for (var i = 0; i < initlink.length; i++) {
+        for (i = 0; i < initlink.length; i++) {
           if (
             initlink[i].source.type === 'paper' &&
             initlink[i].target.type === 'paper' &&
@@ -728,16 +727,13 @@ export default {
         }
       }
       if (that.selectLevel > 3) {
-        console.log(newnodes)
         svgNode = svgNode.data(newnodes)
         svgLink = svgLink.data(newlinks)
         svgNode.exit().remove()
         svgLink.exit().remove()
-        console.log(svgNode)
 
         simulation.alpha(1).restart()
-      }
-      else {
+      } else {
         svgLink = svgLink.data(newlinks, d => {
           return d.source.id + '-' + d.target.id
         })
@@ -841,19 +837,18 @@ export default {
               newnodes.push(initnode[i])
             }
           }
-          for (var i = 0; i < initlink.length; i++) {
+          for (i = 0; i < initlink.length; i++) {
             if (initlink[i].source.level <= 4 && initlink[i].target.level <= 4) {
               newlinks.push(initlink[i])
             }
           }
-        }
-        else {
-          for (var i = 0; i < initnode.length; i++) {
+        } else {
+          for (i = 0; i < initnode.length; i++) {
             if (initnode[i].level <= 4 && initnode[i].type === 'paper') {
               newnodes.push(initnode[i])
             }
           }
-          for (var i = 0; i < initlink.length; i++) {
+          for (i = 0; i < initlink.length; i++) {
             if (
               initlink[i].source.type === 'paper' &&
               initlink[i].target.type === 'paper' &&
@@ -864,7 +859,7 @@ export default {
             }
           }
         }
-        console.log(initnode)
+
         simulation.nodes(newnodes)
         simulation.force('link').links(newlinks)
 

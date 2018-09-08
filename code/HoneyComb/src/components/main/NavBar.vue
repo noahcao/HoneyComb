@@ -19,7 +19,7 @@
             <a href="#" class="title">Honeycomb</a>
           </li> -->
           <li>
-            <router-link :to="{name:'outcomb'}" class="tag1">Explore</router-link>
+            <router-link :to="{name:'Guide'}" class="tag1">Guide</router-link>
           </li>
           <li>
             <router-link :to="{name:'poster'}" class="tag">About us</router-link>

@@ -1,0 +1,244 @@
+<template>
+  <div>
+    <nav-bar></nav-bar>
+    <div class="container-fluid guide-top-wrap">
+      <div class="top-image-container">
+        <h1>Paper Journal</h1>
+        <div class="journal-boxes">
+          <div  class="col-md-4 journal-box">
+            <img src="../../../static/pic/ieee_xplore.png">
+            <p>IEEE Xplore is a research database for discovery and access to journal articles</p>
+          </div>
+          <div class="col-md-4 journal-box">
+            <img src="../../../static/pic/ieee_xplore.png">
+            <p>123123</p>
+          </div>
+          <div class="col-md-4 journal-box">
+            <img src="../../../static/pic/ieee_xplore.png">
+            <p>123123</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-box">
+      <div class="guide-wrap">
+        <h2>
+          <strong>Search Paper</strong>
+        </h2>
+        <div class="container-wrap">
+          <div class="container-inbox">
+            <div class="guide-step">
+              <h4>1.Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+            <div class="guide-step">
+              <h4>1.Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+            <div class="guide-step">
+              <h4>1.Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+            <div class="guide-step">
+              <h4>1.Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+            <div class="guide-step">
+              <h4>1.Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+            <div class="guide-step">
+              <h4>1.Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-wrap">
+        <h2>
+          <strong>Construct your comb</strong>
+        </h2>
+        <div class="container-wrap">
+          <div class="container-inbox">
+            <div class="guide-step">
+              <h4>Step1. Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+            <div class="guide-step">
+              <h4>1.Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+            <div class="guide-step">
+              <h4>1.Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+            <div class="guide-step">
+              <h4>1.Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+            <div class="guide-step">
+              <h4>1.Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+            <div class="guide-step">
+              <h4>1.Enter the paper on the home page</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import navBar from '../main/NavBar'
+
+export default {
+  name: 'Guide',
+  components: {
+    navBar
+  },
+  data () {
+    return {
+
+    }
+  }
+}
+</script>
+
+<style scoped>
+.guide-top-wrap {
+  margin-top: -22px;
+  background-color: #2f363d;
+  background-image: url("https://assets-cdn.github.com/images/modules/marketplace/bg-hero.svg");
+  height: 400px;
+}
+
+.journal-boxes {
+  margin-top: 30px;
+}
+
+.journal-box:hover{
+  cursor: pointer;
+}
+
+.journal-box:hover p{
+  opacity: 1;
+}
+
+.container-box {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  padding-top: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 30px;
+  background-color: rgba(255, 255, 255, 0.6);
+  /* box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
+}
+
+.guide-wrap {
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.container-wrap {
+  margin-top: 20px;
+  width: 100%;
+  /* height: 50px; */
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-x: scroll; /* 1 */
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -webkit-overflow-scrolling: touch; /* 2 */
+  text-align: justify; /* 3 */
+}
+
+.container-inbox > div {
+  display: inline-block;
+  color: black;
+  text-align: center;
+}
+
+.container-inbox {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.guide-step {
+  background-color: #fff !important;
+  border: 1px #e1e4e8 solid !important;
+  width: 60%;
+  height: auto;
+  border-radius: 10px !important;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.guide-step img {
+  display: block;
+  width: 80%;
+  height: auto;
+  margin: auto;
+}
+
+.top-image-container {
+  padding-top: 20px;
+  width: 80%;
+  margin: auto;
+}
+
+.top-image-container h1 {
+  text-align: center;
+  color: #fff;
+}
+
+.top-image-container img {
+  display: block;
+  width: 95%;
+  height: auto;
+  margin: auto;
+  border-radius: 3px;
+  opacity: 1;
+}
+
+.top-image-container p {
+  padding-top: 20px;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  color: #fff;
+  opacity: 0.7;
+  transition: all 0.5s ease;
+}
+</style>
