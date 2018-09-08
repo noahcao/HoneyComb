@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg width='850' height='603'></svg>
+    <svg width='960' height='668'></svg>
     <div class='tooltip'>
       <div v-if='unselected' class='tip'>
         <p>Detailed Information</p>
@@ -8,50 +8,76 @@
         <span class='glyphicon glyphicon-list-alt'></span>
       </div>
       <div v-else-if='ispaper'>
-        <p class='title'>{{paper.title}}</p>
-        <p class='year'>year: {{paper.year}}</p>
+        <div class="paper-area">
+          <p class='title'>{{paper.title}}</p>
+          <p class='year'>year: {{paper.year}}</p>
+          <p class='abstract'>{{paper.abstract}}</p>
+          <div>
+            <h4 id="comment-title">Comment:</h4>
+            <div class="comment-area" v-for="paperComment in paper.paperComments">
+              <p class="comment-content">
+                {{paperComment.content}}
+              </p>
+              <p class="comment-line">
+                <span>{{paperComment.userName}}</span>
+                <span>{{paperComment.time}}</span>
+              </p>
+            </div>
+          </div>
+          <div class="click-icons">
+            <a v-if="this.data.id===null">
+              <span class="glyphicon glyphicon-star-empty paper-icons2" @click="loginWarnning"></span>
+            </a>
+            <a v-else-if="checkStar(paper.id)">
+              <span class="glyphicon glyphicon-star paper-icons2" @click="paperUnstar(paper.id)"></span>
+            </a>
+            <a v-else>
+              <span class="glyphicon glyphicon-star-empty paper-icons2" @click="paperStar(paper.id)"></span>
+            </a>
+            <a>
+              <span id="comment-btn" class="glyphicon glyphicon-comment paper-icons" data-toggle="modal" data-target="#paperComment_modal" type="button"></span>
+            </a>
+            <a v-if="paper.url!==null" :href="paper.url" target="_blank">
+              <span class="glyphicon glyphicon-send paper-icons"></span>
+            </a>
+            <a v-else>
+              <span class="glyphicon glyphicon-send paper-icons"></span>
+            </a>
+          </div>
+        </div>
       </div>
       <div v-else>
         <p class='title'>{{author.name}}</p>
       </div>
-      <div v-if='selected'>
-        <hr class='tooltip-hr'></hr>
-        <div v-if='ispaper'>
-          <p class='abstract'>{{paper.abstract}}</p>
-          <div class="click-icons">
-            <a v-if="this.data.id===null">
-              <span class="glyphicon glyphicon-star-empty paper-icons" @click="loginWarnning"></span>
-            </a>
-            <a v-else-if="checkStar(paper.id)">
-              <span class="glyphicon glyphicon-star paper-icons" @click="paperUnstar(paper.id)"></span>
-            </a>
-            <a v-else>
-              <span class="glyphicon glyphicon-star-empty paper-icons" @click="paperStar(paper.id)"></span>
-            </a>
-            <a>
-              <span class="glyphicon glyphicon-education paper-icons"></span>
-            </a>
+    </div>
+    <div class="modal fade" id="paperComment_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="exampleModalLabel">Comment</h4>
           </div>
-        </div>
-        <div v-else>
-          <!-- <p class='authorinfo'>Publications:</p>
-          <ul>
-            <li v-for='item in author.publication'>
-              {{item.title}}
-            </li>
-          </ul>
-          <p class='authorinfo'>Co-workers:</p>
-          <ul>
-            <li v-for='item in author.co_author'>
-              {{item.name}}
-            </li>
-          </ul> -->
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <textarea type="text" class="form-control" rows="8" id="paperCommentBox" placeholder="Enter here">
+                </textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="closeBtn" class="btn btn-primary" data-dismiss="modal" @click="closeComment">Close</button>
+            <button type="button" class="btn btn-primary" @click="addComment">Submit</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import $ from 'jquery'
 import * as d3 from 'd3'
 var initnode = []
 var initlink = []
@@ -75,11 +101,17 @@ export default {
       selectLevel: 4,
       chooseall: true,
       starList: [],
+      nodeClick: false,
       paper: {
         id: 0,
         title: 'title',
         year: '2018',
-        abstract: 'paper abstract'
+        abstract: 'paper abstract',
+        url: null,
+        paperComments: [
+          { commentId: '1', userId: '1', userName: 'XPandora', paperId: '1', 'content': 'Brilliant!balab alaba labalab alab alabal abalabala', time: '2018-9-7-20:02' },
+          { commentId: '1', userId: '2', userName: 'XPandora2', paperId: '1', 'content': 'Brilliant!b alaba labal abala balab alabala bala bala', time: '2018-9-7-20:02' }
+        ]
       },
       author: {
         name: 'name',
@@ -105,6 +137,40 @@ export default {
     },
     loginWarnning: function () {
       alert('You need to login first')
+    },
+    getCommentArray: function (paperId) {
+      // this.$http.post('/getComments', { paperId: paperId })
+      //   .then((res) => {
+      //     this.paper.paperComments = res.data.paperComments
+      //   })
+    },
+    closeComment: function () {
+      $('#paperCommentBox').val('')
+    },
+    addComment: function () {
+      if (this.id === null) {
+        this.loginWarnning()
+        return
+      }
+
+      var content = $('paperCommentBox').val()
+
+      if (content === '') {
+        return
+      }
+
+      this.$http.post('/addpapercomment', { userId: this.id, paperId: this.paper.id, content: content })
+        .then((res) => {
+          var newComment = {}
+          newComment.commentId = res.data.commentId
+          newComment.userId = res.data.userId
+          newComment.paperId = res.data.paperId
+          newComment.content = res.data.content
+          newComment.userName = res.data.userName
+          newComment.time = res.data.time
+          this.paper.paperComments.push(newComment)
+          $('#closeBtn').click()
+        })
     },
     paperStar: function (d) {
       var newStar = {}
@@ -144,14 +210,162 @@ export default {
     print_id: function (id) {
       console.log(id)
     },
-    getNewNode: function (cliNode) {
+    dataAnalyse: function (papersList, authorList, hierarchyLimit) {
+      for (var i = 0; i < papersList.length; i++) {
+        var temppaper = papersList[i]
+        var papernode = {}
+        papernode.id = 'p' + temppaper.paperid
+        papernode.type = 'paper'
+        papernode.level = temppaper.level
+        papernode.pagerank = temppaper.pagerank
+        papernode.title = ''
+        papernode.abstract = ''
+        papernode.year = temppaper.year
+        initnode.push(Object.assign({}, papernode))
+
+        var tempPapertoAuthor = temppaper.authors
+        var tempPaperRefer = temppaper.reference
+        var tempPaperCite = temppaper.cite
+        if (papernode.level < hierarchyLimit) {
+          for (var j = 0; j < tempPapertoAuthor.length; j++) {
+            var paperlink = {}
+            paperlink.source = 'p' + temppaper.paperid
+            paperlink.target = 'a' + tempPapertoAuthor[j]
+            paperlink.sourcetype = 'paper'
+            paperlink.targettype = 'author'
+            initlink.push(Object.assign({}, paperlink))
+          }
+
+          for (j = 0; j < tempPaperRefer.length; j++) {
+            paperlink = {}
+            paperlink.source = 'p' + temppaper.paperid
+            paperlink.target = 'p' + tempPaperRefer[j]
+            paperlink.sourcetype = 'paper'
+            paperlink.targettype = 'paper'
+            initlink.push(Object.assign({}, paperlink))
+          }
+
+          for (j = 0; j < tempPaperCite.length; j++) {
+            paperlink = {}
+            paperlink.source = 'p' + temppaper.paperid
+            paperlink.target = 'p' + tempPaperCite[j]
+            paperlink.sourcetype = 'paper'
+            paperlink.targettype = 'paper'
+            initlink.push(Object.assign({}, paperlink))
+          }
+        }
+      }
+
+      for (i = 0; i < authorList.length; i++) {
+        var tempauthor = authorList[i]
+        var authornode = {}
+        authornode.id = 'a' + tempauthor.authorid
+        authornode.type = 'author'
+        authornode.level = tempauthor.level
+        authornode.pagerank = tempauthor.pagerank
+        initnode.push(Object.assign({}, authornode))
+      }
+    },
+    netConstruct: function () {
       let that = this
-      var color = d3.scaleOrdinal(d3.schemeCategory10)
+      simulation.nodes(initnode).on('tick', this.ticked)
+      simulation.force('link').links(initlink)
+
+      svgLink = svgLink.data([])
+      svgNode = svgNode.data([])
+
+      svgNode.exit().remove()
+      svgLink.exit().remove()
+
+      svgLink = svgLink.data(initlink)
+      svgNode = svgNode.data(initnode)
+
+      svgLink = svgLink
+        .enter()
+        .append('line')
+        .attr('stroke-width', function (d) {
+          return Math.sqrt(d.value)
+        })
+
+      svgNode = svgNode
+        .enter()
+        .append('circle')
+        .attr('r', function (d, i) {
+          if (d.level === 1) {
+            return 25
+          }
+          return Math.sqrt(d.pagerank / that.totalPR * 2500) * 2
+        })
+        .attr('fill', function (d, i) {
+          if (d.type === 'author') {
+            return '#2c3e50'
+          } else {
+            if (d.level === 1) {
+              return 'red'
+            }
+            return that.getColor(d.year)
+          }
+        })
+        .call(
+          d3
+            .drag()
+            .on('start', this.dragstarted)
+            .on('drag', this.dragged)
+            .on('end', this.dragended)
+        )
+        .on('click', function (d) {
+          if (d.type === 'paper' && d.level !== 1) {
+            that.getNewNode(d)
+          }
+        })
+        .on('mouseover', function (d, i) {
+          console.log(d.id + ' ' + d.level)
+          if (d.type === 'paper') {
+            var paperid = d.id
+            paperid = paperid.slice(1)
+            that.$http.post('/getpaper', { id: paperid })
+              .then((res) => {
+                if (res.data.id !== null) {
+                  that.paper.id = res.data.id
+                  that.paper.title = res.data.title
+                  that.paper.year = res.data.year
+                  that.paper.abstract = res.data._abstract
+                  that.paper.url = res.data.url
+                  that.unselected = false
+                  that.selected = true
+                  that.ispaper = true
+                } else {
+                  alert('paperid error')
+                }
+              })
+            that.getCommentArray(paperid)
+          } else {
+            var authorid = d.id
+            authorid = authorid.slice(1)
+            that.$http.post('/getauthor', { id: authorid })
+              .then((res) => {
+                if (res.data.id !== null) {
+                  that.author.name = res.data.name
+                  that.unselected = false
+                  that.selected = true
+                  that.ispaper = false
+                } else {
+                  alert('authorid error')
+                }
+              })
+          }
+        })
+      simulation.alpha(1).restart()
+    },
+    getNewNode: function (cliNode) {
+      if (this.nodeClick) {
+        return
+      }
+      this.nodeClick = true
       initnode.splice(0, initnode.length)
       initlink.splice(0, initlink.length)
 
       var paperid = cliNode.id
-      console.log(paperid)
       paperid = paperid.slice(1)
       this.$http.post('/graphdata', { id: paperid, hierarchyLimit: 4 })
         .then((res) => {
@@ -161,146 +375,29 @@ export default {
             var papersList = this.modeldata.paper
             var authorList = this.modeldata.author
 
-            for (var i = 0; i < papersList.length; i++) {
-              var temppaper = papersList[i]
-              var papernode = {}
-              papernode.id = 'p' + temppaper.paperid
-              papernode.type = 'paper'
-              papernode.level = temppaper.level
-              papernode.pagerank = temppaper.pagerank
-              papernode.title = 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'
-              papernode.abstract = 'Studies the performance advantage offered by the wideband multipath RAKE structure receiver in a cellular radio direct sequence code division multiple access system (CDMA). The base to mobile link is modeled as a Nakagami fading frequency selective channel. The performance of a RAKE structure receiver employing coherent reception with maximal ratio combining in a frequency selective channel is analyzed and compared with the flat fading case. The degradation in the performance of the receiver as a result of imperfect channel estimation is also studied.'
-              papernode.year = temppaper.year
-              initnode.push(Object.assign({}, papernode))
-
-              var tempPapertoAuthor = temppaper.authors
-              var tempPaperRefer = temppaper.reference
-              var tempPaperCite = temppaper.cite
-              if (papernode.level < 4) {
-                for (var j = 0; j < tempPapertoAuthor.length; j++) {
-                  var paperlink = {}
-                  paperlink.source = 'p' + temppaper.paperid
-                  paperlink.target = 'a' + tempPapertoAuthor[j]
-                  paperlink.sourcetype = 'paper'
-                  paperlink.targettype = 'author'
-                  initlink.push(Object.assign({}, paperlink))
-                }
-
-                for (var j = 0; j < tempPaperRefer.length; j++) {
-                  var paperlink = {}
-                  paperlink.source = 'p' + temppaper.paperid
-                  paperlink.target = 'p' + tempPaperRefer[j]
-                  paperlink.sourcetype = 'paper'
-                  paperlink.targettype = 'paper'
-                  initlink.push(Object.assign({}, paperlink))
-                }
-
-                for (var j = 0; j < tempPaperCite.length; j++) {
-                  var paperlink = {}
-                  paperlink.source = 'p' + temppaper.paperid
-                  paperlink.target = 'p' + tempPaperCite[j]
-                  paperlink.sourcetype = 'paper'
-                  paperlink.targettype = 'paper'
-                  initlink.push(Object.assign({}, paperlink))
-                }
-              }
-            }
-
-            for (var i = 0; i < authorList.length; i++) {
-              var tempauthor = authorList[i]
-              var authornode = {}
-              authornode.id = 'a' + tempauthor.authorid
-              authornode.type = 'author'
-              authornode.level = tempauthor.level
-              authornode.pagerank = tempauthor.pagerank
-              initnode.push(Object.assign({}, authornode))
-            }
-
-            simulation.nodes(initnode).on('tick', this.ticked)
-            simulation.force('link').links(initlink)
-
-            svgLink = svgLink.data([])
-            svgNode = svgNode.data([])
-
-            svgNode.exit().remove()
-            svgLink.exit().remove()
-
-            svgLink = svgLink.data(initlink)
-            svgNode = svgNode.data(initnode)
-
-            svgLink = svgLink
-              .enter()
-              .append('line')
-              .attr('stroke-width', function (d) {
-                return Math.sqrt(d.value)
-              })
-
-            svgNode = svgNode
-              .enter()
-              .append('circle')
-              .attr('r', function (d, i) {
-                return Math.sqrt(d.pagerank / that.totalPR * 2500)
-              })
-              .attr('fill', function (d, i) {
-                if (d.type === 'author') {
-                  return '#2c3e50'
-                }
-                else {
-                  return that.getColor(d.year)
-                }
-              })
-              .call(
-                d3
-                  .drag()
-                  .on('start', this.dragstarted)
-                  .on('drag', this.dragged)
-                  .on('end', this.dragended)
-              )
-              .on('click', function (d) {
-                if (d.type === 'paper' && d.level !== 1) {
-                  that.getNewNode(d)
-                }
-              })
-              .on('mouseover', function (d, i) {
-                console.log(d.id + ' ' + d.level)
-                if (d.type === 'paper') {
-                  var paperid = d.id
-                  paperid = paperid.slice(1)
-                  that.$http.post('/getpaper', { id: paperid })
-                    .then((res) => {
-                      if (res.data.id !== null) {
-                        that.paper.id = res.data.id
-                        that.paper.title = res.data.title
-                        that.paper.year = res.data.year
-                        that.paper.abstract = res.data._abstract
-                        that.unselected = false
-                        that.selected = true
-                        that.ispaper = true
-                      } else {
-                        alert('paperid error')
-                      }
-                    })
-                }
-                else {
-                  var authorid = d.id
-                  authorid = authorid.slice(1)
-                  that.$http.post('/getauthor', { id: authorid })
-                    .then((res) => {
-                      if (res.data.id !== null) {
-                        that.author.name = res.data.name
-                        that.unselected = false
-                        that.selected = true
-                        that.ispaper = false
-                      } else {
-                        alert('authorid error')
-                      }
-                    })
-                }
-              })
-            simulation.alpha(1).restart()
+            this.dataAnalyse(papersList, authorList, 4)
+            this.netConstruct()
+            this.nodeClick = false
           } else {
             alert('error!')
           }
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$http.post('/graphdata', { id: paperid, hierarchyLimit: 3 })
+            .then((res) => {
+              if (res.data.paper !== null) {
+                this.modeldata = res.data
+                var papersList = this.modeldata.paper
+                var authorList = this.modeldata.author
+
+                this.dataAnalyse(papersList, authorList, 3)
+                this.netConstruct()
+                this.nodeClick = false
+              } else {
+                alert('error!')
+              }
+            })
         })
     },
     ticked: function () {
@@ -351,8 +448,6 @@ export default {
       .zoom()
       .scaleExtent([-5, 2])
       .on('zoom', zoomed)
-
-    var color = d3.scaleOrdinal(d3.schemeCategory10)
 
     var svg = d3.select('svg')
     var width = svg.attr('width')
@@ -407,159 +502,27 @@ export default {
           var papersList = this.modeldata.paper
           var authorList = this.modeldata.author
 
-          for (var i = 0; i < papersList.length; i++) {
-            var temppaper = papersList[i]
-            var papernode = {}
-            papernode.id = 'p' + temppaper.paperid
-            papernode.type = 'paper'
-            papernode.level = temppaper.level
-            papernode.pagerank = temppaper.pagerank
-            papernode.title = 'CDMA RAKE receiver for cellular mobile radio in Nakagami fading frequency selective channels'
-            papernode.abstract = 'Studies the performance advantage offered by the wideband multipath RAKE structure receiver in a cellular radio direct sequence code division multiple access system (CDMA). The base to mobile link is modeled as a Nakagami fading frequency selective channel. The performance of a RAKE structure receiver employing coherent reception with maximal ratio combining in a frequency selective channel is analyzed and compared with the flat fading case. The degradation in the performance of the receiver as a result of imperfect channel estimation is also studied.'
-            papernode.year = temppaper.year
-            initnode.push(Object.assign({}, papernode))
-
-            var tempPapertoAuthor = temppaper.authors
-            var tempPaperRefer = temppaper.reference
-            var tempPaperCite = temppaper.cite
-            if (papernode.level < 4) {
-              for (var j = 0; j < tempPapertoAuthor.length; j++) {
-                var paperlink = {}
-                paperlink.source = 'p' + temppaper.paperid
-                paperlink.target = 'a' + tempPapertoAuthor[j]
-                paperlink.sourcetype = 'paper'
-                paperlink.targettype = 'author'
-                initlink.push(Object.assign({}, paperlink))
-              }
-
-              for (var j = 0; j < tempPaperRefer.length; j++) {
-                var paperlink = {}
-                paperlink.source = 'p' + temppaper.paperid
-                paperlink.target = 'p' + tempPaperRefer[j]
-                paperlink.sourcetype = 'paper'
-                paperlink.targettype = 'paper'
-                initlink.push(Object.assign({}, paperlink))
-              }
-
-              for (var j = 0; j < tempPaperCite.length; j++) {
-                var paperlink = {}
-                paperlink.source = 'p' + temppaper.paperid
-                paperlink.target = 'p' + tempPaperCite[j]
-                paperlink.sourcetype = 'paper'
-                paperlink.targettype = 'paper'
-                initlink.push(Object.assign({}, paperlink))
-              }
-            }
-            // else if (papernode.level === 3) {
-            //   for (var i = 0; i < tempPaperRefer.length; i++) {
-            //     console.log(i)
-            //     var inFlag = false
-            //     for (var j = 0; j < initnode.length; j++) {
-            //       if (initnode[j].id === ('p' + tempPaperRefer[i])) {
-            //         inFlag = true
-            //         break
-            //       }
-            //     }
-
-            //     if (inFlag) {
-            //       var paperlink = {}
-            //       paperlink.source = 'p' + temppaper.paperid
-            //       paperlink.target = 'p' + tempPaperRefer[i]
-            //       paperlink.sourcetype = 'paper'
-            //       paperlink.targettype = 'paper'
-            //       initlink.push(Object.assign({}, paperlink))
-            //     }
-            //   }
-            // }
-          }
-
-          for (var i = 0; i < authorList.length; i++) {
-            var tempauthor = authorList[i]
-            var authornode = {}
-            authornode.id = 'a' + tempauthor.authorid
-            authornode.type = 'author'
-            authornode.level = tempauthor.level
-            authornode.pagerank = tempauthor.pagerank
-            initnode.push(Object.assign({}, authornode))
-          }
-
-          simulation.nodes(initnode).on('tick', this.ticked)
-          simulation.force('link').links(initlink)
-
-          svgLink = svgLink
-            .data(initlink)
-            .enter()
-            .append('line')
-            .attr('stroke-width', function (d) {
-              return Math.sqrt(d.value)
-            })
-
-          svgNode = svgNode
-            .data(initnode)
-            .enter()
-            .append('circle')
-            .attr('r', function (d, i) {
-              return Math.sqrt(d.pagerank / that.totalPR * 2500)
-            })
-            .attr('fill', function (d, i) {
-              if (d.type === 'author') {
-                return '#2c3e50'
-              }
-              else {
-                return that.getColor(d.year)
-              }
-            })
-            .call(
-              d3
-                .drag()
-                .on('start', this.dragstarted)
-                .on('drag', this.dragged)
-                .on('end', this.dragended)
-            )
-            .on('click', function (d) {
-              if (d.type === 'paper' && d.level !== 1) {
-                that.getNewNode(d)
-              }
-            })
-            .on('mouseover', function (d, i) {
-              console.log(d.id + ' ' + d.level)
-              if (d.type === 'paper') {
-                var paperid = d.id
-                paperid = paperid.slice(1)
-                that.$http.post('/getpaper', { id: paperid })
-                  .then((res) => {
-                    if (res.data.id !== null) {
-                      that.paper.id = res.data.id
-                      that.paper.title = res.data.title
-                      that.paper.year = res.data.year
-                      that.paper.abstract = res.data._abstract
-                      that.unselected = false
-                      that.selected = true
-                      that.ispaper = true
-                    } else {
-                      alert('paperid error')
-                    }
-                  })
-              }
-              else {
-                var authorid = d.id
-                authorid = authorid.slice(1)
-                that.$http.post('/getauthor', { id: authorid })
-                  .then((res) => {
-                    if (res.data.id !== null) {
-                      that.author.name = res.data.name
-                      that.unselected = false
-                      that.selected = true
-                      that.ispaper = false
-                    } else {
-                      alert('authorid error')
-                    }
-                  })
-              }
-            })
+          this.dataAnalyse(papersList, authorList, 4)
+          this.netConstruct()
         } else {
           alert('error!')
         }
+      })
+      .catch((error) => {
+        console.log(error)
+        this.$http.post('/graphdata', { id: 37821, hierarchyLimit: 3 })
+          .then((res) => {
+            if (res.data.paper !== null) {
+              this.modeldata = res.data
+              var papersList = this.modeldata.paper
+              var authorList = this.modeldata.author
+
+              this.dataAnalyse(papersList, authorList, 3)
+              this.netConstruct()
+            } else {
+              alert('error!')
+            }
+          })
       })
 
     this.bus.$on('SelectPaper', function (message) {
@@ -568,20 +531,19 @@ export default {
       var newlinks = []
 
       for (var i = 0; i < initnode.length; i++) {
-        if (initnode[i].type === 'paper') {
+        if (initnode[i].type === 'paper' && initnode[i].level <= that.selectLevel) {
           newnodes.push(initnode[i])
         }
       }
 
-      for (var i = 0; i < initlink.length; i++) {
+      for (i = 0; i < initlink.length; i++) {
         console.log(initlink[i].source)
         if (
-          initlink[i].source.type !== 'paper' ||
-          initlink[i].target.type !== 'paper'
+          initlink[i].source.type !== 'paper' || initlink[i].source.level > that.selectLevel ||
+          initlink[i].target.type !== 'paper' || initlink[i].target.level > that.selectLevel
         ) {
           continue
-        }
-        else {
+        } else {
           newlinks.push(initlink[i])
         }
       }
@@ -601,6 +563,12 @@ export default {
         return d.source.id + '-' + d.target.id
       })
 
+      svgNode = svgNode.data(initnode, d => {
+        return d.id
+      })
+      svgLink.exit().remove()
+      svgNode.exit().remove()
+
       svgLink = svgLink
         .enter()
         .append('line')
@@ -610,19 +578,21 @@ export default {
         .merge(svgLink)
 
       svgNode = svgNode
-        .data(initnode, d => {
-          return d.id
-        })
         .enter()
         .append('circle')
         .attr('r', function (d, i) {
-          return Math.sqrt(d.pagerank / that.totalPR * 2000) * 2
+          if (d.level === 1) {
+            return 25
+          }
+          return Math.sqrt(d.pagerank / that.totalPR * 2500) * 2
         })
         .attr('fill', function (d, i) {
           if (d.type === 'author') {
             return '#2c3e50'
-          }
-          else {
+          } else {
+            if (d.level === 1) {
+              return 'red'
+            }
             return that.getColor(d.year)
           }
         })
@@ -651,6 +621,7 @@ export default {
                   that.paper.title = res.data.title
                   that.paper.year = res.data.year
                   that.paper.abstract = res.data._abstract
+                  that.paper.url = res.data.url
                   that.unselected = false
                   that.selected = true
                   that.ispaper = true
@@ -658,8 +629,8 @@ export default {
                   alert('paperid error')
                 }
               })
-          }
-          else {
+            that.getCommentArray(paperid)
+          } else {
             var authorid = d.id
             authorid = authorid.slice(1)
             that.$http.post('/getauthor', { id: authorid })
@@ -691,19 +662,18 @@ export default {
               newnodes.push(initnode[i])
             }
           }
-          for (var i = 0; i < initlink.length; i++) {
+          for (i = 0; i < initlink.length; i++) {
             if (initlink[i].source.level <= 2 && initlink[i].target.level <= 2) {
               newlinks.push(initlink[i])
             }
           }
-        }
-        else {
-          for (var i = 0; i < initnode.length; i++) {
+        } else {
+          for (i = 0; i < initnode.length; i++) {
             if (initnode[i].level <= 2 && initnode[i].type === 'paper') {
               newnodes.push(initnode[i])
             }
           }
-          for (var i = 0; i < initlink.length; i++) {
+          for (i = 0; i < initlink.length; i++) {
             if (
               initlink[i].source.type === 'paper' &&
               initlink[i].target.type === 'paper' &&
@@ -736,19 +706,18 @@ export default {
             newnodes.push(initnode[i])
           }
         }
-        for (var i = 0; i < initlink.length; i++) {
+        for (i = 0; i < initlink.length; i++) {
           if (initlink[i].source.level <= 3 && initlink[i].target.level <= 3) {
             newlinks.push(initlink[i])
           }
         }
-      }
-      else {
-        for (var i = 0; i < initnode.length; i++) {
+      } else {
+        for (i = 0; i < initnode.length; i++) {
           if (initnode[i].level <= 3 && initnode[i].type === 'paper') {
             newnodes.push(initnode[i])
           }
         }
-        for (var i = 0; i < initlink.length; i++) {
+        for (i = 0; i < initlink.length; i++) {
           if (
             initlink[i].source.type === 'paper' &&
             initlink[i].target.type === 'paper' &&
@@ -766,8 +735,7 @@ export default {
         svgLink.exit().remove()
 
         simulation.alpha(1).restart()
-      }
-      else {
+      } else {
         svgLink = svgLink.data(newlinks, d => {
           return d.source.id + '-' + d.target.id
         })
@@ -787,13 +755,18 @@ export default {
           .enter()
           .append('circle')
           .attr('r', function (d, i) {
-            return Math.sqrt(d.pagerank / that.totalPR * 2000) * 2
+            if (d.level === 1) {
+              return 25
+            }
+            return Math.sqrt(d.pagerank / that.totalPR * 2500) * 2
           })
           .attr('fill', function (d, i) {
             if (d.type === 'author') {
               return '#2c3e50'
-            }
-            else {
+            } else {
+              if (d.level === 1) {
+                return 'red'
+              }
               return that.getColor(d.year)
             }
           })
@@ -818,20 +791,20 @@ export default {
               that.$http.post('/getpaper', { id: paperid })
                 .then((res) => {
                   if (res.data.id !== null) {
-                    console.log(res.data)
                     that.paper.id = res.data.id
                     that.paper.title = res.data.title
                     that.paper.year = res.data.year
                     that.paper.abstract = res.data._abstract
+                    that.paper.url = res.data.url
                     that.unselected = false
                     that.selected = true
-                    that.ispaper = false
+                    that.ispaper = true
                   } else {
                     alert('paperid error')
                   }
                 })
-            }
-            else {
+              that.getCommentArray(paperid)
+            } else {
               var authorid = d.id
               authorid = authorid.slice(1)
               that.$http.post('/getauthor', { id: authorid })
@@ -841,7 +814,7 @@ export default {
                     that.author.name = res.data.name
                     that.unselected = false
                     that.selected = true
-                    that.ispaper = true
+                    that.ispaper = false
                   } else {
                     alert('authorid error')
                   }
@@ -866,19 +839,18 @@ export default {
               newnodes.push(initnode[i])
             }
           }
-          for (var i = 0; i < initlink.length; i++) {
+          for (i = 0; i < initlink.length; i++) {
             if (initlink[i].source.level <= 4 && initlink[i].target.level <= 4) {
               newlinks.push(initlink[i])
             }
           }
-        }
-        else {
-          for (var i = 0; i < initnode.length; i++) {
+        } else {
+          for (i = 0; i < initnode.length; i++) {
             if (initnode[i].level <= 4 && initnode[i].type === 'paper') {
               newnodes.push(initnode[i])
             }
           }
-          for (var i = 0; i < initlink.length; i++) {
+          for (i = 0; i < initlink.length; i++) {
             if (
               initlink[i].source.type === 'paper' &&
               initlink[i].target.type === 'paper' &&
@@ -889,9 +861,19 @@ export default {
             }
           }
         }
+
+        simulation.nodes(newnodes)
+        simulation.force('link').links(newlinks)
+
         svgLink = svgLink.data(newlinks, d => {
           return d.source.id + '-' + d.target.id
         })
+        svgNode = svgNode.data(newnodes, d => {
+          return d.id
+        })
+
+        svgLink.exit().remove()
+        svgNode.exit().remove()
 
         svgLink = svgLink
           .enter()
@@ -902,19 +884,21 @@ export default {
           .merge(svgLink)
 
         svgNode = svgNode
-          .data(newnodes, d => {
-            return d.id
-          })
           .enter()
           .append('circle')
           .attr('r', function (d, i) {
-            return Math.sqrt(d.pagerank / that.totalPR * 2000) * 2
+            if (d.level === 1) {
+              return 25
+            }
+            return Math.sqrt(d.pagerank / that.totalPR * 2500) * 2
           })
           .attr('fill', function (d, i) {
             if (d.type === 'author') {
               return '#2c3e50'
-            }
-            else {
+            } else {
+              if (d.level === 1) {
+                return 'red'
+              }
               return that.getColor(d.year)
             }
           })
@@ -939,11 +923,11 @@ export default {
               that.$http.post('/getpaper', { id: paperid })
                 .then((res) => {
                   if (res.data.id !== null) {
-                    console.log(res.data)
                     that.paper.id = res.data.id
                     that.paper.title = res.data.title
                     that.paper.year = res.data.year
                     that.paper.abstract = res.data._abstract
+                    that.paper.url = res.data.url
                     that.unselected = false
                     that.selected = true
                     that.ispaper = true
@@ -951,6 +935,7 @@ export default {
                     alert('paperid error')
                   }
                 })
+              that.getCommentArray(paperid)
             } else {
               var authorid = d.id
               authorid = authorid.slice(1)
@@ -968,8 +953,6 @@ export default {
                 })
             }
           })
-        simulation.nodes(newnodes)
-        simulation.force('link').links(newlinks)
         simulation.alpha(1).restart()
       }
     })
@@ -1005,20 +988,20 @@ export default {
   color: #000;
   padding-left: 15px;
   padding-right: 10px;
-  padding-top: 50px;
+  padding-top: 25px;
   padding-bottom: 20px;
-  width: 300px;
+  width: 350px;
   bottom: 0px;
   font-size: 15px;
   z-index: 120;
 }
 
-.tooltip p {
+/* .tooltip p {
   font-size: 15px;
   text-align: center;
   padding: 0;
   margin: 0;
-}
+} */
 
 hr.tooltip-hr {
   color: #ddd;
@@ -1066,7 +1049,6 @@ hr.tooltip-hr {
   text-align: left;
   position: relative;
   line-height: 20px;
-  max-height: 390px;
   overflow: hidden;
 }
 
@@ -1089,11 +1071,15 @@ hr.tooltip-hr {
 .click-icons {
   width: 95%;
   position: absolute;
-  bottom: 25px;
+  bottom: 15px;
   text-align: center;
 }
 .paper-icons {
   font-size: 25px;
+  margin-right: 30px;
+}
+.paper-icons2 {
+  font-size: 28px;
   margin-right: 30px;
 }
 .click-icons a {
@@ -1101,5 +1087,57 @@ hr.tooltip-hr {
 }
 .click-icons a:hover {
   color: #000;
+}
+
+.paper-area {
+  height: 610px;
+  overflow: auto;
+}
+
+#comment-title {
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px rgba(36, 41, 46, 0.5) solid !important;
+}
+
+.comment-line {
+  margin-right: 15px;
+  float: right;
+}
+
+.comment-content {
+  text-indent: 1em;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.comment-area {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px rgba(36, 41, 46, 0.5) solid !important;
+}
+
+.btn-primary {
+  transition: all 0.3s ease;
+  background: rgba(36, 41, 46, 0.9);
+  border-color: rgba(36, 41, 46, 0);
+  margin-top: 5px;
+  color: white;
+}
+.btn-primary:active:focus {
+  color: #333;
+  background-color: #ffffff;
+  border-color: rgba(36, 41, 46, 0);
+}
+.btn-primary:hover {
+  color: #333;
+  background-color: rgba(36, 41, 46, 0.2);
+  border-color: rgba(36, 41, 46, 0);
 }
 </style>
