@@ -27,15 +27,15 @@
               <div class="gs_in_txtw gs_in_txtm"><input v-model="begin" type="text" class="gs_in_txt" name="as_ylo" value="" id="gs_as_ylo" size="4" maxlength="4" autocapitalize="off" pattern="[0-9]*"></div>
               —
               <div class="gs_in_txtw gs_in_txtm"><input v-model="end" type="text" class="gs_in_txt" name="as_yhi" value="" size="4" maxlength="4" autocapitalize="off" pattern="[0-9]*"></div>
-              <div>
-                <span class="glyphicon glyphicon-search search2" @click="search(begin,end)" aria-hidden="true" style="color: #24292e;"></span>
+              <div class="aaa">
+                <span class="glyphicon glyphicon-search search2" @click="searchY(begin,end)" aria-hidden="true" style="color: #24292e;"></span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="col-xs-12 col-md-9">
-        <div v-for="paper in papers">
+        <div v-for="paper in papers" :key="paper.id">
           <div class="panel panel-default">
             <div class="panel-heading">
               <a :href="paper.url" target="_blank" @click="addhistory(paper.id)">
@@ -46,7 +46,7 @@
             <div class="panel-body">
               <div class="col-xs-12 col-md-6 author-group">
                 <div class="body-author">Authors: </div>
-                <div class="body-author" v-for="author in paper.authors">
+                <div class="body-author" v-for="author in paper.authors" :key="author.id">
                   <strong>
                     {{author.name}}
                   </strong>
@@ -76,7 +76,6 @@
         <span class="glyphicon glyphicon-upload" aria-hidden="true" @click="up()"></span>
         <!-- <div id="box" class="box"  >
           <div class="box-in"></div>
-          
         </div> -->
       </div>
       <div v-show="pageShow" class="col-xs-12 col-md-10 bottom-nav">
@@ -129,7 +128,6 @@
         <li class="page-item">
           <a class="page-link">5</a>
         </li>
-        
         <li class="page-item">
           <a class="page-link" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
@@ -168,6 +166,8 @@ export default {
       this.showRange = !this.showRange
     },
     searchY (start, end) {
+      console.log(start)
+      console.log(end)
       this.defaultStart = start
       this.defaultEnd = end + 1
       this.page = [1, 2, 3, 4, 5]
@@ -217,6 +217,9 @@ export default {
             if (res.data.papers.length < 10) {
               this.pageShow = false;
             }
+          }
+          else{
+            this.pageShow = true;
           }
         })
 
@@ -271,6 +274,13 @@ export default {
 
 <style scoped>
 @import "../../../static/css/mdb";
+
+.aaa {
+  display: inline;
+  /* margin-top: 20px; */
+  padding-left: 5px;
+  /* padding-top: 15px; */
+}
 
 .search2 {
   display: inline;

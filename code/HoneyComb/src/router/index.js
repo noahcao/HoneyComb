@@ -38,7 +38,7 @@ export default new Router({
       component: BackEndTest
     },
     {
-      path: '/search?content=:content',
+      path: '/search',
       name: 'search',
       component: search
 
