@@ -79,6 +79,7 @@ export default {
         var panelArray = res.data.panels
         for (var i = 0; i < panelArray.length; i++) {
           var panel = panelArray[i]
+          panel.id = 'panel' + panel.id + i
           panel.type = 'panel'
           this.trends.push(panel)
         }
@@ -90,7 +91,8 @@ export default {
         var postArray = res.data.posts
         for (var i = 0; i < postArray.length; i++) {
           var post = postArray[i]
-          console.log(post)
+          // console.log(post)
+          post.id = 'post' + post.id + i
           post.content = post.content.replace(/<[/]p><p>/g, '\n')
           post.content = post.content.replace('</p>', '')
           post.content = post.content.replace('<p>', '')
@@ -105,7 +107,8 @@ export default {
         var commentArray = res.data.comments
         for (var i = 0; i < commentArray.length; i++) {
           var comment = commentArray[i]
-          comment.type = 'post'
+          comment.id = 'comment' + comment.id + i
+          comment.type = 'comment'
           this.trends.push(comment)
         }
         this.timeSort()

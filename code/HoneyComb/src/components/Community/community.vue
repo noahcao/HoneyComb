@@ -26,7 +26,7 @@
                   <input type="checkbox" @click="check(3)" class="form-check-input" id="check3"> Search in author
                 </li>
                 <li>
-                  <button class="btn btn-primary1" @click="createNewPanel">
+                  <button class="btn btn-primary1" @click="createNewPanel" @click.prevent="onSubmit">
                     <span class="fa plus" aria-hidden="true"></span>Create Panel</button>
                 </li>
               </ul>
@@ -45,7 +45,7 @@
                   <router-link :to="{ name: 'poster', params: { panelid: panel.id }}">
                     <h3 class="card-title dark-text">{{panel.title}}</h3>
                   </router-link>
-                  <a href="#">{{panel.ownerName}}</a>
+                  <a>{{panel.ownerName}}</a>
                   <p class="card-time">posted at: {{panel.time}}</p>
                   <hr class="my-4">
                   <p v-if="panel.posts.length > 0" class="card-text">{{panel.posts[0].content}}</p>
@@ -69,7 +69,7 @@
               </div>
             </div>
             <div class="col-sm-6 col-xs-5">
-              <button class="btn btn-elegant" @click="createPanel"> Post </button>
+              <button class="btn btn-elegant" @click="createPanel" @click.prevent="onSubmit"> Post </button>
             </div>
           </div>
           <div id="panelEditor">
@@ -170,7 +170,7 @@ export default {
   },
   methods: {
     toPoster () {
-      alert("jump to a poster page");
+      alert("Jump to a poster page!");
     },
     search () {
       if (this.content === '') {
@@ -239,15 +239,15 @@ export default {
       }
     },
     saveContent () {
-      alert("存储内容进入数据库:" + this.data.EditorContent)
+      alert("存储内容进入数据库:" + this.data.EditorContent + "!")
     },
     createPanel () {
       if (this.newPanelTitle == "") {
-        alert("title can't be empty!");
+        alert("Title can't be empty!");
         return;
       }
       else if (this.panelContent == "") {
-        alert("content of panel can't be empty!");
+        alert("Content of panel can't be empty!");
         return;
       }
       else {
@@ -255,11 +255,12 @@ export default {
           .then((res) => {
             this.$http.post('/addpost', { panelId: res.data.id, userId: this.data.id, content: this.panelContent })
               .then((res) => {
-                alert("add a post at " + res.data.time);
+                alert("Add a post at " + res.data.time + "!");
                 this.panelContent = "";
                 this.newPanelTitle = "";
                 this.showPoster = true;
                 this.showsidebar = true;
+                window.location.reload()
               })
           })
       }

@@ -191,20 +191,20 @@ export default {
           .then((res) => {
             this.$http.get('/updatepwd', { params: { id: this.id, pwd: pwd1 } })
               .then((res) => {
-                alert('success')
+                alert('Success!')
                 $('#close').click()
               })
           })
       } else if (email === '' && pwd1 !== '') {
         this.$http.get('/updatepwd', { params: { id: this.id, pwd: pwd1 } })
           .then((res) => {
-            alert('success')
+            alert('Success!')
             $('#close').click()
           })
       } else if (email !== '' && pwd1 === '') {
         this.$http.get('/updateemail', { params: { id: this.id, email: email } })
           .then((res) => {
-            alert('success')
+            alert('Success!')
             $('#close').click()
           })
       }
@@ -248,7 +248,7 @@ export default {
       var icon = document.getElementById('icon').files[0]
       var imgSize = icon.size
       if (imgSize > 300 * 1024) {
-        alert('file is too big!!!')
+        alert('File is too big!')
         $('#icon').val('')
         return
       }

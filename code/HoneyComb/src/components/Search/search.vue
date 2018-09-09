@@ -166,8 +166,22 @@ export default {
       this.showRange = !this.showRange
     },
     searchY (start, end) {
-      console.log(start)
-      console.log(end)
+      var isNum = /^[0-9]*$/
+      var errorFlag = false
+
+      if (!isNum.test(start) || !isNum.test(end)) {
+        errorFlag = true
+      }
+
+      if (end <= start) {
+        errorFlag = true
+      }
+
+      if(errorFlag){
+        alert('Bad enter!')
+        return
+      }
+
       this.defaultStart = start
       this.defaultEnd = end + 1
       this.page = [1, 2, 3, 4, 5]
@@ -218,7 +232,7 @@ export default {
               this.pageShow = false;
             }
           }
-          else{
+          else {
             this.pageShow = true;
           }
         })

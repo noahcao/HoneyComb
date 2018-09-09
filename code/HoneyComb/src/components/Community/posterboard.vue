@@ -55,7 +55,7 @@ export default {
     },
     methods: {
         toPoster () {
-            alert("jump to a poster page");
+            alert("Jump to a poster page!");
         }
     }
 }

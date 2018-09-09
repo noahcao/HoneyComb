@@ -78,7 +78,7 @@ export default {
         },
         addComment (panelid, postid) {
             if (this.data.id === null) {
-                alert("Please login first")
+                alert("Please login first!")
                 return
             }
             console.log(this.data.id)
@@ -86,7 +86,7 @@ export default {
             this.$http.post('/addcomment', {                panelId: panelid, postId: postid, content: this.newComments[postid],
                 userId: this.data.id            })
                 .then((res) => {
-                    alert("successfult add a comment!");
+                    alert("Successfult add a comment!");
                     this.$http.post('/getpanel', { id: this.panelid })
                         .then((res) => {
                             console.log(this.panelid);

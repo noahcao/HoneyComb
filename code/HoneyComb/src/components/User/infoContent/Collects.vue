@@ -51,6 +51,8 @@ export default {
         newCollect.text = 'Collect'
         this.collects.splice(index, 1, newCollect)
         // this.collects[index].text = 'Collect'
+        console.log(this.id)
+        console.log(d)
         this.$http.post('/deletestar', { userId: this.id, paperId: d })
           .then((res) => {
 
@@ -68,7 +70,7 @@ export default {
     }
   },
   mounted () {
-    this.$http.post('/getstar', { userId: 1 })
+    this.$http.post('/getstar', { userId: this.id })
       .then((res) => {
         this.collects = res.data.stars
         for (var i = 0; i < this.collects.length; i++) {

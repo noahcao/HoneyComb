@@ -133,7 +133,7 @@ export default {
       }
     },
     loginWarnning: function () {
-      alert('You need to login first')
+      alert('You need to login first!')
     },
     getCommentArray: function (paperId) {
       this.$http.post('/getpapercomment', { paperId: paperId })
@@ -334,7 +334,7 @@ export default {
                   that.selected = true
                   that.ispaper = true
                 } else {
-                  alert('paperid error')
+                  alert('Paperid error!')
                 }
               })
             that.getCommentArray(paperid)
@@ -349,7 +349,7 @@ export default {
                   that.selected = true
                   that.ispaper = false
                 } else {
-                  alert('authorid error')
+                  alert('Authorid error!')
                 }
               })
           }
@@ -378,7 +378,7 @@ export default {
             this.netConstruct()
             this.nodeClick = false
           } else {
-            alert('error!')
+            alert('Error!')
           }
         })
         .catch((error) => {
@@ -394,7 +394,7 @@ export default {
                 this.netConstruct()
                 this.nodeClick = false
               } else {
-                alert('error!')
+                alert('Error!')
               }
             })
         })
@@ -505,7 +505,7 @@ export default {
           this.dataAnalyse(papersList, authorList, 4)
           this.netConstruct()
         } else {
-          alert('error!')
+          alert('Error!')
         }
       })
       .catch((error) => {
@@ -520,7 +520,7 @@ export default {
               this.dataAnalyse(papersList, authorList, 3)
               this.netConstruct()
             } else {
-              alert('error!')
+              alert('Error!')
             }
           })
       })
@@ -626,7 +626,7 @@ export default {
                   that.selected = true
                   that.ispaper = true
                 } else {
-                  alert('paperid error')
+                  alert('Paperid error!')
                 }
               })
             that.getCommentArray(paperid)
@@ -641,7 +641,7 @@ export default {
                   that.selected = true
                   that.ispaper = false
                 } else {
-                  alert('authorid error')
+                  alert('Authorid error!')
                 }
               })
           }
@@ -800,7 +800,7 @@ export default {
                     that.selected = true
                     that.ispaper = true
                   } else {
-                    alert('paperid error')
+                    alert('Paperid error!')
                   }
                 })
               that.getCommentArray(paperid)
@@ -816,7 +816,7 @@ export default {
                     that.selected = true
                     that.ispaper = false
                   } else {
-                    alert('authorid error')
+                    alert('Authorid error!')
                   }
                 })
             }
@@ -932,7 +932,7 @@ export default {
                     that.selected = true
                     that.ispaper = true
                   } else {
-                    alert('paperid error')
+                    alert('Paperid error!')
                   }
                 })
               that.getCommentArray(paperid)
@@ -948,7 +948,7 @@ export default {
                     that.selected = true
                     that.ispaper = false
                   } else {
-                    alert('authorid error')
+                    alert('Authorid error!')
                   }
                 })
             }

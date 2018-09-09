@@ -98,7 +98,7 @@ export default {
                 $('#inputMDEx1').parent().parent().addClass('has-error')
                 $('#inputMDEx1').after('<span id="name-help" class="help-block">User name existed</span>')
               } else {
-                alert('success')
+                alert('Success!')
                 this.data.id = response.data.id
                 window.location.reload()
               }

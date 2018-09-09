@@ -90,11 +90,11 @@ export default {
         this.$http.post('/loginhandle', { name: this.username, pwd: this.userpwd })
           .then((res) => {
             if (res.data.id !== null) {
-              alert('success')
+              alert('Success!')
               this.data.id = res.data.id
               window.location.reload()
             } else {
-              alert('username or password error')
+              alert('Username or password error!')
             }
           })
       }

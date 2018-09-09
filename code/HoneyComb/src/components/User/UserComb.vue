@@ -330,7 +330,7 @@ export default {
             initlink = resLinkArray
             that.reconstruct()
           } else {
-            alert('getnet error!')
+            alert('Get net error!')
           }
         })
     },
@@ -742,7 +742,7 @@ export default {
         this.title = d.id
       })
 
-    this.$http.post('/usernet', { userId: 1 })
+    this.$http.post('/usernet', { userId: this.id })
       .then((res) => {
         for (var i = 0; i < res.data.nets.length; i++) {
           var singleComb = {}

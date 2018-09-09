@@ -52,7 +52,7 @@ export default {
         postContent(){
             this.$http.post('/addpost', {panelId: this.panelId, userId: this.data.id, content: this.data.EditorContent, type:"html"})
                 .then((res) => {
-                    alert("add a post!");
+                    alert("Add a post!");
                     window.location.reload()
                 })
         }
