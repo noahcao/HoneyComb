@@ -59,7 +59,7 @@
               </p>
             </div>
             <div class="guide-step">
-              <h4>5. Move the mouse to the node to get detail information of paper</h4>
+              <h4>5. Move the mouse to get detail info</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/searchpaper_step5.png">
               </p>
@@ -71,7 +71,7 @@
               </p>
             </div>
             <div class="guide-step">
-              <h4>7. Click button on the left to select certain node</h4>
+              <h4>7. Click button on the left to select node</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/searchpaper_step7.png">
               </p>
@@ -94,7 +94,7 @@
               </p>
             </div>
             <div class="guide-step">
-              <h4>2. Your personal comb is shown on the left</h4>
+              <h4>2. Your comb list is shown on the left</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/combconstruct2.png">
               </p>
@@ -106,15 +106,21 @@
               </p>
             </div>
             <div class="guide-step">
-              <h4>4. Click + button to add a new node or new link in your comb</h4>
+              <h4>4. Click button to add a new node or new link</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/combconstruct4.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>5. Move the mouse to the node to view node name and do not forget to save it</h4>
+              <h4>5. Move the mouse to view node name</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/combconstruct5.png">
+              </p>
+            </div>
+            <div class="guide-step">
+              <h4>6. Save your comb</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/combconstruct6.png">
               </p>
             </div>
 

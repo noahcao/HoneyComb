@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     keyListener (e) {
-      if (e.keyCode === 13) {
+      if (e.keyCode === 13 && this.content !== '') {
         $('#search233').click()
       }
     }

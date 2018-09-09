@@ -19,15 +19,14 @@
             <a href="#" class="title">Honeycomb</a>
           </li> -->
           <li>
-
-            <router-link :to="{name:'Guide'}" class="tag1">Guide</router-link>
+            <router-link :to="{name:'community'}" class="tag1">Community</router-link>
+          </li>
+          <li>
+            <router-link :to="{name:'Guide'}" class="tag">Guide</router-link>
           </li>
           <!-- <li>
             <router-link :to="{name:'poster'}" class="tag">About us</router-link>
           </li> -->
-          <li>
-            <router-link :to="{name:'community'}" class="tag">Community</router-link>
-          </li>
           <!-- <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
               <span class="caret"></span>
@@ -102,7 +101,6 @@
         </div>
       </div>
     </div>
-    <h2 class="hide">{{status}}</h2>
   </nav>
 </template>
 
@@ -113,14 +111,10 @@ import wrapperLr from '../user/wrapperLr'
 export default {
   name: 'nav-bar',
   data () {
-    var status = []
-    for (var i of this.data.LRList) {
-      status.push(i)
-    }
     return {
       id: this.data.id,
       name: null,
-      status: status
+      status: this.data.LRList
     }
   },
   components: {
