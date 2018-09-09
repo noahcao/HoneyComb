@@ -20,7 +20,7 @@
           <div class="col-md-4 journal-box">
             <a href="https://arxiv.org/" target="_blank">
               <img src="../../../static/pic/arxiv.png">
-              <p>123123</p>
+              <p>arXiv is a repository of electronic preprints approved for publication after moderation</p>
             </a>
           </div>
         </div>
@@ -35,43 +35,43 @@
         <div class="container-wrap">
           <div class="container-inbox">
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>1. Enter the paper on the home page</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>2. Choose the paper that you are interested in</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/searchpaper_step2.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>3. Click title to browse content</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/searchpaper_step3.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>4. Or Click more to view net of paper</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/searchpaper_step4.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>5. Move the mouse to the node to get detail information of paper</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/searchpaper_step5.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>6. Click node to explore new net</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/searchpaper_step6.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>7. Click button on the left to select certain node</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/searchpaper_step7.png">
               </p>
@@ -88,31 +88,31 @@
         <div class="container-wrap">
           <div class="container-inbox">
             <div class="guide-step">
-              <h4>Step1. Enter the paper on the home page</h4>
+              <h4>1. Click My Comb to access to personal space</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/combconstruct1.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>2. Your personal comb is shown on the left</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/combconstruct2.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>3. Select one or add a new comb to view</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/combconstruct3.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>4. Click + button to add a new node or new link in your comb</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/combconstruct4.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>5. Move the mouse to the node to view node name and do not forget to save it</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/combconstruct5.png">
               </p>
@@ -240,6 +240,11 @@ export default {
   width: 80%;
   height: auto;
   margin: auto;
+}
+
+.guide-step h4{
+  margin-top: 3%;
+  margin-bottom: 2%;
 }
 
 .top-image-container {
