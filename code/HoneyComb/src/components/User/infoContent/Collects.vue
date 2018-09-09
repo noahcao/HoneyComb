@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="media" v-for="paper in collects">
+    <div class="media" v-for="paper in collects" :key="paper.id">
       <div class="media-body">
         <div class="d-inline-block">
           <h4 class="media-heading">

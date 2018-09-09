@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="trend in trends">
+    <div v-for="trend in trends" :key="trend.id">
       <div class="trend-block">
         <div v-if="trend.type==='panel'">
           <div>

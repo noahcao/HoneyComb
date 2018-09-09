@@ -6,7 +6,7 @@
           Your history
         </a>
       </div>
-      <div class="history-item" v-for="history in historys">
+      <div class="history-item" v-for="history in historys" :key="history.time">
         <span>{{history.time}}</span>
         <span class="history-title">
           <a v-if="history.paper.url !== null" :href="history.paper.url" target="_blank">{{history.paper.title}}</a>
@@ -33,7 +33,13 @@ export default {
     this.$http.post('/gethistory', { userId: this.id })
       .then((res) => {
         this.historys = res.data.history
-        console.log(this.historys)
+        this.historys.sort(function (a, b) {
+          if (a.time < b.time) {
+            return 1
+          } else {
+            return -1
+          }
+        })
       })
   }
 }

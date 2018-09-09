@@ -16,14 +16,14 @@ export default {
   },
   data () {
     return {
-      status: false
+      status: this.data.LRList
     }
   },
   watch: {
     'data.LRList': {
       handler: function (val, oldval) {
-        console.log('status change')
         this.status = val[0].status
+        console.log('status change' + this.status)
       },
       deep: true
     }

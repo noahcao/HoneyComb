@@ -14,7 +14,7 @@
             <form class="navbar-form">
               <div class="form-group">
                 <input type="text" class="form-control2" placeholder="Search" v-model="content2">
-                <span class="glyphicon glyphicon-search" @click="search()" aria-hidden="true" style="color: #24292e;float:left"></span>
+                <span class="glyphicon glyphicon-search glyphicon1" @click="search()" aria-hidden="true" style="color: #24292e;float:left"></span>
               </div>
 
             </form>
@@ -24,9 +24,12 @@
             <h6 class="time-scale" @click="searchY(2014,9998)">Since 2014</h6>
             <h6 class="time-scale" @click="reverse()">Custom range...</h6>
             <div class="gs_res_sb_yyr" v-show="showRange">
-              <div class="gs_in_txtw gs_in_txtm"><input type="text" class="gs_in_txt" name="as_ylo" value="" id="gs_as_ylo" size="4" maxlength="4" autocapitalize="off" pattern="[0-9]*"></div>
+              <div class="gs_in_txtw gs_in_txtm"><input v-model="begin" type="text" class="gs_in_txt" name="as_ylo" value="" id="gs_as_ylo" size="4" maxlength="4" autocapitalize="off" pattern="[0-9]*"></div>
               —
-              <div class="gs_in_txtw gs_in_txtm"><input type="text" class="gs_in_txt" name="as_yhi" value="" size="4" maxlength="4" autocapitalize="off" pattern="[0-9]*"></div>
+              <div class="gs_in_txtw gs_in_txtm"><input v-model="end" type="text" class="gs_in_txt" name="as_yhi" value="" size="4" maxlength="4" autocapitalize="off" pattern="[0-9]*"></div>
+              <div>
+                <span class="glyphicon glyphicon-search search2" @click="search(begin,end)" aria-hidden="true" style="color: #24292e;"></span>
+              </div>
             </div>
           </div>
         </div>
@@ -69,38 +72,38 @@
           </div>
         </div>
       </div>
-        <div v-show="pageShow" class="col-xs-12 col-md-2">
-          <span class="glyphicon glyphicon-upload" aria-hidden="true" @click="up()"></span>
-          <!-- <div id="box" class="box"  >
+      <div v-show="pageShow" class="col-xs-12 col-md-2">
+        <span class="glyphicon glyphicon-upload" aria-hidden="true" @click="up()"></span>
+        <!-- <div id="box" class="box"  >
           <div class="box-in"></div>
           
         </div> -->
-        </div>
-        <div v-show="pageShow" class="col-xs-12 col-md-10 bottom-nav">
-          <ul class="pagination">
-            <li id="prev" class="disabled">
-              <a @click="prevPaging()">&lt;</a>
-            </li>
-            <li class="active">
-              <a id="page1" @click="paging('page1')">{{page[0]}}</a>
-            </li>
-            <li>
-              <a id="page2" @click="paging('page2')">{{page[1]}}</a>
-            </li>
-            <li>
-              <a id="page3" @click="paging('page3')">{{page[2]}}</a>
-            </li>
-            <li>
-              <a id="page4" @click="paging('page4')">{{page[3]}}</a>
-            </li>
-            <li>
-              <a id="page5" @click="paging('page5')">{{page[4]}}</a>
-            </li>
-            <li>
-              <a @click="nextPaging()">&gt;</a>
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div v-show="pageShow" class="col-xs-12 col-md-10 bottom-nav">
+        <ul class="pagination">
+          <li id="prev" class="disabled">
+            <a @click="prevPaging()">&lt;</a>
+          </li>
+          <li class="active">
+            <a id="page1" @click="paging('page1')">{{page[0]}}</a>
+          </li>
+          <li>
+            <a id="page2" @click="paging('page2')">{{page[1]}}</a>
+          </li>
+          <li>
+            <a id="page3" @click="paging('page3')">{{page[2]}}</a>
+          </li>
+          <li>
+            <a id="page4" @click="paging('page4')">{{page[3]}}</a>
+          </li>
+          <li>
+            <a id="page5" @click="paging('page5')">{{page[4]}}</a>
+          </li>
+          <li>
+            <a @click="nextPaging()">&gt;</a>
+          </li>
+        </ul>
+      </div>
     </div>
     <!-- <nav>
       <ul class="pagination pg-dark">
@@ -232,7 +235,9 @@ export default {
       defaultEnd: 9999,
       timer: null,
       showRange: false,
-      pageShow: true
+      pageShow: true,
+      begin: null,
+      end: null
     }
   },
   mounted () {
@@ -253,19 +258,33 @@ export default {
 
 <style scoped>
 @import "../../../static/css/mdb";
+
+.search2 {
+  display: inline;
+}
+
+.btn {
+  margin-left: 15px;
+  margin-top: 10px;
+  display: block;
+}
+
 .gs_in_txtw {
   display: inline-block;
   vertical-align: middle;
 }
+
 .gs_res_sb_yyr {
   padding-left: 15px;
 }
+
 hr {
   margin-top: 0px;
   margin-bottom: 0px;
   border: 0;
   border-top: 1px solid #eee;
 }
+
 .time-scale {
   font-size: 10px;
 }
@@ -305,7 +324,7 @@ hr {
 
 .body-cited {
   padding-left: 0;
-  color:#333;
+  color: #333;
 }
 .card .card-body h6 {
   font-weight: 400;
@@ -318,7 +337,7 @@ hr {
   padding: 1.8rem;
 }
 
-.glyphicon {
+.glyphicon1 {
   position: relative;
   top: 12px;
   display: inline-block;

@@ -6,16 +6,22 @@
         <h1>Paper Journal</h1>
         <div class="journal-boxes">
           <div class="col-md-4 journal-box">
-            <img src="../../../static/pic/ieee_xplore.png">
-            <p>IEEE Xplore is a research database for discovery and access to journal articles</p>
+            <a href="https://www.springer.com/cn/" target="_blank">
+              <img src="../../../static/pic/springer.jpg">
+              <p>Springer is a leading global scientific, technical and medical portfolio</p>
+            </a>
           </div>
           <div class="col-md-4 journal-box">
-            <img src="../../../static/pic/ieee_xplore.png">
-            <p>123123</p>
+            <a href="https://ieeexplore.ieee.org/Xplore/home.jsp" target="_blank">
+              <img src="../../../static/pic/ieee_xplore.png">
+              <p>IEEE Xplore is a research database for discovery and access to journal articles</p>
+            </a>
           </div>
           <div class="col-md-4 journal-box">
-            <img src="../../../static/pic/ieee_xplore.png">
-            <p>123123</p>
+            <a href="https://arxiv.org/" target="_blank">
+              <img src="../../../static/pic/arxiv.png">
+              <p>arXiv is a repository of electronic preprints approved for publication after moderation</p>
+            </a>
           </div>
         </div>
       </div>
@@ -29,41 +35,48 @@
         <div class="container-wrap">
           <div class="container-inbox">
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>1. Enter the paper on the home page</h4>
               <p>
                 <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>2. Choose the paper that you are interested in</h4>
               <p>
-                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+                <img class="step-pic" src="../../../static/pic/searchpaper_step2.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>3. Click title to browse content</h4>
               <p>
-                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+                <img class="step-pic" src="../../../static/pic/searchpaper_step3.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>4. Or Click more to view net of paper</h4>
               <p>
-                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+                <img class="step-pic" src="../../../static/pic/searchpaper_step4.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>5. Move the mouse to the node to get detail information of paper</h4>
               <p>
-                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+                <img class="step-pic" src="../../../static/pic/searchpaper_step5.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>6. Click node to explore new net</h4>
               <p>
-                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+                <img class="step-pic" src="../../../static/pic/searchpaper_step6.png">
               </p>
             </div>
+            <div class="guide-step">
+              <h4>7. Click button on the left to select certain node</h4>
+              <p>
+                <img class="step-pic" src="../../../static/pic/searchpaper_step7.png">
+              </p>
+            </div>
+
           </div>
         </div>
       </div>
@@ -75,41 +88,36 @@
         <div class="container-wrap">
           <div class="container-inbox">
             <div class="guide-step">
-              <h4>Step1. Enter the paper on the home page</h4>
+              <h4>1. Click My Comb to access to personal space</h4>
               <p>
-                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+                <img class="step-pic" src="../../../static/pic/combconstruct1.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>2. Your personal comb is shown on the left</h4>
               <p>
-                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+                <img class="step-pic" src="../../../static/pic/combconstruct2.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>3. Select one or add a new comb to view</h4>
               <p>
-                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+                <img class="step-pic" src="../../../static/pic/combconstruct3.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>4. Click + button to add a new node or new link in your comb</h4>
               <p>
-                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+                <img class="step-pic" src="../../../static/pic/combconstruct4.png">
               </p>
             </div>
             <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
+              <h4>5. Move the mouse to the node to view node name and do not forget to save it</h4>
               <p>
-                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
+                <img class="step-pic" src="../../../static/pic/combconstruct5.png">
               </p>
             </div>
-            <div class="guide-step">
-              <h4>1.Enter the paper on the home page</h4>
-              <p>
-                <img class="step-pic" src="../../../static/pic/searchpaper_step1.png">
-              </p>
-            </div>
+
           </div>
         </div>
       </div>
@@ -119,6 +127,7 @@
 
 <script>
 import navBar from '../main/NavBar'
+import $ from 'jquery'
 
 export default {
   name: 'Guide',
@@ -138,7 +147,7 @@ export default {
 
 <style scoped>
 .guide-top-wrap {
-  display: none
+  display: none;
 }
 
 .journal-boxes {
@@ -194,7 +203,6 @@ export default {
   position: relative;
   padding-left: 0px;
   padding-right: 0px;
-  
 }
 
 .guide-step {
@@ -218,15 +226,15 @@ export default {
     display: block;
   }
   .guide-step {
-  background-color: #fff !important;
-  border: 1px #e1e4e8 solid !important;
-  width: 80%;
-  height: auto;
-  border-radius: 10px !important;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-}
+    background-color: #fff !important;
+    border: 1px #e1e4e8 solid !important;
+    width: 80%;
+    height: auto;
+    border-radius: 10px !important;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
 }
 .guide-step img {
   display: block;
@@ -235,10 +243,16 @@ export default {
   margin: auto;
 }
 
+.guide-step h4{
+  margin-top: 3%;
+  margin-bottom: 2%;
+}
+
 .top-image-container {
   padding-top: 20px;
   width: 80%;
   margin: auto;
+  transition: all 0.5s ease;
 }
 
 .top-image-container h1 {

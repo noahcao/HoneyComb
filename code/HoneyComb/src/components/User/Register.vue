@@ -73,8 +73,7 @@ export default {
         flag = false
         document.getElementById('inputMDEx3').value = ''
         document.getElementById('inputMDEx4').value = ''
-      }
-      else {
+      } else {
         if (pwd !== '' && name !== '') {
           var alphabet = /[a-z]/i
           var number = /[0-9]/

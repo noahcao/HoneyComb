@@ -2,7 +2,7 @@
   <div>
     <nav-bar></nav-bar>
     <div class="tips">
-      <h1>Please use this function in PC!</h1>
+      <h1>Please use this function on PC!</h1>
     </div>
     <div class="comb-container">
       <div class="col-md-0 col-lg-2 tool-bar">
@@ -33,7 +33,7 @@ export default {
   },
   data () {
     return {
-      paperId: this.$route.params["paperId"],
+      paperId: this.$route.params['paperId']
     }
   }
 }
@@ -52,6 +52,10 @@ export default {
 
 .tool-bar {
   display: none;
+}
+
+.tips{
+  text-align: center;
 }
 
 @media(min-width: 800px){
