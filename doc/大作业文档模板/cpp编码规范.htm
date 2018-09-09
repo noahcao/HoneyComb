@@ -1,0 +1,2643 @@
+ <html>
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <meta name="filetype" content="example"> 
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>C++ Programming Guidelines</title>
+<link rel="StyleSheet" href="images/rop.css" type="text/css">
+
+</head>
+
+<body>
+
+ 
+ 
+<table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td valign="top">
+
+<script language="JavaScript">
+<!--
+
+//Tell the TreePath to update itself
+var thePath = "";
+var type = typeof parent.ory_button;
+if (type != "undefined") {
+	 type = typeof parent.ory_button.getTreePath();
+	 if (type != "undefined") {
+	 	 thePath = parent.ory_button.getTreePath();
+	 }
+}
+document.write(thePath);
+-->
+</script>
+
+ 
+
+
+ 
+
+
+
+<h1 class="banner"><a name="XE_C++_Programming_Guidelines"></a><a name="XE_Programming_Guidelines_document__C++_Programming_Guidelines"></a>
+<rpw name="PresentationName">C++ Programming Guidelines</rpw></h1>
+
+<h5>Copyright &copy; <font face="Arial"><a href="/copyrite/copyrite.htm"><small><small>IBM 
+  Corp. 1987, 2004. All Rights Reverved.</small></small></a></font><br>
+  <br>
+  The word &quot;Rational&quot; and Rational's products are trademarks of Rational 
+  Software Corporation. References to other companies and their products use trademarks 
+  owned by the respective companies and are for reference purpose only.<br>
+  <br>
+  This document was prepared for Rational Software Corp. by Luan Doan-Minh, from 
+  Calypso Software Inc., Vancouver, B.C., Canada.<br>
+  <br>
+</h5>
+<hr align="left">
+<h1>Contents</h1>
+<h3><a href="#anchor482168">Introduction</a></h3>
+<h4><a href="#anchor482511">Fundamental Principles</a><br>
+<a href="#anchor482771">Assumptions</a><br>
+<a href="#anchor482926">Classification of Guidelines</a><br>
+<a href="#anchor483202">The First and Last Guideline</a></h4>
+<h3><a href="#anchor483722">Code Organization and Style</a></h3>
+<h4><a href="#anchor483868">Code Structure</a><br>
+<a href="#anchor487570">Code Style</a></h4>
+<h3><a href="#anchor488606">Comments</a></h3>
+<h3><a href="#anchor491253">Naming</a></h3>
+<h4><a href="#anchor491434">General</a><br>
+<a href="#anchor99441">Namespaces</a><br>
+<a href="#anchor493923">Classes</a><br>
+<a href="#anchor494193">Functions</a><br>
+<a href="#anchor494849">Objects and Function Parameters</a><br>
+<a href="#anchor495277">Exceptions</a><br>
+<a href="#anchor498123">Miscellaneous</a></h4>
+<h3><a href="#anchor499057">Declarations</a></h3>
+<h4><a href="#anchor499241">Namespaces</a><br>
+<a href="#anchor500473">Classes</a><br>
+<a href="#anchor504715">Functions</a><br>
+<a href="#anchor509707">Types</a><br>
+<a href="#anchor510517">Constants and Objects</a></h4>
+<h3><a href="#anchor511974">Expressions and Statements</a></h3>
+<h4><a href="#anchor512769">Expressions</a><br>
+<a href="#anchor519357">Statements</a></h4>
+<h3><a href="#anchor92029">Special Topics</a></h3>
+<h4><a href="#anchor521650">Memory Management</a><br>
+<a href="#anchor522270">Error Handling and Exceptions</a></h4>
+<h3><a href="#anchor524739">Portability</a></h3>
+<h4><a href="#anchor525043">Pathnames</a><br>
+<a href="#anchor525374">Data Representation</a><br>
+<a href="#anchor526481">Type Conversions</a></h4>
+<h3><a href="#anchor526920">Reuse</a></h3>
+<h3><a href="#anchor528114">Compilation Issues</a></h3>
+<h3><a href="#anchor529916">Guideline Summary</a></h3>
+<h4><a href="#anchor530813">Requirements or Restrictions</a><br>
+<a href="#anchor531085">Recommendations</a><br>
+<a href="#anchor531505">Tips</a></h4>
+<h3><a href="#anchor531721">Bibliography<br>
+<br>
+</a></h3>
+<hr align="left">
+<h2><a name="anchor482168"></a><i>Chapter 1</i></h2>
+<h1>Introduction</h1>
+<p>Large software projects are generally undertaken by correspondingly large
+teams of developers. For the code produced by large teams to have project-wide
+measurable quality, the code must be written in accordance with; and be judged
+against a standard. It is therefore important for large project teams to
+establish a programming standard, or set of guidelines.<br>
+The use of a programming standard also makes it possible:
+<ul>
+  <li>to foster the development of robust, readable, easier to maintain code;
+    and to reduce the mental programming efforts required from both experienced
+    and not so experienced developers alike;</li>
+  <li>to enforce a consistent project-wide coding style;</li>
+  <li>to apply quality measures to the resultant software, both by human and
+    automated means;</li>
+  <li>to quickly acclimatize new developers to the project culture;</li>
+  <li>to support the reuse of project resources: to allow developers to be moved
+    from one project area (or sub-project team) to another without requiring
+    re-learning of new sub-project team cultures.</li>
+</ul>
+<p>The aim of this text is to present C++ programming rules, guidelines and
+hints (generically referred to as guidelines) that can be used as the basis for
+a standard. It is intended for software engineers working in large project
+teams.<br>
+The current version is purposely focused upon programming (although at times it
+is difficult to draw the line between programming and design); design guidelines
+will be added at a later date.<br>
+The guidelines presented cover the following aspects of C++ development:
+<ul>
+  <li>how the project code should be organized;</li>
+  <li>the programming style (how source code should actually be written);</li>
+  <li>how the code should be documented at the source level;</li>
+  <li>the naming conventions to be employed for both source files and names
+    within the code;</li>
+  <li>when certain language constructs should be used, and when they should be
+    avoided;</li>
+</ul>
+<p>They have been collected from a large base of industry knowledge. (See the
+bibliography for the sources: authors and references.) They are based upon:
+<ul>
+  <li>well-known software principles;</li>
+  <li>&quot;good&quot; software practices;</li>
+  <li>lessons learned;</li>
+  <li>subjective opinions.</li>
+</ul>
+<p>Most are based upon a handful of the first category, and large doses of the
+second and third. Unfortunately, some are also based upon the last category;
+mainly, because programming is a highly subjective activity: there being no
+widely accepted &quot;best&quot; or &quot;right&quot; way to code everything.</p>
+<h2><a name="anchor482511"></a>Fundamental Principles</h2>
+<p>Clear, understandable C++ source code is the primary goal of most of the
+rules and guidelines: clear, understandable source code being a major
+contributing factor to software reliability and maintainability. What is meant
+by clear and understandable code can be captured in the following three simple
+fundamental principles <a href="#anchor2546953">[Kruchten, 94]</a>.<br>
+Minimal Surprise-Over its lifetime, source code is read more often than it is
+written, especially specifications. Ideally, code should read like an
+English-language description of what is being done, with the added benefit hat
+it executes. Programs are written more for people than for computers. Reading
+code is a complex mental process that can be eased by uniformity, also referred
+to in this guide as the minimal-surprise principle. A uniform style across an
+entire project is a major reason for a team of software developers to agree on
+programming standards, and it should not be perceived as some kind of punishment
+or as an obstacle to creativity and productivity.<br>
+Single Point of Maintenance-Whenever possible, a design decision should be
+expressed at only one point in the source, and most of its consequences should
+be derived programmatically from this point. Violations of this principle
+greatly jeopardize maintainability and reliability, as well as
+understandability.<br>
+Minimal Noise-Finally, as a major contribution to legibility, the minimal-noise
+principle is applied. That is, an effort is made to avoid cluttering the source
+code with visual &quot;noise&quot;: bars, boxes, and other text with low
+information content or information that does not contribute to the understanding
+of the purpose of the software.<br>
+The intended spirit of the guidelines expressed herein, is to not be overly
+restrictive; but, rather to attempt to provide guidance for the correct and safe
+usage of language features. The key to good software resides in:<br>
+knowing each feature, its limitations and potential dangers;<br>
+knowing exactly in which circumstances the feature is safe to use;<br>
+making the decision to use the feature highly visible;<br>
+using the feature with care and moderation, where appropriate.</p>
+<h2><a name="anchor482771"></a>Assumptions</h2>
+<p>The guidelines presented here make a small number of basic assumptions:<br>
+The reader knows C++<br>
+The use of advanced C++ features is encouraged wherever beneficial, rather than
+discouraged on the ground that some programmers are unfamiliar with them. This
+is the only way in which the project can really benefit from using C++. C++
+should not be used as if it were C, in fact the object-oriented features of C++
+preclude its use as in C. Paraphrasing the code in comments is discouraged; on
+the contrary, the source code should be used in place of comments wherever
+feasible.<br>
+Follow large project practice.<br>
+Many rules offer the most value in large systems, although they can also be used
+in a small system, if only for the sake of practice and uniformity at the
+project or corporate level.<br>
+Coding follows an object-oriented design<br>
+Many rules will support a systematic mapping of object-oriented (OO) concepts to
+C++ features and specific naming conventions.</p>
+<h2><a name="anchor482926"></a>Classification of Guidelines</h2>
+<p>Guidelines are not of equal importance; they are weighted using the following
+scale:</p>
+<p><br>
+Tip:<img src="images/cg_1.gif" align="BOTTOM" naturalsizeflag="3" width="23" height="28"><br>
+A guideline identified by the above symbol is a tip a simple piece of advice
+that can be followed, or safely ignored.<br>
+Recommendation: <img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35"><br>
+A guideline identified by the above symbol is a recommendation usually based on
+more technical grounds: encapsulation, cohesion, coupling, portability or
+reusability may be affected, as well as performance in some implementations.
+Recommendations must be followed unless there is good justification not to.<br>
+Requirement or Restriction: <img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17"><br>
+A guideline identified by the above symbol is a requirement or restriction; a
+violation would definitely lead to bad, unreliable, or non-portable code.
+Requirements or restrictions cannot be violated without a waiver</p>
+<h2><a name="anchor483202"></a>The First and Last Guideline</h2>
+<h3><a name="anchor483435"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Use
+common sense</h3>
+<p>When you cannot find an applicable rule or guideline; when a rule obviously
+does not apply; or when everything else fails: use common sense, and check the
+fundamental principles. This rule overrides all of the others. Common sense is
+required even when rules and guidelines exist.<br>
+<br>
+</p>
+<hr align="left">
+<h2><a name="anchor483722"></a><i>Chapter 2</i></h2>
+<h1>Code Organization and Style</h1>
+<p>This chapter provides guidance on program structure and lay-out.</p>
+<h2><a name="anchor483868"></a>Code Structure</h2>
+<p>Large systems are usually developed as a number of smaller functional <i>subsystems</i>.
+Subsystems themselves are usually constructed from a number of code <i>modules</i>.
+In C++, a module normally contains the implementation for a single, or on rare
+occasions, a set of closely related <i>abstractions</i>. In C++, an abstraction
+is normally implemented as a <i>class</i>. A class has two distinct components:
+an <i>interface</i> visible to the class clients, providing a declaration or
+specification of the class capabilities and responsibilities; and an <i>implementation</i>
+of the declared specification (the <i>class definition</i>).<br>
+Similar to the class, a module also has an interface and an implementation: the
+module interface contains the specifications for the contained module
+abstractions (class declarations); and the module implementation contains the
+actual implementation of the abstractions (class definitions).<br>
+In the construction of the system; subsystems may also be organized into
+collaborative groups or layers to minimize and control their dependencies.</p>
+<h3><a name="anchor484067"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Place
+module specifications and implementations in separate files</h3>
+<p>A module's specification should be placed in a separate file from its
+implementation-the specification file is referred to as a <i>header</i>. A
+module's implementation may be placed in one or more implementation files.<br>
+If a module implementation contains extensive inline functions, common
+implementation-private declarations, test code, or platform-specific code, then
+separate these parts into their own files and name each file after its part's
+content.<br>
+If program executable sizes are a concern, then rarely used functions should
+also be placed in their own individual files.<br>
+Construct a part file name in the following manner:
+<ul>
+  <li>Use the module's main abstraction name as the module name.</li>
+  <li>Append a part type name to the module name. Choose part type names that
+    are indicative of their content.</li>
+  <li>The module name and part name should be separated by a separator (e.g. '_'
+    (underscore) or '.' (period)); choose a separator and apply it consistently.</li>
+</ul>
+<ul>
+  <p><code>File_Name::=<br>
+  <br>
+  &lt;Module_Name&gt; [&lt;Separator&gt; &lt;Part_Name&gt;] '.' &lt;File_Extension&gt;</code></p>
+</ul>
+<ul>
+  <li>For better predictability, use the same letter case for file names as for
+    names within the code. /UL&gt;
+    <p>The following is an example module partitioning and naming scheme:
+    <ul>
+      <li><i>module.inlines.cc</i>-if a module has many potentially inline-able
+        functions, then place the function definitions in a separate <i>.<code>inlines</code></i>
+        file (see &quot;Place module inline function definitions in a separate
+        file&quot;).</li>
+      <li><i>module.private.hh</i>-if a module has many common
+        implementation-private declarations that are referenced by other parts,
+        then separate these declarations out into a .<i>private</i> part for
+        inclusion by other implementation files.</li>
+      <li><i>module.private.cc</i>-a module's implementation-private function
+        definitions, separated out for editing convenience.</li>
+      <li><i>module.function_name.cc</i>-if executable size is a concern, then
+        specialized member functions that are not required by many programs
+        should be separated out into their own individual implementation files
+        (see &quot;Break large modules into multiple translation units if
+        program size is a concern&quot;). If overloaded functions are placed in
+        separate files, each file function name should be suffixed with an
+        instance number. E.g., function_name1 for the first instance of a
+        separate overloaded function.</li>
+      <li><i>module.nested_class.cc</i>-the member functions of a module's
+        nested class, placed in their own file.</li>
+      <li><i>module.test.[hh\cc]</i>-if a module requires extensive test code,
+        then the test code should be declared in a friend test class. The friend
+        test class should be called <i><code>Module.Test</code></i>. Declaring
+        the test code as a friend class facilitates the independent development
+        of the module and its test code; and allows the test code to be omitted
+        from the final module object code without source changes.</li>
+      <li><i>module.platform_name.cc</i>-separate out any module platform
+        dependencies and call the part name after the platform name (see
+        &quot;Isolate platform dependencies&quot;).</li>
+    </ul>
+    <p>Choose a module partitioning and naming scheme and apply it consistently.</p>
+    <h5>Example</h5>
+    <pre>SymaNetwork.hh         // Contains the declaration for a
+                       // class named &quot;SymaNetwork&quot;. 
+SymaNetwork.Inlines.cc // Inline definitions sub-unit
+SymaNetwork.cc         // Module's main implementation unit
+SymaNetwork.Private.cc // Private implementation sub-unit
+SymaNetwork.Test.cc    // Test code sub-unit            </pre>
+    <h5>Rationale</h5>
+    <p>Separating out a module's specification from its implementation
+    facilitates independent development of user and supplier code.<br>
+    Breaking a module's implementation into multiple translation units provides
+    better support for object code removal, resulting in smaller executable
+    sizes.<br>
+    Using a regular and predictable file naming and partitioning convention
+    allows a module's content and organization to be understood without
+    inspection of its actual contents.<br>
+    Passing names through from the code to the file name increases
+    predictability and facilitates the building of file-based tools without
+    requiring complex name mapping <a href="#anchor2521746">[Ellemtel, 1993]</a>.</p>
+    <h3><a name="anchor20680"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Pick
+    a single set of file name extensions to distinguish headers from
+    implementation files</h3>
+    <p>Commonly used file name extensions are: <code>.h, .H, .hh, .hpp, </code>and
+    <code>.hxx</code> for header files; and .c, <code>.C, .cc, .cpp,</code> and
+    .<code>cxx</code> for implementations. Pick a set of extensions and use them
+    consistently.</p>
+    <h5>Example</h5>
+    <pre>SymaNetwork.hh  // The extension &quot;.hh&quot; used to designate
+                // a &quot;SymaNetwork&quot; module header. 
+SymaNetwork.cc  // The extension &quot;.cc&quot; used to designate
+                // a &quot;SymaNetwork&quot; module implementation.            </pre>
+    <h5>Notes</h5>
+    <p>The C++ draft standard working paper also uses the extension
+    &quot;.ns&quot; for headers encapsulated by a namespace.</p>
+    <h3><a name="anchor484581"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+    defining more than one class per module specification</h3>
+    <p><br>
+    Only upon rare occasions should multiple classes be placed together in a
+    module; and then only if they are closely associated (e.g., a container and
+    its iterator). It is acceptable to place a module's main class and its
+    supporting classes within the same header file if all classes are always
+    required to be visible to a client module.</p>
+    <h5>Rationale</h5>
+    <p>Reduces a module's interface and others' dependencies upon it.</p>
+    <h3><a name="anchor484889"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+    putting implementation-private declarations in module specifications</h3>
+    <p>Aside from class private members, a module's implementation-private
+    declarations (e.g. implementation types and supporting classes) should not
+    appear in the module's specification. These declarations should be placed in
+    the needed implementation files unless the declarations are needed by
+    multiple implementation files; in that case the declarations should be
+    placed in a secondary, private header file. The secondary, private header
+    file should then be included by other implementation files as needed.<br>
+    This practice ensures that:<br>
+    a module specification cleanly expresses its abstraction and is free of
+    implementation artifacts;<br>
+    a module specifications is kept as small as possible and thus minimizes
+    inter-module compilation dependencies (see also &quot;Minimize compilation
+    dependencies&quot;);</p>
+    <h5>Example</h5>
+    <pre>// Specification of module foo, contained in file &quot;foo.hh&quot;
+//
+class foo
+{
+.. declarations
+};
+// End of &quot;foo.hh&quot;
+// Private declarations for module foo, contained in file
+// &quot;foo.private.hh&quot; and used by all foo implementation files.
+... private declarations
+// End of &quot;foo.private.hh&quot;
+// Module foo implementation, contained in multiple files 
+// &quot;foo.x.cc&quot; and &quot;foo.y.cc&quot;
+// File &quot;foo.x.cc&quot;
+//
+#include &quot;foo.hh&quot; // Include module's own header
+#include &quot;foo.private.hh&quot; // Include implementation 
+// required declarations.
+... definitions
+// End of &quot;foo.x.cc&quot;
+// File &quot;foo.y.cc&quot;
+//
+#include &quot;foo.hh&quot;
+#include &quot;foo.private.hh&quot;
+... definitions
+// End of &quot;foo.y.cc&quot;            </pre>
+    <h3><a name="anchor485228"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Always
+    use <code>#include</code> to gain access to a module's specification</h3>
+    <p>A module that uses another module must use the preprocessor <code>#include</code>
+    directive to acquire visibility of the supplier module's specification.
+    Correspondingly, modules should never re-declare any part of a supplier
+    module's specification.<br>
+    When including files, only use the <code>#include &lt;header&gt;</code>
+    syntax for &quot;standard&quot; headers; use the <code>#include</code>
+    &quot;header&quot; syntax for the rest.<br>
+    Use of the <code>#include</code> directive also applies to a module's own
+    implementation files: a module implementation must include its own
+    specification and private secondary headers (see &quot;Place module
+    specifications and implementations in separate files&quot;).</p>
+    <h5>Example</h5>
+    <pre>// The specification of module foo in its header file 
+// &quot;foo.hh&quot;
+//
+class foo
+{
+... declarations
+};
+// End of &quot;foo.hh&quot;
+
+// The implementation of module foo in file &quot;foo.cc&quot;
+//
+#include &quot;foo.hh&quot; // The implementation includes its own
+// specification
+... definitions for members of foo
+// End of &quot;foo.cc&quot;            </pre>
+    <p>An exception to the <code>#include</code> rule is when a module only uses
+    or contains a supplier module's types (classes) by-reference (using pointer
+    or reference-type declarations); in this case the by-reference usage or
+    containment is specified using a forward declaration (see also
+    &quot;Minimize compilation dependencies&quot;) rather than a <code>#include</code>
+    directive.<br>
+    Avoid including more than is absolutely needed: this means that module
+    headers should not include other headers that are required only by the
+    module implementation.</p>
+    <h5>Example</h5>
+    <pre>#include &quot;a_supplier.hh&quot;
+
+class needed_only_by_reference;// Use a forward declaration 
+                               //for a class if we only need 
+                               // a pointer or a reference 
+                               // access to it.
+void operation_requiring_object(a_supplier required_supplier, ...);
+//
+// Operation requiring an actual supplier object; thus the
+// supplier specification has to be #include'd.
+
+void some_operation(needed_only_by_reference&amp; a_reference, ...);
+//
+// Some operation needing only a reference to an object; thus
+// should use a forward declaration for the supplier.            </pre>
+    <h5>Rationale</h5>
+    <p>This rule ensures that:
+    <ul>
+      <li>there is always only a single declaration of a module's interface, and
+        that all clients see exactly the same interface;</li>
+      <li>the compilation dependencies between modules is minimized;</li>
+      <li>clients don't needlessly incur compilation overhead for code that is
+        not required.</li>
+    </ul>
+    <h3><a name="anchor485892"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Place
+    module inline function definitions in a separate file</h3>
+    <p>When a module has many inline functions, their definitions should be
+    placed in a separate, inline-function-only file. The inline function file
+    should be included at the end of the module's header file.<br>
+    See also &quot;Use a <code>No_Inline</code> conditional compilation symbol
+    to subvert inline compilation&quot;.</p>
+    <h5>Rationale</h5>
+    <p>This technique keeps implementation details from cluttering a module's
+    header; thus, preserving a clean specification. It also helps in reducing
+    code replication when not compiling inline: using conditional compilation,
+    the inline functions can be compiled into a single object file as opposed to
+    being compiled statically into every using module. Correspondingly, inline
+    function definitions should not be defined in class definitions unless they
+    are absolutely trivial.</p>
+    <h3><a name="anchor486172"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Break
+    large modules into multiple translation units if program size is a concern</h3>
+    <p>Break large modules into multiple translation units to facilitate
+    un-referenced code removal during program linking. Member functions that are
+    rarely referenced should be segregated into separate files from those that
+    are commonly used. In the extreme, individual member functions can be placed
+    in their own files <a href="#anchor2521746">[Ellemtel, 1993]</a>.</p>
+    <h5>Rationale</h5>
+    <p>Linkers are not all equally capable of eliminating un-referenced code
+    within an object file. Breaking large modules into multiple files allows
+    these linkers to reduce executable sizes by eliminating the linking of whole
+    object files <a href="#anchor2521746">[Ellemtel, 1993]</a>.</p>
+    <h5>Notes</h5>
+    <p>It may also be worthwhile considering first whether the module should be
+    broken down into smaller abstractions.</p>
+    <h3><a name="anchor486484"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Isolate
+    platform dependencies</h3>
+    <p>Separate out platform-dependent code from platform-independent code; this
+    will facilitate porting. Platform-dependent modules should have file names
+    qualified by their platform name to highlight the platform dependence.</p>
+    <h5>Example</h5>
+    <pre>SymaLowLevelStuff.hh         // &quot;LowLevelStuff&quot; 
+                             // specification
+SymaLowLevelStuff.SunOS54.cc // SunOS 5.4 implementation
+SymaLowLevelStuff.HPUX.cc    // HP-UX implementation
+SymaLowLevelStuff.AIX.cc     // AIX implementation            </pre>
+    <h5>Notes</h5>
+    <p>From an architectural and maintenance viewpoint, it is also good practice
+    to contain platform dependencies in a small number of low level subsystems.<br>
+    Adopt a standard file content structure and apply it consistently<br>
+    A suggested file content structure consists of the following parts in the
+    following order:
+    <ul>
+      <p>1. Repeated inclusion protection (specification only).<br>
+      2. Optional file and version control identification.<br>
+      3. File inclusions needed by this unit.<br>
+      4. The module documentation (specification only).<br>
+      5. Declarations (class, type, constants, objects and functions) and
+      additional textual specifications (preconditions and postconditions, and
+      invariants).<br>
+      6. Inclusion of this module's inline function definitions.<br>
+      7. Definitions (objects and functions) and implementation private
+      declarations.<br>
+      8. Copyright notice.<br>
+      9. Optional version control history.</p>
+    </ul>
+    <h5>Rationale</h5>
+    <p>The above file content ordering, presents the client pertinent
+    information first; and is consistent with the rationale for the ordering of
+    a class' public, protected and private sections.</p>
+    <h5>Notes</h5>
+    <p>Depending upon corporate policy, the copyright information may need to be
+    placed at the top of the file.</p>
+    <h3><a name="anchor486719"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Protect
+    against repeated file inclusions</h3>
+    <p>Repeated file inclusion and compilation should be prevented by using the
+    following construct in each header file:</p>
+    <pre>#if !defined(module_name) // Use preprocessor symbols to
+#define module_name       // protect against repeated
+                          // inclusions... // Declarations go here
+#include &quot;module_name.inlines.cc&quot; // Optional inline
+                                  // inclusion goes here.
+// No more declarations after inclusion of module's 
+// inline functions.
+#endif // End of module_name.hh            </pre>
+    <p>Use the module file name for the inclusion protection symbol. Use the
+    same letter-case for the symbol as for the module name.</p>
+    <h3><a name="anchor486956"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+    a &quot;<code>No_Inline</code>&quot; conditional compilation symbol to
+    subvert inline compilation</h3>
+    <p>Use the following conditional compilation construct to control inline
+    versus out-of-line compilation of inline-able functions:</p>
+    <pre>// At the top of module_name.inlines.hh
+#if !defined(module_name_inlines)
+#define module_name_inlines
+
+#if defined(No_Inline)
+#define inline // Nullify inline keyword
+#endif
+
+... // Inline definitions go here
+#endif // End of module_name.inlines.hh
+
+// At the end of module_name.hh
+//
+#if !defined(No_Inline)
+#include &quot;module_name.inlines.hh&quot;
+#endif
+
+// At the top of module_name.cc after inclusion of
+// module_name.hh
+//
+#if defined(No_Inline)
+#include &quot;module_name.inlines.hh&quot;
+#endif            </pre>
+    <p>The conditional compilation construct is similar to the multiple
+    inclusion protection construct. If the <code>No_Inline</code> symbol is not
+    defined, then the inline functions are compiled with the module
+    specification and automatically excluded from the module implementation. If
+    the <code>No_Inline</code> symbol is defined, then the inline definitions
+    are excluded from the module specification but included in the module
+    implementation with the keyword <code>inline</code> nullified.</p>
+    <h5>Rationale</h5>
+    <p>The above technique allows for reduced code replication when inline
+    functions are compiled out-of-line. By using conditional compilation, a
+    single copy of the inline functions is compiled into the defining module;
+    versus replicated code, compiled as &quot;static&quot; (internal linkage)
+    functions in every using module when out-of-line compilation is specified by
+    a compiler switch.</p>
+    <h5>Notes</h5>
+    <p>Use of conditional compilation increases the complexity involved in
+    maintaining build dependencies. This complexity is managed by always
+    treating headers and inline function definitions as a single logical unit:
+    implementation files are thus dependent upon both header and inline function
+    definition files.</p>
+    <h2><a name="anchor487570"></a>Code Style</h2>
+    <h3><a name="anchor487743"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+    a small, consistent indentation style for nested statements</h3>
+    <p>Consistent indentation should be used to visually delineate nested
+    statements; indentation of between 2 and 4 spaces has been proven to be the
+    most visually effective for this purpose. We recommend using a regular
+    indentation of 2 spaces.<br>
+    The compound or block statement delimiters (<code>{}</code>), should be at
+    the same level of indentation as surrounding statements (by implication,
+    this means that <code>{}</code> are vertically aligned). Statements within
+    the block should be indented by the chosen number of spaces.<br>
+    Case labels of a <code>switch</code> statement should be at the same
+    indentation level as the <code>switch</code> statement; statements within
+    the <code>switch</code> statement can then be indented by 1 indentation
+    level from the <code>switch</code> statement itself and the case labels.</p>
+    <h5>Example</h5>
+    <pre>if (true)
+{  		// New block
+foo(); // Statement(s) within block
+       // indented by 2 spaces.
+}
+else
+{
+bar();
+}
+while (expression)
+{
+statement();
+}
+switch (i)
+{
+case 1:
+do_something();// Statements indented by 
+               // 1 indentation level from
+break;         // the switch statement itself.
+case 2:
+//...
+default:
+//...
+}            </pre>
+    <h5>Rationale</h5>
+    <p>An indentation of 2 spaces is a comprise between allowing easy
+    recognition of blocks, and allowing sufficient nested blocks before code
+    drifts too far off the right edge of a display monitor or printed page.</p>
+    <h3><a name="anchor488005"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Indent
+    function parameters from the function name or scope name</h3>
+    <p>If a function declaration cannot fit on a single line, then place the
+    first parameter on the same line as the function name; and subsequent
+    parameters each on a new line, indented at the same level as the first
+    parameter. This style of declaration and indentation, shown below, leaves
+    white spaces below the function return type and name; thus, improving their
+    visibility.</p>
+    <h5>Example</h5>
+    <pre>void foo::function_decl( some_type first_parameter, 
+some_other_type second_parameter,
+status_type and_subsequent);            </pre>
+    <p>If following the above guideline would cause line wrap, or parameters to
+    be too far indented, then indent all parameters from the function name or
+    scope name (class, namespace), with each on a separate line:</p>
+    <h5>Example</h5>
+    <pre>void foo::function_with_a_long_name( // function name is
+                                     // much less visible
+                                     some_type first_parameter, 
+                                     some_other_type second_parameter,
+                                     status_type and_subsequent);            </pre>
+    <p>See also alignment rules below.</p>
+    <h3><a name="anchor27055"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+    a maximum line length that would fit on the standard printout paper size</h3>
+    <p>The maximum length of program lines should be limited to prevent loss of
+    information when printed on either standard (letter) or default printout
+    paper size.</p>
+    <h5>Notes</h5>
+    <p>If the level of indentation causes deeply nested statements to drift too
+    far to the right, and statements to extend much beyond the right margin,
+    then it is probably a good time to consider breaking the code into smaller,
+    ore manageable, functions.</p>
+    <h3><a name="anchor488318"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+    consistent line folding</h3>
+    <p>When parameter lists in function declarations, definitions and calls, or
+    enumerators in an enum declarations cannot fit on a single line, break the
+    line after each list element and place each element on a separate line (see
+    also &quot;Indent function parameters from the function name or scope
+    name&quot;).</p>
+    <h5>Example</h5>
+    <pre>enum color { red, 
+             orange, 
+             yellow, 
+             green, 
+             //...
+             violet
+                   };            </pre>
+    <p>If a class or function template declaration is overly long, fold it onto
+    consecutive lines after the template argument list. For example (declaration
+    from the standard Iterators Library, <a href="#anchor2525532">[X3J16, 95]</a>):</p>
+    <pre>template &lt;class InputIterator, class Distance&gt;
+void advance(InputIterator&amp; i, Distance n);            </pre>
+    <p><br>
+    HR ALIGN=&quot;LEFT&quot;&gt;</p>
+    <h2><a name="anchor488606"></a><i>Chapter 3</i></h2>
+    <h1>Comments</h1>
+    <p>This chapter provides guidance on the use of comments in the code.<br>
+    Comments should be used to <i>complement</i> source code, never to
+    paraphrase it:</p>
+    <p>UL&gt;</p>
+  </li>
+  <li>They should supplement source code by explaining what is not obvious; they
+    should not duplicate the language syntax or semantics.</li>
+  <li>They should help the reader to grasp the background concepts, the
+    dependencies, and especially complex data encoding or algorithms.</li>
+  <li>They should highlight: deviations from coding or design standards; the use
+    of restricted features; and special &quot;tricks.&quot;</li>
+</ul>
+<p>For each comment, the programmer should be able to easily answer the
+question: &quot;What value is added by this comment?&quot; Generally,
+well-chosen names often eliminate the need for comments. Comments, unless they
+participate in some formal Program Design Language (PDL), are not checked by the
+compiler; therefore, in accordance with the single-point-of-maintenance
+principle, design decisions should be expressed in the source code rather than
+in comments, even at the expense of a few more declarations.</p>
+<h3><a name="anchor488864"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+C++ style comments rather than C-style comments</h3>
+<p>The C++ style &quot;<code>//</code>&quot; comment delimiter should be used in
+preference to the C-style &quot;<code>/*...*/</code>&quot;.</p>
+<h5>Rationale</h5>
+<p>P&gt;C++ style comments are more visible and reduce the risk of accidentally
+commenting-out vast expanses of code due to a missing end-of-comment delimiter.</p>
+<h5>Counter-Example</h5>
+<pre>/* start of comment with missing end-of-comment delimiter
+do_something();
+do_something_else(); /* Comment about do_something_else */
+                              // End of comment is here. ^
+                              // Both do_something and 
+                              // do_something_else
+                              // are accidentally commented out!
+Do_further();      </pre>
+<h3><a name="anchor489212"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Maximize
+comment proximity to source code</h3>
+<p>Comments should be placed near the code they are commenting upon; with the
+same level of indentation, and attached to the code using a blank comment line.<br>
+Comments that apply to multiple, successive source statements should be placed <i>above</i>
+the statements-serving as an introduction to the statements. Likewise, comments
+associated with individual statements should be placed <i>below</i> the
+statements.</p>
+<h5>Example</h5>
+<pre>// A pre-statements comment applicable 
+// to a number of following statements
+// 
+...
+void function();
+//
+// A post-statement comment for 
+// the preceding statement.      </pre>
+<h3><a name="anchor489428"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+end of line comments</h3>
+<p>Avoid comments on the same line as a source construct: they often become
+misaligned. Such comments are tolerated, however, for descriptions of elements
+in long declarations, such as enumerators in an enum declaration.</p>
+<h3><a name="anchor489711"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+comment headers</h3>
+<p>Avoid the use of headers containing information such as author, phone
+numbers, dates of creation and modification: author and phone numbers rapidly
+become obsolete; whilst creation and modification dates, and reasons for
+modification are best maintained by a configuration management tool (or some
+other form of version history file).<br>
+Avoid the use of vertical bars, closed frames or boxes, even for major construct
+(such as functions and classes); they just add visual noise and are difficult to
+keep consistent. Use blank lines to separate related blocks of source ode rather
+than heavy comment lines. Use a single blank line to separate constructs within
+functions or classes. Use double blank lines to separate functions from each
+other.<br>
+Frames or forms may have the look of uniformity, and of reminding the programmer
+to document the code, but they often lead to a paraphrasing style<a href="#anchor2546953">
+[Kruchten, 94]</a>.</p>
+<h3><a name="anchor489974"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+an empty comment line to separate comment paragraphs</h3>
+<p>Use empty comments, rather than empty lines, within a single comment block to
+separate paragraphs</p>
+<h5>Example</h5>
+<pre>// Some explanation here needs to be continued 
+// in a subsequent paragraph.
+//
+// The empty comment line above makes it 
+// clear that this is another 
+// paragraph of the same comment block.      </pre>
+<h3><a name="anchor490142"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+redundancy</h3>
+<p>Avoid repeating program identifiers in comments, and replicating information
+found elsewhere-provide a pointer to the information instead. Otherwise any
+program change may require maintenance in multiple places. And failure to make
+the required comment changes everywhere will result in misleading or wrong
+comments: these end up being worse than no comments at all.</p>
+<h3><a name="anchor490345"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Write
+self-documenting code rather than comments</h3>
+<p>Always aim to write self-documenting code rather than providing comments.
+This can be achieved by choosing better names; using extra temporary variables;
+or re-structuring the code. Take care with style, syntax, and spelling in
+comments. Use natural language comments rather than telegraphic, or cryptic
+style.</p>
+<h5>Example</h5>
+<pre>Replace:
+do
+{
+...
+} while (string_utility.locate(ch, str) != 0); 
+// Exit search loop when found it.
+with:
+do
+{
+...
+found_it = (string_utility.locate(ch, str) == 0);
+} while (!found_it);      </pre>
+<h3><a name="anchor490611"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Document
+classes and functions</h3>
+<p>Although self-documenting code is preferred over comments; there is generally
+a need to provide information beyond an explanation of complicated parts of the
+code. The information that is needed is documentation of at least the following:
+<ul>
+  <li>the purpose of each class;</li>
+  <li>the purpose of each function if its purpose is not obvious from its name;</li>
+  <li>the meaning of any return values; e.g., the meaning of a Boolean return
+    value for a non-predicate function: that is, does a true value mean the
+    function was successful;</li>
+  <li>conditions under which exceptions are raised;</li>
+  <li>preconditions and postconditions on parameters, if any;</li>
+  <li>additional data accessed, especially if it is modified: especially
+    important for functions with side-effects;</li>
+  <li>any limitations or additional information needed to properly use the class
+    or function;</li>
+  <li>for types and objects, any invariants or additional constraints that
+    cannot be expressed by the language.</li>
+</ul>
+<h5>Rationale</h5>
+<p>The code documentation in conjunction with the declarations should be
+sufficient for a client to use the code; documentation is required since the
+full semantics of classes, functions, types and objects cannot be fully
+expressed using C++ alone.<br>
+<br>
+</p>
+<hr align="left">
+<h2><a name="anchor491253"></a><i>Chapter 4</i></h2>
+<h1>Naming</h1>
+<p>This chapter provides guidance on the choice of names for various C++
+entities.</p>
+<h2><a name="anchor491434"></a>General</h2>
+<p>Coming up with good names for program entities (classes, functions, types,
+objects, literals, exceptions, namespaces) is no easy matter. For
+medium-to-large applications, the problem is made even more challenging: here
+name conflicts, and lack of synonyms to designate distinct but similar concepts
+add to the degree of difficulty.<br>
+Using a naming convention can lessen the mental effort required for inventing
+suitable names. Aside from this benefit, a naming convention has the added
+benefit of enforcing consistency in the code. To be useful, a naming convention
+should provide guidance on: typographical style (or how to write the names); and
+name construction (or how to choose names).</p>
+<h3><a name="anchor491675"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Choose
+a naming convention and apply it consistently</h3>
+<p>It is not so important which naming convention is used as long as it is
+applied consistently. Uniformity in naming is far more important than the actual
+convention: uniformity supports the principle of minimal surprise.<br>
+Because C++ is a case-sensitive language, and because a number of distinct
+naming conventions are in widespread use by the C++ community; it will rarely be
+possible to achieve absolute naming consistency. We recommend picking a naming
+convention for the project based upon the host environment (e.g., UNIX or
+Windows) and the principle libraries used by the project; to maximize the code
+consistency:
+<ul>
+  <li>UNIX-hosted projects that don't make much use of commercial libraries
+    (e.g., the X Window library, X Toolkit Intrinsics and Motif) may prefer to
+    use an all lower-case, underscore-separated-word convention: this is the
+    convention used for UNIX system calls and also by the C++ draft standard
+    working paper.</li>
+  <li>UNIX-hosted projects that are centered around commercial libraries may
+    prefer to use a capitalized style, also commonly referred to as the
+    Smalltalk style-a style where the initial letter of words are capitalized,
+    and the words are concatenated together without separators.</li>
+  <li>Microsoft&reg; Windows-based projects may elect to use the unusual Microsoft&reg; 
+    &quot;Hungarian&quot; notation. We, don't recommend this style; however, as 
+    it is contrary to the fundamental principles underlying the guidelines in 
+    this text.</li>
+</ul>
+<h5>Notes</h5>
+<p>The careful reader will observe that the examples in this text currently do
+not follow all the guidelines. This is due in part to the fact that examples are
+derived from multiple sources; and also due to the desire to conserve paper,
+therefore the formatting guidelines have not been meticulously applied. But the
+message is &quot;do as I say, not as do&quot;.</p>
+<h3><a name="anchor12422"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Never
+declare names beginning with one or more underscores ('_')</h3>
+<p>P&gt;Names with a single leading underscore ('_') are often used by library
+functions (&quot;<code>_main</code>&quot; and &quot;<code>_exit</code>&quot;).
+Names with double leading underscores (&quot;__&quot;); or a single leading
+underscore followed by a capital letter are reserved for compiler internal use.<br>
+Also avoid names with adjacent underscores, as it is often difficult to discern
+the exact number of underscores.</p>
+<h3><a name="anchor492064"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+using type names that differ only by letter case</h3>
+<p>It is hard to remember the differences between type names that differ only by
+letter case, and thus easy to get confused between them.</p>
+<h3><a name="anchor492249"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+the use of abbreviations</h3>
+<p>Abbreviations may be used if they are either commonly used in the application
+domain (e.g., FFT for Fast Fourier Transform), or they are defined in a
+project-recognized list of abbreviations. Otherwise, it is very likely that
+similar but not quite identical abbreviations will occur here and there,
+introducing confusion and errors later (e.g., track_identification being
+abbreviated trid, trck_id, tr_iden, tid, tr_ident, and so on).</p>
+<h3><a name="anchor492470"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+the use of suffixes to denote language constructs</h3>
+<p>The use of suffixes for categorizing kinds of entities (such as <i>type</i>
+for type, and <i>error</i> for exceptions) is usually not very effective for
+imparting understanding of the code. Suffixes such as <i>array</i> and <i>struct</i>
+also imply a specific implementation; which, in the event of an implementation
+change-changing the representation from a struct or array-would either have an
+adverse effect upon any client code, or would be misleading.<br>
+Suffixes can however be useful in a number of limited situations:
+<ul>
+  <li>when the choice of appropriate identifiers is very limited; give the best
+    name to the object and use a suffix for the type;</li>
+  <li>when it represents an application-domain concept, e.g., aircraft_type.</li>
+</ul>
+<h3><a name="anchor492743"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Choose
+clear, legible, meaningful names</h3>
+<p>Choose names from the usage perspective; and use adjectives with nouns to
+enhance local (context specific) meaning. Also make sure that names agree with
+their types.<br>
+Choose names so that constructs such as:</p>
+<pre>object_name.function_name(...);
+object_name-&gt;function_name(...);      </pre>
+<p>are easy to read and appear meaningful.<br>
+Speed of typing is not an acceptable justification for using short or
+abbreviated names. One-letter and short identifiers are often an indication of
+poor choice or laziness. Exceptions are well-recognized instances such as using <i>E</i>
+for the base of the natural logarithms; or <i>Pi</i>.<br>
+Unfortunately, compilers and supporting tools, sometimes limit length of names;
+thus, care should be taken to ensure that long names do not differ only by their
+trailing characters: the differentiating characters may be truncated by these
+tools.</p>
+<h5>Example</h5>
+<pre>void set_color(color new_color)
+{
+...
+the_color = new_color;
+...
+}
+is better than: 
+void set_foreground_color(color fg)
+and: 
+oid set_foreground_color(color foreground);{
+...
+the_foreground_color = foreground;
+...
+}      </pre>
+<p>The naming in the first example is superior to the other two: <code>new_color</code>
+is qualified and agrees with its type; thereby strengthening the semantics of
+the function.<br>
+In the second case, the intuitive reader could infer that <code>fg</code> was
+intended to mean foreground; however, in any good programming style, nothing
+should be left to reader intuition or inference.<br>
+In the third case, when the parameter <code>foreground</code> is used (away from
+its declaration), the reader is led to believe that <code>foreground</code> in
+fact means foreground color. It could conceivably; however, have been of any
+type that is implicitly convertible to a <code>color</code>.</p>
+<h5>Notes</h5>
+<p>Forming names from nouns and adjectives, and ensuring that names agree with
+their types follows natural-language and enhances both code readability and
+semantics.</p>
+<h3><a name="anchor493079"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+correct spelling in names</h3>
+<p>Parts of names that are English words should be spelled correctly and conform
+to the project required form, i.e., consistently English or American, but not
+both. This is equally true for comments.</p>
+<h3><a name="anchor493290"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+positive predicate clauses for Booleans</h3>
+<p>For Boolean objects, functions and function arguments, use a predicate clause
+in the positive form, e.g., <code>found_it</code>, <code>is_available</code>,
+but not <code>is_not_available</code>.</p>
+<h5>Rationale</h5>
+<p>When negating predicates, double negatives are harder to understand.</p>
+<h2><a name="anchor99441"></a>Namespaces</h2>
+<h3><a name="anchor493540"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+namespaces to partition potential global names by subsystems or by libraries</h3>
+<p>If a system is decomposed into subsystems, use the subsystem names as
+namespace names for partitioning and minimizing the system's global namespace.
+If the system is a library, use a single outer-most namespace for the whole
+library.<br>
+Give each subsystem or library namespace a meaningful name; in addition give it
+an abbreviated or acronym alias. Choose abbreviated or acronym aliases that are
+unlikely to clash, e.g. the ANSI C++ draft standard library <a href="#anchor2523431">[Plauger,
+95]</a> defines <code>std</code> as the alias for <code>iso_standard_library</code>.<br>
+If the compiler doesn't yet support the namespace construct, use name prefixes
+to simulate namespaces. For example, the public names in the interface of a
+system management subsystem could be prefixed with syma (short for System
+Management).</p>
+<h5>Rationale</h5>
+<p>Using namespaces to enclose potentially global names, helps to avoid name
+collisions when code is developed independently (by sub-project teams or
+vendors). A corollary is that only namespace names are global.</p>
+<h2><a name="anchor493923"></a>Classes</h2>
+<h3><a name="anchor493742"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+nouns or noun phrases for class names</h3>
+<p>Use a common noun or noun phrase in singular form, to give a class a name
+that expresses its abstraction. Use more general names for base classes and more
+specialized names for derived classes.</p>
+<pre>typedef ... reference; // From the standard library
+typedef ... pointer;   // From the standard library
+typedef ... iterator;  // From the standard library
+class bank_account {...};
+class savings_account : public bank_account {...};
+class checking_account : public bank_account {...};      </pre>
+<p>When there is a conflict or shortage of suitable names for both objects and
+types; use the simple name for the object, and add a suffix such as <i><code>mode,
+kind, code,</code></i> and so on for the type name.<br>
+Use a plural form when expressing an abstraction that represents a collection of
+objects.</p>
+<pre>typedef some_container&lt;...&gt; yellow_pages;      </pre>
+<p>When additional semantics is required beyond just a collection of objects,
+use the following from the standard library as behavioral patterns and name
+suffixes:
+<ul>
+  <li>vector-a randomly accessible sequence container;</li>
+  <li>list-an ordered sequence container;</li>
+  <li>queue-a first-in-first-out sequence container;</li>
+  <li>deque-a double-ended queue;</li>
+  <li>stack-a last-in-first-out sequence container;</li>
+  <li>set-a key-accessed (associative) container;</li>
+  <li>map-a key-accessed (associative) container;</li>
+</ul>
+<h2><a name="anchor494193"></a>Functions</h2>
+<h3><a name="anchor494388"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+verbs for procedure-type function names</h3>
+<p>Use verbs or action phrases for functions that don't have return values
+(function declarations with a void return type), or functions that return values
+by pointer or reference parameters.<br>
+Use nouns or substantives for functions that return only a single value by a
+non-void function return type.<br>
+For classes with common operations (a pattern of behavior), use operation names
+drawn from a project list of choices. For example: <i>begin, end, insert, erase</i>
+(container operations from the standard library).<br>
+Avoid &quot;get&quot; and &quot;set&quot; naming mentality (prefixing functions
+with the prefixes &quot;get&quot; and &quot;set&quot;), especially for public
+operations for getting and setting object attributes. Operation naming should
+stay at the class abstraction and provision of service level; getting and
+setting object attributes are low-level implementation details that weaken
+encapsulation if made public.<br>
+Use adjectives (or past participles) for functions returning a Boolean
+(predicates). For predicates, it is often useful to add the prefix <i>is</i> or <i>has</i>
+before a noun to make the name read as a positive assertion. This is also useful
+when the simple name is already used for an object, type name, or an enumeration
+literal. Be accurate and consistent with respect to tense.</p>
+<h5>Example</h5>
+<pre>void insert(...);
+void erase(...);
+
+Name first_name();
+bool has_first_name();
+bool is_found();
+bool is_available();      </pre>
+<p>Don't use negative names as this can result in expressions with double
+negations (e.g., <code>!is_not_found</code>); making the code more difficult to
+understand. In some cases, a negative predicate can also be made positive
+without changing its semantics by using an antonym, such as &quot;<code>is_invalid</code>&quot;
+instead of &quot;<code>is_not_valid</code>&quot;.</p>
+<h5>Example</h5>
+<pre>bool is_not_valid(...);
+void find_client(name with_the_name, bool&amp; not_found);
+Should be re-defined as:
+bool is_valid(...);
+void find_client(name with_the_name, bool&amp; found);      </pre>
+<h3><a name="anchor494676"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+function overloading when the same general meaning is intended</h3>
+<p>When operations have the same intended purpose, use overloading rather than
+trying to find synonyms: this minimizes the number of concepts and variations of
+operations in the system, and thereby reduce its overall complexity.<br>
+When overloading operators, ensure that the semantics of the operator are
+preserved; if the conventional meaning of an operator cannot be preserved,
+choose another name for the function rather than overload the operator.</p>
+<h2><a name="anchor494849"></a>Objects and Function Parameters</h2>
+<h3><a name="anchor495003"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Augment
+names with grammatical elements to emphasize meaning</h3>
+<p>To indicate uniqueness, or to show that this entity is the main focus of the
+action, prefix the object or parameter name with &quot;<code>the</code>&quot; or
+&quot;<code>this</code>&quot;. To indicate a secondary, temporary, auxiliary
+object, prefix it with &quot;<code>a</code>&quot; or &quot;<code>current</code>&quot;:</p>
+<h5>Example</h5>
+<pre>void change_name( subscriber&amp; the_subscriber,
+const subscriber::name new_name)
+{
+...
+the_subscriber.name = new_name;
+...
+}
+void update(subscriber_list&amp; the_list,
+const subscriber::identification with_id,
+structure&amp; on_structure,
+const value for_value);
+void change( object&amp; the_object,
+const object using_object);      </pre>
+<h2><a name="anchor495277"></a>Exceptions</h2>
+<hr align="left">
+<h3><a name="anchor495660"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Choose
+exception names with a negative meaning</h3>
+<p>Since exceptions must be used only to handle error situations, use a noun or
+a noun phrase that clearly conveys a negative idea:</p>
+<pre>overflow, threshold_exceeded, bad_initial_value      </pre>
+<h3><a name="anchor495912"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+project defined adjectives for exception names</h3>
+<p>Use one of the words such as <i>bad, incomplete, invalid, wrong, missing,</i>
+or <i>illegal</i> from a project agreed list as part of the name rather than
+systematically using <i>error</i> or <i>exception</i>, which do not convey
+specific information.</p>
+<h2><a name="anchor498123"></a>Miscellaneous</h2>
+<h3><a name="anchor496199"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+capital letters for floating point exponent and hexadecimal digits.</h3>
+<p>The letter 'E' in floating-point literals and the hexadecimal digits 'A' to
+'F' should always be uppercase.<br>
+<br>
+</p>
+<hr align="left">
+<h2><a name="anchor499057"></a><i>Chapter 5</i></h2>
+<h1>Declarations</h1>
+<p>This chapter provides guidance on the usage and form of various C++
+declaration kinds.</p>
+<h2><a name="anchor499241"></a>Namespaces</h2>
+<p>Prior to the existence of the namespace feature in the C++ language, there
+were only limited means to manage name scope; consequently, the global namespace
+became rather over-populated, leading to conflicts that prevented some libraries
+from being used together in the same program. The new namespace language feature
+solves the global namespace pollution problem.</p>
+<h3><a name="anchor16104"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Limit
+global declarations to just namespaces</h3>
+<p>This means that only namespace names may be global; all other declarations
+should be within the scope of some namespace.<br>
+Ignoring this rule may eventually lead to name collision.</p>
+<h3><a name="anchor499933"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+a namespace to group non-class functionality</h3>
+<p>For logical grouping of non-class functionality (such as a class category),
+or for functionality with much greater scope than a class, such as a library or
+a subsystem; use a namespace to logical unify the declarations (see &quot;Use
+namespaces to partition potential global names by subsystems or by
+libraries&quot;).<br>
+Express the logical grouping of functionality in the name.</p>
+<h5>Example</h5>
+<pre>namespace transport_layer_interface { /* ... */ };
+namespace math_definitions { /* ... */ };      </pre>
+<h3><a name="anchor500151"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Minimize
+the use of global and namespace scope data</h3>
+<p>The use of global and namespace scope data is contrary to the encapsulation
+principle.</p>
+<h2><a name="anchor500473"></a>Classes</h2>
+<p>Classes are the fundamental design and implementation unit in C++. They
+should be used to capture domain and design abstractions, and as an
+encapsulation mechanism for implementing Abstract Data Types (ADT).</p>
+<h3><a name="anchor500603"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+<code>class</code> rather than <code>struct</code> for implementing abstract
+data types</h3>
+<p>Use the <code>class</code> class-key rather than <code>struct</code> for
+implementing a class-an abstract data type.<br>
+Use the <code>struct</code> class-key for defining plain-old-data-structures
+(POD) as in C, especially when interfacing with C code.<br>
+Although <code>class</code> and <code>struct</code> are equivalent and can be
+used interchangeably, <code>class</code> has the preferred default access
+control emphasis (private) for better encapsulation.</p>
+<h5>Rationale</h5>
+<p>Adopting a consistent practice for distinguishing between <code>class</code>
+and <code>struct</code> introduces a semantic distinction above and beyond the
+language rules: the <code>class</code> become the foremost construct for
+capturing abstractions and encapsulation; whilst the <code>struct</code>
+represents a pure data structure that can be exchanged in mixed programming
+language programs.</p>
+<h3><a name="anchor500848"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Declare
+class members in order of decreasing accessibility</h3>
+<p>The access specifiers in a class declaration should appear in the order <i>public,
+protected, private.</i></p>
+<h5>Rationale</h5>
+<p>The public, protected, private ordering of member declarations ensures that
+information of most interest to the class user is presented first, hence
+reducing the need for the class user to navigate through irrelevant, or
+implementation details.</p>
+<h3><a name="anchor501073"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+declaring public or protected data members for abstract data types</h3>
+<p>The use of public or protected data members reduces a class' encapsulation
+and affects a system's resilience to change: public data members expose a class'
+implementation to its users; protected data members expose a class'
+implementation to its derived classes. Any change to the class' public or
+protected data members will have consequences upon users and derived classes.</p>
+<h3><a name="anchor501337"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+friends to preserve encapsulation</h3>
+<p>This guideline appears counter-intuitive upon first encounter: friendship
+exposes ones private parts to friends, so how can it preserve encapsulation? In
+situations where classes are highly interdependent, and require internal
+knowledge of each other, it is better to grant friendship rather than exporting
+the internal details via the class interface.<br>
+Exporting internal details as public members gives access to class clients which
+is not desirable. Exporting protected members gives access to potential
+descendants, encouraging a hierarchical design which is also not desirable.
+Friendship grants selective private access without enforcing a subclassing
+constraint, thus preserving encapsulation from all but those requiring access.<br>
+A good example of using friendship to preserve encapsulation is granting
+friendship to a friend test class. The friend test class, by seeing the class
+internals can implement the appropriate test code, but later on, the friend test
+class can be dropped from the delivered code. Thus, no encapsulation is lost nor
+is coded added to the deliverable code.</p>
+<h3><a name="anchor501613"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+providing function definitions in class declarations</h3>
+<p>Class declarations should contain only function declarations and never
+function definitions (implementations).</p>
+<h5>Rationale</h5>
+<p>Providing function definitions in a class declaration pollutes the class
+specification with implementation details; making the class interface less
+discernible and more difficult to read; and increases compilation dependencies.<br>
+Function definitions in class declarations also reduce control over function
+inlining (see also &quot;Use a <code>No_Inline</code> conditional compilation
+symbol to subvert inline compilation&quot;).</p>
+<h3><a name="anchor501775"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Always
+provide a default constructor for classes with explicitly-declared constructors</h3>
+<p>To allow the use of a class in an array, or any of the STL containers; a
+class must provide a public default constructor, or allow the compiler to
+generate one.</p>
+<h5>Notes</h5>
+<p>An exception to the above rule exists when a class has a non-static data
+member of reference type, in this case it is often not possible to create a
+meaningful default constructor. It is questionable; therefore, to use a
+reference to an object data member.</p>
+<h3><a name="anchor502006"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Always
+declare copy constructors and assignment operators for classes with pointer type
+data members</h3>
+<p>If needed, and not explicitly declared, the compiler will implicitly generate
+a copy constructor and an assignment operator for a class. The compiler defined
+copy constructor and assignment operator implement what is commonly referred to
+in Smalltalk terminology as &quot;shallow-copy&quot;: explicitly, memberwise
+copy with bitwise copy for pointers. Use of the compiler generated copy
+constructor and default assignment operators is guaranteed to leak memory.</p>
+<h5>Example</h5>
+<pre>// Adapted from <a href="#anchor2522845">[Meyers, 92]</a>.
+void f()
+{
+String hello(&quot;Hello&quot;);// Assume String is implemented 
+                      // with a pointer to a char 
+                      // array.
+{ // Enter new scope (block)
+String world(&quot;World&quot;);
+world = hello;        // Assignment loses world's 
+                      // original memory
+}	// Destruct world upon exit from 
+	// block;
+	// also indirectly hello
+String hello2 = hello; // Assign destructed hello to 
+                       // hello2
+}      </pre>
+<p>In the above code, the memory holding the string &quot;<code>World</code>&quot;
+is lost after the assignment. Upon exiting the inner block, <code>world</code>
+is destroyed; thus, also losing the memory referenced by <code>hello</code>. The
+destructed <code>hello</code> is assigned to <code>hello2</code>.</p>
+<h5>Example</h5>
+<pre>// Adapted from <a href="#anchor2522845">[Meyers, 1992]</a>.
+void foo(String bar) {};
+void f()
+{
+String lost = &quot;String that will be lost!&quot;;
+foo(lost);
+}      </pre>
+<p>In the above code, when <code>foo</code> is called with argument <code>lost</code>,
+<code>lost</code> will be copied into <code>foo</code> using the compiler
+defined copy constructor. Since <code>lost</code> is copied with a bitwise copy
+of the pointer to <code>&quot;String that will be lost!&quot;</code>, upon exit
+from <code>foo</code>, the copy of <code>lost</code> will be destroyed (assuming
+the destructor is implemented correctly to free up memory) along with the memory
+holding &quot;<code>String that will be lost!&quot;</code></p>
+<h3><a name="anchor502268"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Never
+re-declare constructor parameters to have a default value</h3>
+<h5>Example</h5>
+<pre>// Example from [X3J16, 95; section 12.8]
+class X {
+public:
+X(const X&amp;, int);	// int parameter is not 
+				   // initialized
+				   // No user-declared copy constructor, thus 
+				   // compiler implicitly declares one.
+};
+// Deferred initialization of the int parameter mutates 
+// constructor into a copy constructor.
+//
+X::X(const X&amp; x, int i = 0) { ... }      </pre>
+<h5>Rationale</h5>
+<p>A compiler not seeing a &quot;standard&quot; copy constructor signature in a
+class declaration will implicitly declare a copy constructor. Deferred
+initialization of default parameters may however mutate a constructor into copy
+constructor: resulting in ambiguity when a copy constructor is used. Any use of
+a copy constructor is thus ill-formed because of the ambiguity <a href="#anchor2525532">[X3J16,
+95; section 12.8]</a>.</p>
+<h3><a name="anchor502518"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Always
+declare destructors to be virtual</h3>
+<p>Unless a class is explicitly designed to be non-derivable, its destructor
+should always be declared virtual.</p>
+<h5>Rationale</h5>
+<p>Deletion of a derived class object via a pointer or reference to a base class
+type will result in undefined behavior unless the base class destructor has been
+declared virtual.</p>
+<h5>Example</h5>
+<pre>// Bad style used for brevity
+class B {
+public:
+B(size_t size) { tp = new T[size]; }
+~B() { delete [] tp; tp = 0; }
+//...
+private:
+T* tp;
+};
+
+class D : public B {
+public:
+D(size_t size) : B(size) {}
+~D() {}
+//... 
+};
+
+void f()
+{
+B* bp = new D(10);
+delete bp; // Undefined behavior due to
+		    // non-virtual base class
+	       // destructor
+}      </pre>
+<h3><a name="anchor502704"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+declaring too many conversion operators and single parameter constructors</h3>
+<p>Single parameter constructors can also be prevented from being used for
+implicit conversion by declaring them with the <code>explicit</code> specifier.</p>
+<h3><a name="anchor502914"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Never
+redefine non-virtual functions</h3>
+<p>Non-virtual functions implement invariant behavior and are not intended to be
+specialized by derived classes. Violating this guideline may produce unexpected
+behavior: the same object may exhibit different behavior at different times.<br>
+Non-virtual functions are statically bound; thus, the function invoked upon an
+object is governed by the static type of the variable referencing the
+object-pointer-to-A and pointer-to-B respectively in the example below-and not
+the actual type of the object.</p>
+<h5>Example</h5>
+<pre>// Adapted from <a href="#anchor2522845">[Meyers, 92]</a>.
+class A {
+public:
+oid f(); // Non-virtual: statically bound
+};
+class B : public A {
+public:
+void f(); // Non-virtual: statically bound
+};
+void g()
+{
+B x;
+A* pA = &amp;x; // Static type: pointer-to-A
+B* pB = &amp;x; // Static type: pointer-to-B
+pA-&gt;f(); // Calls A::f
+pB-&gt;f(); // Calls B::f
+}      </pre>
+<h3><a name="anchor503176"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+non-virtual functions judiciously</h3>
+<p>Since non-virtual functions constrain subclasses by restricting
+specialization and polymorphism, care should be taken to ensure that an
+operation is truly invariant for all subclasses before declaring it non-virtual.</p>
+<h3><a name="anchor503449"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+constructor-initializers rather than assignments in constructors</h3>
+<p>The initialization of an object's state during construction should be
+performed by a constructor initializer-a member initializer list-rather than
+with assignment operators within the constructor body.</p>
+<h5>Example</h5>
+<pre>Do this:
+class X 
+{
+public:
+X();
+private
+Y the_y;
+};
+X::X() : the_y(some_y_expression) { } 
+//
+// &quot;the_y&quot; initialized by a constructor-initializer
+Rather than this:
+X::X() { the_y = some_y_expression; }
+//
+// &quot;the_y&quot; initialized by an assignment operator.      </pre>
+<h5>Rationale</h5>
+<p>Object construction involves the construction of all base classes and data
+members prior to the execution of the constructor body. Initialization of data
+members requires two operations (construction plus assignment) if performed in a
+constructor body as opposed to a single operation (construction with an initial
+value) when performed using a constructor-initializer.<br>
+For large nested aggregate classes (classes containing classes containing
+classes...), the performance overheads of multiple operations-construction +
+member assignment-can be significant.</p>
+<h3><a name="anchor503758"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Never
+call member functions from a constructor initializer</h3>
+<h5>Example</h5>
+<pre>class A 
+{
+public:
+A(int an_int);
+};
+class B : public A
+{
+public:
+int f();
+B();
+};
+
+B::B() : A(f()) {} 
+// undefined: calls member function but A bas
+// not yet been initialized <a href="#anchor2525532">[X3J16, 95]</a>.      </pre>
+<h5>Rationale</h5>
+<p>The result of an operation is undefined if a member function is called
+directly or indirectly from a constructor initializer before all the member
+initializers for base classes have completed <a href="#anchor2525532">[X3J16,
+95].</a></p>
+<h3><a name="anchor504062"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Beware
+when calling member functions in constructors and destructors</h3>
+<p>Care should be exercised when calling member functions in constructors; be
+aware that even if a virtual function is called, the one that is executed is the
+one defined in the constructor or destructor's class or one of its base's.</p>
+<h3><a name="anchor504315"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+<code>static const</code> for integral class constants</h3>
+<p>When defining integral (integer) class constants, use <code>static const</code>
+data members rather than <code>#define</code>'s or global constants. If <code>static
+const</code> is not supported by the compiler, use <code>enum</code>'s instead.</p>
+<h5>Example</h5>
+<pre>Do this:
+class X {
+static const buffer_size = 100;
+char buffer[buffer_size];
+};
+static const buffer_size;
+Or this:
+class C {
+enum { buffer_size = 100 };
+char buffer[buffer_size];
+};
+But not this:
+#define BUFFER_SIZE 100
+class C {
+char buffer[BUFFER_SIZE];
+};      </pre>
+<h2><a name="anchor504715"></a>Functions</h2>
+<h3><a name="anchor505104"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Always
+declare an explicit function return type</h3>
+<p>This will prevent confusion when the compiler complains about a missing
+return type for functions declared without an explicit return type.</p>
+<h3><a name="anchor505286"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Always
+provide formal parameter names in function declarations</h3>
+<p>Also use the same names in both function declarations and definitions; this
+minimizes surprises. Providing parameter names improves code documentation and
+readability.</p>
+<h3><a name="anchor505514"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Strive
+for functions with a single point of return</h3>
+<p>Return statements sprinkled freely over a function body are akin to <code>goto</code>
+statements, making the code more difficult to read and to maintain.<br>
+Multiple returns can be tolerated only in very small functions, when all <code>return</code>'s
+can be seen simultaneously and when the code has a very regular structure:</p>
+<pre>type_t foo()
+{
+
+if (this_condition)
+return this_value;
+else
+return some_other_value;
+}      </pre>
+<p>Functions with void return type should have no return statement.</p>
+<h3><a name="anchor505821"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+creating function with global side-effects</h3>
+<p>The creation of functions that produce global side-effects (change
+unadvertised data other than their internal object state: such as global and
+namespace data) should be minimized (see also &quot;Minimize the use of global
+and namespace scope data&quot;). But if unavoidable, then any side effects
+should be clearly documented as part of the function specification.<br>
+Passing in the required objects as parameters makes code less context dependent,
+more robust, and easier to understand.</p>
+<h3><a name="anchor506202"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Declare
+function parameters in order of decreasing importance and volatility</h3>
+<p>The <i>order</i> in which parameters are declared is important from the
+caller's point of view:
+<ul>
+  <li>First define the non-defaulted parameters in order of decreasing
+    importance;</li>
+  <li>Then define the parameters that have default values, with the most likely
+    to be modified first.</li>
+</ul>
+<p>This ordering permits taking advantage of defaults to reduce the number of
+arguments in function calls.</p>
+<h3><a name="anchor506403"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+declaring functions with a variable number of parameters</h3>
+<p>Arguments for functions with a variable number of parameters cannot be
+type-checked.</p>
+<h3><a name="anchor506589"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+re-declaring functions with default parameters</h3>
+<p>Avoid adding defaults to functions in further re-declarations of the
+function: apart from forward declarations, a function should only be declared
+once. Otherwise this may cause confusion for readers who are not aware of
+subsequent declarations.</p>
+<h3><a name="anchor506792"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Maximize
+the use of const in function declarations</h3>
+<p>Check whether functions have any constant behavior (return a constant value;
+accept constant arguments; or operate without side effect) and assert the
+behavior using the <code>const</code> specifier.</p>
+<h5>Example</h5>
+<pre>const T f(...); // Function returning a constant
+		         // object.
+T f(T* const arg);	// Function taking a constant
+			          // pointer. 
+// The pointed-to object can be 
+// changed but not the pointer.
+T f(const T* arg);      // Function taking a pointer to, and
+T f(const T&amp; arg);      // function taking a reference to a 
+                        // constant object. The pointer can 
+                        // change but not the pointed-to 
+                        // object.
+T f(const T* const arg);  // Function taking a constant 
+                          // pointer to a constant object. 
+                          // Neither the pointer nor pointed-
+                          // to object may change.
+T f(...) const;  // Function without side-effect: 
+                 // does not change its object state; 
+                 // so can be applied to constant 
+                 // objects.      </pre>
+<h3><a name="anchor507052"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+passing objects by value</h3>
+<p>Passing and returning objects by value may incur heavy constructor and
+destructor overhead. The constructor and destructor overhead can be avoided by
+passing and returning objects by reference.<br>
+<code>Const</code> references can be used to specify that arguments passed by
+reference cannot be modified. Typical usage examples are copy constructors and
+assignment operators:</p>
+<pre>C::C(const C&amp; aC);
+C&amp; C::operator=(const C&amp; aC);      </pre>
+<h5>Example</h5>
+<p>Consider the following:</p>
+<pre>the_class the_class::return_by_value(the_class a_copy)
+{
+return a_copy;
+}
+the_class an_object;
+return_by_value(an_object);      </pre>
+<p>When <code>return_by_value</code> is called with <code>an_object</code> as
+argument, <code>the_class</code> copy constructor is invoked to copy <code>an_object</code>
+to <code>a_copy</code>. <code>the_class</code> copy constructor is invoked again
+to copy <code>a_copy</code> to the function return temporary object. <code>the_class</code>
+destructor is invoked to destroy <code>a_copy</code> upon return from the
+function. Some time later <code>the_class</code> destructor will be invoked
+again to destroy the object returned by <code>return_by_value</code>. The
+overall cost of the above do-nothing function call is two constructors and two
+destructors.<br>
+The situation is even worse if <code>the_class</code> was a derived class and
+contained member data of other classes; the constructors and destructors of base
+classes and contained classes would also be invoked, thus escalating the number
+of constructor and destructor calls incurred by the function call.</p>
+<h5>Notes</h5>
+<p>The above guideline may appear to invite developers to always pass and return
+objects by reference, however care should be exercised not to return references
+to local objects or references when objects are required. Returning a reference
+to local a object is an invitation for disaster since upon function return, the
+returned reference is bound to a destroyed object!</p>
+<h3><a name="anchor507285"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Never
+return a reference to a local object</h3>
+<p>Local objects are destroyed upon leaving function scope; using destroyed
+objects is inviting disaster.</p>
+<h3><a name="anchor507604"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Never
+return a de-referenced pointer initialized by new</h3>
+<p>Violation of this guideline will lead to memory leaks</p>
+<h5>Example</h5>
+<pre>class C {
+public:
+...
+friend C&amp; operator+( const C&amp; left, 
+const C&amp; right);
+};
+C&amp; operator+(const C&amp; left, const C&amp; right)
+{
+C* new_c = new C(left..., right...);
+return *new_c;
+}
+C a, b, c, d;
+C sum;
+sum = a + b + c + d;      </pre>
+<p>Since the intermediate results of the operator+'s are not stored when
+computing sum, the intermediate objects cannot be deleted, leading to memory
+leaks.</p>
+<h3><a name="anchor507940"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Never
+return a non-const reference or pointer to member data</h3>
+<p>Violation of this guideline violates data encapsulation and may lead to bad
+surprises.</p>
+<h3><a name="anchor508101"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+inline functions in preference to <code>#define</code> for macro expansion</h3>
+<p>But use inlining judiciously: only for very small functions; inlining large
+functions may cause code bloat.<br>
+Inline functions also increase the compilation dependencies between modules, as
+the implementation of the inline functions need to be made available for
+compilation of the client code.<br>
+<a href="#anchor2523136">[Meyers, 1992]</a> provides a detailed discussion of
+the following rather extreme example of bad macro usage:</p>
+<h5>Example</h5>
+<p>Don't do this:</p>
+<pre>#define MAX(a, b) ((a) &gt; (b) ? (a) : (b))     </pre>
+<p>Rather, do this:</p>
+<pre>inline int max(int a, int b) { return a &gt; b ? a : b; }      </pre>
+<p>The macro <code>MAX</code> has a number of problems: it is not type-safe; and
+its behavior is non-deterministic:</p>
+<pre>int a = 1, b = 0;
+MAX(a++, b);     // a is incremented twice
+MAX(a++, b+10);  // a is incremented once
+MAX(a, &quot;Hello&quot;); // comparing ints and pointers      </pre>
+<h3><a name="anchor508478"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+default parameters rather than function overloading</h3>
+<p>Use default parameters rather than function overloading when a single
+algorithm can be exploited, and the algorithm can be parameterized by a small
+number of parameters.<br>
+Using default parameters helps to reduce the number of overloaded functions,
+enhancing maintainability, and reduces the number of arguments required in
+function calls, improving code readability.</p>
+<h3><a name="anchor508622"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+function overloading to express common semantics</h3>
+<p>Use function overloading when multiple implementations are required for the
+same semantic operation, but with different argument types.<br>
+Preserve conventional meaning when overloading operators. Don't forget to define
+related operators, e.g., <code>operator==</code> and <code>operator!=</code>.</p>
+<h3><a name="anchor508866"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+overloading functions taking pointers and integers</h3>
+<p>Avoid overloading functions with a single pointer argument by functions with
+a single integer argument:</p>
+<pre>void f(char* p);
+void f(int i);      </pre>
+<p>The following calls may cause surprises:</p>
+<p>PRE&gt;f(NULL); f(0);</p>
+<p>Overload resolution resolves to <code>f(int)</code> and not<code> f(char*)</code>.</p>
+<h3><a name="anchor509053"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Have<code>
+operator= </code>return a reference to <code>*this</code></h3>
+<p>C++ allows chaining of the assignment operators:</p>
+<pre>String x, y, z;
+x = y = z = &quot;A string&quot;;      </pre>
+<p>Since the assignment operator is right-associative, the string &quot;<code>A
+string</code>&quot; is assigned to z, z to y, and y to x. The <code>operator=</code>
+is effectively invoked once for each expression on the right side of the =, in a
+right to left order. This also means that the result of each <code>operator=</code>
+is an object, however a return choice of either the left hand or the right hand
+object is possible.<br>
+Since good practice dictates that the signature of the assignment operator
+should always be of the form:</p>
+<pre>C&amp; C::operator=(const C&amp;);      </pre>
+<p>only the left hand object is possible (rhs is const reference, lhs is
+non-const reference), thus <code>*this</code> should be returned. See <a href="#anchor2522845">[Meyers,
+1992]</a> for a detailed discussion.</p>
+<h3><a name="anchor509276"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Have
+<code>operator=</code> check for self-assignment</h3>
+<p>There are two good reasons for performing the check: firstly, assignment of a
+derived class object involves calling the assignment operator of each base class
+up the inheritance hierarchy and skipping these operations may provide
+significant runtime savings. Secondly, assignment involves the destruction of
+the &quot;lvalue&quot; object prior to copying the &quot;rvalue&quot; object. In
+the case of a self assignment, the rvalue object is destroyed before it is
+assigned, the result of the assignment is thus undefined.</p>
+<h3><a name="anchor509548"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Minimize
+complexity</h3>
+<p>Do not write overly long functions, for example over 60 lines of code.<br>
+Minimize the number of return statements, 1 is the ideal number.<br>
+Strive for a Cyclomatic Complexity of less than 10 (sum of the decision
+statements + 1, for single exit statement functions).<br>
+Strive for an Extended Cyclomatic Complexity of less than 15 (sum of the
+decision statements + logical operators + 1, for single exit statement
+functions).<br>
+Minimize the mean maximum span of reference (distance in lines between the
+declaration of a local object and the first instance of its use).</p>
+<h2><a name="anchor509707"></a>Types</h2>
+<h3><a name="anchor509845"></a><img src="images/cg_1.gif" align="BOTTOM" naturalsizeflag="3" width="23" height="28">Define
+project-wide global system types</h3>
+<p>In large projects there are usually a collection of types used frequently
+throughout the system; in this case it is sensible to collect together these
+types in one or more low-level global utility namespaces (see example for
+&quot;Avoid the use of fundamental types&quot;).</p>
+<h3><a name="anchor509998"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+the use of fundamental types</h3>
+<p>When a high degree of portability is the objective, or when control is needed
+over the memory space occupied by numeric objects, or when a specific range of
+values is required; then fundamental types should not be used. In these
+situations it is better to declare explicit type names with size constraints
+using the appropriate fundamental types.<br>
+Make sure that fundamental types don't sneak back into the code through loop
+counters, array indices, and so on.</p>
+<h5>Example</h5>
+<pre>namespace system_types {
+typedef unsigned char byte;
+typedef short int integer16; // 16-bit signed integer
+typedef int integer32; // 32-bit signed integer
+typedef unsigned short int natural16; // 16-bit unsigned integer
+typedef unsigned int natural32; // 32-bit unsigned integer
+...
+}      </pre>
+<h5>Rationale</h5>
+<p>The representation of fundamental types is implementation dependent.</p>
+<h3><a name="anchor510300"></a><img src="images/cg_1.gif" align="BOTTOM" naturalsizeflag="3" width="23" height="28">Use
+<code>typedef</code> to create synonyms to strengthen local meaning</h3>
+<p>Use <code>typedef</code> to create synonyms for existing names, to give more
+meaningful local names and improve legibility (there is no runtime penalty for
+doing so).<br>
+<code>typedef</code> can also be used to provide shorthands for qualified names.</p>
+<h5>Example</h5>
+<pre>// vector declaration from standard library
+//
+namespace std {
+template &lt;class T, class Alloc = allocator&gt;
+class vector {
+public:
+typedef typename 
+Alloc::types&lt;T&gt;reference reference;
+typedef typename 
+Alloc::types&lt;T&gt;const_reference const_reference;
+typedef typename 
+Alloc::types&lt;T&gt;pointer iterator;
+typedef typename 
+Alloc::types&lt;T&gt;const_pointer const_iterator;
+...
+}
+}      </pre>
+<p>When using typedef-names created by <code>typedef</code>, do not mix the use
+of the original name and the synonym in the same piece of code.</p>
+<h2><a name="anchor510517"></a>Constants and Objects</h2>
+<p>H3&gt;<a name="anchor510747"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+using literal values</p>
+<p>Use named constants in preference.</p>
+<h3><a name="anchor510988"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+using the preprocessor #define directive for defining constants</h3>
+<p>Use <code>const</code> or <code>enum</code> instead.<br>
+Don't do this:</p>
+<pre>#define LIGHT_SPEED 3E8
+Rather, do this:
+const int light_speed = 3E8;
+Or this for sizing arrays:
+enum { small_buffer_size = 100, 
+large_buffer_size = 1000 };      </pre>
+<h5>Rationale</h5>
+<p>Debugging is much harder because names introduced by <code>#defines</code>
+are replaced during compilation preprocessing, and do not appear in symbol
+tables.</p>
+<h3><a name="anchor511232"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Declare
+objects close to their point of first use<br>
+<a name="anchor511376"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Always
+initialize const objects at declaration</h3>
+<p><code>const</code> objects not declared <code>extern</code> have internal
+linkage, initializing these constant objects at declaration allows the
+initializers to be used at compilation time.</p>
+<h3><a name="anchor511553"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Never
+cast away the &quot;constness&quot; of a constant object</h3>
+<p>Constant objects may exist in read-only memory.</p>
+<h3><a name="anchor511788"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Initialize
+objects at definition</h3>
+<p>Specify initial values in object definitions, unless the object is
+self-initializing. If it is not possible to assign a meaningful initial value,
+then assign a &quot;nil&quot; value or consider declaring the object later.<br>
+For large objects, it is generally not advisable to construct the objects, and
+then later initialize them using assignment as this can be very costly (see also
+&quot;Use constructor initializers rather than assignments in
+constructors&quot;).<br>
+If proper initialization of an object is not possible at the time of
+construction, then initialize the object using a conventional &quot;nil&quot;
+value that means &quot;uninitialized&quot;. The nil value is to be used only for
+initialization to declare an &quot;unusable but known value&quot; that can be
+rejected in a controlled fashion by algorithms: to indicate an uninitialized
+variable error when the object is used before proper initialization.<br>
+Note that it is not always possible to declare a nil value for all types,
+especially modulo types, such as an angle. In this case choose the least likely
+value.<br>
+<br>
+</p>
+<hr align="left">
+<h2><a name="anchor511974"></a><i>Chapter 6</i></h2>
+<h1>Expressions and Statements</h1>
+<p>This chapter provides guidance on the usage and form of various kinds of C++
+expressions and statements.</p>
+<h2><a name="anchor512769"></a>Expressions</h2>
+<h3><a name="anchor513128"></a><img src="images/cg_1.gif" align="BOTTOM" naturalsizeflag="3" width="23" height="28">Use
+redundant parentheses to make compound expressions clearer<br>
+<a name="anchor513356"></a><img src="images/cg_1.gif" align="BOTTOM" naturalsizeflag="3" width="23" height="28">Avoid
+nesting expressions too deeply</h3>
+<p>The level of nesting of an expression is defined as the number of nested sets
+of parentheses required to evaluate an expression from left to right if the
+rules of operator precedence were ignored.<br>
+Too many levels of nesting make expressions harder to comprehend.</p>
+<h3><a name="anchor513613"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Do
+not assume any particular expression evaluation order</h3>
+<p>Unless evaluation order is specified by an operator (comma operator, ternary
+expression, and conjunctions and disjunctions); do not assume any particular
+evaluation order; assuming may lead to bad surprises and non-portability.<br>
+For example, don't combine the use of a variable in the same statement as an
+increment or decrement of the variable.</p>
+<h5>Example</h5>
+<pre>foo(i, i++);
+array[i] = i--;      </pre>
+<h3><a name="anchor517867"></a><img src="images/cg_1.gif" align="BOTTOM" naturalsizeflag="3" width="23" height="28">Use
+0 for null pointers rather than <code>NULL</code></h3>
+<p>The use of 0 or <code>NULL</code> for null pointers is a highly controversial
+topic.<br>
+Both C and C++ define any zero-valued constant expression to be interpretable as
+a null pointer. Because 0 is difficult to read and the use of literals is highly
+discouraged, programmers have traditionally used the macro <code>NULL</code> as
+the null pointer. Unfortunately, there is no portable definition for <code>NULL</code>.
+Some ANSI C compilers have used (void *)0, but this turns out to be a poor
+choice for C++:</p>
+<pre>char* cp = (void*)0; /* Legal C but not C++ */      </pre>
+<p>Thus any definition of <code>NULL</code> of the form (T*)0, rather than
+simply zero, requires a cast in C++. Historically, guidelines advocating the use
+of 0 for null pointers, attempted to alleviate the casting requirement and make
+code more portable. Many C++ developers however feel more comfortable using <code>NULL</code>
+rather than 0, and also argue that most compilers (more precisely, most header
+files) nowadays implement <code>NULL</code> as 0.<br>
+This guideline rules in favor of 0, since 0 is guaranteed to work irrespective
+of the value of <code>NULL</code>, however, due to controversy, this point is
+demoted to the level of a tip, to be followed or ignored as seen fit.</p>
+<h3><a name="anchor518196"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Don't
+use old-style casting</h3>
+<p>Use the new casting operators (<code>dynamic_cast, static_cast,
+reinterpret_cast, const_cast</code>) rather than old-style casting.<br>
+If you don't have the new cast operators; avoid casting altogether, especially
+downcasting (converting a base class object to a derived class object).<br>
+Use the casting operators as follows:
+<ul>
+  <li><code>dynamic_cast</code>-to cast between members of the same class
+    hierarchy (subtypes) using run-time type information (run-time type
+    information is available for classes with virtual functions). Casting
+    between such classes is guaranteed to be safe.</li>
+  <li><code>static_cast</code>-to cast between members of the same class
+    hierarchy without using run-time type information; so is not guaranteed to
+    be safe. If the programmer cannot guarantee type-safety, then <code>use
+    dynamic_cast.</code></li>
+  <li><code>reinterpret_cast</code>-to cast between unrelated pointer types and
+    integral (integer) types; is unsafe and should only be used between the
+    types mentioned.</li>
+  <li><code>const_cast</code>-to cast away the &quot;constness&quot; of a
+    function argument specified as a <code>const</code> parameter. Note <code>const_cast</code>
+    is not intended to cast away the &quot;constness&quot; of an object truly
+    defined as a const object (it could be in read-only-memory).</li>
+</ul>
+<p>Don't use <code>typeid</code> to implement type-switching logic: let the
+casting operators perform the type checking and conversion atomically, see <a href="#anchor2524798">[Stroustrup,
+1994]</a> for an in-depth discussion.</p>
+<h5>Example</h5>
+<p>Don't do the following:</p>
+<pre>void foo (const base&amp; b)
+{
+if (typeid(b) == typeid(derived1)) {
+do_derived1_stuff();
+else if (typeid(b) == typeid(derived2)) {
+do_derived2_stuff();
+else if () {
+
+}
+}      </pre>
+<h5>Rationale</h5>
+<p>Old-style casting defeats the type system and can lead to hard-to-detect bugs
+that are not caught by the compiler: the memory management system can be
+corrupted, virtual function tables can get trampled on, and non-related objects
+can be damaged when the object is accessed as a derived class object. Note that
+the damage can be done even by a read access, as non-existent pointers or fields
+might be referenced.<br>
+New-style casting operators make type conversion safer (in most cases) and more
+explicit.</p>
+<h3><a name="anchor518514"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Use
+the new bool type for Boolean expressions</h3>
+<p>Don't use the old-style Boolean macros or constants: there is no standard
+Boolean value true; use the new <code>bool</code> type instead.</p>
+<h3><a name="anchor518714"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Never
+compare directly against the Boolean value true</h3>
+<p>Since there was traditionally no standard value for true (1 or ! 0);
+comparisons of non-zero expressions to true could fail.<br>
+Use Boolean expressions instead.</p>
+<h5>Example</h5>
+<p>Avoid doing this:</p>
+<pre>if (someNonZeroExpression == true) 
+// May not evaluate to true
+Better to do this:
+if (someNonZeroExpression) 
+// Always evaluates as a true condition.      </pre>
+<h3><a name="anchor518939"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Never
+compare pointers to objects not within the same array</h3>
+<p>The result of such operations are nearly always meaningless.</p>
+<h3><a name="anchor519161"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Always
+assign a null pointer value to a deleted object pointer</h3>
+<p>Avoid disaster by setting a pointer to a deleted object to null: repeated
+deletion of a non-null pointer is harmful, but repeated deletion of a null
+pointer is harmless.<br>
+Always assign a null pointer value after deletion even before a function return,
+since new code may be added later.</p>
+<h2><a name="anchor519357"></a>Statements</h2>
+<h3><a name="anchor519619"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+an if-statement when branching on Boolean expressions<br>
+<a name="anchor519864"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+a switch-statement when branching on discrete values</h3>
+<p>Use a switch statement rather than a series of &quot;else if&quot; when the
+branching condition is a discrete value.</p>
+<h3><a name="anchor520167"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Always
+provide a <code>default</code> branch for switch-statements for catching errors</h3>
+<p>A switch statement should always contain a <code>default</code> branch,and
+the <code>default</code> branch should be used for trapping errors.<br>
+This policy ensures that when new switch values are introduced, and branches to
+handle the new values are omitted, the existing default branch will catch the
+error.</p>
+<h3><a name="anchor520508"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+a for-statement or a while-statement when a pre-iteration test is required in a
+loop</h3>
+<p>Use a for-statement in preference to a while statement when iteration and
+loop termination is based upon the loop counter.</p>
+<h3><a name="anchor520758"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+a do-while-statement when a post-iteration test is required in a loop<br>
+<a name="anchor520942"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+the use of jump statements in loops</h3>
+<p>Avoid exiting (using <code>break, return</code> or <code>goto</code>) from
+loops other than by the loop termination condition; and pre-maturely skipping to
+the next iteration with <code>continue</code>. This reduces the number of flow
+of control paths, making code easier to comprehend.</p>
+<h3><a name="anchor521200"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Don't
+use the <code>goto</code>-statement</h3>
+<p>This seems to be a universal guideline.</p>
+<h3><a name="anchor521418"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+the hiding of identifiers in nested scopes</h3>
+<p>This may lead to confusion for the readers and potential risks in
+maintenance.<br>
+<br>
+</p>
+<hr align="left">
+<h2><a name="anchor92029"></a><i>Chapter 7</i></h2>
+<h1>Special Topics</h1>
+<p>This chapter provides guidance on the topics of memory management and error
+reporting.</p>
+<h2><a name="anchor521650"></a>Memory Management</h2>
+<h3><a name="anchor521844"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Avoid
+mixing C and C++ memory operations</h3>
+<p>The C library <code>malloc</code>, <code>calloc</code> and <code>realloc</code>
+functions should not be used for allocating object space: the C++ operator new
+should be used for this purpose.<br>
+The only time memory should be allocated using the C functions is when memory is
+to be passed to a C library function for disposal.<br>
+Don't use delete to free memory allocated by C functions, or free on objects
+created by new.</p>
+<h3><a name="anchor522121"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Always
+use delete[] when deleting array objects created by new</h3>
+<p>Using delete on array objects without the empty brackets (&quot;[]&quot;)
+notation will result in only the first array element being deleted, and thus
+memory leakage.</p>
+<h2><a name="anchor522270"></a>Error Handling and Exceptions</h2>
+<p>Because not much experience has been gained using the C++ exception
+mechanism, the guidelines presented here may undergo significant future
+revision.<br>
+The C++ draft standard defines two broad categories of errors: logic errors and
+runtime errors. Logic errors are preventable programming errors. Runtime errors
+are defined as those errors due to events beyond the scope of the program.<br>
+The general rule for use of exceptions is that the system in normal condition
+and in the absence of overload or hardware failure should not raise any
+exceptions.</p>
+<h3><a name="anchor522434"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+assertions liberally during development to detect errors</h3>
+<p>Use function preconditions and postcondition assertions during development to provide
+&quot;drop-dead&quot; error detection.<br>
+Assertions provide a simple and useful provisional error detection mechanism
+until the final error handling code is implemented. Assertions have the added
+bonus of being able to be compiled away using the &quot;NDEBUG&quot;
+preprocessor symbol (see &quot;Define the NDEBUG symbol with a specific
+value&quot;).<br>
+The assert macro has traditionally been used for this purpose; however,
+reference <a href="#anchor2524798">[Stroustrup, 1994]</a> provides a template
+alternative, see below.</p>
+<h5>Example</h5>
+<pre>template&lt;class T, class Exception&gt;
+inline void assert ( T a_boolean_expression, 
+Exception the_exception)
+{
+if (! NDEBUG)
+if (! a_boolean_expression) 
+throw the_exception;
+}      </pre>
+<h3><a name="anchor522653"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+exceptions only for truly exceptional conditions</h3>
+<p>Do not use exceptions for frequent, anticipated events: exceptions cause
+disruptions in the normal flow of control of the code, making it more difficult
+to understand and maintain.<br>
+Anticipated events should be handled in the normal flow of control of the code;
+use a function return value or &quot;out&quot; parameter status code as
+required.<br>
+Exceptions should also not be used to implement control structures: this would
+be another form of &quot;goto&quot; statement.</p>
+<h3><a name="anchor522899"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Derive
+project exceptions from standard exceptions</h3>
+<p>This ensures that all exceptions support a minimal set of common operations
+and can be handled by a small set of high level handlers.<br>
+Logic errors (domain error, invalid argument error, length error and
+out-of-range error) should be used to indicate application domain errors,
+invalid arguments passed to function calls, construction of objects beyond their
+permitted sizes, and argument values not within permitted ranges.<br>
+Runtime errors (range error and overflow error) should be used to indicate
+arithmetic and configuration errors, corrupted data, or resource exhaustion
+errors only detectable at runtime.</p>
+<h3><a name="anchor523223"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Minimize
+the number of exceptions used by a given abstraction</h3>
+<p>In large systems, having to handle a large number of exceptions at each level
+makes the code difficult to read and to maintain. Exception processing may dwarf
+the normal processing.<br>
+Ways to minimize the number of exceptions are:<br>
+Share exceptions between abstractions by using a small number of exception
+categories.<br>
+Throw specialized exceptions derived from the standard exceptions but handle
+more generalized exceptions.<br>
+Add &quot;exceptional&quot; states to the objects, and provide primitives to
+check explicitly the validity of the objects.</p>
+<h3><a name="anchor523384"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Declare
+all exceptions thrown</h3>
+<p>Functions originating exceptions (not just passing exceptions through) should
+declare all exceptions thrown in their exception specification: they should not
+silently generate exceptions without warning their clients.</p>
+<h3><a name="anchor523617"></a><img src="images/cg_1.gif" align="BOTTOM" naturalsizeflag="3" width="23" height="28">Report
+exceptions at first occurrence</h3>
+<p>During development, report exceptions by the appropriate logging mechanism as
+early as possible, including at the &quot;throw-point&quot;.</p>
+<h3><a name="anchor523770"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Define
+exception handlers in most-derived, to most-base class order</h3>
+<p>Exception handlers should be defined in the most-derived, to most-base class
+order in order to avoid coding unreachable handlers; see the how-not-to-it
+example, below. This also ensures that the most appropriate handler catches the
+exception since handlers are matched in a declaration order.</p>
+<h5>Example</h5>
+<p>P&gt;Don't do this:</p>
+<pre>class base { ... };
+class derived : public base { ... };
+...
+try {
+...
+throw derived(...);
+//
+// Throw a derived class exception
+}
+catch (base&amp; a_base_failure)
+//
+// But base class handler &quot;catches&quot; because 
+// it matches first!
+{
+...
+}
+catch (derived&amp; a_derived_failure) 
+//
+// This handler is unreachable!
+{ 
+...
+}      </pre>
+<h3><a name="anchor524023"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Avoid
+catch-all exception handlers</h3>
+<p>Avoid catch-all exception handlers (handler declarations using ...), unless
+the exception is re-thrown.<br>
+Catch-all handlers should only be used for local housekeeping, then the
+exception should be re-thrown to prevent masking of the fact that the exception
+cannot be handled at this level:</p>
+<pre>try {
+...
+}
+catch (...)
+{ 
+if (io.is_open(local_file))
+{
+io.close(local_file);
+}
+throw;
+}      </pre>
+<h3><a name="anchor524215"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Make
+sure function status codes have an appropriate value</h3>
+<p>When returning status codes as a function parameter, always assigned a value
+to the parameter as the first executable statement in the function body.
+Systematically make all statuses a success by default or a failure by default.
+Think of all possible exits from the function, including exception handlers.</p>
+<h3><a name="anchor524480"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Perform
+safety checks locally; do not expect your client to do so</h3>
+<p>If a function might produce an erroneous output unless given proper input,
+install code in the function to detect and report invalid input in a controlled
+manner. Do not rely on a comment that tells the client to pass proper values. It
+is virtually guaranteed that sooner or later that comment will be ignored,
+resulting in hard-to-debug errors if the invalid parameters are not detected.<br>
+<br>
+</p>
+<hr align="left">
+<h2><a name="anchor524739"></a><i>Chapter 8</i></h2>
+<h1>Portability</h1>
+<p>This chapter deals with language features that are <i>a priori</i>
+non-portable.</p>
+<h2><a name="anchor525043"></a>Pathnames</h2>
+<h3><a name="anchor525177"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Never
+use hardcoded file pathnames</h3>
+<p>Pathnames are not represented in a standard manner across operating systems.
+Using them will introduce platform dependencies.</p>
+<h5>Example</h5>
+<pre>#include &quot;somePath/filename.hh&quot; // Unix
+#include &quot;somePath\filename.hh&quot; // MSDOS      </pre>
+<h2><a name="anchor525374"></a>Data Representation</h2>
+<p>The representation and alignment of types are highly machine architecture
+dependent. Assumptions made about representation and alignment may lead to bad
+surprises and reduced portability.</p>
+<h3><a name="anchor525601"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Do
+not assume the representation of a type</h3>
+<p>In particular, never attempt to store a pointer in an <code>int</code>, a
+long or any other numeric type-this is highly non-portable.</p>
+<h3><a name="anchor525857"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Do
+not assume the alignment of a type<br>
+<a name="anchor526058"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Do
+not depend on a particular underflow or overflow behavior<br>
+<a name="anchor526259"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+&quot;stretchable&quot; constants whenever possible</h3>
+<p>Stretchable constants avoid problems with word-size variations.</p>
+<h5>Example</h5>
+<pre>const int all_ones = ~0;
+const int last_3_bits = ~0x7;     </pre>
+<h2><a name="anchor526481"></a>Type Conversions</h2>
+<h3><a name="anchor526700"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Do
+not convert from a &quot;shorter&quot; type to a &quot;longer&quot; type</h3>
+<p>Machine architectures may dictate the alignment of certain types. Converting
+from types with more relaxed alignment requirements to types with more stringent
+alignment requirements may lead to program failures.<br>
+<br>
+</p>
+<hr align="left">
+<h2><a name="anchor526920"></a><i>Chapter 9</i></h2>
+<h1>Reuse</h1>
+<p>This chapter provides guidance on reusing C++ code.</p>
+<h3><a name="anchor527171"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+standard library components whenever possible</h3>
+<p>If the standard libraries are not available, then create classes based upon
+the standard library interfaces: this will facilitate future migration.</p>
+<h3><a name="anchor527316"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+templates to reuse data independent behavior</h3>
+<p>Use templates to reuse behavior, when behavior is not dependent upon a
+specific data type.</p>
+<h3><a name="anchor527463"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+public inheritance to reuse class interfaces (subtyping)</h3>
+<p>Use <code>public</code> inheritance to express the &quot;isa&quot;
+relationship and reuse base class interfaces, and optionally, their
+implementation.</p>
+<h3><a name="anchor527670"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+containment rather than private inheritance to reuse class implementations</h3>
+<p>Avoid private inheritance when reusing implementation or modeling
+&quot;parts/whole&quot; relationships. Reuse of implementation without
+redefinition is best achieved by containment rather than by private inheritance.<br>
+Use private inheritance when redefinition of base class operations is needed.</p>
+<h3><a name="anchor527872"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Use
+multiple inheritance judiciously</h3>
+<p>Multiple inheritance should be used judiciously as it brings much additional
+complexity. <a href="#anchor2522845">[Meyers, 1992]</a> provides a detailed
+discussion on the complexities due to potential name ambiguities and repeated
+inheritance. Complexities arise from:<br>
+Ambiguities, when the same names are used by multiple classes, any unqualified
+references to the names are inherently ambiguous. Ambiguity can be resolved by
+qualifying the member names with their class names. However, this has the
+unfortunate effect of defeating polymorphism and turning virtual functions into
+statically bound functions.<br>
+Repeated inheritance (inheritance of a base class multiple times by a derived
+class via different paths in the inheritance hierarchy) of multiple sets of data
+members from the same base raises the problem of which of the multiple sets of
+data members should be used?<br>
+Multiply inherited data members can be prevented by using virtual inheritance
+(inheritance of virtual base classes). Why not always use virtual inheritance
+then? Virtual inheritance has the negative effect of altering the underlying
+object representation and reducing access efficiency.<br>
+Enacting a policy to require all inheritance to be virtual, at the same time
+imposing an all encompassing space and time penalty, would be too authoritarian.<br>
+Multiple inheritance; therefore, requires class designers to be clairvoyant as
+to the future uses of their classes: in order to be able to make the decision to
+use virtual or non-virtual inheritance.<br>
+<br>
+</p>
+<hr align="left">
+<h2><a name="anchor528114"></a><i>Chapter 10</i></h2>
+<h1>Compilation Issues</h1>
+<p>This chapter provides guidance on compilation issues</p>
+<h3><a name="anchor528648"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Minimize
+compilation dependencies</h3>
+<p>Do not include in a module specification other header files that are only
+required by the module's implementation.<br>
+Avoid including header files in a specification for the purpose of gaining
+visibility to other classes, when only pointer or reference visibility is
+required; use forward declarations instead.</p>
+<h5>Example</h5>
+<pre>// Module A specification, contained in file &quot;A.hh&quot;
+#include &quot;B.hh&quot; // Don't include when only required by
+                // the implementation.
+#include &quot;C.hh&quot; // Don't include when only required by
+                // reference; use a forward declaration instead.
+class C;
+class A
+{
+C* a_c_by_reference; // Has-a by reference.
+};
+// End of &quot;A.hh&quot;      </pre>
+<h5>Notes</h5>
+<p>Minimizing compilation dependencies is the rationale for certain design
+idioms or patterns, variously named: Handle or Envelope <a href="#anchor2522845">[Meyers,
+1992]</a>, or Bridge [Gamma] classes. By dividing the responsibility for a class
+abstraction across two associated classes, one providing the class interface,
+and the other the implementation; the dependencies between a class and its
+clients are minimized since any changes to the implementation (the
+implementation class) no longer cause recompilation of the clients.</p>
+<h5>Example</h5>
+<pre>// Module A specification, contained in file &quot;A.hh&quot;
+class A_implementation;
+class A
+{
+A_implementation* the_implementation;
+};
+// End of &quot;A.hh&quot;      </pre>
+<p>This approach also allows the interface class and implementation class to be
+specialized as two separate class hierarchies.</p>
+<h3><a name="anchor82235"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Define
+the <code>NDEBUG</code> symbol with a specific value</h3>
+<p>The <code>NDEBUG</code> symbol was traditionally used to compile away
+assertion code implemented using the assert macro. The traditional usage
+paradigm was to define the symbol when it was desired to eliminate assertions;
+however, developers were often unaware of the presence of assertions, and
+therefore never defined the symbol.<br>
+We advocate using the template version of the assert; in this case the <code>NDEBUG</code>
+symbol has to be given an explicit value: 0 if assertion code is desired;
+non-zero to eliminate. Any assertion code subsequently compiled without
+providing the <code>NDEBUG</code> symbol a specific value will generate
+compilation errors; thus, bringing the developer's attention to the existence of
+assertion code.<br>
+<br>
+</p>
+<hr align="left">
+<h1><a name="anchor529916"></a>Guideline Summary</h1>
+<p>Here is a summary of all the guidelines presented in this booklet.</p>
+<h2><a name="anchor530813"></a><img src="images/cg_3.gif" alt="Pointer Finger Icon" align="BOTTOM" naturalsizeflag="3" width="35" height="17">Requirements
+or Restrictions</h2>
+<p><a href="#anchor483435">Use common sense</a><br>
+<a href="#anchor485228">Always use <code>#include</code> to gain access to a
+module's specification</a><br>
+<a href="#anchor12422">Never declare names beginning with one or more
+underscores ('_')</a><br>
+<a href="#anchor16104">Limit global declarations to just namespaces</a><br>
+<a href="#anchor501775">Always provide a default constructor for classes with
+explicitly-declared constructors</a><br>
+<a href="#anchor502006">Always declare copy constructors and assignment
+operators for classes with pointer type data members</a><br>
+<a href="#anchor502268">Never re-declare constructor parameters to have a
+default value</a><br>
+<a href="#anchor502518">Always declare destructors to be virtual</a><br>
+<a href="#anchor502914">Never redefine non-virtual functions</a><br>
+<a href="#anchor503758">Never call member functions from a constructor
+initializer</a><br>
+<a href="#anchor507285">Never return a reference to a local object</a><br>
+<a href="#anchor507604">Never return a de-referenced pointer initialized by new</a><br>
+<a href="#anchor507940">Never return a non-const reference or pointer to member
+data</a><br>
+<a href="#anchor509053">Have <code>operator=</code> return a reference to <code>*this</code></a><br>
+<a href="#anchor509276">Have <code>operator=</code> check for self-assignment</a><br>
+<a href="#anchor511553">Never cast away the &quot;constness&quot; of a constant
+object</a><br>
+<a href="#anchor513613">Do not assume any particular expression evaluation order</a><br>
+<a href="#anchor518196">Don't use old-style casting</a><br>
+<a href="#anchor518514">Use the new <code>bool</code> type for Boolean
+expressions</a><br>
+<a href="#anchor518714">Never compare directly against the Boolean value true</a><br>
+<a href="#anchor518939">Never compare pointers to objects not within the same
+array</a><br>
+<a href="#anchor519161">Always assign a <code>null</code> pointer value to a
+deleted object pointer</a><br>
+<a href="#anchor520167">Always provide a default branch for switch-statements
+for catching errors</a><br>
+<a href="#anchor521200">Don't use the goto-statement</a><br>
+<a href="#anchor521844">Avoid mixing C and C++ memory operations</a><br>
+<a href="#anchor522121">Always use delete[] when deleting array objects created
+by new</a><br>
+<a href="#anchor525177">Never use hardcoded file pathnames</a><br>
+<a href="#anchor525601">Do not assume the representation of a type</a><br>
+<a href="#anchor525857">Do not assume the alignment of a type</a><br>
+<a href="#anchor526058">Do not depend on a particular underflow or overflow
+behavior</a><br>
+<a href="#anchor526700">Do not convert from a &quot;shorter&quot; type to a
+&quot;longer&quot;</a><br>
+<a href="#anchor82235">Define the <code>NDEBUG</code> symbol with a specific
+value</a></p>
+<h2><a name="anchor531085"></a><img src="images/cg_2.gif" alt="Okay Hand Icon" align="BOTTOM" naturalsizeflag="3" width="17" height="35">Recommendations</h2>
+<p><a href="#anchor484067">Place module specifications and implementations in
+separate files</a><br>
+<a href="#anchor20680">Pick a single set of file name extensions to distinguish
+headers from implementation files</a><br>
+<a href="#anchor484581">Avoid defining more than one class per module
+specification</a><br>
+<a href="#anchor484889">Avoid putting implementation-private declarations in
+module specifications</a><br>
+<a href="#anchor485892">Place module inline function definitions in a separate
+file</a><br>
+<a href="#anchor486172">Break large modules into multiple translation units if
+program size is a concern</a><br>
+<a href="#anchor486484">Isolate platform dependencies</a><br>
+<a href="#anchor486719">Protect against repeated file inclusions</a><br>
+<a href="#anchor486956">Use a &quot;<code>No_Inline</code>&quot; conditional
+compilation symbol to subvert inline compilation</a><br>
+<a href="#anchor487743">Use a small, consistent indentation style for nested
+statements</a><br>
+<a href="#anchor488005">Indent function parameters from the function name or
+scope name</a><br>
+<a href="#anchor27055">Use a maximum line length that would fit on the standard
+printout paper size</a><br>
+<a href="#anchor488318">Use consistent line folding</a><br>
+<a href="#anchor488864">Use C++ style comments rather than C-style comments</a><br>
+<a href="#anchor489212">Maximize comment proximity to source code</a><br>
+<a href="#anchor489428">Avoid end of line comments</a><br>
+<a href="#anchor489711">Avoid comment headers</a><br>
+<a href="#anchor489974">Use an empty comment line to separate comment paragraphs</a><br>
+<a href="#anchor490142">Avoid redundancy</a><br>
+<a href="#anchor490345">Write self-documenting code rather than comments</a><br>
+<a href="#anchor490611">Document classes and functions</a><br>
+<a href="#anchor491675">Choose a naming convention and apply it consistently</a><br>
+<a href="#anchor492064">Avoid using type names that differ only by letter case</a><br>
+<a href="#anchor492249">Avoid the use of abbreviations</a><br>
+<a href="#anchor492470">Avoid the use of suffixes to denote language constructs</a><br>
+<a href="#anchor492743">Choose clear, legible, meaningful names</a><br>
+<a href="#anchor493079">Use correct spelling in names</a><br>
+<a href="#anchor493290">Use positive predicate clauses for Booleans</a><br>
+<a href="#anchor493540">Use namespaces to partition potential global names by
+subsystems or by libraries</a><br>
+<a href="#anchor493742">Use nouns or noun phrases for class names</a><br>
+<a href="#anchor494388">Use verbs for procedure-type function names</a><br>
+<a href="#anchor494676">Use function overloading when the same general meaning
+is intended</a><br>
+<a href="#anchor495003">Augment names with grammatical elements to emphasize
+meaning</a><br>
+<a href="#anchor495660">Choose exception names with a negative meaning</a><br>
+<a href="#anchor495912">Use project defined adjectives for exception names</a><br>
+<a href="#anchor496199">Use capital letters for floating point exponent and
+hexadecimal digits.</a><br>
+<a href="#anchor499933">Use a namespace to group non-class functionality</a><br>
+<a href="#anchor500151">Minimize the use of global and namespace scope data</a><br>
+<a href="#anchor500603">Use class rather than struct for implementing abstract
+data types</a><br>
+<a href="#anchor500848">Declare class members in order of decreasing
+accessibility</a><br>
+<a href="#anchor501073">Avoid declaring public or protected data members for
+abstract data types</a><br>
+<a href="#anchor501337">Use friends to preserve encapsulation</a><br>
+<a href="#anchor501613">Avoid providing function definitions in class
+declarations</a><br>
+<a href="#anchor502704">Avoid declaring too many conversion operators and single
+parameter constructors</a><br>
+<a href="#anchor503176">Use non-virtual functions judiciously</a><br>
+<a href="#anchor503449">Use constructor-initializers rather than assignments in
+constructors</a><br>
+<a href="#anchor504062">Beware when calling member functions in constructors and
+destructors</a><br>
+<a href="#anchor504315">Use static const for integral class constants</a><br>
+<a href="#anchor505104">Always declare an explicit function return type</a><br>
+<a href="#anchor505286">Always provide formal parameter names in function
+declarations</a><br>
+<a href="#anchor505514">Strive for functions with a single point of return</a><br>
+<a href="#anchor505821">Avoid creating function with global side-effects</a><br>
+<a href="#anchor506202">Declare function parameters in order of decreasing
+importance and volatility</a><br>
+<a href="#anchor506403">Avoid declaring functions with a variable number of
+parameters</a><br>
+<a href="#anchor506589">Avoid re-declaring functions with default parameters</a><br>
+<a href="#anchor506792">Maximize the use of const in function declarations</a><br>
+<a href="#anchor507052">Avoid passing objects by value</a><br>
+<a href="#anchor508101">Use inline functions in preference to <code>#define</code>
+for macro expansion</a><br>
+<a href="#anchor508478">Use default parameters rather than function overloading</a><br>
+<a href="#anchor508622">Use function overloading to express common semantics</a><br>
+<a href="#anchor508866">Avoid overloading functions taking pointers and integers</a><br>
+<a href="#anchor509548">Minimize complexity</a><br>
+<a href="#anchor509998">Avoid the use of fundamental types</a><br>
+<a href="#anchor510747">Avoid using literal values</a><br>
+<a href="#anchor510988">Avoid using the preprocessor <code>#define</code>
+directive for defining constants</a><br>
+<a href="#anchor511232">Declare objects close to their point of first use</a><br>
+<a href="#anchor511376">Always initialize const objects at declaration</a><br>
+<a href="#anchor511788">Initialize objects at definition</a><br>
+<a href="#anchor519619">Use an if-statement when branching on Boolean
+expressions</a><br>
+<a href="#anchor519864">Use a switch-statement when branching on discrete values</a><br>
+<a href="#anchor520508">Use a for-statement or a while-statement when a
+pre-iteration test is required in a loop</a><br>
+<a href="#anchor520758">Use a do-while-statement when a post-iteration test is
+required in a loop</a><br>
+<a href="#anchor520942">Avoid the use of jump statements in loops</a><br>
+<a href="#anchor521418">Avoid the hiding of identifiers in nested scopes</a><br>
+<a href="#anchor522434">Use assertions liberally during development to detect
+errors</a><br>
+<a href="#anchor522653">Use exceptions only for truly exceptional conditions</a><br>
+<a href="#anchor522899">Derive project exceptions from standard exceptions</a><br>
+<a href="#anchor523223">Minimize the number of exceptions used by a given
+abstraction</a><br>
+<a href="#anchor523384">Declare all exceptions thrown</a><br>
+<a href="#anchor523770">Define exception handlers in most-derived, to most-base
+class order</a><br>
+<a href="#anchor524023">Avoid catch-all exception handlers</a><br>
+<a href="#anchor524215">Make sure function status codes have an appropriate
+value</a><br>
+<a href="#anchor524480">Perform safety checks locally; do not expect your client
+to do so</a><br>
+<a href="#anchor526259">Use &quot;stretchable&quot; constants whenever possible</a><br>
+<a href="#anchor527171">Use standard library components whenever possible</a></p>
+<h2><a name="anchor531505"></a><img src="images/cg_1.gif" align="BOTTOM" naturalsizeflag="3" width="23" height="28">Tips</h2>
+<p><a href="#anchor509845">Define project-wide global system types</a><br>
+<a href="#anchor510300">Use typedef to create synonyms to strengthen local
+meaning</a><br>
+<a href="#anchor513128">Use redundant parentheses to make compound expressions
+clearer</a><br>
+<a href="#anchor513356">Avoid nesting expressions too deeply</a><br>
+<a href="#anchor517867">Use 0 for null pointers rather than <code>NULL</code></a><br>
+<a href="#anchor523617">Report exceptions at first occurrence</a><br>
+<br>
+</p>
+<hr align="left">
+<h1><a name="anchor531721"></a>Bibliography</h1>
+
+<table>
+  <tr>
+    <td width="120">[Cargill, 92]</td>
+  
+  <td><a name="anchor2521269"></a>Cargill, Tom. 1992. C++ Programming Styles
+  Addison-Wesley.<br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td width="120">[Coplien, 92]</td>
+  <td><a name="anchor2521487"></a>Coplien, James O. 1992. Advanced C++
+  Programming Styles and Idioms, Addison-Wesley.<br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td width="120">[Ellemtel, 93]</td>
+  <td><a name="anchor2521746"></a>Ellemtel Telecommunications Systems
+  Laboratories. June 1993. Programming in C++ Rules and Recommendations.<br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td width="120">[Ellis, 90]</td>
+  <td><a name="anchor2521997"></a>Ellis, Margaret A. and Stroustrup,
+  Bjarne.1990. The Annotated C++ Reference Manual, Addison-Wesley.<br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td width="120">[Kruchten, 94]</td>
+  <td><a name="anchor2546953"></a>Kruchten, P. May 1994. Ada Programming
+  Guidelines for the Canadian Automated Air Traffic System.<br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td width="120">[Lippman, 96]</td>
+  <td><a name="anchor2522592"></a>Lippman, Stanley, B. 1996. Inside the C++
+  Object Model, Addison-Wesley.<br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td width="120">[Meyers, 92]</td>
+  <td><a name="anchor2522845"></a>Meyers, Scott. 1992. Effective C++,
+  Addison-Wesley.<br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td width="120">[Meyers, 96]</td>
+  <td><a name="anchor2523136"></a>Meyers, Scott. 1996. More Effective C++,
+  Addison-Wesley.<br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td width="120">[Plauger, 95]</td>
+  <td><a name="anchor2523431"></a>Plauger, P.J. 1995. The Draft Standard C++
+  Library, Prentice Hall, Inc.<br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td width="120">[Plum, 91]</td>
+  <td><a name="anchor2524143"></a>Plum, Thomas and Saks, Dan. 1991. C++
+  Programming Guidelines, Plum Hall Inc.<br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td width="120">[Stroustrup, 94]</td>
+  <td><a name="anchor2524798"></a>Stroustrup, Bjarne. 1994. The Design and
+  Evolution of C++, Addison-Wesley.<br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td width="120">[X3J16, 95]</td>
+  <td><a name="anchor2525532"></a>X3J16/95-0087 | WG21/N0687. April 1995.
+  Working Paper for Draft Proposed International Standard for Information
+  Systems-Programming Language C++.</td>
+</tr>
+</table>
+<br>
+<br>
+
+
+ 
+ 
+<div class="margins20">
+<p>
+ <a href="/copyrite/copyrite.htm">
+ <font size="-2">&copy; Copyright IBM Corp. 1987, 2004. All Rights Reserved.</font>
+ </a>
+</p>
+</div>
+
+
+</td><td valign="top" width="24"></td><td valign="top" width="1%">
+<p>
+<a href="/index.htm"></a>
+</p>
+
+<script language="JavaScript">
+<!--
+
+function loadTop()
+{
+  if(parent.frames.length!=0 && parent.frames[1].name=="ory_toc")
+  {
+	 var msg = "The Rational Unified Process is already displayed using frames";
+     alert(msg);
+  }
+  else
+  {
+    var expires = new Date();
+    expires.setTime (expires.getTime() + (1000 * 20));
+    document.cookie = "rup_ory_doc=" + escape (document.URL) +
+    "; expires=" + expires.toUTCString() +  "; path=/";
+
+    var new_ory_doc_loc = null;
+
+    for(i=document.links.length-1;i>=0;i--)
+    {
+       if(document.links[i].href.indexOf("index.htm")!=-1)
+       {
+         new_ory_doc_loc = document.links[i].href;
+         break;
+       }
+    }
+
+    if(new_ory_doc_loc!=null)
+    {
+	if( self.name == "ory_doc" )
+	{
+		window.close();
+		window.open( new_ory_doc_loc );		
+	}
+	else
+	{
+	       	top.location = new_ory_doc_loc;
+	}
+    }
+   }
+}
+// -->
+</script>
+<script language="JavaScript">
+<!--
+  function getImageUrl(image)
+  {
+    var new_ory_doc_loc=null;
+    for(i=document.links.length-1;i>=0;i--)
+    {
+       if(document.links[i].href.indexOf("index.htm")!=-1)
+       {
+         new_ory_doc_loc = document.links[i].href.substring(0,document.links[i].href.lastIndexOf("/"));
+         new_ory_doc_loc = new_ory_doc_loc + "" + image;
+         return new_ory_doc_loc;
+       }
+    }
+    return null;
+  }
+// -->
+</script>
+<script
+language="JavaScript">
+<!--
+MSFPhover =
+(((navigator.appName == "Netscape") &&
+  (parseInt(navigator.appVersion) >= 3 )) ||
+  ((navigator.appName == "Microsoft Internet Explorer") &&
+  (parseInt(navigator.appVersion) >= 4 )));
+
+  function MSFPpreload(img)
+  {
+     var a=new Image();
+     a.src=img;
+     return a;
+  }
+// -->
+</script>
+<script language="JavaScript">
+<!--
+    if(MSFPhover)
+    {
+        RupGray=MSFPpreload(getImageUrl('/images/rup1.gif'));
+        RupBlue=MSFPpreload(getImageUrl('/images/rup1_a.gif'));
+    }
+// -->
+
+//display the load button or not
+var ory_toc_exist = typeof parent.ory_toc;
+if (ory_toc_exist == "undefined") {
+	// split alt text out to allow translation
+	var altText = "Display Rational Unified Process using frames";
+	document.write("<a href=\"JavaScript:loadTop();\" onmouseover=\"if(MSFPhover) document['Home'].src=RupBlue.src; self.status=' '; return true\" onmouseout=\"if(MSFPhover) document['Home'].src=RupGray.src; self.status= ' ';return true\"> <br> <img src=\"images/rup1.gif");
+	document.write("\"  border=\"0\" alt=\"");
+        document.write(altText);
+        document.write("\" name=\"Home\" width=\"26\" height=\"167\"></a>");
+
+}
+else {
+	var nbsp = "&nbsp;";
+	document.write(nbsp);
+}
+</script>
+
+</td></tr></table><table border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td>
+<p align="right"><small><small>Rational Unified Process&nbsp;&nbsp; 
+<img border="0" alt="2003.06.13" src="images/rupversion.gif">
+</small></small>
+</td></tr></table>
+
+ 
+
+</body>
+
+</html>
+
