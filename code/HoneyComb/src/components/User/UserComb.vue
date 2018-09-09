@@ -564,6 +564,20 @@ export default {
         }
       }
 
+      for (var j = 0; j < initlink.length; j++) {
+        if (startNode === initlink[j].source.id && endNode === initlink[j].target.id) {
+          errorStartNode = true
+          errorEndNode = true
+          break
+        }
+
+        if (startNode === initlink[j].target.id && endNode === initlink[j].source.id) {
+          errorStartNode = true
+          errorEndNode = true
+          break
+        }
+      }
+
       if (errorStartNode) {
         startNode = ''
       }
@@ -574,13 +588,13 @@ export default {
 
       if (startNode === '') {
         $('#startNode1').parent().addClass('has-error')
-        $('#startNode1').after('<span id="startNode1-help" class="help-block">Node name can not be found</span>')
+        $('#startNode1').after('<span id="startNode1-help" class="help-block">Node name can not be found or link already exists</span>')
         errorFlag = true
       }
 
       if (endNode === '') {
         $('#endNode1').parent().addClass('has-error')
-        $('#endNode1').after('<span id="endNode1-help" class="help-block">Node name can not be found</span>')
+        $('#endNode1').after('<span id="endNode1-help" class="help-block">Node name can not be found or link already exists</span>')
         errorFlag = true
       }
 
@@ -654,7 +668,7 @@ export default {
       initlink.splice(index, 1)
 
       this.reconstruct()
-      $('close4').click()
+      $('#close4').click()
     },
 
     closeLink: function () {
