@@ -37,10 +37,10 @@
             <a>
               <span id="comment-btn" class="glyphicon glyphicon-comment paper-icons" data-toggle="modal" data-target="#paperComment_modal" type="button"></span>
             </a>
-            <a v-if="paper.url!==null" :href="paper.url" target="_blank">
+            <a v-if="paper.url!==null" :href="paper.url" target="_blank" @click="addhistory(paper.id)">
               <span class="glyphicon glyphicon-send paper-icons"></span>
             </a>
-            <a v-else>
+            <a v-else @click="addhistory(paper.id)">
               <span class="glyphicon glyphicon-send paper-icons"></span>
             </a>
           </div>
@@ -134,6 +134,18 @@ export default {
     },
     loginWarnning: function () {
       alert('You need to login first!')
+    },
+    addhistory (paperId) {
+      if (this.id === null) {
+        return
+      }
+      console.log(this.id)
+      console.log(paperId)
+
+      this.$http.post('/addhistory', { userId: this.id, paperId: paperId })
+        .then((res) => {
+          // do nothing
+        })
     },
     getCommentArray: function (paperId) {
       this.$http.post('/getpapercomment', { paperId: paperId })

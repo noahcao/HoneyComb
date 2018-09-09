@@ -34,9 +34,10 @@
 export default {
   name: 'sidebar',
   methods: {
-  },
 
-};
+  }
+
+}
 </script>
 
 <style scoped>
