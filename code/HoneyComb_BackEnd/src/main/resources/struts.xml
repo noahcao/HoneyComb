@@ -298,5 +298,27 @@
             </result>
             <interceptor-ref name="demostack"/>
         </action>
+
+        <action name="addpapercomment" class="action.UpdateAnnotationAction" method="add">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="deletepapercomment" class="action.UpdateAnnotationAction" method="delete">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
+        <action name="getpapercomment" class="action.QueryAnnotationAction">
+            <result name="success" type="json"/>
+            <result name="error" type="httpheader">
+                <param name="status">400</param>
+            </result>
+            <interceptor-ref name="demostack"/>
+        </action>
     </package>
 </struts>

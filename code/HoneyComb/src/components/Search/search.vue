@@ -38,7 +38,7 @@
         <div v-for="paper in papers">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <a :href="paper.url" target="_blank">
+              <a :href="paper.url" target="_blank" @click="addhistory(paper.id)">
                 <h3 class="panel-title">{{paper.title}}</h3>
               </a>
             </div>
@@ -152,6 +152,18 @@ export default {
     NavBar
   },
   methods: {
+    addhistory (paperId) {
+      if (this.id === null) {
+        return
+      }
+      console.log(this.id)
+      console.log(paperId)
+
+      this.$http.post('/addhistory', { userId: this.id, paperId: paperId })
+        .then((res) => {
+          //do nothing
+        })
+    },
     reverse () {
       this.showRange = !this.showRange
     },
@@ -224,6 +236,7 @@ export default {
   },
   data () {
     return {
+      id: this.data.id,
       content: this.$route.params.content,
       content2: '',
       papers: null,
