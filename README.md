@@ -8,9 +8,8 @@ A web (and optionally mobile application) project to build a reliable visualized
 2. 查询；
 3. 收藏；
 4. 历史记录；
-5. 评论，Vote and Veto；
+5. 评论；
 6. 自建知识网络（MindMap）；
-7. 对于论文的附加信息\文件，比如大家可以上传分享自己复现论文中模型的代码
 
 #### 任务：
 

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.User" table="user" schema="honeycomb">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="email" column="email"/>
+        <property name="pwd" column="password"/>
+        <property name="icon" column="icon"/>
+        <set name="stars" table="star" cascade="save-update, persist" lazy="false">
+            <key column="user_id"/>
+            <many-to-many class="model.Paper" column="paper_id"/>
+        </set>
+        <set name="history" table="history" cascade="save-update, persist" lazy="false">
+            <key column="user_id"/>
+            <composite-element class="model.History">
+                <property name="time" column="time"/>
+                <many-to-one name="paper" class="model.PaperSmall" cascade="save-update, persist" lazy="false" column="paper_id" />
+            </composite-element>
+        </set>
+        <property name="bio" column="bio"/>
+    </class>
+</hibernate-mapping>

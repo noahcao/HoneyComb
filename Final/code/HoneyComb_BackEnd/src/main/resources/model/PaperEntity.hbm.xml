@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Paper" table="paper" schema="honeycomb">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="title" column="title"/>
+        <property name="cited" column="cited"/>
+        <property name="url" column="url"/>
+        <property name="_abstract" column="abstract"/>
+        <set name="authors" table="author_paper" cascade="save-update, persist" lazy="false">
+            <key column="paper_id"/>
+            <many-to-many class="model.Author" column="author_id"/>
+        </set>
+        <property name="year" column="year"/>
+        <set name="reference" table="paper_paper_reference" cascade="save-update, persist" lazy="false">
+            <key column="citation_id"/>
+            <element column="paper_id" type="java.lang.Long"/>
+        </set>
+        <set name="citation" table="paper_paper_reference" cascade="save-update, persist" lazy="false">
+            <key column="paper_id"/>
+            <element column="citation_id" type="java.lang.Long"/>
+        </set>
+    </class>
+</hibernate-mapping>
