@@ -2,7 +2,7 @@
     <div id='editor'>
         <div id='editorNavBar'>
             <button class='barbtn btn-link pull-right' @click="saveContent">Save</button>
-            <button class='barbtn btn-link pull-right'>Post</button>
+            <button class='barbtn btn-link pull-right' @click="postContent">Post</button>
             <button class='barbtn btn-link pull-right' @click='alterEditor'>{{anotherEditor}}</button>
         </div>
         <markdown v-if="showMarkdown"></markdown>
@@ -20,6 +20,7 @@ import markdown from './markdown'
 import { quillEditor } from 'vue-quill-editor'
 export default {
     name: 'editor',
+    props: ['panelId'],
     components: {
       markdown,
       quillEditor,
@@ -42,11 +43,18 @@ export default {
                 this.showMarkdown = true;
                 this.anotherEditor = 'RichText Mode';
                 this.data.EditorContent = "";
-                this.data.inMarkdown = true
+                this.data.inMarkdown = true;
             }
         },
         saveContent(){
             alert("存储内容进入数据库:" + this.data.EditorContent)
+        },
+        postContent(){
+            this.$http.post('/addpost', {panelId: this.panelId, userId: this.data.id, content: this.data.EditorContent, type:"html"})
+                .then((res) => {
+                    alert("add a post!");
+                    window.location.reload()
+                })
         }
     }
 }

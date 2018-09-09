@@ -52,7 +52,7 @@
             </div>
         </div>
         <div id="editorboard" v-if="showeditor">
-            <editor></editor>
+            <editor :panelId="panelid"></editor>
         </div>
     </div>
 </template>
@@ -125,7 +125,7 @@ export default {
     data () {
         return {
             showeditor: false,
-            panelid: this.$route.params["panelid"],
+            panelid: this.$route.params.panelid,
             panelinfo: null,
             posters: null,
             paneltitle: null,

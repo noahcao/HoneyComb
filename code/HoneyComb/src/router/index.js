@@ -49,7 +49,7 @@ export default new Router({
       component: community
     },
     {
-      path: '/poster',
+      path: '/poster/:panelid',
       name: 'poster',
       component: poster
     },
