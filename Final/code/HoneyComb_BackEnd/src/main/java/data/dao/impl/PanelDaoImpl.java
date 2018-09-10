@@ -71,7 +71,7 @@ public class PanelDaoImpl implements PanelDao {
     @Override
     public List<PanelEntity> findUserList(Integer owner) {
         BasicDBObject fieldsObject = new BasicDBObject();
-        fieldsObject.put("posts", false);
+        fieldsObject.put("posts.comments", false);
         Query query = new BasicQuery(new BasicDBObject("owner", owner), fieldsObject);
         query.with(new Sort(new Order(Direction.DESC, "time")));
         return this.mongoTemplate.find(query, PanelEntity.class);

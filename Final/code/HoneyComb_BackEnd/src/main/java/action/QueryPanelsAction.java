@@ -107,6 +107,15 @@ public class QueryPanelsAction extends ActionSupport {
             }
         }
         else return ERROR;
+        for (PanelEntity panel : this.panels) {
+            User result = appService.getUserById(panel.getOwner());
+            if (result == null) {
+                this.panels.remove(panel);
+                panelDao.deleteById(panel.getId());
+                continue;
+            }
+            panel.setOwnerName(result.getName());
+        }
         return SUCCESS;
     }
 
