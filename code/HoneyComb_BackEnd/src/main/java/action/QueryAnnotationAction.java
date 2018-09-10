@@ -49,8 +49,6 @@ public class QueryAnnotationAction extends ActionSupport {
         for (Annotation annotation : this.paperComments) {
             User user = appService.getUserById(annotation.getUserId());
             if (user == null) {
-                this.paperComments.remove(annotation);
-                annotationDao.deleteById(annotation.getCommentId());
                 continue;
             }
             annotation.setUserName(user.getName());
