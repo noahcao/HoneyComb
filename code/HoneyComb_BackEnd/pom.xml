@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <spring.version>4.3.16.RELEASE</spring.version>
+        <spring.version>6.0.0</spring.version>
         <hibernate.version>5.2.16.Final</hibernate.version>
         <struts2.version>2.5.14.1</struts2.version>
         <maven.compiler.source>1.8</maven.compiler.source>
